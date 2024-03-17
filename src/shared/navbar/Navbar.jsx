@@ -15,7 +15,7 @@ const Navbar = () => {
               ? "pending"
               : isActive
               ? "border-b border-black"
-              : "border-none"
+              : "hover:border-b border-black"
           }
         >
           Home
@@ -30,7 +30,7 @@ const Navbar = () => {
               ? "pending"
               : isActive
               ? "border-b border-black"
-              : "border-none"
+              : "hover:border-b border-black"
           }
         >
           About
@@ -44,7 +44,7 @@ const Navbar = () => {
               ? "pending"
               : isActive
               ? "border-b border-black"
-              : "border-none"
+              : "hover:border-b border-black"
           }
         >
           Contact
