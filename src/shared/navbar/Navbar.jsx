@@ -1,8 +1,56 @@
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { HeartIcon } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
+  const navLinks = (
+    <>
+      <li>
+        <NavLink
+          to={"/"}
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "border-b border-black"
+              : "border-none"
+          }
+        >
+          Home
+        </NavLink>
+      </li>
+
+      <li>
+        <NavLink
+          to={"/about"}
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "border-b border-black"
+              : "border-none"
+          }
+        >
+          About
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to={"/contact"}
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "border-b border-black"
+              : "border-none"
+          }
+        >
+          Contact
+        </NavLink>
+      </li>
+    </>
+  );
   return (
     <div className="max-w-7xl mx-auto py-3">
       <div className="flex justify-between items-center">
@@ -14,9 +62,7 @@ const Navbar = () => {
           </div>
           <div>
             <ul className="flex justify-around items-center gap-3 text-xl">
-              <li>Home</li>
-              <li>About</li>
-              <li>Contact</li>
+              {navLinks}
             </ul>
           </div>
         </div>
