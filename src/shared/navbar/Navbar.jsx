@@ -2,6 +2,7 @@ import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { HeartIcon } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { NavLink } from "react-router-dom";
+import Logo from "../logo/Logo";
 
 const Navbar = () => {
   const navLinks = (
@@ -55,10 +56,8 @@ const Navbar = () => {
     <div className="max-w-7xl mx-auto py-3">
       <div className="flex justify-between items-center">
         <div className="flex items-end gap-8">
-          <div>
-            <h1 className="font-bold text-4xl">
-              Munshi<span className="font-extralight">Wholesale</span>
-            </h1>
+          <div className="text-4xl">
+            <Logo />
           </div>
           <div>
             <ul className="flex justify-around items-center gap-3 text-xl">
