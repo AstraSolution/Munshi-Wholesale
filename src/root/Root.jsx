@@ -1,5 +1,6 @@
 import Header from "../components/header/Header";
 import Home from "../pages/home/Home";
+import Footer from "../shared/footer/Footer";
 import Navbar from "../shared/navbar/Navbar";
 
 const Root = () => {
@@ -8,6 +9,7 @@ const Root = () => {
       <Header />
       <Navbar />
       <Home />
+      <Footer />
     </div>
   );
 };
