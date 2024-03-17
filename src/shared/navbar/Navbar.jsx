@@ -50,6 +50,20 @@ const Navbar = () => {
           Contact
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to={"/sign-up"}
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "border-b border-black"
+              : "hover:border-b border-black"
+          }
+        >
+          SignUp
+        </NavLink>
+      </li>
     </>
   );
   return (
