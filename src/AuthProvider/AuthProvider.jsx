@@ -9,6 +9,8 @@ import {
   updateProfile,
   sendPasswordResetEmail,
   confirmPasswordReset,
+  sendEmailVerification,
+  reload,
 } from "firebase/auth";
 import React, { createContext, useEffect, useState } from "react";
 import app from "../Firebase/Firebase.config";
@@ -20,9 +22,15 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const createUser = (email, password) => {
+  const createUser = async (email, password) => {
     setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    await sendEmailVerification(auth.currentUser);
+    return userCredential;
   };
 
   const signInUser = (email, password) => {
@@ -37,12 +45,20 @@ const AuthProvider = ({ children }) => {
     });
   };
 
-  const passwordResetEmailSend = (email) => {
+  const passwordResetEmail = (email) => {
     return sendPasswordResetEmail(auth, email);
   };
 
   const confirmResetPassword = (code, newPassword) => {
     return confirmPasswordReset(auth, code, newPassword);
+  };
+
+  const emailVerification = () => {
+    return sendEmailVerification(auth.currentUser);
+  };
+
+  const reloadUser = () => {
+    return reload(auth.currentUser);
   };
 
   const googleLogin = () => {
@@ -72,8 +88,10 @@ const AuthProvider = ({ children }) => {
     updateUserProfile,
     googleLogin,
     logOut,
-    passwordResetEmailSend,
+    passwordResetEmail,
     confirmResetPassword,
+    emailVerification,
+    reloadUser,
   };
 
   return (
