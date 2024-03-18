@@ -1,13 +1,28 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import EyeIcon from "../../shared/Icons/EyeIcon";
 import EyeSlashIcon from "../../shared/Icons/EyeSlashIcon";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/icons/google.png";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(true);
+  const { googleLogin, signInUser } = useContext(AuthContext);
+
   const handleSignUp = () => {};
-  const handleGoogleLogin = () => {};
+
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((res) => {
+        const loggedUser = res.user;
+        console.log(loggedUser);
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
   return (
     <div className="container mx-auto px-5 md:px-0 flex justify-center items-center min-h-screen">
       <div className="max-w-[400px] w-[400px] border p-8 rounded-lg shadow-md">
@@ -30,6 +45,7 @@ export default function Login() {
         </div>
 
         <form onSubmit={handleSignUp}>
+          {/* email field  */}
           <div class="relative float-label-input pb-5">
             <input
               type="email"
@@ -41,6 +57,8 @@ export default function Login() {
               Email Address
             </label>
           </div>
+
+          {/* password field  */}
           <div className="flex items-center relative pb-1">
             <div class="relative float-label-input w-full">
               <input
@@ -53,6 +71,8 @@ export default function Login() {
                 Password
               </label>
             </div>
+
+            {/* show and hide password toggle  */}
             <p
               onClick={() => setShowPassword(!showPassword)}
               className="cursor-pointer absolute right-4"
@@ -60,11 +80,15 @@ export default function Login() {
               <small>{showPassword ? <EyeIcon /> : <EyeSlashIcon />}</small>
             </p>
           </div>
+
+          {/* forget password url  */}
           <Link>
             <small className="block text-right underline pb-4 text-[#967c2f] hover:text-[#e9af03]">
               Forget Password?
             </small>
           </Link>
+
+          {/* form submit button  */}
           <input
             type="submit"
             value="Login"

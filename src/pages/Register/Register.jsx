@@ -1,13 +1,30 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import EyeIcon from "../../shared/Icons/EyeIcon";
 import EyeSlashIcon from "../../shared/Icons/EyeSlashIcon";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/icons/google.png";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 export default function Register() {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(true);
-  const handleSignUp = () => {};
-  const handleGoogleLogin = () => {};
+  const { googleLogin, createUser, updateUserProfile } =
+    useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
+
+  const handleRegister = (e) => {};
+
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((res) => {
+        const loggedUser = res.user;
+        console.log(loggedUser);
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
   return (
     <div className="container mx-auto px-5 md:px-0 flex justify-center items-center min-h-screen">
       <div className="max-w-[400px] w-[400px] border p-8 rounded-lg shadow-md">
@@ -29,7 +46,7 @@ export default function Register() {
           <hr className="bg-[#343A40] max-w-[20%] w-[20%]" />
         </div>
 
-        <form onSubmit={handleSignUp}>
+        <form onSubmit={handleRegister}>
           <div class="relative float-label-input pb-5">
             <input
               type="text"
@@ -77,6 +94,8 @@ export default function Register() {
             className="shadow-sm w-full bg-[#ffc10a] hover:bg-[#e9af03] py-3 text-white font-semibold rounded-md transition duration-200 ease-in-outbg-white"
           />
         </form>
+
+        {loading && <p>Loading...</p>}
 
         <p className="text-center mt-5">
           Already have an Account?{" "}
