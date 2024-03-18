@@ -4,6 +4,7 @@ import EyeSlashIcon from "../../shared/Icons/EyeSlashIcon";
 import { Link, useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/icons/google.png";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -12,7 +13,47 @@ export default function Register() {
     useContext(AuthContext);
   const [loading, setLoading] = useState(false);
 
-  const handleRegister = (e) => {};
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    createUser(email, password)
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+
+        updateUserProfile(name)
+          .then(() => {
+            const loggedProfile = result.user;
+            console.log(loggedProfile);
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+
+        Swal.fire({
+          position: "center-center",
+          icon: "success",
+          title: "Register Successful!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        form.reset();
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((error) => {
+        console.log(error.message);
+        Swal.fire({
+          position: "center-center",
+          icon: "error",
+          title: "This email already have taken!",
+          text: "Pleasey try another email.",
+        });
+      });
+  };
 
   const handleGoogleLogin = () => {
     googleLogin()
