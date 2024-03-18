@@ -20,7 +20,7 @@ export default function Login() {
           className="mb-5 border rounded-md w-full p-3 text-lg font-semibold flex items-center justify-center gap-3"
         >
           <img src={googleIcon} alt="" />
-          Login with Google
+          Sign in with Google
         </button>
 
         <div className="flex items-center justify-center gap-5 pb-6">
