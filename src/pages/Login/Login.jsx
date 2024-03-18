@@ -9,7 +9,7 @@ export default function Login() {
   const handleSignUp = () => {};
   const handleGoogleLogin = () => {};
   return (
-    <div className="container mx-auto flex justify-center items-center min-h-screen">
+    <div className="container mx-auto px-5 md:px-0 flex justify-center items-center min-h-screen">
       <div className="max-w-[400px] w-[400px] border p-8 rounded-lg shadow-md">
         <h2 className="text-4xl font-bold text-center mb-8 text-[#ffc10a]">
           Login
@@ -60,23 +60,23 @@ export default function Login() {
               <small>{showPassword ? <EyeIcon /> : <EyeSlashIcon />}</small>
             </p>
           </div>
-          <small className="block text-right underline pb-4">
-            Forget Password?
-          </small>
+          <Link>
+            <small className="block text-right underline pb-4 text-[#967c2f] hover:text-[#e9af03]">
+              Forget Password?
+            </small>
+          </Link>
           <input
             type="submit"
             value="Login"
-            className="w-full bg-[#ffc10a] hover:bg-[#e9af03] py-3 text-white font-semibold rounded-md transition duration-200 ease-in-outbg-white"
+            className="shadow-sm w-full bg-[#ffc10a] hover:bg-[#e9af03] py-3 text-white font-semibold rounded-md transition duration-200 ease-in-outbg-white"
           />
         </form>
-
-        {/* <hr className="bg-gray-700 my-10 w-3/4 mx-auto" /> */}
 
         <p className="text-center mt-5">
           New to Munshi-Wholesale?{" "}
           <Link
             to={"/register"}
-            className="secondaryText hover:text-[#ffc10a] hover:underline"
+            className="text-[#967c2f] hover:text-[#ffc10a] hover:underline"
           >
             Register
           </Link>
