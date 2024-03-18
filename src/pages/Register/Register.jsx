@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 export default function Register() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(true);
-  const { googleLogin, createUser, updateUserProfile } =
+  const { googleLogin, createUser, updateUserProfile, emailVerification } =
     useContext(AuthContext);
   const [loading, setLoading] = useState(false);
 
@@ -94,6 +94,7 @@ export default function Register() {
               type="text"
               name="name"
               placeholder=" "
+              required
               className="shadow-sm block bg-white w-full  focus:outline-none focus:shadow-outline border border-[#ffc10a] rounded-md py-3 px-4 appearance-none leading-normal"
             />
             <label class="absolute top-3 left-0 text-[#ffc10a] pointer-events-none transition duration-200 ease-in-outbg-white px-4">
@@ -105,6 +106,7 @@ export default function Register() {
               type="email"
               name="email"
               placeholder=" "
+              required
               className="shadow-sm block bg-white w-full  focus:outline-none focus:shadow-outline border border-[#ffc10a] rounded-md py-3 px-4 appearance-none leading-normal"
             />
             <label class="absolute top-3 left-0 text-[#ffc10a] pointer-events-none transition duration-200 ease-in-outbg-white px-4">
@@ -117,6 +119,7 @@ export default function Register() {
                 type={showPassword ? "password" : "text"}
                 name="password"
                 placeholder=" "
+                required
                 className="shadow-sm block bg-white w-full  focus:outline-none focus:shadow-outline border border-[#ffc10a] rounded-md py-3 px-4 appearance-none leading-normal"
               />
               <label class="absolute top-3 left-0 text-[#ffc10a] pointer-events-none transition duration-200 ease-in-outbg-white px-4">

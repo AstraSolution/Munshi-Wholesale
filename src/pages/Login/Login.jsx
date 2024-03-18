@@ -4,13 +4,58 @@ import EyeSlashIcon from "../../shared/Icons/EyeSlashIcon";
 import { Link, useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/icons/google.png";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 export default function Login() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(true);
-  const { googleLogin, signInUser } = useContext(AuthContext);
+  const { googleLogin, signInUser, passwordResetEmail } =
+    useContext(AuthContext);
 
-  const handleSignUp = () => {};
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    signInUser(email, password)
+      .then((res) => {
+        const loggedUser = res.user;
+        console.log(loggedUser);
+        Swal.fire({
+          position: "center-center",
+          icon: "success",
+          title: "Login Successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        form.reset();
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((err) => {
+        console.log(err.message);
+        Swal.fire({
+          position: "center-center",
+          icon: "error",
+          title: "Invalid Email or Password",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
+  };
+
+  const handleForgetPassword = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    console.log(email)
+    passwordResetEmail(email)
+      .then(() => {
+        console.log("please check your email");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
 
   const handleGoogleLogin = () => {
     googleLogin()
@@ -44,13 +89,14 @@ export default function Login() {
           <hr className="bg-[#343A40] max-w-[20%] w-[20%]" />
         </div>
 
-        <form onSubmit={handleSignUp}>
+        <form onSubmit={handleLogin}>
           {/* email field  */}
           <div class="relative float-label-input pb-5">
             <input
               type="email"
               name="email"
               placeholder=" "
+              required
               className="shadow-sm block bg-white w-full  focus:outline-none focus:shadow-outline border border-[#ffc10a] rounded-md py-3 px-4 appearance-none leading-normal"
             />
             <label class="absolute top-3 left-0 text-[#ffc10a] pointer-events-none transition duration-200 ease-in-outbg-white px-4">
@@ -65,6 +111,7 @@ export default function Login() {
                 type={showPassword ? "password" : "text"}
                 name="password"
                 placeholder=" "
+                required
                 className="shadow-sm block bg-white w-full  focus:outline-none focus:shadow-outline border border-[#ffc10a] rounded-md py-3 px-4 appearance-none leading-normal"
               />
               <label class="absolute top-3 left-0 text-[#ffc10a] pointer-events-none transition duration-200 ease-in-outbg-white px-4">
@@ -82,7 +129,7 @@ export default function Login() {
           </div>
 
           {/* forget password url  */}
-          <Link>
+          <Link onClick={handleForgetPassword}>
             <small className="block text-right underline pb-4 text-[#967c2f] hover:text-[#e9af03]">
               Forget Password?
             </small>
