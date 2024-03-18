@@ -25,6 +25,7 @@ export default function Register() {
         console.log(err.message);
       });
   };
+
   return (
     <div className="container mx-auto px-5 md:px-0 flex justify-center items-center min-h-screen">
       <div className="max-w-[400px] w-[400px] border p-8 rounded-lg shadow-md">
