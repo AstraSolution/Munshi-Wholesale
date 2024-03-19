@@ -1,6 +1,7 @@
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { PhoneIcon } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon } from "@heroicons/react/24/outline";
 import { NavLink } from "react-router-dom";
 import Logo from "../logo/Logo";
 
@@ -37,7 +38,10 @@ const Navbar = () => {
 
             <div className="flex items-center gap-2">
               <ShoppingBagIcon className="size-12 text-white" />
-              <div>
+              <div className="lg:hidden">
+                <Bars3Icon className="size-12 text-white" />
+              </div>
+              <div className="hidden lg:block">
                 <p className="text-white font-semibold text-lg">My Cart:</p>
                 <p className="text-yellow-500 font-semibold">0 - $0.00</p>
               </div>
@@ -48,18 +52,14 @@ const Navbar = () => {
 
       <div className="bg-yellow-400 py-2">
         <div className="max-w-7xl mx-auto px-5">
-          <div className="flex justify-center lg:hidden">
-            <form className="flex items-center">
+          <div className="max-w-xl mx-auto flex justify-center lg:hidden">
+            <form className="flex items-center w-full">
               <input
                 type="text"
                 placeholder="Search..."
-                className="py-2 px-4 w-96 rounded-l-lg text-lg focus:outline-none"
+                className="py-2 px-4 w-full rounded-l-lg text-lg focus:outline-none"
               />
-              <button
-                type="submit"
-                // className="bg-black text-white py-2 px-3 rounded-r-lg text-lg font-semibold"
-                className=""
-              >
+              <button type="submit">
                 <MagnifyingGlassIcon className="size-11 py-2 px-3 bg-black text-white rounded-r-lg" />
               </button>
             </form>
