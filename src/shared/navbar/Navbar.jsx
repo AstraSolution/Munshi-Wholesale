@@ -30,7 +30,7 @@ const Navbar = () => {
       <div className="bg-black">
         <div className="max-w-7xl mx-auto py-5 px-5">
           <div className="flex justify-between items-center">
-            <div className="text-4xl text-white">
+            <div className="text-2xl md:text-3xl lg:text-4xl text-white">
               <Logo />
             </div>
 
@@ -49,10 +49,10 @@ const Navbar = () => {
             </form>
 
             <div className="flex items-center gap-2">
-              <ShoppingBagIcon className="size-12 text-white" />
+              <ShoppingBagIcon className="size-6 md:size-8 lg:size-12 text-white" />
               <div className="lg:hidden">
                 <Bars3Icon
-                  className="size-12 text-white cursor-pointer"
+                  className="size-6 md:size-8 text-white cursor-pointer"
                   onClick={openSlider}
                 />
               </div>
@@ -140,7 +140,7 @@ const Navbar = () => {
                         ? "pending"
                         : isActive
                         ? "py-1 px-2 rounded-md text-sm font-semibold bg-yellow-400"
-                        : "py-1 px-2 rounded-md text-sm font-semibold hover:bg-yellow-300"
+                        : "py-1 px-2 rounded-md text-sm font-semibold"
                     }
                   >
                     {navLink.label}
