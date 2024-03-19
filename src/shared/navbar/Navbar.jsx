@@ -129,6 +129,25 @@ const Navbar = () => {
                 <XMarkIcon className="size-7" />
               </button>
             </div>
+            <div>
+              <ul className="p-2 flex flex-col">
+                {navLinks?.map((navLink, key) => (
+                  <NavLink
+                    key={key}
+                    to={navLink.link}
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "pending"
+                        : isActive
+                        ? "py-1 px-2 rounded-md text-sm font-semibold bg-yellow-400"
+                        : "py-1 px-2 rounded-md text-sm font-semibold hover:bg-yellow-300"
+                    }
+                  >
+                    {navLink.label}
+                  </NavLink>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       )}
