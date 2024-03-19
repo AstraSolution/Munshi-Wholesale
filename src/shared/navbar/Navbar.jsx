@@ -2,10 +2,22 @@ import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { PhoneIcon } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Bars3Icon } from "@heroicons/react/24/outline";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import { NavLink } from "react-router-dom";
 import Logo from "../logo/Logo";
+import { useState } from "react";
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openSlider = () => {
+    setIsOpen(true);
+  };
+
+  const closeSlider = () => {
+    setIsOpen(false);
+  };
+
   const navLinks = [
     { label: "Home", link: "/" },
     { label: "About", link: "/about" },
@@ -39,7 +51,10 @@ const Navbar = () => {
             <div className="flex items-center gap-2">
               <ShoppingBagIcon className="size-12 text-white" />
               <div className="lg:hidden">
-                <Bars3Icon className="size-12 text-white" />
+                <Bars3Icon
+                  className="size-12 text-white cursor-pointer"
+                  onClick={openSlider}
+                />
               </div>
               <div className="hidden lg:block">
                 <p className="text-white font-semibold text-lg">My Cart:</p>
@@ -103,6 +118,20 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+
+      {/* Slider component */}
+      {isOpen && (
+        <div className="fixed inset-0 bg-black/50 z-50" onClick={closeSlider}>
+          <div className="fixed left-0 top-0 bottom-0 bg-white w-64">
+            <div className="flex justify-between items-center py-2 px-3  bg-yellow-500">
+              <h5 className="text-lg font-semibold">Menu</h5>
+              <button onClick={closeSlider}>
+                <XMarkIcon className="size-7" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
