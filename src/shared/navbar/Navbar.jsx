@@ -108,7 +108,7 @@ const Navbar = () => {
                   <span className="hover:underline cursor-pointer">
                     +880 000 000 000
                   </span>{" "}
-                  &{" "}
+                  or{" "}
                   <span className="hover:underline cursor-pointer">
                     example@gmail.com
                   </span>
