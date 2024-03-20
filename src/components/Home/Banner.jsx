@@ -1,18 +1,21 @@
 const Banner = () => {
   return (
     <div>
-      <div className="">
-        <img
-          src="https://i.ibb.co/ns9rx96/slider-bg.png"
-          alt="banner"
-          className="relative"
-        />
+      <div
+        className="min-h-screen"
+        style={{
+          backgroundImage: "url(https://i.ibb.co/ns9rx96/slider-bg.png)",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+        }}
+      >
         <div className="absolute top-1/2 text-white flex justify-between items-start w-full px-28">
           <div>
             <h3 className="text-red-700 text-2xl font-semibold">
               Special Offer
             </h3>
-            <p className="mt-3 text-6xl ">
+            <p className="mt-3 text-3xl font-semibold lg:text-5xl ">
               GET 25% FLAT <br /> OFFERS ON ALL <br /> TOOLS
             </p>
             <button className="bg-yellow-300 p-3 px-5 rounded-full font-bold text-black mt-10">
@@ -22,11 +25,12 @@ const Banner = () => {
           <img
             src="https://i.ibb.co/X5dpW4L/slider-quote-image.png"
             alt="discount"
+            className="hidden lg:block"
           />
         </div>
       </div>
-      <div className="grid grid-cols-3 bg-black gap-5">
-        <div className="grid col-span-2 grid-cols-2 gap-5">
+      <div className="flex flex-col-reverse lg:flex-row bg-black gap-5 px-5 pb-10">
+        <div className="w-full lg:w-[60%] grid grid-cols-1 md:grid-cols-2 gap-5">
           {/* First card */}
           <div
             style={{
@@ -117,7 +121,7 @@ const Banner = () => {
 
         {/* Big image */}
         <div
-          className="grid-cols-1"
+          className="w-full lg:w-[40%] grid grid-cols-1"
           style={{
             backgroundImage:
               "url(https://i.ibb.co/K59YRgQ/maso-main-98f9cc21-a6be-467c-bf66-a8173c9c15d4.png)",
