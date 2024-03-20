@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
 
 const WishList = () => {
+
+
+    const {user} = useContext(AuthContext)
+    console.log(user.email);
 
     const wishlistItems = [
         {
