@@ -1,6 +1,7 @@
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
+import Logo from "../../shared/logo/Logo";
 
 const Dashboard = () => {
   const [isSliderOpen, setIsSidebarOpen] = useState(true);
@@ -21,7 +22,11 @@ const Dashboard = () => {
         className={`w-64 h-screen bg-black text-white ${
           isSliderOpen ? "block" : "hidden"
         }`}
-      ></div>
+      >
+        <div className="py-3 text-2xl text-center text-yellow-400">
+          <Logo />
+        </div>
+      </div>
 
       {/* navbar */}
       <div className="w-full h-14 bg-black shadow-lg">
@@ -52,6 +57,7 @@ const Dashboard = () => {
           </div>
         </div>
 
+        {/* main content */}
         <div className="p-2">
           <h1>Dashboard content</h1>
         </div>
