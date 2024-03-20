@@ -5,6 +5,8 @@ import Home from "../pages/home/Home";
 import WishList from "../components/WishList/WishList";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import AddProduct from "../pages/AddProduct/AddProduct";
+
 const router = createBrowserRouter([
   {
     path: "/",
