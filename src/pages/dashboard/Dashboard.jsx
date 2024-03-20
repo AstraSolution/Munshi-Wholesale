@@ -2,7 +2,7 @@ import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import Logo from "../../shared/logo/Logo";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Dashboard = () => {
   const [isSliderOpen, setIsSidebarOpen] = useState(true);
@@ -33,7 +33,7 @@ const Dashboard = () => {
           <Logo />
         </div>
 
-        <div>
+        <div className="flex flex-col justify-stretch">
           <ul className="p-3 flex flex-col gap-3">
             {navLinks?.map((navLink, key) => (
               <NavLink
@@ -51,6 +51,20 @@ const Dashboard = () => {
               </NavLink>
             ))}
           </ul>
+
+          <div className="p-3">
+            <hr />
+            <div className="flex flex-col mt-2">
+              <Link to="/">
+                <button className="py-2 px-3 hover:bg-yellow-200 hover:text-black text-lg font-semibold rounded-md text-start w-full">
+                  Home
+                </button>
+              </Link>
+              <button className="py-2 px-3 hover:bg-yellow-200 hover:text-black text-lg font-semibold rounded-md text-start">
+                Logout
+              </button>
+            </div>
+          </div>
         </div>
       </div>
       {/* slider end */}
@@ -96,4 +110,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
