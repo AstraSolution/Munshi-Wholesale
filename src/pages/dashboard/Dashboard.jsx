@@ -2,6 +2,7 @@ import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import Logo from "../../shared/logo/Logo";
+import { NavLink } from "react-router-dom";
 
 const Dashboard = () => {
   const [isSliderOpen, setIsSidebarOpen] = useState(true);
@@ -15,9 +16,14 @@ const Dashboard = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  const navLinks = [
+    { label: "Profile", link: "/dashboard" },
+    { label: "Add Product", link: "/dashboard/add-product" },
+  ];
+
   return (
     <div className="flex">
-      {/* slider */}
+      {/* slider start */}
       <div
         className={`w-64 h-screen bg-black text-white ${
           isSliderOpen ? "block" : "hidden"
@@ -26,9 +32,30 @@ const Dashboard = () => {
         <div className="py-3 text-2xl text-center text-yellow-400">
           <Logo />
         </div>
-      </div>
 
-      {/* navbar */}
+        <div>
+          <ul className="p-3 flex flex-col gap-3">
+            {navLinks?.map((navLink, key) => (
+              <NavLink
+                key={key}
+                to={navLink.link}
+                className={({ isActiv, isPending }) =>
+                  isPending
+                    ? "pending"
+                    : isActiv
+                    ? "py-2 px-3 bg-yellow-300 text-lg font-semibold rounded-md"
+                    : "py-2 px-3 hover:bg-yellow-200 hover:text-black text-lg font-semibold rounded-md"
+                }
+              >
+                {navLink.label}
+              </NavLink>
+            ))}
+          </ul>
+        </div>
+      </div>
+      {/* slider end */}
+
+      {/* navbar start */}
       <div className="w-full h-14 bg-black shadow-lg">
         <div className="flex justify-between items-center py-2 px-5">
           <button onClick={toggleSlider}>
@@ -56,11 +83,13 @@ const Dashboard = () => {
             )}
           </div>
         </div>
+        {/* navbar end */}
 
-        {/* main content */}
+        {/* main content start*/}
         <div className="p-2">
           <h1>Dashboard content</h1>
         </div>
+        {/* main content end*/}
       </div>
     </div>
   );
