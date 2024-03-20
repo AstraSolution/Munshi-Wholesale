@@ -1,0 +1,131 @@
+
+// Products Data collection
+[
+    {
+        "id": "1",
+        "title": "Cordless Drill/Driver Kit",
+        "imgae": ["url-1", "url-2"],
+        "category": "Power Tools / Welding Equipment / Plumbing Fixtures / Painting Supplies",
+        "brand": "DeWalt",
+        "price": 129.99,
+        "description": "Cordless drill/driver kit with two lithium-ion batteries and charger. Suitable for drilling and fastening tasks.",
+        "quantity": 50,
+        "model": "DCD771C2",
+        "offer_title": "Black firday, summer sale etc" / "N/A",
+        "discount": "20%" / 35 / "N/A",
+        "specification": {
+            "voltes": "20 volts",
+            "power_source": "Battery-powered",
+            "battery_type": "Lithium-ion",
+            "max_torque": "300 in-lbs",
+            "speed_settings": "2-speed transmission (0-450 / 0-1,500 RPM)",
+            "chuck_size": "1/2 inch",
+            "clutch_settings": "16-position adjustable clutch",
+            "safety_features": [
+                "Overload protection",
+                "Non-slip grip"
+            ],
+            "compatibility": [
+                "20V MAX lithium-ion batteries"
+            ]
+        },
+        "included_accessories": [
+            "Two 20V MAX lithium-ion batteries",
+            "Charger",
+            "Contractor bag"
+        ],
+        "weight": "3.6 lbs",
+        "dimensions": "10.1 x 7.6 x 3.2 inches",
+        "warranty": "3-year limited warranty",
+        "color": [
+            "Yellow/Black",
+            "green/teal"
+        ],
+        "verint": [
+            "type1",
+            "type2"
+        ],
+        "material": "Plastic, Metal",
+        "certification": "UL Listed",
+        "usage": "DIY, Professional",
+        "recommended_applications": [
+            "Wood",
+            "Metal",
+            "Plastic"
+        ],
+        "features": [
+            "Compact and lightweight design",
+            "LED work light",
+            "Ergonomic handle"
+        ],
+        "availability": "In Stock",
+        "shipping_weight": "5 lbs",
+        "shipping_dimensions": "12 x 9 x 5 inches",
+        "shipping_restrictions": "This item can be shipped to select countries outside of the U.S.",
+        "shipping_method": [
+            "Standard Shipping",
+            "Expedited Shipping"
+        ],
+        "assembly_required": false,
+        "country_of_origin": "China",
+        "manufacturer": "Stanley Black & Decker, Inc.",
+        "return_policy": "This item is eligible for return within 30 days of delivery."
+    }
+]
+
+// reviews Data collection
+
+[
+    {
+        "product_id": "1",
+        "reviews": [
+            {
+                "_id": "1",
+                "user_name": "parvej",
+                "comment": "vala product",
+                "rating": 4.3,
+                "timestamp": "2024-03-14T12:00:00Z"
+            },
+            {
+                "_id": "2",
+                "user_name": "siyam",
+                "comment": "niceeeee",
+                "rating": 4.5,
+                "timestamp": "2024-03-14T12:30:00Z"
+            },
+            {
+                "_id": "3",
+                "user_name": "ful",
+                "comment": "niceeeee",
+                "rating": 4.5,
+                "timestamp": "2024-03-14T13:00:00Z"
+            }
+        ]
+    },
+    {
+        "product_id": "2",
+        "reviews": [
+            {
+                "_id": "1",
+                "user_name": "parvej",
+                "comment": "vala product",
+                "rating": 4.3,
+                "timestamp": "2024-03-14T12:00:00Z"
+            },
+            {
+                "_id": "2",
+                "user_name": "siyam",
+                "comment": "niceeeee",
+                "rating": 4.5,
+                "timestamp": "2024-03-14T12:30:00Z"
+            },
+            {
+                "_id": "3",
+                "user_name": "ful",
+                "comment": "niceeeee",
+                "rating": 4.5,
+                "timestamp": "2024-03-14T13:00:00Z"
+            }
+        ]
+    }
+]

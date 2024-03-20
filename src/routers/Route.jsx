@@ -31,5 +31,9 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Register />,
   },
+  {
+    path: "/add-product",
+    element: <AddProduct/>,
+  },
 ]);
 export default router;
