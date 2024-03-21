@@ -1,12 +1,14 @@
-import Cards from "../../components/Cards/Card";
-import FeaturedCard from "../../components/FeaturedCard/FeaturedCard";
 import Banner from "../../components/Home/Banner";
+import FeatureProduct from "./FeatureProduct";
+
 import Newslatter from "../../components/Newslatter/Newslatter";
 
 const Home = () => {
   return (
-    <div className=" mx-auto">
+    <div className="">
       <Banner></Banner>
+
+      <FeatureProduct></FeatureProduct>
       <FeaturedCard></FeaturedCard>
       <Cards></Cards>
       <Newslatter/>
