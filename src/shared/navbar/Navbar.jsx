@@ -1,14 +1,17 @@
-import { ShoppingBagIcon } from "@heroicons/react/24/outline";
-import { PhoneIcon } from "@heroicons/react/24/outline";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { Bars3Icon } from "@heroicons/react/24/outline";
-import { XMarkIcon } from "@heroicons/react/24/outline";
-import { NavLink } from "react-router-dom";
+import {
+  PhoneIcon,
+  MagnifyingGlassIcon,
+  Bars3Icon,
+  XMarkIcon,
+  ShoppingBagIcon,
+} from "@heroicons/react/24/outline";
+import { Link, NavLink } from "react-router-dom";
 import Logo from "../logo/Logo";
 import { useState } from "react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   const openSlider = () => {
     setIsOpen(true);
@@ -18,11 +21,19 @@ const Navbar = () => {
     setIsOpen(false);
   };
 
+  const openCart = () => {
+    setIsCartOpen(true);
+  };
+
+  const closeCart = () => {
+    setIsCartOpen(false);
+  };
+
   const navLinks = [
     { label: "Home", link: "/" },
     { label: "About", link: "/about" },
     { label: "Contact", link: "/contact" },
-    { label: "SignUp", link: "/sign-up" },
+    { label: "Register", link: "/register" },
     { label: "Dashboard", link: "/dashboard" },
   ];
 
@@ -50,7 +61,9 @@ const Navbar = () => {
             </form>
 
             <div className="flex items-center gap-2">
-              <ShoppingBagIcon className="size-6 md:size-8 lg:size-12 text-white" />
+              <button onClick={openCart}>
+                <ShoppingBagIcon className="size-6 md:size-8 lg:size-12 text-white" />
+              </button>
               <div className="lg:hidden">
                 <Bars3Icon
                   className="size-6 md:size-8 text-white cursor-pointer"
@@ -120,7 +133,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Slider component */}
+      {/* nav Slider start */}
       {isOpen && (
         <div className="fixed inset-0 bg-black/50 z-50" onClick={closeSlider}>
           <div className="fixed left-0 top-0 bottom-0 bg-white w-64">
@@ -152,6 +165,28 @@ const Navbar = () => {
           </div>
         </div>
       )}
+      {/* nav Slider end */}
+
+      {/* cart slider start */}
+      {isCartOpen && (
+        <div className="fixed inset-0 bg-black/50 z-50" onClick={closeCart}>
+          <div className="fixed top-0 right-0 bottom-0 w-full sm:w-[400px] bg-white">
+            <div className="flex justify-between items-center p-3 lg:p-5 bg-yellow-400">
+              <button
+                onClick={closeCart}
+                className="hover:bg-black/10 hover:shadow-lg rounded-full p-1 transition-all duration-300"
+              >
+                <XMarkIcon className="size-7" />
+              </button>
+
+              <Link>
+                <h1 className="text-xl lg:text-2xl font-bold"> My Cart</h1>
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* cart slider end */}
     </div>
   );
 };
