@@ -12,7 +12,7 @@ import {
   sendEmailVerification,
   reload,
 } from "firebase/auth";
-import React, { createContext, useEffect, useState } from "react";
+import  { createContext, useEffect, useState } from "react";
 import app from "../Firebase/Firebase.config";
 
 export const AuthContext = createContext(null);
@@ -68,6 +68,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      localStorage.setItem("email", currentUser?.email)
       setUser(currentUser);
       setLoading(false);
     });
@@ -77,6 +78,7 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const logOut = () => {
+    localStorage.removeItem("email")
     return signOut(auth);
   };
 

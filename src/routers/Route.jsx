@@ -17,8 +17,9 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
+   
       {
-        path: "/wishlist",
+         path: "/wishlist",
         element: <WishList></WishList>,
       },
     ],
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/add-product",
-    element: <AddProduct/>,
+    element: <AddProduct />,
   },
 ]);
 export default router;
