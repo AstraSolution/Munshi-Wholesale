@@ -1,5 +1,5 @@
 import Banner from "../../components/Home/Banner";
-import FeatureProduct from "../../components/FeaturedCard/FeaturedCard";
+import FeatureProduct from "./FeatureProduct";
 import Newslatter from "../../components/Newslatter/Newslatter";
 
 const Home = () => {
