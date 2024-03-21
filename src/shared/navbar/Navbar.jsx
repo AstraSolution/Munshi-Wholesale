@@ -14,8 +14,8 @@ const Navbar = () => {
             isPending
               ? "pending"
               : isActive
-              ? "border-b border-black"
-              : "hover:border-b border-black"
+                ? "border-b border-black"
+                : "hover:border-b border-black"
           }
         >
           Home
@@ -29,8 +29,8 @@ const Navbar = () => {
             isPending
               ? "pending"
               : isActive
-              ? "border-b border-black"
-              : "hover:border-b border-black"
+                ? "border-b border-black"
+                : "hover:border-b border-black"
           }
         >
           About
@@ -43,8 +43,8 @@ const Navbar = () => {
             isPending
               ? "pending"
               : isActive
-              ? "border-b border-black"
-              : "hover:border-b border-black"
+                ? "border-b border-black"
+                : "hover:border-b border-black"
           }
         >
           Contact
@@ -52,13 +52,13 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to={"/sign-up"}
+          to={"/login"}
           className={({ isActive, isPending }) =>
             isPending
               ? "pending"
               : isActive
-              ? "border-b border-black"
-              : "hover:border-b border-black"
+                ? "border-b border-black"
+                : "hover:border-b border-black"
           }
         >
           SignUp
@@ -86,10 +86,25 @@ const Navbar = () => {
             <ShoppingBagIcon className="size-7" />
             <div className="size-2 bg-red-500 rounded-full absolute bottom-0 right-0"></div>
           </div>
+
+
           <div className="relative">
-            <HeartIcon className="size-7" />
-            <div className="size-2 bg-red-500 rounded-full absolute bottom-0 right-0"></div>
+
+            <NavLink to="/wishlist" className={({ isActive, isPending }) =>
+              isPending
+                ? "pending"
+                : isActive
+                  ? ""
+                  : ""
+            }>
+              <HeartIcon className="size-7" />
+              <div className="size-2 bg-red-500 rounded-full absolute bottom-0 right-0"></div>
+            </NavLink>
           </div>
+
+
+
+
           <div>
             <img
               src="https://i.ibb.co/9qmtc5b/person-1.jpg"
