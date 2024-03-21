@@ -59,11 +59,9 @@ const MyCart = () => {
       </div>
 
       <div className="flex flex-col lg:flex-row gap-5 mt-10">
-        <div className="lg:w-2/3">
+        <div className="lg:w-2/3 px-3">
           <div className="flex justify-between items-center">
-            <h1 className="text-lg md:text-xl lg:text-3xl font-bold">
-              Products
-            </h1>
+            <h1 className="text-2xl lg:text-3xl font-bold">Products</h1>
             <button className="hover:text-red-500 rounded-lg transition-all duration-300 mr-10">
               <span className="flex items-center gap-3">
                 <TrashIcon className="size-5" />{" "}
@@ -74,7 +72,10 @@ const MyCart = () => {
 
           <div className="mt-5">
             {products.map((product) => (
-              <div key={product.id} className="pb-2 flex gap-3 border-b my-5">
+              <div
+                key={product.id}
+                className="pb-2 flex flex-col items-center md:flex-row gap-3 border-b my-5"
+              >
                 <Link>
                   <img src={product.productImg} alt="" className="size-64" />
                 </Link>
@@ -131,10 +132,8 @@ const MyCart = () => {
           </div>
         </div>
 
-        <div className="lg:w-1/3">
-          <h1 className="text-lg md:text-xl lg:text-3xl font-bold">
-            Order Summary
-          </h1>
+        <div className="lg:w-1/3 px-3">
+          <h1 className="text-2xl lg:text-3xl font-bold">Order Summary</h1>
 
           <div className="mt-4">
             <div>
