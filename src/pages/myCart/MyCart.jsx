@@ -26,16 +26,26 @@ const MyCart = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-2 min-h-screen">
-      <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold">
-        Your Shopping Cart
-      </h1>
-      <p className="font-light py-2">Home / Your Shopping Cart</p>
+      <div className="my-5">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold">
+          Your Shopping Cart
+        </h1>
+        <p className="font-light py-2">Home / Your Shopping Cart</p>
+      </div>
 
-      <div className="flex flex-col lg:flex-row gap-5 my-5">
+      <div className="flex flex-col lg:flex-row gap-5 mt-10">
         <div className="lg:w-2/3">
-          <h1 className="text-lg md:text-xl lg:text-3xl">Products</h1>
+          <div className="flex justify-between items-center">
+            <h1 className="text-lg md:text-xl lg:text-3xl">Products</h1>
+            <button className="hover:text-red-500 rounded-lg transition-all duration-300 mr-10">
+              <span className="flex items-center gap-3">
+                <TrashIcon className="size-5" />{" "}
+                <span className="text-xl">Remove All</span>
+              </span>
+            </button>
+          </div>
 
-          <div className="mt-10">
+          <div className="mt-5">
             {products.map((product) => (
               <div key={product.id} className="pb-2 flex gap-3 border-b">
                 <img src={product.productImg} alt="" className="size-64" />
