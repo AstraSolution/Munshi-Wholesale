@@ -2,7 +2,7 @@ import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import Logo from "../../shared/logo/Logo";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
   const [isSliderOpen, setIsSidebarOpen] = useState(true);
@@ -85,7 +85,7 @@ const Dashboard = () => {
 
         {/* main content start*/}
         <div className="p-2">
-          <h1>Dashboard content</h1>
+          <Outlet />
         </div>
         {/* main content end*/}
       </div>

@@ -4,6 +4,7 @@ import {
   Bars3Icon,
   XMarkIcon,
   ShoppingBagIcon,
+  TrashIcon,
 } from "@heroicons/react/24/outline";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../logo/Logo";
@@ -183,6 +184,32 @@ const Navbar = () => {
                 <h1 className="text-xl lg:text-2xl font-bold"> My Cart</h1>
               </Link>
             </div>
+
+            <div className="py-2 px-5 flex gap-3 border-b">
+              <img
+                src="https://dt-multispare.myshopify.com/cdn/shop/products/shop06_4f673430-26a3-43a2-975c-97a24415829b.jpg?v=1669179083&width=360"
+                alt=""
+                className="size-28"
+              />
+
+              <div className="space-y-2">
+                <h2 className="text-xl lg:text-2xl font-bold">
+                  Woodwork Vaccum Grinding
+                </h2>
+                <div className="flex justify-between items-center ">
+                  <p>$452.00</p>
+                  <button className="hover:bg-black/10 hover:shadow-md p-2 rounded-full transition-all duration-300">
+                    <TrashIcon className="size-5" />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <Link>
+              <button className="py-2 w-full my-3 mx-2 bg-yellow-400 rounded-lg shadow-lg lg:text-xl font-semibold hover:bg-yellow-500 hover:shadow-none transition-all duration-300">
+                View All Cart
+              </button>
+            </Link>
           </div>
         </div>
       )}
