@@ -22,6 +22,14 @@ const MyCart = () => {
       pricePerUnit: 420.0,
       productColor: "Blue",
     },
+    {
+      id: 2,
+      productImg:
+        "https://dt-multispare.myshopify.com/cdn/shop/products/shop11_3428686f-14e8-433c-b6a0-de555e1944a7.jpg?v=1669181109&width=300",
+      productTitle: "Professional Electric Wood Router",
+      pricePerUnit: 750.0,
+      productColor: "Yellow",
+    },
   ];
 
   return (
@@ -47,18 +55,23 @@ const MyCart = () => {
 
           <div className="mt-5">
             {products.map((product) => (
-              <div key={product.id} className="pb-2 flex gap-3 border-b">
+              <div key={product.id} className="pb-2 flex gap-3 border-b my-5">
                 <img src={product.productImg} alt="" className="size-64" />
 
                 <div className="space-y-2">
-                  <h2 className="text-xl lg:text-4xl font-bold">
-                    Woodwork Vacuum Grinding
+                  <h2
+                    title={product.productTitle}
+                    className="text-xl lg:text-4xl font-semibold hover:cursor-pointer"
+                  >
+                    {product.productTitle.length < 28
+                      ? product.productTitle
+                      : product.productTitle.slice(0, 27) + ".."}
                   </h2>
 
                   <p>${product.pricePerUnit} per unit</p>
                   <p>15 x 10 x 7 cm</p>
 
-                  <p>Blue</p>
+                  <p>{product.productColor}</p>
 
                   <div className="flex items-center">
                     <button
@@ -75,7 +88,7 @@ const MyCart = () => {
                       -
                     </button>
                   </div>
-                  <p>Total Quantity: {quantity}</p>
+                  <p>Total Quantity: {quantity} pice</p>
 
                   <div className="flex justify-between items-center my-2">
                     <p>
@@ -97,6 +110,26 @@ const MyCart = () => {
 
         <div className="lg:w-1/3">
           <h1 className="text-lg md:text-xl lg:text-3xl">Order Summary</h1>
+
+          <div className="mt-4">
+            <div>
+              {products.map((product) => (
+                <div key={product.id} className="border-b my-3">
+                  <h1 className="text-lg font-semibold">
+                    {product.productTitle}
+                  </h1>
+                  <p>Total Quantuty: {quantity} pice</p>
+                  <p>
+                    total price: ${(product.pricePerUnit * quantity).toFixed(2)}
+                  </p>
+                </div>
+              ))}
+            </div>
+            <h1 className="text-2xl font-semibold">Subtotal: $ 33.00</h1>
+            <button className="w-full py-2 bg-yellow-400 hover:bg-yellow-500 shadow-lg hover:shadow-none rounded-lg text-xl font-bold transition-all duration-300 mt-8">
+              Checkout
+            </button>
+          </div>
         </div>
       </div>
     </div>
