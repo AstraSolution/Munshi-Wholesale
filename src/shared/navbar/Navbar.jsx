@@ -38,6 +38,25 @@ const Navbar = () => {
     { label: "Dashboard", link: "/dashboard" },
   ];
 
+  const products = [
+    {
+      id: 1,
+      productImg:
+        "https://dt-multispare.myshopify.com/cdn/shop/products/shop06_4f673430-26a3-43a2-975c-97a24415829b.jpg?v=1669179083&width=360",
+      productTitle: "Woodwork Vacuum Grinding",
+      pricePerUnit: 420.0,
+      productColor: "Blue",
+    },
+    {
+      id: 2,
+      productImg:
+        "https://dt-multispare.myshopify.com/cdn/shop/products/shop11_3428686f-14e8-433c-b6a0-de555e1944a7.jpg?v=1669181109&width=300",
+      productTitle: "Professional Electric Wood Router",
+      pricePerUnit: 750.0,
+      productColor: "Yellow",
+    },
+  ];
+
   return (
     <div>
       <div className="bg-black">
@@ -170,7 +189,7 @@ const Navbar = () => {
 
       {/* cart slider start */}
       {isCartOpen && (
-        <div className="fixed inset-0 bg-black/50 z-50" onClick={closeCart}>
+        <div className="fixed inset-0 bg-black/50 z-50">
           <div className="fixed top-0 right-0 bottom-0 w-full sm:w-[400px] bg-white">
             <div className="flex justify-between items-center p-3 lg:p-5 bg-yellow-400">
               <button
@@ -185,24 +204,27 @@ const Navbar = () => {
               </Link>
             </div>
 
-            <div className="py-2 px-5 flex gap-3 border-b">
-              <img
-                src="https://dt-multispare.myshopify.com/cdn/shop/products/shop06_4f673430-26a3-43a2-975c-97a24415829b.jpg?v=1669179083&width=360"
-                alt=""
-                className="size-28"
-              />
+            <div>
+              {products?.map((product) => (
+                <div
+                  key={product.id}
+                  className="py-2 px-5 flex gap-3 border-b my-3"
+                >
+                  <img src={product.productImg} alt="" className="size-28" />
 
-              <div className="space-y-2">
-                <h2 className="text-xl lg:text-2xl font-bold">
-                  Woodwork Vaccum Grinding
-                </h2>
-                <div className="flex justify-between items-center ">
-                  <p>$452.00</p>
-                  <button className="hover:bg-black/10 hover:shadow-md p-2 rounded-full transition-all duration-300">
-                    <TrashIcon className="size-5" />
-                  </button>
+                  <div className="space-y-2">
+                    <h2 className="text-xl lg:text-2xl font-bold">
+                      {product.productTitle}
+                    </h2>
+                    <div className="flex justify-between items-center ">
+                      <p>${product.pricePerUnit}</p>
+                      <button className="hover:text-red-500 transition-all duration-300">
+                        <TrashIcon className="size-5" />
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
 
             <Link to="/my-cart">
