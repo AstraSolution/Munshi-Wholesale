@@ -1,17 +1,13 @@
 import Banner from "../../components/Home/Banner";
-import FeatureProduct from "./FeatureProduct";
-
+import FeatureProduct from "../../components/FeaturedCard/FeaturedCard";
 import Newslatter from "../../components/Newslatter/Newslatter";
 
 const Home = () => {
   return (
     <div className="">
       <Banner></Banner>
-
       <FeatureProduct></FeatureProduct>
-      <FeaturedCard></FeaturedCard>
-      <Cards></Cards>
-      <Newslatter/>
+      <Newslatter />
     </div>
   );
 };

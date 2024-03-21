@@ -6,13 +6,10 @@ import { Outlet } from "react-router-dom";
 const Root = () => {
   return (
     <div>
-      
-    <Header />
+      <Header />
       <Navbar />
-        <Outlet />
-      <Home />
-      <Footer/>
- 
+      <Outlet />
+      <Footer />
     </div>
   );
 };
