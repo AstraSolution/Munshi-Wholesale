@@ -180,7 +180,7 @@ const Navbar = () => {
                 <XMarkIcon className="size-7" />
               </button>
 
-              <Link>
+              <Link to="/my-cart">
                 <h1 className="text-xl lg:text-2xl font-bold"> My Cart</h1>
               </Link>
             </div>
@@ -205,7 +205,7 @@ const Navbar = () => {
               </div>
             </div>
 
-            <Link>
+            <Link to="/my-cart">
               <button className="py-2 w-full my-3 mx-2 bg-yellow-400 rounded-lg shadow-lg lg:text-xl font-semibold hover:bg-yellow-500 hover:shadow-none transition-all duration-300">
                 View All Cart
               </button>
