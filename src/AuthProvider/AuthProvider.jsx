@@ -12,7 +12,7 @@ import {
   sendEmailVerification,
   reload,
 } from "firebase/auth";
-import  { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import app from "../Firebase/Firebase.config";
 
 export const AuthContext = createContext(null);
