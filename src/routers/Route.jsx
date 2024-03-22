@@ -25,6 +25,14 @@ const router = createBrowserRouter([
         path: "/my-cart",
         element: <MyCart />,
       },
+      {
+        path: "/allProducts",
+        element: <AllProducts />,
+      },
+      {
+        path: "/wishlist",
+        element: <WishList />,
+      },
     ],
   },
   {
@@ -39,14 +47,6 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/add-product",
         element: <AddProduct />,
-      },
-      {
-        path: "/allProducts",
-        element: <AllProducts />,
-      },
-      {
-        path: "/wishlist",
-        element: <WishList />,
       },
     ],
   },

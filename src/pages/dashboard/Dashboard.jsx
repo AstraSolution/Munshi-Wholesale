@@ -64,8 +64,8 @@ const Dashboard = () => {
       </div>
       {/* slider end */}
 
-      {/* navbar start */}
       <div className="w-full h-14 bg-black shadow-lg">
+        {/* navbar start */}
         <div className="flex justify-between items-center py-2 px-5">
           <button onClick={toggleSlider}>
             {isSliderOpen ? (
