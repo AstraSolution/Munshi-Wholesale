@@ -20,6 +20,7 @@ const Navbar = () => {
 
   const navLinks = [
     { label: "Home", link: "/" },
+    { label: "Products", link: "/allProducts" },
     { label: "About", link: "/about" },
     { label: "Contact", link: "/contact" },
     { label: "SignUp", link: "/sign-up" },
