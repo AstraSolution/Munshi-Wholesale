@@ -7,6 +7,8 @@ import Profile from "../pages/profile/Profile";
 import AddProduct from "../pages/AddProduct/AddProduct";
 import AllProducts from "../pages/AllProducts/AllProducts";
 import WishList from "../components/WishList/WishList";
+import Login from "../pages/Login/Login";
+import Register from "../pages/Register/Register";
 
 const router = createBrowserRouter([
   {
@@ -26,8 +28,18 @@ const router = createBrowserRouter([
         path: "/wishlist",
         element: <WishList></WishList>,
       },
+      
     ],
   },
+  {
+    path: "/login",
+    element: <Login></Login>
+  },
+  {
+    path: "/register",
+    element: <Register></Register>
+  },
+ 
   {
     path: "/dashboard",
     element: <Dashboard />,

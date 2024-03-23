@@ -4,56 +4,119 @@ import EyeSlashIcon from "../../shared/Icons/EyeSlashIcon";
 import { Link, useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/icons/google.png";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
-import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
+import { Toaster, toast } from "react-hot-toast";
+import { useForm } from "react-hook-form";
 
 export default function Register() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(true);
-  const { googleLogin, createUser, updateUserProfile, emailVerification } =
-    useContext(AuthContext);
+  const { googleLogin, createUser, updateUserProfile, emailVerification } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
+  const { register, handleSubmit, reset } = useForm();
 
-  const handleRegister = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const name = form.name.value;
-    const email = form.email.value;
-    const password = form.password.value;
+  // const handleRegister = (e) => {
 
-    createUser(email, password)
-      .then((result) => {
-        const loggedUser = result.user;
-        console.log(loggedUser);
 
-        updateUserProfile(name)
-          .then(() => {
-            const loggedProfile = result.user;
-            console.log(loggedProfile);
-          })
-          .catch((error) => {
-            console.log(error.message);
-          });
+  const axiosPublic = useAxiosPublic();
 
-        Swal.fire({
-          position: "center-center",
-          icon: "success",
-          title: "Register Successful!",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        form.reset();
-        navigate(location?.state ? location.state : "/");
-      })
-      .catch((error) => {
-        console.log(error.message);
-        Swal.fire({
-          position: "center-center",
-          icon: "error",
-          title: "This email already have taken!",
-          text: "Pleasey try another email.",
-        });
+  const signUp = (data) => {
+    const name = data.name;
+    const email = data.email;
+    const password = data.password;
+
+    const userInfo = { name, email, password };
+
+    try {
+      createUser(email, password).then(async (res) => {
+        const updateName = await updateUserProfile(name);
+        if (res.user) {
+       
+          try {
+            const response = await axiosPublic.post("users", userInfo);
+           setTimeout(() => {
+            toast.success(' Singup  Successfully!');
+           }, 1000);
+           
+            navigate(location?.state ? location.state : "/");
+          } catch (error) {
+            console.error("Error posting user data:", error);
+            toast.error(' please Try Again');
+          }
+        }
       });
+    } catch (error) {
+      console.error("Error during sign up:", error);
+      toast.error(' please Try Again');
+    }
   };
+
+
+
+
+
+
+
+
+
+
+
+  // createUser(email, password)
+  //   .then((result) => {
+  //     const loggedUser = result.user;
+  //     console.log(loggedUser);
+
+  //     updateUserProfile(name)
+  //       .then(() => {
+  //         const loggedProfile = result.user;
+  //         console.log(loggedProfile);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error.message);
+  //       });
+
+  //     Swal.fire({
+  //       position: "center-center",
+  //       icon: "success",
+  //       title: "Register Successful!",
+  //       showConfirmButton: false,
+  //       timer: 1500,
+  //     });
+  //     form.reset();
+  //     navigate(location?.state ? location.state : "/");
+  //   })
+  //   .catch((error) => {
+  //     console.log(error.message);
+  //     Swal.fire({
+  //       position: "center-center",
+  //       icon: "error",
+  //       title: "This email already have taken!",
+  //       text: "Pleasey try another email.",
+  //     });
+  //   });
+
+
+
+  // };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   const handleGoogleLogin = () => {
     googleLogin()
@@ -88,11 +151,11 @@ export default function Register() {
           <hr className="bg-[#343A40] max-w-[20%] w-[20%]" />
         </div>
 
-        <form onSubmit={handleRegister}>
+        <form onSubmit={handleSubmit(signUp)}>
           <div class="relative float-label-input pb-5">
             <input
               type="text"
-              name="name"
+              {...register("name")}
               placeholder=" "
               required
               className="shadow-sm block bg-white w-full  focus:outline-none focus:shadow-outline border border-[#ffc10a] rounded-md py-3 px-4 appearance-none leading-normal"
@@ -104,7 +167,7 @@ export default function Register() {
           <div class="relative float-label-input pb-5">
             <input
               type="email"
-              name="email"
+              {...register("email")}
               placeholder=" "
               required
               className="shadow-sm block bg-white w-full  focus:outline-none focus:shadow-outline border border-[#ffc10a] rounded-md py-3 px-4 appearance-none leading-normal"
@@ -117,7 +180,7 @@ export default function Register() {
             <div class="relative float-label-input w-full">
               <input
                 type={showPassword ? "password" : "text"}
-                name="password"
+                {...register("password")}
                 placeholder=" "
                 required
                 className="shadow-sm block bg-white w-full  focus:outline-none focus:shadow-outline border border-[#ffc10a] rounded-md py-3 px-4 appearance-none leading-normal"
@@ -135,8 +198,8 @@ export default function Register() {
           </div>
           <input
             type="submit"
-            value="Register"
-            className="shadow-sm w-full bg-[#ffc10a] hover:bg-[#e9af03] py-3 text-white font-semibold rounded-md transition duration-200 ease-in-outbg-white"
+            value="Sign up"
+            className="shadow-sm btn w-full bg-[#ffc10a] hover:bg-[#e9af03] py-3 text-white font-semibold rounded-md transition duration-200 ease-in-outbg-white"
           />
         </form>
 
@@ -152,6 +215,7 @@ export default function Register() {
           </Link>
         </p>
       </div>
+      <Toaster />
     </div>
   );
 }
