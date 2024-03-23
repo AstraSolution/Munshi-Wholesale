@@ -1,11 +1,41 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
+
 
 const WishList = () => {
 
-
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     console.log(user.email);
+
+    const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`http://localhost:5000/api/v1//wishlist/${user?.email}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const result = await response.json();
+                setData(result);
+            } catch (error) {
+                setError(error);
+            } 
+        };
+
+        fetchData();
+    }, []); // Empty dependency array means this effect will run once after the first render
+
+
+    console.log(data);
+ 
+
+
+
+
+
+
 
     const wishlistItems = [
         {
