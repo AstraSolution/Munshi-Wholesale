@@ -10,9 +10,11 @@ import TranstackProvider from "./providers/TranstackProvider";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <TranstackProvider>
-      <RouterProvider router={router} />
-    </TranstackProvider>  
+    <AuthProvider>
+      <TranstackProvider>
+        <RouterProvider router={router} />
+      </TranstackProvider>
+    </AuthProvider> 
 
   </React.StrictMode>
 );
