@@ -226,6 +226,39 @@ const CheckOut = () => {
             </div>
           </div>
           {/* Order Summary end */}
+
+          {/* Shipping Method start */}
+          <div className="border border-black shadow-md rounded-sm">
+            <div className="bg-black rounded-t-sm p-2">
+              <h1 className="text-white font-bold">Shipping Method</h1>
+            </div>
+            <div className="p-4 flex flex-col gap-4">
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center justify-between hover:bg-gray-200 px-2 py-2 rounded-md cursor-pointer">
+                  <span className="flex items-center gap-2">
+                    <span>Pick up in-store</span>
+                  </span>
+                  <span className="text-sm font-medium">Free</span>
+                </div>
+                <div className="flex items-center justify-between hover:bg-gray-200 px-2 py-2 rounded-md cursor-pointer">
+                  <span className="flex items-center gap-2">
+                    <span>My carrier</span>
+                  </span>
+                  <span className="text-sm font-medium">$8.40 (tax incl.)</span>
+                </div>
+              </div>
+              <div className="text-center text-gray-500 text-sm">
+                Estimated delivery time will be displayed at checkout
+              </div>
+            </div>
+          </div>
+          {/* Shipping Method end */}
+
+
+
+
+
+
         </div>
       </div>
     </div>
