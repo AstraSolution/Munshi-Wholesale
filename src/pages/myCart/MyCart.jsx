@@ -163,9 +163,11 @@ const MyCart = () => {
             <h1 className="text-2xl font-semibold cursor-pointer">
               Subtotal: ${subtotal}
             </h1>
-            <button className="w-full py-2 bg-yellow-400 hover:bg-yellow-500 shadow-lg hover:shadow-none rounded-lg text-xl font-bold transition-all duration-300 mt-8">
-              Checkout
-            </button>
+            <Link to="/checkout">
+              <button className="w-full py-2 bg-yellow-400 hover:bg-yellow-500 shadow-lg hover:shadow-none rounded-lg text-xl font-bold transition-all duration-300 mt-8">
+                Checkout
+              </button>
+            </Link>
           </div>
         </div>
       </div>
