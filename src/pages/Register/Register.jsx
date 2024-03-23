@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import  { useContext, useState } from "react";
 import EyeIcon from "../../shared/Icons/EyeIcon";
 import EyeSlashIcon from "../../shared/Icons/EyeSlashIcon";
 import { Link, useNavigate } from "react-router-dom";
@@ -11,7 +11,9 @@ import { useForm } from "react-hook-form";
 export default function Register() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(true);
-  const { googleLogin, createUser, updateUserProfile, emailVerification } = useContext(AuthContext);
+
+  const { googleLogin, createUser, updateUserProfile, emailVerification } =   useContext(AuthContext);
+
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit, reset } = useForm();
 

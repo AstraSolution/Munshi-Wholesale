@@ -11,11 +11,12 @@ import AuthProvider from "./AuthProvider/AuthProvider";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <AuthProvider>
     <TranstackProvider>
-      <AuthProvider>
-        <RouterProvider router={router} />
-      </AuthProvider>
-    </TranstackProvider>
+
+      <RouterProvider router={router} />
+    </TranstackProvider>  
+    </AuthProvider>  
 
   </React.StrictMode>
 );
