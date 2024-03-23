@@ -44,6 +44,17 @@ const CheckOut = () => {
                 />
               </div>
               <div className="flex flex-col">
+                <label htmlFor="birthDate" className="mb-2">
+                  Date of birth
+                </label>
+                <input
+                  type="date"
+                  id="birthDate"
+                  name="birthDate"
+                  className="border border-gray-300 rounded-md px-2 py-1 focus:outline-none"
+                />
+              </div>
+              <div className="flex flex-col">
                 <label htmlFor="email" className="mb-2">
                   Email
                 </label>
@@ -72,18 +83,6 @@ const CheckOut = () => {
                     Show
                   </button>
                 </div>
-              </div>
-
-              <div className="flex flex-col">
-                <label htmlFor="birthDate" className="mb-2">
-                  Date of birth
-                </label>
-                <input
-                  type="date"
-                  id="birthDate"
-                  name="birthDate"
-                  className="border border-gray-300 rounded-md px-2 py-1 focus:outline-none"
-                />
               </div>
             </form>
           </div>
