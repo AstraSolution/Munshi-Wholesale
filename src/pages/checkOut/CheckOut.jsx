@@ -88,6 +88,107 @@ const CheckOut = () => {
             </form>
           </div>
           {/* Personal Information end */}
+
+          {/* Addresses start */}
+          <div className="border border-black shadow-md rounded-sm">
+            <div className="bg-black rounded-t-sm p-2">
+              <h1 className="text-white font-bold">Addresses</h1>
+            </div>
+            <form className="w-full rounded-lg p-4 flex flex-col gap-4">
+              <div>
+                <label htmlFor="company" className="mb-2">
+                  Company (Optional)
+                </label>
+                <input
+                  type="text"
+                  id="company"
+                  name="company"
+                  className="border border-gray-300 rounded-md px-2 py-1 focus:outline-none w-full"
+                />
+              </div>
+              <div>
+                <label htmlFor="vatNumber" className="mb-2">
+                  VAT number (Optional)
+                </label>
+                <input
+                  type="text"
+                  id="vatNumber"
+                  name="vatNumber"
+                  className="border border-gray-300 rounded-md px-2 py-1 focus:outline-none w-full"
+                />
+              </div>
+              <div>
+                <label htmlFor="address" className="mb-2">
+                  Address
+                </label>
+                <textarea
+                  id="address"
+                  name="address"
+                  className="border border-gray-300 rounded-md px-2 py-1 focus:outline-none w-full"
+                  rows="3"
+                ></textarea>
+              </div>
+              <div>
+                <label htmlFor="addressComplement" className="mb-2">
+                  Address Complement (Optional)
+                </label>
+                <input
+                  type="text"
+                  id="addressComplement"
+                  name="addressComplement"
+                  className="border border-gray-300 rounded-md px-2 py-1 focus:outline-none w-full"
+                />
+              </div>
+              <div>
+                <label htmlFor="city" className="mb-2">
+                  City
+                </label>
+                <input
+                  type="text"
+                  id="city"
+                  name="city"
+                  className="border border-gray-300 rounded-md px-2 py-1 focus:outline-none w-full"
+                />
+              </div>
+              <div className="flex flex-wrap -mx-2">
+                <div className="w-full px-2 mr-2">
+                  <label htmlFor="postalCode" className="mb-2">
+                    Postal code
+                  </label>
+                  <input
+                    type="text"
+                    id="postalCode"
+                    name="postalCode"
+                    className="border border-gray-300 rounded-md px-2 py-1 focus:outline-none w-full"
+                  />
+                </div>
+                <div className="w-full px-2">
+                  <label htmlFor="country" className="mb-2">
+                    Country
+                  </label>
+                  <select
+                    id="country"
+                    name="country"
+                    className="border border-gray-300 rounded-md px-2 py-1 focus:outline-none w-full"
+                  >
+                    <option value="">Select Country</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label htmlFor="phone" className="mb-2">
+                  Phone
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  className="border border-gray-300 rounded-md px-2 py-1 focus:outline-none w-full"
+                />
+              </div>
+            </form>
+          </div>
+          {/* Addresses end */}
         </div>
 
         {/* right side */}
