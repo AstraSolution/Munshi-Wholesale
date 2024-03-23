@@ -3,9 +3,10 @@ import { PhoneIcon } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Logo from "../logo/Logo";
 import { useState } from "react";
+import { AiOutlineHeart } from 'react-icons/ai';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,9 +21,10 @@ const Navbar = () => {
 
   const navLinks = [
     { label: "Home", link: "/" },
+    { label: "Products", link: "/allProducts" },
     { label: "About", link: "/about" },
     { label: "Contact", link: "/contact" },
-    { label: "SignUp", link: "/sign-up" },
+    { label: "Sign In", link: "/login" },
     { label: "Dashboard", link: "/dashboard" },
   ];
 
@@ -50,6 +52,16 @@ const Navbar = () => {
             </form>
 
             <div className="flex items-center gap-2">
+
+              {/* wishlist icon  */}
+
+              <Link to="/wishlist">
+                <div className="px-2">
+                  <span className="indicator-item badge badge-secondary text-white "> 44 </span>
+                  <AiOutlineHeart className="mx-auto text-white " />
+                </div>
+              </Link>
+
               <ShoppingBagIcon className="size-6 md:size-8 lg:size-12 text-white" />
               <div className="lg:hidden">
                 <Bars3Icon
@@ -91,8 +103,8 @@ const Navbar = () => {
                       isPending
                         ? "pending"
                         : isActive
-                        ? "pb-1 border-b-2 border-black"
-                        : "pb-1 hover:border-b-2 border-black transition-all duration-300"
+                          ? "pb-1 border-b-2 border-black"
+                          : "pb-1 hover:border-b-2 border-black transition-all duration-300"
                     }
                   >
                     {navLink.label}
@@ -140,8 +152,8 @@ const Navbar = () => {
                       isPending
                         ? "pending"
                         : isActive
-                        ? "py-1 px-2 rounded-md text-sm font-semibold bg-yellow-400"
-                        : "py-1 px-2 rounded-md text-sm font-semibold"
+                          ? "py-1 px-2 rounded-md text-sm font-semibold bg-yellow-400"
+                          : "py-1 px-2 rounded-md text-sm font-semibold"
                     }
                   >
                     {navLink.label}
