@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom";
-import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn } from 'react-icons/fa';
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaTwitter,
+  FaLinkedinIn,
+} from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -132,9 +137,7 @@ const Footer = () => {
             <FaLinkedinIn className="text-white text-lg hover:text-blue-500" />
           </a>
         </div>
-        <p className="text-sm py-3 md:py-0 lg:py-0">
-          © 2024 Astra Solution
-        </p>
+        <p className="text-sm py-3 md:py-0 lg:py-0">© 2024 Astra Solution</p>
         <div className="flex items-center gap-3">
           We accepted
           <img src="/Public/assets/payment.png" alt="" />
