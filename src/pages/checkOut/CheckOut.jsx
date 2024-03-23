@@ -312,7 +312,16 @@ const CheckOut = () => {
           </div>
           {/* comment end */}
 
-
+          {/* Pay Now start */}
+          <div>
+            <button
+              type="submit"
+              className="bg-black text-white font-bold w-full py-2 px-4 rounded-sm shadow-lg hover:shadow-sm focus:outline-none transition-all duration-300"
+            >
+              Pay Now
+            </button>
+          </div>
+          {/* Pay Now end */}
         </div>
       </div>
     </div>
