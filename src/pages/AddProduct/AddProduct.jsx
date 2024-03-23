@@ -4,11 +4,9 @@ import { LuUpload } from "react-icons/lu";
 import { MdDeleteOutline } from "react-icons/md";
 
 const AddProduct = () => {
-
   const { register, handleSubmit } = useForm();
   const [images, setImages] = React.useState([]);
   const [fileNames, setFileNames] = React.useState([]);
-
 
   const handleImageChange = (files) => {
     const newImages = [...images];
@@ -30,11 +28,9 @@ const AddProduct = () => {
     setFileNames(newFileNames);
   };
 
-
   const onSubmit = (data) => {
     console.log(data);
   };
-
 
   return (
     <section className="max-w-5xl p-6 mx-auto bg-zinc-700 rounded-md shadow-md dark:bg-gray-800 mt-20 mb-9">
@@ -144,7 +140,6 @@ const AddProduct = () => {
             <label className="block text-sm font-medium text-white">
               Image
             </label>
-
             <div className="flex space-x-4">
               {images.map((image, index) => (
                 <div key={index} className="relative">
@@ -180,7 +175,6 @@ const AddProduct = () => {
               multiple
               onChange={(e) => handleImageChange(e.target.files)}
             />
-
           </div>
         </div>
 

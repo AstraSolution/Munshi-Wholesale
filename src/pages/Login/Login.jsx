@@ -7,12 +7,13 @@ import { Link, useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/icons/google.png";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
 
 export default function Login() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(true);
-  const { googleLogin, signInUser, passwordResetEmail } =
-    useContext(AuthContext);
+  const axiosPublic = useAxiosPublic()
+  const { googleLogin, signInUser, passwordResetEmail } =   useContext(AuthContext);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -61,9 +62,15 @@ export default function Login() {
 
   const handleGoogleLogin = () => {
     googleLogin()
-      .then((res) => {
+      .then( async(res) => {
         const loggedUser = res.user;
-        console.log(loggedUser);
+        
+        const userInfo = {
+          name: loggedUser?.displayName,
+          email: loggedUser?.email
+        }
+        await axiosPublic.post("/users", userInfo)
+
         navigate(location?.state ? location.state : "/");
       })
       .catch((err) => {
