@@ -298,7 +298,19 @@ const CheckOut = () => {
           </div>
           {/* Payment end */}
 
-
+          {/* comment start */}
+          <div className="w-full border border-black px-4 py-4 flex flex-col gap-2 shadow-md rounded-sm">
+            <label htmlFor="comment" className="text-sm font-bold">
+              If you would like to add a comment to your order, please write it
+              in the field below
+            </label>
+            <textarea
+              id="comment"
+              name="comment"
+              className="border border-gray-300 rounded-md px-2 py-2 focus:outline-none h-20 resize-none"
+            ></textarea>
+          </div>
+          {/* comment end */}
 
 
         </div>
