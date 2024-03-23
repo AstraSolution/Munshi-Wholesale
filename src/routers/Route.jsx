@@ -5,6 +5,7 @@ import Home from "../pages/home/Home";
 import Dashboard from "../pages/dashboard/Dashboard";
 import Profile from "../pages/profile/Profile";
 import AddProduct from "../pages/AddProduct/AddProduct";
+import MyCart from "../pages/myCart/MyCart";
 import AllProducts from "../pages/AllProducts/AllProducts";
 import WishList from "../components/WishList/WishList";
 import Login from "../pages/Login/Login";
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/my-cart",
+        element: <MyCart />,
       },
       {
         path: "/allProducts",
