@@ -192,7 +192,41 @@ const CheckOut = () => {
         </div>
 
         {/* right side */}
-        <div className="lg:w-1/3 space-y-5"></div>
+        <div className="lg:w-1/3 space-y-5">
+          {/* Order Summary start */}
+          <div className="border border-black shadow-md rounded-sm">
+            <div className="bg-black rounded-t-sm p-2">
+              <h1 className="text-white font-bold">Order Summary</h1>
+            </div>
+            <div className="p-4 flex flex-col gap-4">
+              <div className="flex flex-col gap-2">
+                <div className="flex justify-between">
+                  <span>Stepladder tool</span>
+                  <span>x1</span>
+                  <span>$13.93</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Diagonal pliers</span>
+                  <span>x1</span>
+                  <span>$13.57</span>
+                </div>
+              </div>
+              <div className="flex justify-between text-sm font-medium pt-2 border-t border-gray-200">
+                <span>Subtotal</span>
+                <span>$27.50</span>
+              </div>
+              <div className="flex justify-between text-sm font-medium">
+                <span>Shipping</span>
+                <span>Free</span>
+              </div>
+              <div className="flex justify-between text-lg font-bold pt-2 border-t border-gray-200">
+                <span>Total (tax incl.)</span>
+                <span>$27.50</span>
+              </div>
+            </div>
+          </div>
+          {/* Order Summary end */}
+        </div>
       </div>
     </div>
   );
