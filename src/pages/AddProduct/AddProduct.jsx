@@ -70,10 +70,7 @@ const AddProduct = () => {
           </div>
 
           <div>
-            <label
-              className="text-white dark:text-gray-200"
-              htmlFor=""
-            >
+            <label className="text-white dark:text-gray-200" htmlFor="">
               Demo
             </label>
             <input
@@ -83,10 +80,7 @@ const AddProduct = () => {
             />
           </div>
           <div>
-            <label
-              className="text-white dark:text-gray-200"
-              htmlFor=""
-            >
+            <label className="text-white dark:text-gray-200" htmlFor="">
               Demo
             </label>
             <input
@@ -96,10 +90,7 @@ const AddProduct = () => {
             />
           </div>
           <div>
-            <label
-              className="text-white dark:text-gray-200"
-              htmlFor=""
-            >
+            <label className="text-white dark:text-gray-200" htmlFor="">
               Demo
             </label>
             <input
@@ -120,7 +111,6 @@ const AddProduct = () => {
               <option>Demo</option>
               <option>Demo</option>
               <option>Demo</option>
-            
             </select>
           </div>
 
@@ -150,42 +140,41 @@ const AddProduct = () => {
               Image
             </label>
             <div>
-          <div className="flex space-x-4">
-            {images.map((image, index) => (
-              <div key={index} className="relative">
-                <img
-                  src={image}
-                  alt={fileNames[index]}
-                  className="max-h-40 object-cover w-full"
-                />
-                <button
-                  type="button"
-                  onClick={() => handleRemoveImage(index)}
-                  className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
-                >
-                  <MdDeleteOutline />
-                </button>
+              <div className="flex space-x-4">
+                {images.map((image, index) => (
+                  <div key={index} className="relative">
+                    <img
+                      src={image}
+                      alt={fileNames[index]}
+                      className="max-h-40 object-cover w-full"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveImage(index)}
+                      className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
+                    >
+                      <MdDeleteOutline />
+                    </button>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          {/* Upload button */}
-          <div
-            onClick={() => document.querySelector("#image").click()}
-            className="cursor-pointer mt-4 p-16 border border-gray-300 rounded-md  items-center justify-center"
-          >
-            <LuUpload className="text-3xl text-[#F01543] mx-auto"></LuUpload>{" "}
-           
-          </div>
-          {/* Hidden file input */}
-          <input
-            type="file"
-            id="image"
-            accept="image/*"
-            className="hidden"
-            multiple
-            onChange={(e) => handleImageChange(e.target.files)}
-          />
-        </div>
+              {/* Upload button */}
+              <div
+                onClick={() => document.querySelector("#image").click()}
+                className="cursor-pointer mt-4 p-16 border border-gray-300 rounded-md  items-center justify-center"
+              >
+                <LuUpload className="text-3xl text-[#F01543] mx-auto"></LuUpload>{" "}
+              </div>
+              {/* Hidden file input */}
+              <input
+                type="file"
+                id="image"
+                accept="image/*"
+                className="hidden"
+                multiple
+                onChange={(e) => handleImageChange(e.target.files)}
+              />
+            </div>
           </div>
         </div>
 

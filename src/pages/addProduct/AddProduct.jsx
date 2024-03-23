@@ -3,8 +3,28 @@ import { LuUpload } from "react-icons/lu";
 import { MdDeleteOutline } from "react-icons/md";
 
 const AddProduct = () => {
-  const [image, setImage] = useState(null);
-  const [fileName, setFileName] = useState("No Selected File");
+  const [images, setImages] = useState([]);
+  const [fileNames, setFileNames] = useState([]);
+
+  const handleImageChange = (files) => {
+    const newImages = [...images];
+    const newFileNames = [...fileNames];
+    for (let i = 0; i < files.length; i++) {
+      newImages.push(URL.createObjectURL(files[i]));
+      newFileNames.push(files[i].name);
+    }
+    setImages(newImages);
+    setFileNames(newFileNames);
+  };
+
+  const handleRemoveImage = (index) => {
+    const newImages = [...images];
+    const newFileNames = [...fileNames];
+    newImages.splice(index, 1);
+    newFileNames.splice(index, 1);
+    setImages(newImages);
+    setFileNames(newFileNames);
+  };
 
   return (
     <section className="max-w-5xl p-6 mx-auto bg-zinc-700 rounded-md shadow-md dark:bg-gray-800 mt-20 mb-9">
@@ -50,10 +70,7 @@ const AddProduct = () => {
           </div>
 
           <div>
-            <label
-              className="text-white dark:text-gray-200"
-              htmlFor=""
-            >
+            <label className="text-white dark:text-gray-200" htmlFor="">
               Demo
             </label>
             <input
@@ -63,10 +80,7 @@ const AddProduct = () => {
             />
           </div>
           <div>
-            <label
-              className="text-white dark:text-gray-200"
-              htmlFor=""
-            >
+            <label className="text-white dark:text-gray-200" htmlFor="">
               Demo
             </label>
             <input
@@ -76,10 +90,7 @@ const AddProduct = () => {
             />
           </div>
           <div>
-            <label
-              className="text-white dark:text-gray-200"
-              htmlFor=""
-            >
+            <label className="text-white dark:text-gray-200" htmlFor="">
               Demo
             </label>
             <input
@@ -100,7 +111,6 @@ const AddProduct = () => {
               <option>Demo</option>
               <option>Demo</option>
               <option>Demo</option>
-            
             </select>
           </div>
 
@@ -129,89 +139,42 @@ const AddProduct = () => {
             <label className="block text-sm font-medium text-white">
               Image
             </label>
-            <div className="flex-[3] space-y-5">
+            <div>
+              <div className="flex space-x-4">
+                {images.map((image, index) => (
+                  <div key={index} className="relative">
+                    <img
+                      src={image}
+                      alt={fileNames[index]}
+                      className="max-h-40 object-cover w-full"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveImage(index)}
+                      className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
+                    >
+                      <MdDeleteOutline />
+                    </button>
+                  </div>
+                ))}
+              </div>
+              {/* Upload button */}
               <div
                 onClick={() => document.querySelector("#image").click()}
-                className=" w-full rounded-md cursor-pointer min-h-80 px-8 flex items-center justify-center bg-[#F9FAFB]"
+                className="cursor-pointer mt-4 p-16 border border-gray-300 rounded-md  items-center justify-center"
               >
-                <input
-                  type="file"
-                  name=""
-                  id="image"
-                  accept="image/*"
-                  hidden
-                  onChange={({ target: { files } }) => {
-                    files[0] && setFileName(files[0].name);
-                    if (files) {
-                      setImage(URL.createObjectURL(files[0]));
-                    }
-                  }}
-                />
-
-                {image ? (
-                  <img
-                    className="max-h-72 p-2 bg-white rounded-md"
-                    src={image}
-                    alt={fileName}
-                  />
-                ) : (
-                  <div className="text-[#F01543] space-y-4 font-semibold ">
-                    <LuUpload className="text-3xl text-[#F01543] mx-auto "></LuUpload>{" "}
-                    <p>Browse Files to upload</p>{" "}
-                  </div>
-                )}
+                <LuUpload className="text-3xl text-[#F01543] mx-auto"></LuUpload>{" "}
               </div>
-              {fileName ? (
-                <div className="p-3 bg-[#F9FAFB] rounded-md flex items-center justify-between">
-                  <p>{fileName}</p>
-                  <span
-                    onClick={() => {
-                      setImage(null);
-                      setFileName("No Selected File");
-                    }}
-                    className="p-4 bg-[#F01543] rounded text-white font-bold cursor-pointer  text-sm md:text-base lg:text-lg "
-                  >
-                    <MdDeleteOutline className="text-2xl"></MdDeleteOutline>
-                  </span>
-                </div>
-              ) : (
-                <></>
-              )}
+              {/* Hidden file input */}
+              <input
+                type="file"
+                id="image"
+                accept="image/*"
+                className="hidden"
+                multiple
+                onChange={(e) => handleImageChange(e.target.files)}
+              />
             </div>
-            {/* <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-              <div className="space-y-1 text-center">
-                <svg
-                  className="mx-auto h-12 w-12 text-white"
-                  stroke="currentColor"
-                  fill="none"
-                  viewBox="0 0 48 48"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                <div className="flex text-sm text-gray-600">
-                  <label
-                    htmlFor="file-upload"
-                    className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
-                  >
-                    <span className="">Upload a file</span>
-                    <input
-                      id="file-upload"
-                      name="file-upload"
-                      type="file"
-                      className="sr-only"
-                    />
-                  </label>
-                  <p className="pl-1 text-white">or drag and drop</p>
-                </div>
-                <p className="text-xs text-white">PNG, JPG, GIF up to 10MB</p>
-              </div>
-            </div> */}
           </div>
         </div>
 
