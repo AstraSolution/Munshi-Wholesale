@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import EyeIcon from "../../shared/Icons/EyeIcon";
 import EyeSlashIcon from "../../shared/Icons/EyeSlashIcon";
 import { Link, useNavigate } from "react-router-dom";
@@ -91,7 +91,7 @@ export default function Login() {
 
         <form onSubmit={handleLogin}>
           {/* email field  */}
-          <div class="relative float-label-input pb-5">
+          <div className="relative float-label-input pb-5">
             <input
               type="email"
               name="email"
@@ -99,14 +99,14 @@ export default function Login() {
               required
               className="shadow-sm block bg-white w-full  focus:outline-none focus:shadow-outline border border-[#ffc10a] rounded-md py-3 px-4 appearance-none leading-normal"
             />
-            <label class="absolute top-3 left-0 text-[#ffc10a] pointer-events-none transition duration-200 ease-in-outbg-white px-4">
+            <label className="absolute top-3 left-0 text-[#ffc10a] pointer-events-none transition duration-200 ease-in-outbg-white px-4">
               Email Address
             </label>
           </div>
 
           {/* password field  */}
           <div className="flex items-center relative pb-1">
-            <div class="relative float-label-input w-full">
+            <div className="relative float-label-input w-full">
               <input
                 type={showPassword ? "password" : "text"}
                 name="password"
@@ -114,7 +114,7 @@ export default function Login() {
                 required
                 className="shadow-sm block bg-white w-full  focus:outline-none focus:shadow-outline border border-[#ffc10a] rounded-md py-3 px-4 appearance-none leading-normal"
               />
-              <label class="absolute top-3 left-0 text-[#ffc10a] pointer-events-none transition duration-200 ease-in-outbg-white px-4">
+              <label className="absolute top-3 left-0 text-[#ffc10a] pointer-events-none transition duration-200 ease-in-outbg-white px-4">
                 Password
               </label>
             </div>
