@@ -254,7 +254,49 @@ const CheckOut = () => {
           </div>
           {/* Shipping Method end */}
 
-
+          {/* Payment start */}
+          <div className="border border-black shadow-md rounded-sm">
+            <div className="bg-black rounded-t-sm p-2">
+              <h1 className="text-white font-bold">Payment</h1>
+            </div>
+            <div className="p-4">
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center justify-between mb-2">
+                  <span>Pay by Cash</span>
+                  <input
+                    type="radio"
+                    id="payByCash"
+                    name="paymentType"
+                    value="cash"
+                  />
+                </div>
+                <div className="flex items-center justify-between mb-2">
+                  <span>Pay by SSLCOMMERZ</span>
+                  <input
+                    type="radio"
+                    id="payByBankWire"
+                    name="paymentType"
+                    value="bankWire"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <label htmlFor="terms" className="flex items-center mb-2">
+                    <input
+                      type="checkbox"
+                      id="terms"
+                      name="terms"
+                      className="mr-2"
+                    />
+                    <span className="text-sm">
+                      I agree to the terms of service and will adhere to them
+                      unconditionally.
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Payment end */}
 
 
 
