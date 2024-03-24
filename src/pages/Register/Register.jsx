@@ -7,15 +7,15 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
 import { Toaster, toast } from "react-hot-toast";
 import { useForm } from "react-hook-form";
+import { FuncContext } from "../../providers/FunctionProvider";
 
 export default function Register() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(true);
-
   const { googleLogin, createUser, updateUserProfile, emailVerification } =   useContext(AuthContext);
-
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit, reset } = useForm();
+  const { handleAddToCarts } = useContext(FuncContext)
 
   // const handleRegister = (e) => {
 
@@ -34,7 +34,8 @@ export default function Register() {
         const updateName = await updateUserProfile(name);
         console.log("updateName",updateName);
         if (res.user) {
-       
+          
+          await handleAddToCarts(name, email)
           try {
             setLoading(true)
             const res = await axiosPublic.post("/users", userInfo);
@@ -50,6 +51,8 @@ export default function Register() {
             toast.error(' please Try Again');
           }
         }
+
+        reset()
       });
     } catch (error) {
       console.error("Error during sign up:", error);
@@ -71,7 +74,7 @@ export default function Register() {
         };
       
         await axiosPublic.post("/users", userInfo)
-
+        await handleAddToCarts(loggedUser?.displayName, loggedUser?.email)
         navigate(location?.state ? location.state : "/");
       })
       .catch((err) => {

@@ -4,48 +4,16 @@ import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
 import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import { Link } from "react-router-dom";
+import toast from 'react-hot-toast';
 
 const Card = ({ product }) => {
   const { user } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
- 
-//   const CartsSchema = new mongoose.Schema({
-//     customer_name: {
-//        type: String,
-//        required: true
-//     },
-//     customer_email: {
-//         type: String,
-//         required: true
-//     },
-//     owner_email: {
-//         type: String,
-//         required: true
-//     },
-//      product_id: {
-//         type: String,
-//         required: true
-//     },
-//     unit_price: {
-//         type: Number,
-//         required: true
-//     },
-//     total_price: {
-//         type: Number,
-//         required: true
-//     },
-//     quantity: {
-//         type: Number,
-//         required: true
-//     },
-//     product_image: [String],
-//     stock_limit: Number,
-//     title: String,
-// })
+
 
   // handel add to cart function
-  const handleAddToCart = async(id) => {
-
+  const handleAddToCart = async (id) => {
+    const images = product?.image || [];
     const cartData = {
       customer_name: user?.displayName || "",
       customer_email: user?.email || "",
@@ -53,18 +21,40 @@ const Card = ({ product }) => {
       unit_price: product?.price,
       total_price: product?.price,
       quantity: 1,
-      product_image: product?.image[0],
-      stock_limit: product?.quantity ,
-      title: product?.title
-    }
+      product_image: [...images],
+      stock_limit: product?.quantity,
+      title: product?.title,
+    };
 
-    if(!user){
-      localStorage.setItem("carts", cartData)
+     // Check if the product is already in the Cart
+     let productExistsInCarts = false;
+     const carts = JSON.parse(localStorage.getItem("carts")) || [];
+     for (const item of carts) {
+       if (item.product_id === id) {
+         productExistsInCarts = true;
+         break;
+       }
+     }
+
+     if (productExistsInCarts) {
+       toast.error(`${product?.title} is already in your Carts`);
+       return; // Stop execution if the product already exists
+     }
+
+    if (!user) {
+      carts.push(cartData);
+      localStorage.setItem("carts", JSON.stringify(carts));
+
+      toast.success(`${product?.title} Added to cart`);
     } else {
-      const res  = await axiosPublic.post("/myCarts", cartData);
+      const res = await axiosPublic.post("/myCarts", cartData);
+
+      setTimeout(() => {
+        toast.success(`${product?.title} Added to cart`);
+      }, 1000);
       console.log(res?.data);
     }
-  }
+  };
 
   return (
     <div className="center">
@@ -79,8 +69,9 @@ const Card = ({ product }) => {
 
             <div className="flex justify-evenly mt-2">
               <button
-               onClick={() => handleAddToCart(product._id)}
-               className="bg-yellow-400 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
+                onClick={() => handleAddToCart(product._id)}
+                className="bg-yellow-400 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded"
+              >
                 Add to Cart
               </button>
               <Link to={`product/${product?._id}`}>
