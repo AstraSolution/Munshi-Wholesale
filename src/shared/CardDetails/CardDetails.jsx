@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { FaStar, FaRegHeart } from "react-icons/fa";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { FaPlus, FaMinus, FaArrowRightArrowLeft } from "react-icons/fa6";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RiShoppingBag2Line } from "react-icons/ri";
 
 import { Navigation } from "swiper/modules";
@@ -13,19 +13,132 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import "./Table.css";
+import toast from "react-hot-toast";
+import useAuth from "../../hooks/auth/useAuth";
 
 const CardDetails = () => {
   const axiosPublic = useAxiosPublic();
   const param = useParams();
   const [quantity, setQuantity] = useState(1);
+  const { user } = useAuth();
+  const [ favorite, setFavorite] = useState(false)
 
-  const { data: product = [] } = useQuery({
+  const { data: product = {} } = useQuery({
     queryKey: ["product"],
     queryFn: async () => {
       const res = await axiosPublic.get(`/products/${param?.id}`);
       return res.data;
     },
   });
+
+
+  useEffect(() => {
+        // Check if the product is already in the wishlist    
+        const wishlists = JSON.parse(localStorage.getItem("wishlist")) || [];
+        for (const item of wishlists) {
+          if (item.product_id === param?.id) {
+            setFavorite(true)
+            break;
+          }
+        }
+  }, [param]);
+
+
+  // handel add to cart function
+  const handleAddToCart = async (id) => {
+    const images = product?.image || [];
+    const cartData = {
+      customer_name: user?.displayName || "",
+      customer_email: user?.email || "",
+      product_id: id,
+      unit_price: product?.price,
+      total_price: product?.price,
+      quantity: 1,
+      product_image: [...images],
+      stock_limit: product?.quantity,
+      title: product?.title,
+    };
+
+     // Check if the product is already in the Cart
+     let productExistsInCarts = false;
+     const carts = JSON.parse(localStorage.getItem("carts")) || [];
+     for (const item of carts) {
+       if (item.product_id === id) {
+         productExistsInCarts = true;
+         break;
+       }
+     }
+
+     if (productExistsInCarts) {
+       toast.error(`${product?.title} is already in your Carts`);
+       return; // Stop execution if the product already exists
+     }
+
+    if (!user) {
+      carts.push(cartData);
+      localStorage.setItem("carts", JSON.stringify(carts));
+
+      toast.success(`${product?.title} Added to cart`);
+    } else {
+      const res = await axiosPublic.post("/myCarts", cartData);
+
+      setTimeout(() => {
+        toast.success(`${product?.title} Added to cart`);
+      }, 1000);
+      console.log(res?.data);
+    }
+  };
+
+  // handel add to cart function
+  const handleAddToWishlist = async (id) => {
+    const images = product?.image || [];
+    const wishlistData = {
+      customer_name: user?.displayName || "",
+      customer_email: user?.email || "",
+      product_id: id,
+      unit_price: product?.price,
+      total_price: product?.price,
+      quantity: 1,
+      product_image: [...images],
+      stock_limit: product?.quantity,
+      title: product?.title,
+    };
+  
+    // Check if the product is already in the wishlist
+    const wishlists = JSON.parse(localStorage.getItem("wishlist")) || [];
+    const index = wishlists.findIndex(item => item.product_id === id);
+  
+    if (index !== -1) {
+      // Product already exists, remove it from wishlist
+      wishlists.splice(index, 1);
+      localStorage.setItem("wishlist", JSON.stringify(wishlists));
+      setFavorite(false); // Toggle favorite state
+      toast.success(`${product?.title} removed from wishlist`);
+    } else {
+      // Product doesn't exist, add it to wishlist
+      wishlists.push(wishlistData);
+      localStorage.setItem("wishlist", JSON.stringify(wishlists));
+      setFavorite(true); // Toggle favorite state
+      toast.success(`${product?.title} added to wishlist`);
+    }
+  
+    if (user) {
+      try {
+        if (index !== -1) {
+          // Remove from server wishlist
+          await axiosPublic.delete(`/wishlist/${id}`);
+        } else {
+          // Add to server wishlist
+          await axiosPublic.post("/wishlist", wishlistData);
+        }
+      } catch (error) {
+        console.error("Error updating wishlist:", error);
+        toast.error("Failed to update wishlist. Please try again later.");
+      }
+    }
+  };
+  
+
 
   return (
     <div className="container">
@@ -176,14 +289,20 @@ const CardDetails = () => {
                 </button>
               </div>
             </div>
-            <button className="bg-yellow-400 md:p-2 lg:py-2 lg:px-5 flex items-center gap-2">
+            <button
+              onClick={() => handleAddToCart(product?._id)}
+              className="bg-yellow-400 md:p-2 lg:py-2 lg:px-5 flex items-center gap-2"
+            >
               <RiShoppingBag2Line className="text-xl" /> Add to cart
             </button>
           </div>
-          <h2 className="text-gray-500 flex items-center gap-2">
-            <FaRegHeart />
+          <button
+            onClick={() => handleAddToWishlist(product?._id)}
+            className="text-gray-500 flex items-center gap-2"
+          >
+            <FaRegHeart className={`${favorite ? 'text-red-500' : ""} `}/>
             Add to Wishlist
-          </h2>
+          </button>
 
           <hr className="my-5" />
 
