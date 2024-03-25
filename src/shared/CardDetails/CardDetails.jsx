@@ -47,6 +47,7 @@ const CardDetails = () => {
   // handel add to cart function
   const handleAddToCart = async (id) => {
     const images = product?.image || [];
+    const color = product?.color || [];
     const cartData = {
       customer_name: user?.displayName || "",
       customer_email: user?.email || "",
@@ -57,6 +58,8 @@ const CardDetails = () => {
       product_image: [...images],
       stock_limit: product?.quantity,
       title: product?.title,
+      color: [...color],
+      dimensions: product?.dimensions
     };
 
      // Check if the product is already in the Cart
@@ -92,6 +95,8 @@ const CardDetails = () => {
   // handel add to cart function
   const handleAddToWishlist = async (id) => {
     const images = product?.image || [];
+    const color = product?.color || [];
+
     const wishlistData = {
       customer_name: user?.displayName || "",
       customer_email: user?.email || "",
@@ -102,6 +107,8 @@ const CardDetails = () => {
       product_image: [...images],
       stock_limit: product?.quantity,
       title: product?.title,
+      color: [...color],
+      dimensions: product?.dimensions
     };
   
     // Check if the product is already in the wishlist

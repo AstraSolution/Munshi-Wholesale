@@ -11,17 +11,13 @@ import Logo from "../logo/Logo";
 import { useState } from "react";
 import useAuth from "../../hooks/auth/useAuth";
 import useMyCarts from "../../hooks/carts/useMyCarts";
-// import { AiOutlineHeart } from 'react-icons/ai';
-
+import { AiOutlineHeart } from 'react-icons/ai';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { user, logOut } = useAuth();
   const { carts, totalPrice } = useMyCarts();
-
-
-
 
   const openSlider = () => {
     setIsOpen(true);
@@ -47,17 +43,10 @@ const Navbar = () => {
     { label: "Sign In", link: "/login" },
     { label: "Register", link: "/register" },
     { label: "Dashboard", link: "/dashboard" },
-
   ];
-
-
-
-
-
 
   return (
     <div>
-    
       <div className="bg-black">
         <div className="max-w-7xl mx-auto py-5 px-5">
           <div className="flex justify-between items-center">
@@ -80,6 +69,16 @@ const Navbar = () => {
             </form>
 
             <div className="flex items-center gap-2">
+              <Link to="/wishList">
+                <div className="px-2">
+                  <span className="indicator-item badge text-red-500 ">
+
+                    {0}
+                  </span>
+            
+                  <AiOutlineHeart className="mx-auto text-red-600 text-5xl" />
+                </div>
+              </Link>
               <button onClick={openCart}>
                 <ShoppingBagIcon className="size-6 md:size-8 lg:size-12 text-white" />
               </button>
@@ -91,10 +90,11 @@ const Navbar = () => {
               </div>
               <div className="hidden lg:block">
                 <p className="text-white font-semibold text-lg">My Cart:</p>
-                <p className="text-yellow-500 font-semibold"> {carts?.length} - ${totalPrice}</p>
+                <p className="text-yellow-500 font-semibold">
+                  {carts?.length} - ${totalPrice}
+                </p>
               </div>
             </div>
-          
           </div>
         </div>
       </div>
@@ -211,7 +211,11 @@ const Navbar = () => {
                   key={cart?._id}
                   className="py-2 px-5 flex gap-3 border-b my-3"
                 >
-                  <img src={cart?.product_image[0]} alt="" className="size-28" />
+                  <img
+                    src={cart?.product_image[0]}
+                    alt=""
+                    className="size-28"
+                  />
 
                   <div className="space-y-2">
                     <h2 className="text-xl lg:text-2xl font-bold">
