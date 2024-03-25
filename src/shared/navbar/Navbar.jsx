@@ -23,7 +23,7 @@ const Navbar = () => {
     { label: "Home", link: "/" },
     { label: "Products", link: "/allProducts" },
     { label: "About", link: "/about" },
-    { label: "Contact", link: "/contact" },
+    { label: "Contact", link: "/contact-us" },
     { label: "Sign In", link: "/login" },
     { label: "Dashboard", link: "/dashboard" },
   ];
