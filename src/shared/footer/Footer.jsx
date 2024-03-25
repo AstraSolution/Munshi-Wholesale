@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaTwitter,
-  FaLinkedinIn,
-} from "react-icons/fa";
+// import {
+//   FaFacebookF,
+//   FaInstagram,
+//   FaTwitter,
+//   FaLinkedinIn,
+// } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -123,7 +123,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="w-full flex flex-row md:flex-col-2 lg:flex-col-3 mt-6 md:mt-0 py-4  items-center  justify-between border-t-[1px] border-t-gray-300">
-        <div className=" flex gap-2">
+        {/* <div className=" flex gap-2">
           <a href="https://www.facebook.com">
             <FaFacebookF className="text-white text-lg mr-2 hover:text-blue-500" />
           </a>
@@ -136,12 +136,12 @@ const Footer = () => {
           <a href="https://www.linkedin.com">
             <FaLinkedinIn className="text-white text-lg hover:text-blue-500" />
           </a>
-        </div>
+        </div> */}
         <p className="text-sm py-3 md:py-0 lg:py-0">© 2024 Astra Solution</p>
-        <div className="flex items-center gap-3">
+        {/* <div className="flex items-center gap-3">
           We accepted
           <img src="/Public/assets/payment.png" alt="" />
-        </div>
+        </div> */}
       </div>
     </footer>
   );
