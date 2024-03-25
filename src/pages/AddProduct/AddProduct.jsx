@@ -133,7 +133,7 @@ const AddProduct = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 ">
             {/*  title */}
             <div>
-              <label className="text-white "> Title </label>
+              <label className="text-white "> Product Title </label>
               <input
                 className="h-11 w-full px-2 text-xs md:text-sm  border border-[#2802a5] rounded-lg focus:outline-none shadow-md"
                 {...register("title")}
