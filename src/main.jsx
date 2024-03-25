@@ -3,9 +3,6 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import router from "./routers/Route";
-
-
-
 import TranstackProvider from "./providers/TranstackProvider";
 import AuthProvider from "./AuthProvider/AuthProvider";
 

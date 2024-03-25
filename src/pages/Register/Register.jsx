@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/icons/google.png";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
-import { Toaster, toast } from "react-hot-toast";
+import toast, { Toaster } from 'react-hot-toast';
 import { useForm } from "react-hook-form";
 
 export default function Register() {
@@ -107,17 +107,6 @@ export default function Register() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
   const handleGoogleLogin = () => {
     googleLogin()
       .then((res) => {
@@ -201,6 +190,7 @@ export default function Register() {
             value="Sign up"
             className="shadow-sm btn w-full bg-[#ffc10a] hover:bg-[#e9af03] py-3 text-white font-semibold rounded-md transition duration-200 ease-in-outbg-white"
           />
+     
         </form>
 
         {loading && <p>Loading...</p>}
