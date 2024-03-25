@@ -74,6 +74,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      localStorage.setItem("email", currentUser?.email)
       setUser(currentUser);
       setLoading(false);
     });
@@ -83,6 +84,7 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const logOut = () => {
+    localStorage.removeItem("email")
     return signOut(auth);
   };
 

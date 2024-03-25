@@ -9,8 +9,8 @@ import AllProducts from "../pages/AllProducts/AllProducts";
 import WishList from "../components/WishList/WishList";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
-import CheckOut from "../pages/checkOut/CheckOut";
-import AddProduct from '../pages/AddProduct/AddProduct'
+import CardDetails from "../shared/CardDetails/CardDetails";
+// import AddProduct from "../pages/addProduct/AddProduct";
 
 const router = createBrowserRouter([
   {
@@ -32,18 +32,37 @@ const router = createBrowserRouter([
       },
       {
         path: "/wishlist",
-        element: <WishList />,
+        element: <WishList></WishList>,
       },
       {
-        path: "/checkout",
-        element: <CheckOut />,
+        path: "/allProducts/product/:id",
+        element: <CardDetails></CardDetails>,
+      },
+      {
+        path: "/product/:id",
+        element: <CardDetails></CardDetails>,
       },
     ],
   },
   {
+
+    path: "/add-product",
+    // element: <AddProduct />
+  },
+  {
+
+    path: "/login",
+    element: <Login></Login>
+  },
+  {
+    path: "/register",
+    element: <Register></Register>
+  },
+ 
+  {
+
     path: "/dashboard",
     element: <Dashboard />,
-    errorElement: <Error />,
     children: [
       {
         path: "/dashboard",
@@ -51,17 +70,9 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/add-product",
-        element: <AddProduct />,
+        // element: <AddProduct />,
       },
     ],
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/register",
-    element: <Register />,
   },
 ]);
 export default router;

@@ -9,10 +9,19 @@ import {
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../logo/Logo";
 import { useState } from "react";
+import useAuth from "../../hooks/auth/useAuth";
+import useMyCarts from "../../hooks/carts/useMyCarts";
+// import { AiOutlineHeart } from 'react-icons/ai';
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const { user, logOut } = useAuth();
+  const { carts, totalPrice } = useMyCarts();
+
+
+
 
   const openSlider = () => {
     setIsOpen(true);
@@ -32,33 +41,23 @@ const Navbar = () => {
 
   const navLinks = [
     { label: "Home", link: "/" },
+    { label: "Products", link: "/allProducts" },
     { label: "About", link: "/about" },
     { label: "Contact", link: "/contact" },
+    { label: "Sign In", link: "/login" },
     { label: "Register", link: "/register" },
     { label: "Dashboard", link: "/dashboard" },
+
   ];
 
-  const products = [
-    {
-      id: 1,
-      productImg:
-        "https://dt-multispare.myshopify.com/cdn/shop/products/shop06_4f673430-26a3-43a2-975c-97a24415829b.jpg?v=1669179083&width=360",
-      productTitle: "Woodwork Vacuum Grinding",
-      pricePerUnit: 420.0,
-      productColor: "Blue",
-    },
-    {
-      id: 2,
-      productImg:
-        "https://dt-multispare.myshopify.com/cdn/shop/products/shop11_3428686f-14e8-433c-b6a0-de555e1944a7.jpg?v=1669181109&width=300",
-      productTitle: "Professional Electric Wood Router",
-      pricePerUnit: 750.0,
-      productColor: "Yellow",
-    },
-  ];
+
+
+
+
 
   return (
     <div>
+    
       <div className="bg-black">
         <div className="max-w-7xl mx-auto py-5 px-5">
           <div className="flex justify-between items-center">
@@ -92,9 +91,10 @@ const Navbar = () => {
               </div>
               <div className="hidden lg:block">
                 <p className="text-white font-semibold text-lg">My Cart:</p>
-                <p className="text-yellow-500 font-semibold">0 - $0.00</p>
+                <p className="text-yellow-500 font-semibold"> {carts?.length} - ${totalPrice}</p>
               </div>
             </div>
+          
           </div>
         </div>
       </div>
@@ -132,6 +132,7 @@ const Navbar = () => {
                   </NavLink>
                 </li>
               ))}
+              {user && <button onClick={logOut}>Logout</button>}
             </ul>
 
             <div className="flex items-center gap-3">
@@ -205,20 +206,20 @@ const Navbar = () => {
             </div>
 
             <div>
-              {products?.map((product) => (
+              {carts?.map((cart) => (
                 <div
-                  key={product.id}
+                  key={cart?._id}
                   className="py-2 px-5 flex gap-3 border-b my-3"
                 >
-                  <img src={product.productImg} alt="" className="size-28" />
+                  <img src={cart?.product_image[0]} alt="" className="size-28" />
 
                   <div className="space-y-2">
                     <h2 className="text-xl lg:text-2xl font-bold">
-                      {product.productTitle}
+                      {cart?.title}
                     </h2>
-                    <div className="flex justify-between items-center ">
-                      <p>${product.pricePerUnit}</p>
-                      <button className="hover:text-red-500 transition-all duration-300">
+                    <div className="flex  justify-between items-center ">
+                      <p>${cart?.unit_price}</p>
+                      <button className="hover:text-red-500 transition-all duration-300  ">
                         <TrashIcon className="size-5" />
                       </button>
                     </div>

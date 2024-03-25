@@ -1,38 +1,44 @@
-import React, { useContext } from 'react';
+
+import  { useContext } from 'react';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 
+
+
 const WishList = () => {
+  const { user } = useContext(AuthContext);
+  console.log(user.email);
 
+  const wishlistItems = [
+    {
+      name: "Divi Engine Logo Zipper Hoodie",
+      price: 29.99,
+      stockStatus: "In Stock",
+      image:
+        "https://es.digitaltrends.com/wp-content/uploads/2023/11/mejor-cable-ethernet-1.jpeg?fit=1500%2C1000&p=1",
+    },
+    {
+      name: "Dat Divi Engine Life Crop-top 13-Tonel",
+      price: 14.99,
+      stockStatus: "In Stock",
+      image:
+        "https://es.digitaltrends.com/wp-content/uploads/2023/11/mejor-cable-ethernet-1.jpeg?fit=1500%2C1000&p=1",
+    },
+    {
+      name: "Dat Divi Engine Life Hoodie Limited Edition",
+      price: 44.99,
+      stockStatus: "In Stock",
+      image:
+        "https://es.digitaltrends.com/wp-content/uploads/2023/11/mejor-cable-ethernet-1.jpeg?fit=1500%2C1000&p=1",
+    },
+    {
+      name: "WordPress Tee",
+      price: 12.99,
+      stockStatus: "In Stock",
+      image:
+        "https://es.digitaltrends.com/wp-content/uploads/2023/11/mejor-cable-ethernet-1.jpeg?fit=1500%2C1000&p=1",
+    },
+  ];
 
-    const {user} = useContext(AuthContext)
-    console.log(user.email);
-
-    const wishlistItems = [
-        {
-            name: 'Divi Engine Logo Zipper Hoodie',
-            price: 29.99,
-            stockStatus: 'In Stock',
-            image: "https://es.digitaltrends.com/wp-content/uploads/2023/11/mejor-cable-ethernet-1.jpeg?fit=1500%2C1000&p=1",
-        },
-        {
-            name: 'Dat Divi Engine Life Crop-top 13-Tonel',
-            price: 14.99,
-            stockStatus: 'In Stock',
-            image: "https://es.digitaltrends.com/wp-content/uploads/2023/11/mejor-cable-ethernet-1.jpeg?fit=1500%2C1000&p=1",
-        },
-        {
-            name: 'Dat Divi Engine Life Hoodie Limited Edition',
-            price: 44.99,
-            stockStatus: 'In Stock',
-            image: "https://es.digitaltrends.com/wp-content/uploads/2023/11/mejor-cable-ethernet-1.jpeg?fit=1500%2C1000&p=1",
-        },
-        {
-            name: 'WordPress Tee',
-            price: 12.99,
-            stockStatus: 'In Stock',
-            image: "https://es.digitaltrends.com/wp-content/uploads/2023/11/mejor-cable-ethernet-1.jpeg?fit=1500%2C1000&p=1",
-        },
-    ];
 
 
     return (
