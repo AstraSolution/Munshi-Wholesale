@@ -1,10 +1,9 @@
-
-
 import React from "react";
 import { useForm } from "react-hook-form";
 import { LuUpload } from "react-icons/lu";
 import { MdDeleteOutline } from "react-icons/md";
 import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const AddProduct = () => {
   const { register, handleSubmit } = useForm();
@@ -12,9 +11,6 @@ const AddProduct = () => {
   const [fileNames, setFileNames] = React.useState([]);
 
   const axiosPublic = useAxiosPublic();
-
-
-
 
   const handleImageChange = (files) => {
     const newImages = [...images];
@@ -36,80 +32,78 @@ const AddProduct = () => {
     setFileNames(newFileNames);
   };
 
-
   const onSubmit = async (data) => {
     const {
       title,
-      description,
+      brand,
       category,
       price,
-      warranty,
-      weight,
-      model,
-      specification : {
-        voltes,
-        clutch_settings,
-        chuck_size,
-        speed_settings,
-        max_torque,
-        battery_type,
-        power_source,
-        safety_features = [
-          "Overload protection",
-          "Non-slip grip",
-        ],
-        compatibility = [
-
-        ]
-      },
-
-      included_accessories = [
-
-      ] ,
-      color = [
-
-      ],
-      verint =[
-
-      ],
       quantity,
-      brand,
-      return_policy,
-      manufacturer,
-      country_of_origin,
-      shipping_restrictions,
-      shipping_dimensions,
-      shipping_weight,
-      availability,
-      usage,
+      model,
+      voltes,
+      power_source,
+      battery_type,
+      max_torque,
+      speed_settings,
+      chuck_size,
+      clutch_settings,
+      safety_features,
+      compatibility,
+      included_accessories,
+      color,
+      verint,
+      weight,
+      warranty,
+      material,
       certification,
-      material
+      usage,
+      availability,
+      shipping_weight,
+      shipping_dimensions,
+      shipping_restrictions,
+      country_of_origin,
+      manufacturer,
+      return_policy,
+      description,
     } = data;
-
 
     // const cover_image = await uploadImage();
     const product = {
       title,
-      description,
+      brand,
       category,
       price,
-      warranty,
-      safety_features,verint,color,included_accessories,
-      compatibility,
-      weight,
-      model,
       quantity,
-      brand,
-      return_policy,
-      manufacturer,
-      country_of_origin,
-      shipping_restrictions,
-      shipping_dimensions,
-      shipping_weight,
-      availability,
-      usage,
-      certification,
+      model,
+      included_accessories,
+      color,
+      verint,
+      weight,
+      warranty,
       material,
+      certification,
+      usage,
+      availability,
+      shipping_weight,
+      shipping_dimensions,
+      shipping_restrictions,
+      country_of_origin,
+      manufacturer,
+      return_policy,
+      description,
+
+      specification: {
+        voltes,
+        power_source,
+        battery_type,
+        max_torque,
+        speed_settings,
+        chuck_size,
+        clutch_settings,
+        safety_features: ["Overload protection", "Non-slip grip"],
+        compatibility: [],
+      },
+
       upload_time: new Date().toISOString(),
     };
 
@@ -117,9 +111,14 @@ const AddProduct = () => {
 
     const res = await axiosPublic.post("/products", product);
     if (res?.data) {
-      // reset();
-      // Swal.fire("Book upload successful");
-      console.log("add product successfull");
+      console.log("data added");
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Book upload successful",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 
@@ -130,7 +129,7 @@ const AddProduct = () => {
       </h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-5 mb-5">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 ">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 ">
             {/*  title */}
             <div>
               <label className="text-white "> Product Title </label>
@@ -143,7 +142,7 @@ const AddProduct = () => {
               />
             </div>
 
-            {/*  Brand */}
+            {/*  brand */}
             <div>
               <label className="text-white "> Brand </label>
               <input
@@ -154,6 +153,7 @@ const AddProduct = () => {
                 required
               />
             </div>
+
             {/*  category */}
             <div>
               <label className="text-white "> category </label>
@@ -177,6 +177,7 @@ const AddProduct = () => {
                 required
               />
             </div>
+
             {/* quantity */}
             <div>
               <label className="text-white "> Quantity </label>
@@ -188,6 +189,7 @@ const AddProduct = () => {
                 required
               />
             </div>
+
             {/* model */}
             <div>
               <label className="text-white "> Model </label>
@@ -199,6 +201,7 @@ const AddProduct = () => {
                 required
               />
             </div>
+
             {/* voltes */}
             <div>
               <label className="text-white "> Voltes </label>
@@ -210,6 +213,7 @@ const AddProduct = () => {
                 required
               />
             </div>
+
             {/* power_source */}
             <div>
               <label className="text-white "> power_source </label>
@@ -221,6 +225,7 @@ const AddProduct = () => {
                 required
               />
             </div>
+
             {/* battery_type */}
             <div>
               <label className="text-white "> battery_type </label>
@@ -232,6 +237,7 @@ const AddProduct = () => {
                 required
               />
             </div>
+
             {/* max_torque */}
             <div>
               <label className="text-white "> max_torque </label>
@@ -267,6 +273,7 @@ const AddProduct = () => {
                 required
               />
             </div>
+
             {/* clutch_settings */}
             <div>
               <label className="text-white "> clutch_settings </label>
@@ -278,6 +285,7 @@ const AddProduct = () => {
                 required
               />
             </div>
+
             {/* safety_features */}
             <div>
               <label className="text-white "> safety_features </label>
@@ -289,6 +297,7 @@ const AddProduct = () => {
                 required
               />
             </div>
+
             {/* compatibility */}
             <div>
               <label className="text-white "> compatibility </label>
@@ -300,6 +309,7 @@ const AddProduct = () => {
                 required
               />
             </div>
+
             {/* included_accessories */}
             <div>
               <label className="text-white "> included_accessories </label>
@@ -311,6 +321,7 @@ const AddProduct = () => {
                 required
               />
             </div>
+
             {/* color */}
             <div>
               <label className="text-white "> color </label>
@@ -334,28 +345,6 @@ const AddProduct = () => {
                 required
               />
             </div>
-            {/* power_source */}
-            <div>
-              <label className="text-white "> power_source </label>
-              <input
-                className="h-11 w-full px-2 text-xs md:text-sm  border border-[#2802a5] rounded-lg focus:outline-none shadow-md"
-                {...register("power_source")}
-                placeholder="power_source"
-                type="text"
-                required
-              />
-            </div>
-
-
-
-
-
-
-
-
-
-
-
 
             {/* weight */}
             <div>
@@ -380,6 +369,7 @@ const AddProduct = () => {
                 required
               />
             </div>
+
             {/* material */}
             <div>
               <label className="text-white "> Material </label>
@@ -391,6 +381,7 @@ const AddProduct = () => {
                 required
               />
             </div>
+
             {/* certification */}
             <div>
               <label className="text-white "> Certification </label>
@@ -402,6 +393,7 @@ const AddProduct = () => {
                 required
               />
             </div>
+
             {/* usage */}
             <div>
               <label className="text-white "> Usage </label>
@@ -413,6 +405,7 @@ const AddProduct = () => {
                 required
               />
             </div>
+
             {/* availability */}
             <div>
               <label className="text-white "> Availability </label>
@@ -424,6 +417,7 @@ const AddProduct = () => {
                 required
               />
             </div>
+
             {/* shipping_weight */}
             <div>
               <label className="text-white "> Shipping Weight </label>
@@ -435,9 +429,10 @@ const AddProduct = () => {
                 required
               />
             </div>
+
             {/* shipping_dimensions */}
             <div>
-              <label className="text-white ">  shipping_dimensions </label>
+              <label className="text-white "> shipping_dimensions </label>
               <input
                 className="h-11 w-full px-2 text-xs md:text-sm  border border-[#2802a5] rounded-lg focus:outline-none shadow-md"
                 {...register("shipping_dimensions")}
@@ -446,9 +441,10 @@ const AddProduct = () => {
                 required
               />
             </div>
+
             {/* shipping_restrictions */}
             <div>
-              <label className="text-white ">  shipping_restrictions </label>
+              <label className="text-white "> shipping_restrictions </label>
               <input
                 className="h-11 w-full px-2 text-xs md:text-sm  border border-[#2802a5] rounded-lg focus:outline-none shadow-md"
                 {...register("shipping_restrictions")}
@@ -457,9 +453,10 @@ const AddProduct = () => {
                 required
               />
             </div>
-            {/* shipping_restrictions */}
+
+            {/* country_of_origin */}
             <div>
-              <label className="text-white ">  country_of_origin </label>
+              <label className="text-white "> country_of_origin </label>
               <input
                 className="h-11 w-full px-2 text-xs md:text-sm  border border-[#2802a5] rounded-lg focus:outline-none shadow-md"
                 {...register("country_of_origin")}
@@ -468,9 +465,10 @@ const AddProduct = () => {
                 required
               />
             </div>
+
             {/* manufacturer */}
             <div>
-              <label className="text-white ">  manufacturer </label>
+              <label className="text-white "> manufacturer </label>
               <input
                 className="h-11 w-full px-2 text-xs md:text-sm  border border-[#2802a5] rounded-lg focus:outline-none shadow-md"
                 {...register("manufacturer")}
@@ -479,9 +477,10 @@ const AddProduct = () => {
                 required
               />
             </div>
+
             {/* return_policy */}
             <div>
-              <label className="text-white ">  return_policy </label>
+              <label className="text-white "> return_policy </label>
               <input
                 className="h-11 w-full px-2 text-xs md:text-sm  border border-[#2802a5] rounded-lg focus:outline-none shadow-md"
                 {...register("return_policy")}
@@ -491,47 +490,22 @@ const AddProduct = () => {
               />
             </div>
 
+            {/* description */}
             <div>
               <label className="text-white "> Dscription </label>
-              <textarea {...register("description")} id="" cols="30" rows="10">
-
-              </textarea>
-
+              <textarea
+                {...register("description")}
+                id=""
+                cols="30"
+                rows="10"
+              ></textarea>
             </div>
-            {/* book category */}
-            {/* <select
-              className="h-11 w-full text-xs md:text-sm text-gray-400 px-2 bg-teal-50/40 border border-[#2802a5] rounded-lg focus:outline-none shadow-md"
-              {...register("category")}
-            >
-              <option selected hidden value="">
-                Book Category
-              </option>
-              {categories?.map((category) => (
-                <option key={category?._id} value={category?.category_name}>
-                  {category?.category_name}
-                </option>
-              ))}
-            </select> */}
-            {/* book language */}
-            {/* <select
-              className="h-11 w-full px-2 text-xs md:text-sm bg-teal-50/40 border border-[#2802a5] text-gray-400 rounded-lg focus:outline-none shadow-md"
-              {...register("language")}
-            >
-              <option selected value="">
-                Book Language
-              </option>
-              <option value="english">English</option>
-              <option value="bangla">Bangla</option>
-              <option value="arabic">Arabic</option>
-            </select> */}
           </div>
         </div>
 
         {/* Image input */}
         <div className="mt-6">
-          <label className="block text-sm font-medium text-white">
-            Images
-          </label>
+          <label className="block text-sm font-medium text-white">Images</label>
           <div className="flex flex-wrap items-center mt-2">
             {images.map((image, index) => (
               <div key={index} className="relative mr-4 mb-4">
