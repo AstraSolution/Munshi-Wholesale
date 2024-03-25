@@ -4,7 +4,6 @@ import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import router from "./routers/Route";
 import AuthProvider from "./AuthProvider/AuthProvider";
-
 import TranstackProvider from "./providers/TranstackProvider";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
