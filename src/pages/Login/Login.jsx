@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/icons/google.png";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
-import leftArrow from "../../shared/Icons/LeftArrow";
 import { FaArrowLeft } from "react-icons/fa6";
 
 export default function Login() {
