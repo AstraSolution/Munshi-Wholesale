@@ -1,47 +1,55 @@
-import { useContext, useState } from "react";
+
+import  { useContext, useState } from "react";
 import EyeIcon from "../../shared/Icons/EyeIcon";
 import EyeSlashIcon from "../../shared/Icons/EyeSlashIcon";
 import { Link, useNavigate } from "react-router-dom";
-import googleIcon from "../../assets/icons/google.png";
-import { AuthContext } from "../../AuthProvider/AuthProvider";
+import googleIcon from "../../../Public/assets/icons/google.png";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
+import { FuncContext } from "../../providers/FunctionProvider";
+import useAuth from "../../hooks/auth/useAuth";
 
 export default function Login() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(true);
-  const { googleLogin, signInUser, passwordResetEmail } =
-    useContext(AuthContext);
+  const axiosPublic = useAxiosPublic()
+  const { googleLogin, signInUser, passwordResetEmail } =  useAuth();
+  const { handleAddToCarts } = useContext(FuncContext)
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    signInUser(email, password)
-      .then((res) => {
-        const loggedUser = res.user;
-        console.log(loggedUser);
-        Swal.fire({
-          position: "center-center",
-          icon: "success",
-          title: "Login Successfully",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        form.reset();
-        navigate(location?.state ? location.state : "/");
-      })
-      .catch((err) => {
-        console.log(err.message);
-        Swal.fire({
-          position: "center-center",
-          icon: "error",
-          title: "Invalid Email or Password",
-          showConfirmButton: false,
-          timer: 1500,
-        });
+    
+    try {
+      const res = await signInUser(email, password);
+      const loggedUser = res.user;
+      
+      await handleAddToCarts(loggedUser?.displayName, loggedUser?.email)
+ 
+      Swal.fire({
+        position: "center-center",
+        icon: "success",
+        title: "Login Successfully",
+        showConfirmButton: false,
+        timer: 1500,
       });
+      
+      form.reset();
+      navigate(location?.state ? location.state : "/");
+    } catch (err) {
+      console.log(err.message);
+      Swal.fire({
+        position: "center-center",
+        icon: "error",
+        title: "Invalid Email or Password",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
   };
+  
 
   const handleForgetPassword = (e) => {
     e.preventDefault();
@@ -59,9 +67,18 @@ export default function Login() {
 
   const handleGoogleLogin = () => {
     googleLogin()
-      .then((res) => {
+      .then( async(res) => {
         const loggedUser = res.user;
-        console.log(loggedUser);
+        
+
+        const userInfo = {
+          name: loggedUser?.displayName,
+          email: loggedUser?.email
+        }
+        await axiosPublic.post("/users", userInfo)
+          
+        await handleAddToCarts(loggedUser?.displayName, loggedUser?.email)
+
         navigate(location?.state ? location.state : "/");
       })
       .catch((err) => {

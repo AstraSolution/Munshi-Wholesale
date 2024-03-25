@@ -46,6 +46,32 @@ const AddProduct = () => {
       warranty,
       weight,
       model,
+      specification : {
+        voltes,
+        clutch_settings,
+        chuck_size,
+        speed_settings,
+        max_torque,
+        battery_type,
+        power_source,
+        safety_features = [
+          "Overload protection",
+          "Non-slip grip",
+        ],
+        compatibility = [
+
+        ]
+      },
+
+      included_accessories = [
+
+      ] ,
+      color = [
+
+      ],
+      verint =[
+
+      ],
       quantity,
       brand,
       return_policy,
@@ -68,6 +94,8 @@ const AddProduct = () => {
       category,
       price,
       warranty,
+      safety_features,verint,color,included_accessories,
+      compatibility,
       weight,
       model,
       quantity,
@@ -85,11 +113,9 @@ const AddProduct = () => {
       upload_time: new Date().toISOString(),
     };
 
-console.log(product);
-
+    console.log(product);
 
     const res = await axiosPublic.post("/products", product);
-
     if (res?.data) {
       // reset();
       // Swal.fire("Book upload successful");
@@ -128,6 +154,17 @@ console.log(product);
                 required
               />
             </div>
+            {/*  category */}
+            <div>
+              <label className="text-white "> category </label>
+              <input
+                className="h-11 w-full px-2 text-xs md:text-sm  border border-[#2802a5] rounded-lg focus:outline-none shadow-md"
+                {...register("category")}
+                placeholder=" category"
+                type="text"
+                required
+              />
+            </div>
 
             {/*Price  */}
             <div>
@@ -162,6 +199,163 @@ console.log(product);
                 required
               />
             </div>
+            {/* voltes */}
+            <div>
+              <label className="text-white "> Voltes </label>
+              <input
+                className="h-11 w-full px-2 text-xs md:text-sm  border border-[#2802a5] rounded-lg focus:outline-none shadow-md"
+                {...register("voltes")}
+                placeholder=" Voltes"
+                type="text"
+                required
+              />
+            </div>
+            {/* power_source */}
+            <div>
+              <label className="text-white "> power_source </label>
+              <input
+                className="h-11 w-full px-2 text-xs md:text-sm  border border-[#2802a5] rounded-lg focus:outline-none shadow-md"
+                {...register("power_source")}
+                placeholder=" Power Source"
+                type="text"
+                required
+              />
+            </div>
+            {/* battery_type */}
+            <div>
+              <label className="text-white "> battery_type </label>
+              <input
+                className="h-11 w-full px-2 text-xs md:text-sm  border border-[#2802a5] rounded-lg focus:outline-none shadow-md"
+                {...register("battery_type")}
+                placeholder="  battery_type"
+                type="text"
+                required
+              />
+            </div>
+            {/* max_torque */}
+            <div>
+              <label className="text-white "> max_torque </label>
+              <input
+                className="h-11 w-full px-2 text-xs md:text-sm  border border-[#2802a5] rounded-lg focus:outline-none shadow-md"
+                {...register("max_torque")}
+                placeholder="max_torque"
+                type="text"
+                required
+              />
+            </div>
+
+            {/* speed_settings */}
+            <div>
+              <label className="text-white "> speed_settings </label>
+              <input
+                className="h-11 w-full px-2 text-xs md:text-sm  border border-[#2802a5] rounded-lg focus:outline-none shadow-md"
+                {...register("speed_settings")}
+                placeholder="speed_settings"
+                type="text"
+                required
+              />
+            </div>
+
+            {/* chuck_size */}
+            <div>
+              <label className="text-white "> chuck_size </label>
+              <input
+                className="h-11 w-full px-2 text-xs md:text-sm  border border-[#2802a5] rounded-lg focus:outline-none shadow-md"
+                {...register("chuck_size")}
+                placeholder="chuck_size"
+                type="text"
+                required
+              />
+            </div>
+            {/* clutch_settings */}
+            <div>
+              <label className="text-white "> clutch_settings </label>
+              <input
+                className="h-11 w-full px-2 text-xs md:text-sm  border border-[#2802a5] rounded-lg focus:outline-none shadow-md"
+                {...register("clutch_settings")}
+                placeholder="clutch_settings"
+                type="text"
+                required
+              />
+            </div>
+            {/* safety_features */}
+            <div>
+              <label className="text-white "> safety_features </label>
+              <input
+                className="h-11 w-full px-2 text-xs md:text-sm  border border-[#2802a5] rounded-lg focus:outline-none shadow-md"
+                {...register("safety_features")}
+                placeholder="safety_features"
+                type="text"
+                required
+              />
+            </div>
+            {/* compatibility */}
+            <div>
+              <label className="text-white "> compatibility </label>
+              <input
+                className="h-11 w-full px-2 text-xs md:text-sm  border border-[#2802a5] rounded-lg focus:outline-none shadow-md"
+                {...register("compatibility")}
+                placeholder="compatibility"
+                type="text"
+                required
+              />
+            </div>
+            {/* included_accessories */}
+            <div>
+              <label className="text-white "> included_accessories </label>
+              <input
+                className="h-11 w-full px-2 text-xs md:text-sm  border border-[#2802a5] rounded-lg focus:outline-none shadow-md"
+                {...register("included_accessories")}
+                placeholder="included_accessories"
+                type="text"
+                required
+              />
+            </div>
+            {/* color */}
+            <div>
+              <label className="text-white "> color </label>
+              <input
+                className="h-11 w-full px-2 text-xs md:text-sm  border border-[#2802a5] rounded-lg focus:outline-none shadow-md"
+                {...register("color")}
+                placeholder="color"
+                type="color"
+                required
+              />
+            </div>
+
+            {/* verint */}
+            <div>
+              <label className="text-white "> verint </label>
+              <input
+                className="h-11 w-full px-2 text-xs md:text-sm  border border-[#2802a5] rounded-lg focus:outline-none shadow-md"
+                {...register("verint")}
+                placeholder="verint"
+                type="text"
+                required
+              />
+            </div>
+            {/* power_source */}
+            <div>
+              <label className="text-white "> power_source </label>
+              <input
+                className="h-11 w-full px-2 text-xs md:text-sm  border border-[#2802a5] rounded-lg focus:outline-none shadow-md"
+                {...register("power_source")}
+                placeholder="power_source"
+                type="text"
+                required
+              />
+            </div>
+
+
+
+
+
+
+
+
+
+
+
 
             {/* weight */}
             <div>
@@ -296,6 +490,14 @@ console.log(product);
                 required
               />
             </div>
+
+            <div>
+              <label className="text-white "> Dscription </label>
+              <textarea {...register("description")} id="" cols="30" rows="10">
+
+              </textarea>
+
+            </div>
             {/* book category */}
             {/* <select
               className="h-11 w-full text-xs md:text-sm text-gray-400 px-2 bg-teal-50/40 border border-[#2802a5] rounded-lg focus:outline-none shadow-md"
@@ -311,7 +513,7 @@ console.log(product);
               ))}
             </select> */}
             {/* book language */}
-            <select
+            {/* <select
               className="h-11 w-full px-2 text-xs md:text-sm bg-teal-50/40 border border-[#2802a5] text-gray-400 rounded-lg focus:outline-none shadow-md"
               {...register("language")}
             >
@@ -321,7 +523,7 @@ console.log(product);
               <option value="english">English</option>
               <option value="bangla">Bangla</option>
               <option value="arabic">Arabic</option>
-            </select>
+            </select> */}
           </div>
         </div>
 

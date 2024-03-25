@@ -1,19 +1,21 @@
-import React, { useContext, useState } from "react";
+import  { useContext, useState } from "react";
 import EyeIcon from "../../shared/Icons/EyeIcon";
 import EyeSlashIcon from "../../shared/Icons/EyeSlashIcon";
 import { Link, useNavigate } from "react-router-dom";
-import googleIcon from "../../assets/icons/google.png";
+import googleIcon from "../../../Public/assets/icons/google.png";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
 import toast, { Toaster } from 'react-hot-toast';
 import { useForm } from "react-hook-form";
+import { FuncContext } from "../../providers/FunctionProvider";
 
 export default function Register() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(true);
-  const { googleLogin, createUser, updateUserProfile, emailVerification } = useContext(AuthContext);
+  const { googleLogin, createUser, updateUserProfile, emailVerification } =   useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit, reset } = useForm();
+  const { handleAddToCarts } = useContext(FuncContext)
 
   // const handleRegister = (e) => {
 
@@ -30,10 +32,15 @@ export default function Register() {
     try {
       createUser(email, password).then(async (res) => {
         const updateName = await updateUserProfile(name);
+        console.log("updateName",updateName);
         if (res.user) {
-       
+          
+          await handleAddToCarts(name, email)
           try {
-            const response = await axiosPublic.post("users", userInfo);
+            setLoading(true)
+            const res = await axiosPublic.post("/users", userInfo);
+            setLoading(false)
+            console.log("api response: ",res.data);
            setTimeout(() => {
             toast.success(' Singup  Successfully!');
            }, 1000);
@@ -44,6 +51,8 @@ export default function Register() {
             toast.error(' please Try Again');
           }
         }
+
+        reset()
       });
     } catch (error) {
       console.error("Error during sign up:", error);
@@ -54,64 +63,18 @@ export default function Register() {
 
 
 
-
-
-
-
-
-
-
-  // createUser(email, password)
-  //   .then((result) => {
-  //     const loggedUser = result.user;
-  //     console.log(loggedUser);
-
-  //     updateUserProfile(name)
-  //       .then(() => {
-  //         const loggedProfile = result.user;
-  //         console.log(loggedProfile);
-  //       })
-  //       .catch((error) => {
-  //         console.log(error.message);
-  //       });
-
-  //     Swal.fire({
-  //       position: "center-center",
-  //       icon: "success",
-  //       title: "Register Successful!",
-  //       showConfirmButton: false,
-  //       timer: 1500,
-  //     });
-  //     form.reset();
-  //     navigate(location?.state ? location.state : "/");
-  //   })
-  //   .catch((error) => {
-  //     console.log(error.message);
-  //     Swal.fire({
-  //       position: "center-center",
-  //       icon: "error",
-  //       title: "This email already have taken!",
-  //       text: "Pleasey try another email.",
-  //     });
-  //   });
-
-
-
-  // };
-
-
-
-
-
-
-
-
-
   const handleGoogleLogin = () => {
     googleLogin()
-      .then((res) => {
+      .then( async(res) => {
         const loggedUser = res.user;
         console.log(loggedUser);
+        const userInfo = { 
+          name: loggedUser?.displayName,
+          email: loggedUser?.email
+        };
+      
+        await axiosPublic.post("/users", userInfo)
+        await handleAddToCarts(loggedUser?.displayName, loggedUser?.email)
         navigate(location?.state ? location.state : "/");
       })
       .catch((err) => {
@@ -141,7 +104,7 @@ export default function Register() {
         </div>
 
         <form onSubmit={handleSubmit(signUp)}>
-          <div class="relative float-label-input pb-5">
+          <div className="relative float-label-input pb-5">
             <input
               type="text"
               {...register("name")}
@@ -149,11 +112,11 @@ export default function Register() {
               required
               className="shadow-sm block bg-white w-full  focus:outline-none focus:shadow-outline border border-[#ffc10a] rounded-md py-3 px-4 appearance-none leading-normal"
             />
-            <label class="absolute top-3 left-0 text-[#ffc10a] pointer-events-none transition duration-200 ease-in-outbg-white px-4">
+            <label className="absolute top-3 left-0 text-[#ffc10a] pointer-events-none transition duration-200 ease-in-outbg-white px-4">
               Full Name
             </label>
           </div>
-          <div class="relative float-label-input pb-5">
+          <div className="relative float-label-input pb-5">
             <input
               type="email"
               {...register("email")}
@@ -161,12 +124,12 @@ export default function Register() {
               required
               className="shadow-sm block bg-white w-full  focus:outline-none focus:shadow-outline border border-[#ffc10a] rounded-md py-3 px-4 appearance-none leading-normal"
             />
-            <label class="absolute top-3 left-0 text-[#ffc10a] pointer-events-none transition duration-200 ease-in-outbg-white px-4">
+            <label className="absolute top-3 left-0 text-[#ffc10a] pointer-events-none transition duration-200 ease-in-outbg-white px-4">
               Email Address
             </label>
           </div>
           <div className="flex items-center relative pb-5">
-            <div class="relative float-label-input w-full">
+            <div className="relative float-label-input w-full">
               <input
                 type={showPassword ? "password" : "text"}
                 {...register("password")}
@@ -174,7 +137,7 @@ export default function Register() {
                 required
                 className="shadow-sm block bg-white w-full  focus:outline-none focus:shadow-outline border border-[#ffc10a] rounded-md py-3 px-4 appearance-none leading-normal"
               />
-              <label class="absolute top-3 left-0 text-[#ffc10a] pointer-events-none transition duration-200 ease-in-outbg-white px-4">
+              <label className="absolute top-3 left-0 text-[#ffc10a] pointer-events-none transition duration-200 ease-in-outbg-white px-4">
                 Password
               </label>
             </div>

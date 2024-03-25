@@ -5,10 +5,12 @@ import Home from "../pages/home/Home";
 import Dashboard from "../pages/dashboard/Dashboard";
 import Profile from "../pages/profile/Profile";
 import AddProduct from "../pages/AddProduct/AddProduct";
+import MyCart from "../pages/myCart/MyCart";
 import AllProducts from "../pages/AllProducts/AllProducts";
 import WishList from "../components/WishList/WishList";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import CardDetails from "../shared/CardDetails/CardDetails";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +23,10 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
+        path: "/my-cart",
+        element: <MyCart />,
+      },
+      {
         path: "/allProducts",
         element: <AllProducts />,
       },
@@ -28,10 +34,23 @@ const router = createBrowserRouter([
         path: "/wishlist",
         element: <WishList></WishList>,
       },
-      
+      {
+        path: "/allProducts/product/:id",
+        element: <CardDetails></CardDetails>,
+      },
+      {
+        path: "/product/:id",
+        element: <CardDetails></CardDetails>,
+      },
     ],
   },
   {
+
+    path: "/add-product",
+    element: <AddProduct />
+  },
+  {
+
     path: "/login",
     element: <Login></Login>
   },
@@ -41,6 +60,7 @@ const router = createBrowserRouter([
   },
  
   {
+
     path: "/dashboard",
     element: <Dashboard />,
     children: [

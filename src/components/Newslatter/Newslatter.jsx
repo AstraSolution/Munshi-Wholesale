@@ -1,4 +1,4 @@
-import newsbg from "../../assets/images/newsbg.png";
+import newsbg from "../../../Public/assets/images/newsbg.png";
 
 const Newslatter = () => {
   return (

@@ -1,60 +1,60 @@
 import PropTypes from "prop-types";
 import "./card.css";
+import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
 import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
-import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
-import { Toaster, toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
 
 const Card = ({ product }) => {
-  console.log(product);
-  const { user } = useContext(AuthContext)
-  const userEmail = user?.email
-  console.log(userEmail);
+  const { user } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
 
-  const { _id, title, price, warranty, weight, image, features, color, brand, category, availability } = product || {};
 
-
-
-  const handleAddToWishlist = () => {
-
-    const wishlistData = {
-      userEmail,
-      product_id: _id,
-      title,
-      price,
-      warranty,
-      weight,
-      image,
-      features,
-      color,
-      category,
-      availability,
-      brand,
+  // handel add to cart function
+  const handleAddToCart = async (id) => {
+    const images = product?.image || [];
+    const cartData = {
+      customer_name: user?.displayName || "",
+      customer_email: user?.email || "",
+      product_id: id,
+      unit_price: product?.price,
+      total_price: product?.price,
+      quantity: 1,
+      product_image: [...images],
+      stock_limit: product?.quantity,
+      title: product?.title,
     };
-    
-    console.log(wishlistData);
-    // add operation
-    axiosPublic
-      .post("/wishlist", wishlistData)
-      .then((response) => {
-        console.log(response.data);
 
-        if (response.status === 200) {
-          toast.success('Item added to wishlist successfully!');
-          refetch();
-        } else {
-          toast.error('Failed to add item to wishlist.');
-        }
-      })
-      .catch((error) => {
-        console.error("Error adding to wishlist:", error);
-        toast.error('Failed to add item to wishlist.');
-      });
+     // Check if the product is already in the Cart
+     let productExistsInCarts = false;
+     const carts = JSON.parse(localStorage.getItem("carts")) || [];
+     for (const item of carts) {
+       if (item.product_id === id) {
+         productExistsInCarts = true;
+         break;
+       }
+     }
+
+     if (productExistsInCarts) {
+       toast.error(`${product?.title} is already in your Carts`);
+       return; // Stop execution if the product already exists
+     }
+
+    if (!user) {
+      carts.push(cartData);
+      localStorage.setItem("carts", JSON.stringify(carts));
+
+      toast.success(`${product?.title} Added to cart`);
+    } else {
+      const res = await axiosPublic.post("/myCarts", cartData);
+
+      setTimeout(() => {
+        toast.success(`${product?.title} Added to cart`);
+      }, 1000);
+      console.log(res?.data);
+    }
   };
-
-
-
 
   return (
     <div className="center">
@@ -67,31 +67,28 @@ const Card = ({ product }) => {
           </div>
 
           <div className="contentBx">
-            <div>
-              <h2 className="text-white text-center ">{product?.title}</h2>
-              <h2 className="text-white text-center -mt-1">
-                $ {product?.price}
-              </h2>
-            </div>
+            <h2 className="text-white text-center -mt-6">{product?.title}</h2>
+            <h2 className="text-white text-center -mt-1">$ {product?.price}</h2>
 
             <div className="flex justify-evenly mt-2">
-              <button className="bg-yellow-400 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
+              <button
+                onClick={() => handleAddToCart(product._id)}
+                className="bg-yellow-400 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded"
+              >
                 Add to Cart
               </button>
-              <button className="bg-yellow-400 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
-                View Details
-              </button>
+              <Link to={`product/${product?._id}`}>
+                <button className="bg-yellow-400 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded z-10">
+                  View Details
+                </button>
+              </Link>
             </div>
 
           </div>
         </div>
       </div>
       <div>
-        <button
-          onClick={handleAddToWishlist}
-          className="bg-yellow-400 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
-          Add to Wishlist
-        </button>
+       
 
       </div>
       <Toaster />
