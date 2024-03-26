@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer className="bg-black text-white px-8 pt-8 ">
-      <div className=" flex flex-wrap justify-between pb-4">
+      <div className="container mx-auto flex flex-wrap justify-between pb-4">
         <div className="w-full md:w-1/2 lg:w-1/4">
           <Link
             to={"#"}
@@ -18,7 +18,7 @@ const Footer = () => {
             Munshi Wholesale
           </Link>
           <p className="">
-            <span className=" text-yellow-300">Adress: </span> Uttara, Dhaka,
+            <span className=" text-yellow-300">Address: </span> Uttara, Dhaka,
             Bangladesh
           </p>
           <p className="">

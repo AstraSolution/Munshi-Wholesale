@@ -1,10 +1,13 @@
+import { Link } from "react-router-dom";
 
 const Logo = () => {
   return (
     <div>
-      <h1 className="font-bold">
-        M<span className="font-extralight">Wholesale</span>
-      </h1>
+      <Link to="./">
+        <button className="font-bold">
+          M<span className="font-extralight">Wholesale</span>
+        </button>
+      </Link>
     </div>
   );
 };

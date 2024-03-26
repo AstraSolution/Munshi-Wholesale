@@ -3,7 +3,7 @@ import newsbg from "../../assets/images/newsbg.png";
 const Newslatter = () => {
   return (
     <div
-      className="bg-cover bg-center flex items-center justify-center"
+      className="bg-cover bg-center flex items-center justify-center py-10"
       style={{ backgroundImage: `url(${newsbg})` }}
     >
       <div className="w-full flex items-start container mx-auto">

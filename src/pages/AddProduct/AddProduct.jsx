@@ -10,8 +10,6 @@ const AddProduct = () => {
   const [images, setImages] = React.useState([]);
   const [fileNames, setFileNames] = React.useState([]);
 
-  const axiosPublic = useAxiosPublic();
-
   const handleImageChange = (files) => {
     const newImages = [...images];
     const newFileNames = [...fileNames];
@@ -47,8 +45,8 @@ const AddProduct = () => {
       speed_settings,
       chuck_size,
       clutch_settings,
-      safety_features,
-      compatibility,
+      // safety_features,
+      // compatibility,
       included_accessories,
       color,
       verint,
@@ -109,7 +107,7 @@ const AddProduct = () => {
 
     console.log(product);
 
-    const res = await axiosPublic.post("/products", product);
+    const res = await useAxiosPublic.post("/products", product);
     if (res?.data) {
       Swal.fire({
         position: "top-end",

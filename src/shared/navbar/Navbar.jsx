@@ -1,14 +1,26 @@
-import { ShoppingBagIcon } from "@heroicons/react/24/outline";
-import { PhoneIcon } from "@heroicons/react/24/outline";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { Bars3Icon } from "@heroicons/react/24/outline";
-import { XMarkIcon } from "@heroicons/react/24/outline";
-import { NavLink } from "react-router-dom";
+import {
+  PhoneIcon,
+  MagnifyingGlassIcon,
+  Bars3Icon,
+  XMarkIcon,
+  ShoppingBagIcon,
+  TrashIcon,
+} from "@heroicons/react/24/outline";
+import { Link, NavLink } from "react-router-dom";
 import Logo from "../logo/Logo";
 import { useState } from "react";
+import useAuth from "../../hooks/auth/useAuth";
+import useMyCarts from "../../hooks/carts/useMyCarts";
+import SearchBar from "./SearchBar";
+import SearchBarM from "./SearchBarM";
+// import { AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlineHeart } from 'react-icons/ai';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const { user, logOut } = useAuth();
+  const { carts, totalPrice } = useMyCarts();
 
   const openSlider = () => {
     setIsOpen(true);
@@ -18,12 +30,21 @@ const Navbar = () => {
     setIsOpen(false);
   };
 
+  const openCart = () => {
+    setIsCartOpen(true);
+  };
+
+  const closeCart = () => {
+    setIsCartOpen(false);
+  };
+
   const navLinks = [
     { label: "Home", link: "/" },
     { label: "Products", link: "/allProducts" },
     { label: "About", link: "/about" },
-    { label: "Contact", link: "/contact" },
-    { label: "SignUp", link: "/sign-up" },
+    { label: "Contact", link: "/contact-us" },
+    { label: "Sign In", link: "/login" },
+    { label: "Register", link: "/register" },
     { label: "Dashboard", link: "/dashboard" },
   ];
 
@@ -36,22 +57,22 @@ const Navbar = () => {
               <Logo />
             </div>
 
-            <form className="hidden lg:flex items-center">
-              <input
-                type="text"
-                placeholder="Search..."
-                className="py-2 px-4 w-96 rounded-l-lg text-lg focus:outline-none"
-              />
-              <button
-                type="submit"
-                className="bg-yellow-400 py-2 px-3 rounded-r-lg text-lg font-semibold"
-              >
-                Search
-              </button>
-            </form>
+            <SearchBar />
 
             <div className="flex items-center gap-2">
-              <ShoppingBagIcon className="size-6 md:size-8 lg:size-12 text-white" />
+              <Link to="/wishList">
+                <div className="px-2">
+                  <span className="indicator-item badge text-red-500 ">
+
+                    {0}
+                  </span>
+            
+                  <AiOutlineHeart className="mx-auto text-red-600 text-5xl" />
+                </div>
+              </Link>
+              <button onClick={openCart}>
+                <ShoppingBagIcon className="size-6 md:size-8 lg:size-12 text-white" />
+              </button>
               <div className="lg:hidden">
                 <Bars3Icon
                   className="size-6 md:size-8 text-white cursor-pointer"
@@ -60,7 +81,11 @@ const Navbar = () => {
               </div>
               <div className="hidden lg:block">
                 <p className="text-white font-semibold text-lg">My Cart:</p>
-                <p className="text-yellow-500 font-semibold">0 - $0.00</p>
+                <p className="text-yellow-500 font-semibold">
+                  {" "}
+                  {carts?.length} - ${totalPrice}
+                  {carts?.length} - ${(totalPrice).toFixed(2)}
+                </p>
               </div>
             </div>
           </div>
@@ -100,6 +125,7 @@ const Navbar = () => {
                   </NavLink>
                 </li>
               ))}
+              {user && <button onClick={logOut}>Logout</button>}
             </ul>
 
             <div className="flex items-center gap-3">
@@ -121,7 +147,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Slider component */}
+      {/* nav Slider start */}
       {isOpen && (
         <div className="fixed inset-0 bg-black/50 z-50" onClick={closeSlider}>
           <div className="fixed left-0 top-0 bottom-0 bg-white w-64">
@@ -153,6 +179,61 @@ const Navbar = () => {
           </div>
         </div>
       )}
+      {/* nav Slider end */}
+
+      {/* cart slider start */}
+      {isCartOpen && (
+        <div className="fixed inset-0 bg-black/50 z-50">
+          <div className="fixed top-0 right-0 bottom-0 w-full sm:w-[400px] bg-white">
+            <div className="flex justify-between items-center p-3 lg:p-5 bg-yellow-400">
+              <button
+                onClick={closeCart}
+                className="hover:bg-black/10 hover:shadow-lg rounded-full p-1 transition-all duration-300"
+              >
+                <XMarkIcon className="size-7" />
+              </button>
+
+              <Link to="/my-cart">
+                <h1 className="text-xl lg:text-2xl font-bold"> My Cart</h1>
+              </Link>
+            </div>
+
+            <div>
+              {carts.splice(0, 3)?.map((cart) => (
+                <div
+                  key={cart?._id}
+                  className="py-2 px-5 flex gap-3 border-b my-3"
+                >
+                  <img
+                    src={cart?.product_image[0]}
+                    alt=""
+                    className="size-28"
+                  />
+
+                  <div className="space-y-2">
+                    <h2 className="text-xl lg:text-2xl font-bold">
+                      {cart?.title}
+                    </h2>
+                    <div className="flex  justify-between items-center ">
+                      <p>${cart?.unit_price}</p>
+                      <button className="hover:text-red-500 transition-all duration-300  ">
+                        <TrashIcon className="size-5" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <Link to="/my-cart">
+              <button className="py-2 w-full my-3 mx-2 bg-yellow-400 rounded-lg shadow-lg lg:text-xl font-semibold hover:bg-yellow-500 hover:shadow-none transition-all duration-300">
+                View All Cart
+              </button>
+            </Link>
+          </div>
+        </div>
+      )}
+      {/* cart slider end */}
     </div>
   );
 };
