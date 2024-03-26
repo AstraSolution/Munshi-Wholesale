@@ -5,15 +5,18 @@ import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import { Link } from "react-router-dom";
 import toast from 'react-hot-toast';
+import useMyCarts from "../../hooks/carts/useMyCarts";
 
 const Card = ({ product }) => {
   const { user } = useContext(AuthContext);
+  const {refetch } = useMyCarts()
   const axiosPublic = useAxiosPublic();
-
+  
 
   // handel add to cart function
   const handleAddToCart = async (id) => {
     const images = product?.image || [];
+    const color = product?.color || [];
     const cartData = {
       customer_name: user?.displayName || "",
       customer_email: user?.email || "",
@@ -24,6 +27,8 @@ const Card = ({ product }) => {
       product_image: [...images],
       stock_limit: product?.quantity,
       title: product?.title,
+      color: [...color],
+      dimensions: product?.dimensions
     };
 
      // Check if the product is already in the Cart
@@ -48,7 +53,7 @@ const Card = ({ product }) => {
       toast.success(`${product?.title} Added to cart`);
     } else {
       const res = await axiosPublic.post("/myCarts", cartData);
-
+      refetch()
       setTimeout(() => {
         toast.success(`${product?.title} Added to cart`);
       }, 1000);

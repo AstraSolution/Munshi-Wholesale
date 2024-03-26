@@ -14,6 +14,7 @@ import useMyCarts from "../../hooks/carts/useMyCarts";
 import SearchBar from "./SearchBar";
 import SearchBarM from "./SearchBarM";
 // import { AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlineHeart } from 'react-icons/ai';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -59,6 +60,16 @@ const Navbar = () => {
             <SearchBar />
 
             <div className="flex items-center gap-2">
+              <Link to="/wishList">
+                <div className="px-2">
+                  <span className="indicator-item badge text-red-500 ">
+
+                    {0}
+                  </span>
+            
+                  <AiOutlineHeart className="mx-auto text-red-600 text-5xl" />
+                </div>
+              </Link>
               <button onClick={openCart}>
                 <ShoppingBagIcon className="size-6 md:size-8 lg:size-12 text-white" />
               </button>
@@ -73,6 +84,7 @@ const Navbar = () => {
                 <p className="text-yellow-500 font-semibold">
                   {" "}
                   {carts?.length} - ${totalPrice}
+                  {carts?.length} - ${(totalPrice).toFixed(2)}
                 </p>
               </div>
             </div>
@@ -187,7 +199,7 @@ const Navbar = () => {
             </div>
 
             <div>
-              {carts?.map((cart) => (
+              {carts.splice(0, 3)?.map((cart) => (
                 <div
                   key={cart?._id}
                   className="py-2 px-5 flex gap-3 border-b my-3"
