@@ -12,6 +12,7 @@ import { useState } from "react";
 import useAuth from "../../hooks/auth/useAuth";
 import useMyCarts from "../../hooks/carts/useMyCarts";
 import SearchBar from "./SearchBar";
+import SearchBarM from "./SearchBarM";
 // import { AiOutlineHeart } from 'react-icons/ai';
 
 const Navbar = () => {
