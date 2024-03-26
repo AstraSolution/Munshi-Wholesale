@@ -11,17 +11,14 @@ import Logo from "../logo/Logo";
 import { useState } from "react";
 import useAuth from "../../hooks/auth/useAuth";
 import useMyCarts from "../../hooks/carts/useMyCarts";
+import SearchBar from "./SearchBar";
 // import { AiOutlineHeart } from 'react-icons/ai';
-
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { user, logOut } = useAuth();
   const { carts, totalPrice } = useMyCarts();
-
-
-
 
   const openSlider = () => {
     setIsOpen(true);
@@ -47,17 +44,10 @@ const Navbar = () => {
     { label: "Sign In", link: "/login" },
     { label: "Register", link: "/register" },
     { label: "Dashboard", link: "/dashboard" },
-
   ];
-
-
-
-
-
 
   return (
     <div>
-    
       <div className="bg-black">
         <div className="max-w-7xl mx-auto py-5 px-5">
           <div className="flex justify-between items-center">
@@ -65,19 +55,7 @@ const Navbar = () => {
               <Logo />
             </div>
 
-            <form className="hidden lg:flex items-center">
-              <input
-                type="text"
-                placeholder="Search..."
-                className="py-2 px-4 w-96 rounded-l-lg text-lg focus:outline-none"
-              />
-              <button
-                type="submit"
-                className="bg-yellow-400 py-2 px-3 rounded-r-lg text-lg font-semibold"
-              >
-                Search
-              </button>
-            </form>
+            <SearchBar />
 
             <div className="flex items-center gap-2">
               <button onClick={openCart}>
@@ -91,10 +69,12 @@ const Navbar = () => {
               </div>
               <div className="hidden lg:block">
                 <p className="text-white font-semibold text-lg">My Cart:</p>
-                <p className="text-yellow-500 font-semibold"> {carts?.length} - ${totalPrice}</p>
+                <p className="text-yellow-500 font-semibold">
+                  {" "}
+                  {carts?.length} - ${totalPrice}
+                </p>
               </div>
             </div>
-          
           </div>
         </div>
       </div>
@@ -211,7 +191,11 @@ const Navbar = () => {
                   key={cart?._id}
                   className="py-2 px-5 flex gap-3 border-b my-3"
                 >
-                  <img src={cart?.product_image[0]} alt="" className="size-28" />
+                  <img
+                    src={cart?.product_image[0]}
+                    alt=""
+                    className="size-28"
+                  />
 
                   <div className="space-y-2">
                     <h2 className="text-xl lg:text-2xl font-bold">
