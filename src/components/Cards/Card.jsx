@@ -98,54 +98,54 @@ const Card = ({ product }) => {
     };
 
 
-    // if (user?.email) {
-    //   axiosPublic
-    //     .post("/wishlist", wishlistData)
-    //     .then((response) => {
-    //       WishlistReFetech();
-    //      toast.success("wish list add successfull")
-    //     })
-    //     .catch((error) => {
-    //       console.error("Error adding to wishlist:", error);
-    //     });
-    // } else {
-    //   toast.error("please login")
-    // }
+    if (user?.email) {
+      axiosPublic
+        .post("/wishlist", wishlistData)
+        .then((response) => {
+          WishlistReFetech();
+         toast.success("wish list add successfull")
+        })
+        .catch((error) => {
+          console.error("Error adding to wishlist:", error);
+        });
+    } else {
+      toast.error("please login")
+    }
 
 
 
     //   // Check if the product is already in the wishlist
-      const wishlists = JSON.parse(localStorage.getItem("wishlist")) || [];
-      const index = wishlists.findIndex(item => item.product_id === _id);
+      // const wishlists = JSON.parse(localStorage.getItem("wishlist")) || [];
+      // const index = wishlists.findIndex(item => item.product_id === _id);
 
-      if (index !== -1) {
-        // Product already exists, remove it from wishlist
-        wishlists.splice(index, 1);
-        localStorage.setItem("wishlist", JSON.stringify(wishlists));
-        setFavorite(false); // Toggle favorite state
-        toast.success(`${product?.title} removed from wishlist`);
-      } else {
-        // Product doesn't exist, add it to wishlist
-        wishlists.push(wishlistData);
-        localStorage.setItem("wishlist", JSON.stringify(wishlists));
-        setFavorite(true); // Toggle favorite state
-        toast.success(`${product?.title} added to wishlist`);
-      }
+      // if (index !== -1) {
+      //   // Product already exists, remove it from wishlist
+      //   wishlists.splice(index, 1);
+      //   localStorage.setItem("wishlist", JSON.stringify(wishlists));
+      //   setFavorite(false); // Toggle favorite state
+      //   toast.success(`${product?.title} removed from wishlist`);
+      // } else {
+      //   // Product doesn't exist, add it to wishlist
+      //   wishlists.push(wishlistData);
+      //   localStorage.setItem("wishlist", JSON.stringify(wishlists));
+      //   setFavorite(true); // Toggle favorite state
+      //   toast.success(`${product?.title} added to wishlist`);
+      // }
 
-      if (user) {
-        try {
-          if (index !== -1) {
-            // Remove from server wishlist
-            await axiosPublic.delete(`/wishlist/${id}`);
-          } else {
-            // Add to server wishlist
-            await axiosPublic.post("/wishlist", wishlistData);
-          }
-        } catch (error) {
-          console.error("Error updating wishlist:", error);
-          toast.error("Failed to update wishlist. Please try again later.");
-        }
-      }
+      // if (user) {
+      //   try {
+      //     if (index !== -1) {
+      //       // Remove from server wishlist
+      //       await axiosPublic.delete(`/wishlist/${id}`);
+      //     } else {
+      //       // Add to server wishlist
+      //       await axiosPublic.post("/wishlist", wishlistData);
+      //     }
+      //   } catch (error) {
+      //     console.error("Error updating wishlist:", error);
+      //     toast.error("Failed to update wishlist. Please try again later.");
+      //   }
+      // }
 
 
 

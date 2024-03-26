@@ -7,7 +7,7 @@ const useMyCarts = () => {
   let totalPrice = 0;
 
   const email =  localStorage.getItem("email") ;
-  console.log("email: ",email);
+  // console.log("email: ",email);
   if(email === undefined || email === "undefined" ) {
     console.log("localCarts");
     const localCarts = localStorage.getItem("carts");
