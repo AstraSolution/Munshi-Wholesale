@@ -2,8 +2,7 @@ import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import Logo from "../../shared/logo/Logo";
-import { Link, NavLink } from "react-router-dom";
-import { Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
   const [isSliderOpen, setIsSidebarOpen] = useState(true);
@@ -65,8 +64,8 @@ const Dashboard = () => {
       </div>
       {/* slider end */}
 
-      {/* navbar start */}
       <div className="w-full h-14 bg-black shadow-lg">
+        {/* navbar start */}
         <div className="flex justify-between items-center py-2 px-5">
           <button onClick={toggleSlider}>
             {isSliderOpen ? (
