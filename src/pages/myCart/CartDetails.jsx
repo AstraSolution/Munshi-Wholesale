@@ -60,27 +60,34 @@ const CartDetails = ({ cart, refetch }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosPublic
-          .delete(`/myCarts/${id}`)
-          .then((response) => {
-            if (response.data) {
+        if(userEmail){
+            axiosPublic
+            .delete(`/myCarts/${id}`)
+            .then((response) => {
+              if (response.data) {
+                Swal.fire(
+                  "Deleted!",
+                  `Your book "${title}" has been deleted.`,
+                  "success"
+                );
+  
+                refetch();
+              }
+            })
+            .catch((error) => {
+              console.error("Error deleting Book:", error);
               Swal.fire(
-                "Deleted!",
-                `Your book "${title}" has been deleted.`,
-                "success"
+                "Error!",
+                "An error occurred while deleting the book.",
+                "error"
               );
-
-              refetch();
-            }
-          })
-          .catch((error) => {
-            console.error("Error deleting Book:", error);
-            Swal.fire(
-              "Error!",
-              "An error occurred while deleting the book.",
-              "error"
-            );
-          });
+            });
+        } 
+        else {
+            
+            localStorage.removeItem("")
+        }
+     
       }
     });
   };

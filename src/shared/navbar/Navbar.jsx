@@ -91,7 +91,7 @@ const Navbar = () => {
               <div className="hidden lg:block">
                 <p className="text-white font-semibold text-lg">My Cart:</p>
                 <p className="text-yellow-500 font-semibold">
-                  {carts?.length} - ${totalPrice}
+                  {carts?.length} - ${(totalPrice).toFixed(2)}
                 </p>
               </div>
             </div>
@@ -206,7 +206,7 @@ const Navbar = () => {
             </div>
 
             <div>
-              {carts?.map((cart) => (
+              {carts.splice(0, 3)?.map((cart) => (
                 <div
                   key={cart?._id}
                   className="py-2 px-5 flex gap-3 border-b my-3"
