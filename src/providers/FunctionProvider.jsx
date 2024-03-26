@@ -28,6 +28,56 @@ const FunctionProvider = ({ children }) => {
     }
   };
 
+  
+  // // handel add to cart function
+  // const handleAddToCart = async (id) => {
+  //   const images = product?.image || [];
+  //   const color = product?.color || [];
+  //   const cartData = {
+  //     customer_name: user?.displayName || "",
+  //     customer_email: user?.email || "",
+  //     product_id: id,
+  //     unit_price: product?.price,
+  //     total_price: product?.price,
+  //     quantity: 1,
+  //     product_image: [...images],
+  //     stock_limit: product?.quantity,
+  //     title: product?.title,
+  //     color: [...color],
+  //     dimensions: product?.dimensions
+  //   };
+
+  //    // Check if the product is already in the Cart
+  //    let productExistsInCarts = false;
+  //    const carts = JSON.parse(localStorage.getItem("carts")) || [];
+  //    for (const item of carts) {
+  //      if (item.product_id === id) {
+  //        productExistsInCarts = true;
+  //        break;
+  //      }
+  //    }
+
+  //    if (productExistsInCarts) {
+  //      toast.error(`${product?.title} is already in your Carts`);
+  //      return; // Stop execution if the product already exists
+  //    }
+
+  //   if (!user) {
+  //     carts.push(cartData);
+  //     localStorage.setItem("carts", JSON.stringify(carts));
+
+  //     toast.success(`${product?.title} Added to cart`);
+  //   } else {
+  //     const res = await axiosPublic.post("/myCarts", cartData);
+  //     refetch()
+  //     setTimeout(() => {
+  //       toast.success(`${product?.title} Added to cart`);
+  //     }, 1000);
+  //     console.log(res?.data);
+  //   }
+  // };
+
+
   const functions = {
     handleAddToCarts,
   };
