@@ -6,7 +6,6 @@ import { MdOutlineModeEdit } from "react-icons/md";
 import { FaPlus, FaMinus, FaArrowRightArrowLeft } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { RiShoppingBag2Line } from "react-icons/ri";
-
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -269,7 +268,7 @@ const CardDetails = () => {
           <div className="flex md:flex-col lg:flex-row md:items-start lg:items-center gap-5 my-5">
             <div className="flex items-center gap-3">
               <h3>Quantity</h3>
-              <div className="flex">
+              <div className="flex items-center">
                 <button
                   onClick={() => {
                     if (quantity > 1) {
