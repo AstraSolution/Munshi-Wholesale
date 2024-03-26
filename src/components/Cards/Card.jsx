@@ -1,15 +1,12 @@
 import PropTypes from "prop-types";
 import "./card.css";
+import { Link } from "react-router-dom";
+const Card = ({ product }) => {
 import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
 import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import { Link } from "react-router-dom";
 import toast from 'react-hot-toast';
-
-const Card = ({ product }) => {
-  const { user } = useContext(AuthContext);
-  const axiosPublic = useAxiosPublic();
-
 
   // handel add to cart function
   const handleAddToCart = async (id) => {
@@ -56,9 +53,10 @@ const Card = ({ product }) => {
     }
   };
 
+
   return (
     <div className="center">
-      <div className="container-card">
+      <div className="container-product">
         <div className="card">
           <div className="imgBx">
             <img src={product?.image} alt={product?.title} />

@@ -1,7 +1,5 @@
-
-import  { useContext } from 'react';
-import { AuthContext } from '../../AuthProvider/AuthProvider';
-
+import { useContext } from "react";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 
 const WishList = () => {
@@ -38,9 +36,6 @@ const WishList = () => {
         "https://es.digitaltrends.com/wp-content/uploads/2023/11/mejor-cable-ethernet-1.jpeg?fit=1500%2C1000&p=1",
     },
   ];
-
-
-
     return (
         <div >
             <div className="container mx-auto px-4 py-16  ">
@@ -83,6 +78,7 @@ const WishList = () => {
 
         </div>
     );
+
 };
 
 export default WishList;

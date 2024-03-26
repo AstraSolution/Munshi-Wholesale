@@ -5,6 +5,7 @@ import { FaStar, FaRegHeart } from "react-icons/fa";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { FaPlus, FaMinus, FaArrowRightArrowLeft } from "react-icons/fa6";
 import { useEffect, useState } from "react";
+
 import { RiShoppingBag2Line } from "react-icons/ri";
 
 import { Navigation } from "swiper/modules";
@@ -16,21 +17,24 @@ import "./Table.css";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/auth/useAuth";
 
+
 const CardDetails = () => {
   const axiosPublic = useAxiosPublic();
   const param = useParams();
   const [quantity, setQuantity] = useState(1);
+
+
+  const { data: product = [] } = useQuery({
   const { user } = useAuth();
   const [ favorite, setFavorite] = useState(false)
-
   const { data: product = {} } = useQuery({
+
     queryKey: ["product"],
     queryFn: async () => {
       const res = await axiosPublic.get(`/products/${param?.id}`);
       return res.data;
     },
   });
-
 
   useEffect(() => {
         // Check if the product is already in the wishlist    
@@ -138,6 +142,7 @@ const CardDetails = () => {
     }
   };
   
+
 
 
   return (
@@ -289,6 +294,16 @@ const CardDetails = () => {
                 </button>
               </div>
             </div>
+
+            <button className="bg-yellow-400 md:p-2 lg:py-2 lg:px-5 flex items-center gap-2">
+              <RiShoppingBag2Line className="text-xl" /> Add to cart
+            </button>
+          </div>
+          <h2 className="text-gray-500 flex items-center gap-2">
+            <FaRegHeart />
+            Add to Wishlist
+          </h2>
+
             <button
               onClick={() => handleAddToCart(product?._id)}
               className="bg-yellow-400 md:p-2 lg:py-2 lg:px-5 flex items-center gap-2"
@@ -303,6 +318,7 @@ const CardDetails = () => {
             <FaRegHeart className={`${favorite ? 'text-red-500' : ""} `}/>
             Add to Wishlist
           </button>
+
 
           <hr className="my-5" />
 

@@ -2,12 +2,13 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { LuUpload } from "react-icons/lu";
 import { MdDeleteOutline } from "react-icons/md";
+import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
 
 const AddProduct = () => {
   const { register, handleSubmit } = useForm();
   const [images, setImages] = React.useState([]);
   const [fileNames, setFileNames] = React.useState([]);
-
+const axiosPublic = useAxiosPublic()
   const handleImageChange = (files) => {
     const newImages = [...images];
     const newFileNames = [...fileNames];
@@ -29,7 +30,35 @@ const AddProduct = () => {
   };
 
   const onSubmit = (data) => {
-    console.log(data);
+    const { productName, title, tags, body, category } = data;
+    // const uploadedImageUrl = await uploadImage();
+
+    const product = {
+      productName,
+      title,
+      category,
+      tags,
+      body,
+      // cover_image: uploadedImageUrl,
+      // user_name: "Admin",
+      // user_email: user?.email,
+      // publish_date: submittingDateTime.toLocaleDateString(),
+      // publish_time: submittingDateTime.toLocaleTimeString(),
+    };
+    console.log(product);
+
+    axiosPublic
+      .post("/products", product)
+      .then((response) => {
+       console.log(response.data);
+      
+        
+      })
+      .catch((error) => {
+        // Handle errors
+        console.error("Error:", error);
+      });
+
   };
 
   return (
