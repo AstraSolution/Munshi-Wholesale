@@ -89,55 +89,55 @@ const CardDetails = () => {
     }
   };
 
-  // handel add to cart function
-  const handleAddToWishlist = async (id) => {
-    const images = product?.image || [];
-    const wishlistData = {
-      customer_name: user?.displayName || "",
-      customer_email: user?.email || "",
-      product_id: id,
-      unit_price: product?.price,
-      total_price: product?.price,
-      quantity: 1,
-      product_image: [...images],
-      stock_limit: product?.quantity,
-      title: product?.title,
-    };
-  
-    // Check if the product is already in the wishlist
-    const wishlists = JSON.parse(localStorage.getItem("wishlist")) || [];
-    const index = wishlists.findIndex(item => item.product_id === id);
-  
-    if (index !== -1) {
-      // Product already exists, remove it from wishlist
-      wishlists.splice(index, 1);
-      localStorage.setItem("wishlist", JSON.stringify(wishlists));
-      setFavorite(false); // Toggle favorite state
-      toast.success(`${product?.title} removed from wishlist`);
-    } else {
-      // Product doesn't exist, add it to wishlist
-      wishlists.push(wishlistData);
-      localStorage.setItem("wishlist", JSON.stringify(wishlists));
-      setFavorite(true); // Toggle favorite state
-      toast.success(`${product?.title} added to wishlist`);
-    }
-  
+// handel add to cart function
+const handleAddToWishlist = async (id) => {
+  const images = product?.image || [];
+  const wishlistData = {
+    customer_name: user?.displayName || "",
+    customer_email: user?.email || "",
+    product_id: id,
+    unit_price: product?.price,
+    total_price: product?.price,
+    quantity: 1,
+    product_image: [...images],
+    stock_limit: product?.quantity,
+    title: product?.title,
+  };
+
+  try {
     if (user) {
-      try {
-        if (index !== -1) {
-          // Remove from server wishlist
-          await axiosPublic.delete(`/wishlist/${id}`);
-        } else {
-          // Add to server wishlist
-          await axiosPublic.post("/wishlist", wishlistData);
-        }
-      } catch (error) {
-        console.error("Error updating wishlist:", error);
-        toast.error("Failed to update wishlist. Please try again later.");
+      const response = await axiosPublic.post("/wishlist", wishlistData);
+      if (response.status === 201) {
+        setFavorite(true); // Toggle favorite state
+        toast.success(`${product?.title} added to wishlist`);
+      } else {
+        toast.error("Failed to add to wishlist. Please try again later.");
+      }
+    } else {
+      // Save to local storage
+      const wishlists = JSON.parse(localStorage.getItem("wishlist")) || [];
+      const index = wishlists.findIndex(item => item.product_id === id);
+
+      if (index !== -1) {
+        // Product already exists, remove it from wishlist
+        wishlists.splice(index, 1);
+        localStorage.setItem("wishlist", JSON.stringify(wishlists));
+        setFavorite(false); // Toggle favorite state
+        toast.success(`${product?.title} removed from wishlist`);
+      } else {
+        // Product doesn't exist, add it to wishlist
+        wishlists.push(wishlistData);
+        localStorage.setItem("wishlist", JSON.stringify(wishlists));
+        setFavorite(true); // Toggle favorite state
+        toast.success(`${product?.title} added to wishlist`);
       }
     }
-  };
-  
+  } catch (error) {
+    console.error("Error adding to wishlist:", error);
+    toast.error("Failed to add to wishlist. Please try again later.");
+  }
+};
+
 
 
   return (

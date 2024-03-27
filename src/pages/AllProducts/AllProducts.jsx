@@ -5,18 +5,24 @@ import Card from "../../components/Cards/Card";
 const AllProducts = () => {
   const axiosPublic = useAxiosPublic();
 
-  const { data: allProducts = [] } = useQuery({
+  const { data: allProducts = [], isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
       const res = await axiosPublic.get(`/products`);
       return res.data;
     },
   });
+ 
+  if(isLoading){
+    return <div className=" text-center">Loading...</div>
+  }
+   
+  const products = allProducts.products;
 
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-        {allProducts.map((product) => (
+        {products.map((product) => (
           <Card key={product?._id} product={product}></Card>
         ))}
       </div>
