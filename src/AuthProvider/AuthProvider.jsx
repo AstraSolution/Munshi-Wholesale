@@ -11,6 +11,7 @@ import {
   confirmPasswordReset,
   sendEmailVerification,
   reload,
+  FacebookAuthProvider,
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import app from "../Firebase/Firebase.config";
@@ -66,8 +67,14 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, provider);
   };
 
+  const facebookLogin = () => {
+    const provider = new FacebookAuthProvider();
+    return signInWithPopup(auth, provider);
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      localStorage.setItem("email", currentUser?.email)
       setUser(currentUser);
       setLoading(false);
     });
@@ -77,6 +84,7 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const logOut = () => {
+    localStorage.removeItem("email")
     return signOut(auth);
   };
 
@@ -87,6 +95,7 @@ const AuthProvider = ({ children }) => {
     signInUser,
     updateUserProfile,
     googleLogin,
+    facebookLogin,
     logOut,
     passwordResetEmail,
     confirmResetPassword,

@@ -5,11 +5,17 @@ import { RouterProvider } from "react-router-dom";
 import router from "./routers/Route";
 
 import TranstackProvider from "./providers/TranstackProvider";
+import AuthProvider from "./AuthProvider/AuthProvider";
+import FunctionProvider from "./providers/FunctionProvider";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <TranstackProvider>
-      <RouterProvider router={router} />
-    </TranstackProvider>
+    <AuthProvider>
+      <FunctionProvider>
+        <TranstackProvider>
+          <RouterProvider router={router} />
+        </TranstackProvider>
+      </FunctionProvider>
+    </AuthProvider>
   </React.StrictMode>
 );

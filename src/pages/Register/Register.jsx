@@ -4,7 +4,13 @@ import EyeSlashIcon from "../../shared/Icons/EyeSlashIcon";
 import { Link, useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/icons/google.png";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
-import Swal from "sweetalert2";
+
+import { useForm } from "react-hook-form";
+import { FuncContext } from "../../providers/FunctionProvider";
+import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
+import { FaArrowLeft } from "react-icons/fa";
+import toast, { Toaster } from "react-hot-toast";
+import FVIcon from "../../assets/icons/facebook.svg";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -12,54 +18,60 @@ export default function Register() {
   const { googleLogin, createUser, updateUserProfile, emailVerification } =
     useContext(AuthContext);
   const [loading, setLoading] = useState(false);
+  const { register, handleSubmit, reset } = useForm();
+  const { handleAddToCarts } = useContext(FuncContext);
 
-  const handleRegister = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const name = form.name.value;
-    const email = form.email.value;
-    const password = form.password.value;
+  const axiosPublic = useAxiosPublic();
 
-    createUser(email, password)
-      .then((result) => {
-        const loggedUser = result.user;
-        console.log(loggedUser);
+  const signUp = (data) => {
+    const name = data.name;
+    const email = data.email;
+    const password = data.password;
 
-        updateUserProfile(name)
-          .then(() => {
-            const loggedProfile = result.user;
-            console.log(loggedProfile);
-          })
-          .catch((error) => {
-            console.log(error.message);
-          });
+    const userInfo = { name, email, password };
 
-        Swal.fire({
-          position: "center-center",
-          icon: "success",
-          title: "Register Successful!",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        form.reset();
-        navigate(location?.state ? location.state : "/");
-      })
-      .catch((error) => {
-        console.log(error.message);
-        Swal.fire({
-          position: "center-center",
-          icon: "error",
-          title: "This email already have taken!",
-          text: "Pleasey try another email.",
-        });
+    try {
+      createUser(email, password).then(async (res) => {
+        const updateName = await updateUserProfile(name);
+        console.log("updateName", updateName);
+        if (res.user) {
+          await handleAddToCarts(name, email);
+          try {
+            setLoading(true);
+            const res = await axiosPublic.post("/users", userInfo);
+            setLoading(false);
+            console.log("api response: ", res.data);
+            setTimeout(() => {
+              toast.success(" Singup  Successfully!");
+            }, 1000);
+
+            navigate(location?.state ? location.state : "/");
+          } catch (error) {
+            console.error("Error posting user data:", error);
+            toast.error(" please Try Again");
+          }
+        }
+
+        reset();
       });
+    } catch (error) {
+      console.error("Error during sign up:", error);
+      toast.error(" please Try Again");
+    }
   };
 
   const handleGoogleLogin = () => {
     googleLogin()
-      .then((res) => {
+      .then(async (res) => {
         const loggedUser = res.user;
         console.log(loggedUser);
+        const userInfo = {
+          name: loggedUser?.displayName,
+          email: loggedUser?.email,
+        };
+
+        await axiosPublic.post("/users", userInfo);
+        await handleAddToCarts(loggedUser?.displayName, loggedUser?.email);
         navigate(location?.state ? location.state : "/");
       })
       .catch((err) => {
@@ -67,91 +79,115 @@ export default function Register() {
       });
   };
 
+  const handleFacebookLogin = () => {};
+
   return (
-    <div className="container mx-auto px-5 md:px-0 flex justify-center items-center min-h-screen">
-      <div className="max-w-[400px] w-[400px] border p-8 rounded-lg shadow-md">
-        <h2 className="text-4xl font-bold text-center mb-8 text-[#ffc10a]">
-          Register
-        </h2>
-
-        <button
-          onClick={handleGoogleLogin}
-          className="mb-5 border rounded-md w-full p-3 text-lg font-semibold flex items-center justify-center gap-3"
-        >
-          <img src={googleIcon} alt="" />
-          Sign in with Google
-        </button>
-
-        <div className="flex items-center justify-center gap-5 pb-6">
-          <hr className="bg-[#343A40] max-w-[20%] w-[20%]" />
-          <p>Or</p>
-          <hr className="bg-[#343A40] max-w-[20%] w-[20%]" />
-        </div>
-
-        <form onSubmit={handleRegister}>
-          <div class="relative float-label-input pb-5">
-            <input
-              type="text"
-              name="name"
-              placeholder=" "
-              required
-              className="shadow-sm block bg-white w-full  focus:outline-none focus:shadow-outline border border-[#ffc10a] rounded-md py-3 px-4 appearance-none leading-normal"
-            />
-            <label class="absolute top-3 left-0 text-[#ffc10a] pointer-events-none transition duration-200 ease-in-outbg-white px-4">
-              Full Name
-            </label>
-          </div>
-          <div class="relative float-label-input pb-5">
-            <input
-              type="email"
-              name="email"
-              placeholder=" "
-              required
-              className="shadow-sm block bg-white w-full  focus:outline-none focus:shadow-outline border border-[#ffc10a] rounded-md py-3 px-4 appearance-none leading-normal"
-            />
-            <label class="absolute top-3 left-0 text-[#ffc10a] pointer-events-none transition duration-200 ease-in-outbg-white px-4">
-              Email Address
-            </label>
-          </div>
-          <div className="flex items-center relative pb-5">
-            <div class="relative float-label-input w-full">
-              <input
-                type={showPassword ? "password" : "text"}
-                name="password"
-                placeholder=" "
-                required
-                className="shadow-sm block bg-white w-full  focus:outline-none focus:shadow-outline border border-[#ffc10a] rounded-md py-3 px-4 appearance-none leading-normal"
-              />
-              <label class="absolute top-3 left-0 text-[#ffc10a] pointer-events-none transition duration-200 ease-in-outbg-white px-4">
-                Password
-              </label>
-            </div>
-            <p
-              onClick={() => setShowPassword(!showPassword)}
-              className="cursor-pointer absolute right-4"
-            >
-              <small>{showPassword ? <EyeIcon /> : <EyeSlashIcon />}</small>
-            </p>
-          </div>
-          <input
-            type="submit"
-            value="Register"
-            className="shadow-sm w-full bg-[#ffc10a] hover:bg-[#e9af03] py-3 text-white font-semibold rounded-md transition duration-200 ease-in-outbg-white"
-          />
-        </form>
-
-        {loading && <p>Loading...</p>}
-
-        <p className="text-center mt-5">
-          Already have an Account?{" "}
+    <div className="container mx-auto px-5 md:px-0 h-screen">
+      <div>
+        <p className="flex justify-end mt-10">
           <Link
-            to={"/login"}
-            className="text-[#967c2f] hover:text-[#ffc10a] hover:underline"
+            to={"/"}
+            className="text-right font-semibold flex items-center gap-2 text-[#ffc10a] hover:text-[#e9af03]"
           >
-            Login
+            <FaArrowLeft /> Go Home
           </Link>
         </p>
+
+        <div className="flex justify-center items-center min-h-screen">
+          <div className="max-w-[400px] w-[400px] border p-8 rounded-lg shadow-md">
+            <h2 className="text-4xl font-bold text-center mb-8 text-[#ffc10a]">
+              Register
+            </h2>
+
+            <button
+              onClick={handleGoogleLogin}
+              className="mb-5 border rounded-md w-full p-3 text-lg font-semibold flex items-center justify-center gap-3"
+            >
+              <img src={googleIcon} alt="" />
+              Sign in with Google
+            </button>
+
+            <button
+              onClick={handleFacebookLogin}
+              className="mb-5 border rounded-md w-full p-3 text-lg font-semibold flex items-center justify-center gap-3"
+            >
+              <img className="w-5" src={FVIcon} alt="" />
+              Sign in with Google
+            </button>
+
+            <div className="flex items-center justify-center gap-5 pb-6">
+              <hr className="bg-[#343A40] max-w-[20%] w-[20%]" />
+              <p>Or</p>
+              <hr className="bg-[#343A40] max-w-[20%] w-[20%]" />
+            </div>
+
+            <form onSubmit={signUp}>
+              <div class="relative float-label-input pb-5">
+                <input
+                  type="text"
+                  name="name"
+                  placeholder=" "
+                  required
+                  className="shadow-sm block bg-white w-full  focus:outline-none focus:shadow-outline border border-[#ffc10a] rounded-md py-3 px-4 appearance-none leading-normal"
+                />
+                <label class="absolute top-3 left-0 text-[#ffc10a] pointer-events-none transition duration-200 ease-in-outbg-white px-4">
+                  Full Name
+                </label>
+              </div>
+              <div class="relative float-label-input pb-5">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder=" "
+                  required
+                  className="shadow-sm block bg-white w-full  focus:outline-none focus:shadow-outline border border-[#ffc10a] rounded-md py-3 px-4 appearance-none leading-normal"
+                />
+                <label class="absolute top-3 left-0 text-[#ffc10a] pointer-events-none transition duration-200 ease-in-outbg-white px-4">
+                  Email Address
+                </label>
+              </div>
+              <div className="flex items-center relative pb-5">
+                <div class="relative float-label-input w-full">
+                  <input
+                    type={showPassword ? "password" : "text"}
+                    name="password"
+                    placeholder=" "
+                    required
+                    className="shadow-sm block bg-white w-full  focus:outline-none focus:shadow-outline border border-[#ffc10a] rounded-md py-3 px-4 appearance-none leading-normal"
+                  />
+                  <label class="absolute top-3 left-0 text-[#ffc10a] pointer-events-none transition duration-200 ease-in-outbg-white px-4">
+                    Password
+                  </label>
+                </div>
+                <p
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="cursor-pointer absolute right-4"
+                >
+                  <small>{showPassword ? <EyeIcon /> : <EyeSlashIcon />}</small>
+                </p>
+              </div>
+              <input
+                type="submit"
+                value="Register"
+                className="shadow-sm w-full bg-[#ffc10a] hover:bg-[#e9af03] py-3 text-white font-semibold rounded-md transition duration-200 ease-in-outbg-white"
+              />
+            </form>
+
+            {loading && <p>Loading...</p>}
+
+            <p className="text-center mt-5">
+              Already have an Account?{" "}
+              <Link
+                to={"/login"}
+                className="text-[#967c2f] hover:text-[#ffc10a] hover:underline"
+              >
+                Login
+              </Link>
+            </p>
+          </div>
+        </div>
       </div>
+      <Toaster />
     </div>
   );
 }

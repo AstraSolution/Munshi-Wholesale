@@ -9,10 +9,23 @@ import {
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../logo/Logo";
 import { useState } from "react";
+import useAuth from "../../hooks/auth/useAuth";
+import useMyCarts from "../../hooks/carts/useMyCarts";
+import SearchBar from "./SearchBar";
+// import SearchBarM from "./SearchBarM";
+import { AiOutlineHeart } from 'react-icons/ai';
+import useWishList from "../../hooks/wishlist/useWishlist";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const { user, logOut } = useAuth();
+  const { carts, totalPrice } = useMyCarts();
+  const { wishlistProduct, isLoading } = useWishList();
+
+  if(isLoading){
+    return <p className=" text-center">Loading...</p>
+  }
 
   const openSlider = () => {
     setIsOpen(true);
@@ -32,29 +45,12 @@ const Navbar = () => {
 
   const navLinks = [
     { label: "Home", link: "/" },
+    { label: "Products", link: "/allProducts" },
     { label: "About", link: "/about" },
-    { label: "Contact", link: "/contact" },
+    { label: "Contact", link: "/contact-us" },
+    { label: "Sign In", link: "/login" },
     { label: "Register", link: "/register" },
     { label: "Dashboard", link: "/dashboard" },
-  ];
-
-  const products = [
-    {
-      id: 1,
-      productImg:
-        "https://dt-multispare.myshopify.com/cdn/shop/products/shop06_4f673430-26a3-43a2-975c-97a24415829b.jpg?v=1669179083&width=360",
-      productTitle: "Woodwork Vacuum Grinding",
-      pricePerUnit: 420.0,
-      productColor: "Blue",
-    },
-    {
-      id: 2,
-      productImg:
-        "https://dt-multispare.myshopify.com/cdn/shop/products/shop11_3428686f-14e8-433c-b6a0-de555e1944a7.jpg?v=1669181109&width=300",
-      productTitle: "Professional Electric Wood Router",
-      pricePerUnit: 750.0,
-      productColor: "Yellow",
-    },
   ];
 
   return (
@@ -66,21 +62,19 @@ const Navbar = () => {
               <Logo />
             </div>
 
-            <form className="hidden lg:flex items-center">
-              <input
-                type="text"
-                placeholder="Search..."
-                className="py-2 px-4 w-96 rounded-l-lg text-lg focus:outline-none"
-              />
-              <button
-                type="submit"
-                className="bg-yellow-400 py-2 px-3 rounded-r-lg text-lg font-semibold"
-              >
-                Search
-              </button>
-            </form>
+            <SearchBar />
 
             <div className="flex items-center gap-2">
+            <Link to="/wishList">
+                <div className="px-2">
+                  <span className="indicator-item badge text-red-500 ">
+
+                    {wishlistProduct?.length}
+                  </span>
+            
+                  <AiOutlineHeart className="mx-auto text-red-600 text-5xl" />
+                </div>
+              </Link>
               <button onClick={openCart}>
                 <ShoppingBagIcon className="size-6 md:size-8 lg:size-12 text-white" />
               </button>
@@ -92,7 +86,10 @@ const Navbar = () => {
               </div>
               <div className="hidden lg:block">
                 <p className="text-white font-semibold text-lg">My Cart:</p>
-                <p className="text-yellow-500 font-semibold">0 - $0.00</p>
+                <p className="text-yellow-500 font-semibold">
+                  {" "}
+                  {carts?.length} - ${totalPrice.toFixed(2)}
+                </p>
               </div>
             </div>
           </div>
@@ -132,6 +129,7 @@ const Navbar = () => {
                   </NavLink>
                 </li>
               ))}
+              {user && <button onClick={logOut}>Logout</button>}
             </ul>
 
             <div className="flex items-center gap-3">
@@ -205,20 +203,24 @@ const Navbar = () => {
             </div>
 
             <div>
-              {products?.map((product) => (
+              {carts.slice(0,3)?.map((cart) => (
                 <div
-                  key={product.id}
+                  key={cart?._id}
                   className="py-2 px-5 flex gap-3 border-b my-3"
                 >
-                  <img src={product.productImg} alt="" className="size-28" />
+                  <img
+                    src={cart?.product_image[0]}
+                    alt=""
+                    className="size-28"
+                  />
 
                   <div className="space-y-2">
                     <h2 className="text-xl lg:text-2xl font-bold">
-                      {product.productTitle}
+                      {cart?.title}
                     </h2>
-                    <div className="flex justify-between items-center ">
-                      <p>${product.pricePerUnit}</p>
-                      <button className="hover:text-red-500 transition-all duration-300">
+                    <div className="flex  justify-between items-center ">
+                      <p>${cart?.unit_price}</p>
+                      <button className="hover:text-red-500 transition-all duration-300  ">
                         <TrashIcon className="size-5" />
                       </button>
                     </div>
