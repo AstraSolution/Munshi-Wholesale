@@ -1,23 +1,37 @@
-import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
 import Card from "../../components/Cards/Card";
+import useGetAllProducts from "../../hooks/products/useGetAllProducts";
+import { useState } from "react";
 
 const AllProducts = () => {
-  const axiosPublic = useAxiosPublic();
+  const [currentPage, setCurrentPage] = useState(1)
+  const { products, totalProduct,  isPending } = useGetAllProducts(currentPage, 12)
 
-  const { data: allProducts = [], isLoading } = useQuery({
-    queryKey: ["products"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/products`);
-      return res.data;
-    },
-  });
- 
-  if(isLoading){
+  
+
+  if(isPending){
     return <div className=" text-center">Loading...</div>
   }
-   
-  const products = allProducts.products;
+
+  const pageNumbers = Array.from(
+    { length: Math.ceil(totalProduct / 12) },
+    (_, index) => index + 1
+  );
+
+  const handlePagination = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < Math.ceil(totalProduct / 12)) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
 
   return (
     <div>
@@ -26,6 +40,32 @@ const AllProducts = () => {
           <Card key={product?._id} product={product}></Card>
         ))}
       </div>
+      {pageNumbers?.length > 1 && (
+          <div className="flex justify-center my-3 mb-3">
+            <button
+              onClick={handlePrevPage}
+              className="mx-1 px-3 py-1 rounded-lg  bg-yellow-300 text-white hover:bg-yellow-500"
+            >
+              Prev
+            </button>
+            {pageNumbers.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => handlePagination(index + 1)}
+                className={`mx-1 px-3 py-1 rounded-lg  bg-yellow-300 text-white hover:bg-yellow-500 ${currentPage === index + 1 ? "bg-yellow-500" : ""
+                  }`}
+              >
+                {index + 1}
+              </button>
+            ))}
+            <button
+              onClick={handleNextPage}
+              className="mx-1 px-3 py-1 rounded-lg  bg-yellow-300 text-white hover:bg-yellow-500"
+            >
+              Next
+            </button>
+          </div>
+        )}
     </div>
   );
 };

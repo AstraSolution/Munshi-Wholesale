@@ -16,7 +16,7 @@ const MyCart = () => {
 
 
   //   delete all cart
-  const handleDeleteCarts = () => {
+  const handleDeleteCart = () => {
     Swal.fire({
       title: "Delete Book",
       text: `Are you sure you want to delete all products`,
@@ -78,7 +78,7 @@ const MyCart = () => {
               <div className="flex justify-between items-center">
                 <h1 className="text-2xl lg:text-3xl font-bold">Products</h1>
                 <button
-                  onClick={handleDeleteCarts}
+                  onClick={handleDeleteCart}
                   className="hover:text-red-500 rounded-lg transition-all duration-300 mr-10"
                 >
                   <span className="flex items-center gap-3">

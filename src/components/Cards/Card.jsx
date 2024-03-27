@@ -1,14 +1,14 @@
 import PropTypes from "prop-types";
 import "./card.css";
+import { Link } from "react-router-dom";
 import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
 import {  useState } from "react";
-import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import useMyCarts from "../../hooks/carts/useMyCarts";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import useWishList from "../../hooks/wishlist/useWishlist";
 import useAuth from "../../hooks/auth/useAuth";
-import { isAllOf } from "@reduxjs/toolkit";
+// import { isAllOf } from "@reduxjs/toolkit";
 
 const Card = ({ product }) => {
   const { user } = useAuth()
@@ -31,6 +31,7 @@ const Card = ({ product }) => {
   // handel add to cart function
   const handleAddToCart = async (id) => {
     const images = product?.image || [];
+    const color = product?.color || [];
     const cartData = {
       customer_name: user?.displayName || "",
       customer_email: user?.email || "",
@@ -41,6 +42,8 @@ const Card = ({ product }) => {
       product_image: [...images],
       stock_limit: product?.quantity,
       title: product?.title,
+      color: [...color],
+      dimensions: product?.dimensions
     };
 
     // Check if the product is already in the Cart

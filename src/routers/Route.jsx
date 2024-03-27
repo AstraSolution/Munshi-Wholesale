@@ -11,6 +11,7 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import CardDetails from "../shared/CardDetails/CardDetails";
 // import AddProduct from "../pages/addProduct/AddProduct";
+import ContactUs from "../pages/ContactUs/ContactUs";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
         element: <AllProducts />,
       },
       {
-        path: "/wishlist",
+        path: "/wishList",
         element: <WishList></WishList>,
       },
       {
@@ -58,7 +59,11 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Register></Register>
   },
- 
+  {
+    path: "/contact-us",
+    element: <ContactUs/>
+  },
+
   {
 
     path: "/dashboard",
