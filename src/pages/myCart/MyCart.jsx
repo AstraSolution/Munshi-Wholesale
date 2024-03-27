@@ -14,7 +14,8 @@ const MyCart = () => {
     return <div className=" text-center min-h-screen my-auto">Loading...</div>;
   }
 
-  //   delete a cart
+
+  //   delete all cart
   const handleDeleteCart = () => {
     Swal.fire({
       title: "Delete Book",
@@ -88,9 +89,9 @@ const MyCart = () => {
               </div>
 
               <div className="mt-5">
-                {carts?.map((cart) => (
+                {carts?.map((cart, i) => (
                   <CartDetails
-                    key={cart._id}
+                    key={i}
                     cart={cart}
                     refetch={refetch}
                   ></CartDetails>
@@ -105,7 +106,7 @@ const MyCart = () => {
                 <div>
                   {carts?.map((cart, index) => (
                     <div
-                      key={cart._id}
+                      key={index}
                       className="flex items-start gap-3 border-b my-3"
                     >
                       <div>
@@ -114,17 +115,17 @@ const MyCart = () => {
                       <div>
                         <Link>
                           <h1 className="text-lg font-semibold">
-                            {cart.title}
+                            {cart?.title}
                           </h1>
                         </Link>
-                        <p>Total Quantity: {cart.quantity} pice</p>
-                        <p>Total Price: ${cart.total_price.toFixed(2)}</p>
+                        <p>Total Quantity: {cart?.quantity} pice</p>
+                        <p>Total Price: ${cart?.total_price.toFixed(2)}</p>
                       </div>
                     </div>
                   ))}
                 </div>
                 <h1 className="text-2xl font-semibold cursor-pointer">
-                  Subtotal: ${totalPrice.toFixed(2)}
+                  Subtotal: ${totalPrice?.toFixed(2)}
                 </h1>
                 <Link to="/checkout">
                   <button className="w-full py-2 bg-yellow-400 hover:bg-yellow-500 shadow-lg hover:shadow-none rounded-lg text-xl font-bold transition-all duration-300 mt-8">

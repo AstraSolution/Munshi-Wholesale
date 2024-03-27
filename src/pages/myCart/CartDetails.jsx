@@ -7,26 +7,48 @@ import Swal from "sweetalert2";
 const CartDetails = ({ cart, refetch }) => {
   const [error, setError] = useState("");
   const [quantity, setQuantity] = useState(cart?.quantity);
-  const userEmail = localStorage.getItem("email");
+  const email = localStorage.getItem("email");
   const axiosPublic = useAxiosPublic();
 
-  //   handle increment product quantity
+  // handle increment product quantity
   const handleIncrement = async (id) => {
     if (quantity < cart?.stock_limit) {
+      // Increment local quantity
       setQuantity((prevQuantity) => prevQuantity + 1);
-      const total_price = quantity * cart?.unit_price;
+      const total_price = (quantity + 1) * cart?.unit_price; // Update total price for incremented quantity
 
-      if (userEmail) {
+      if (email === undefined || email === "undefined") {
+        // If no email, update local storage
+        const updatedCartData = JSON.parse(localStorage.getItem("carts")); // Retrieve cart data from local storage
+
+        // Find the index of the product in the array by ID
+        const index = updatedCartData.findIndex(
+          (product) => product.product_id === id
+        );
+
+        if (index !== -1) {
+          // Update quantity of the product
+          updatedCartData[index].quantity += 1;
+
+          // Stringify the updated JavaScript object
+          const updatedJsonData = JSON.stringify(updatedCartData);
+
+          // Save the updated JSON data back to local storage
+          localStorage.setItem("carts", updatedJsonData);
+        }
+      } else {
+        // Update quantity and total price on the server
         const res = await axiosPublic.patch(`/myCarts/${id}`, {
-          quantity,
-          total_price,
+          quantity: quantity + 1,
+          total_price: total_price,
         });
+
         if (res?.data) {
-          refetch();
+          refetch(); // Refetch the cart data
         }
       }
     } else {
-      setError(`Opps this book limit is ${cart?.stock_limit}`);
+      setError(`Opps this product limit is ${cart?.stock_limit}`);
     }
   };
 
@@ -36,7 +58,7 @@ const CartDetails = ({ cart, refetch }) => {
       setError("");
       setQuantity((prevQuantity) => prevQuantity - 1);
       const total_price = quantity * cart?.unit_price;
-      if (userEmail) {
+      if (email?.length) {
         const res = await axiosPublic.patch(`/myCarts/${id}`, {
           quantity,
           total_price,
@@ -49,7 +71,7 @@ const CartDetails = ({ cart, refetch }) => {
   };
 
   //   delete a cart
-  const handleDeleteCart = (id, title) => {
+  const handleDeleteCart = async (id, title) => {
     Swal.fire({
       title: "Delete Book",
       text: `Are you sure you want to delete the book ${title}?`,
@@ -58,36 +80,27 @@ const CartDetails = ({ cart, refetch }) => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        if(userEmail){
-            axiosPublic
-            .delete(`/myCarts/${id}`)
-            .then((response) => {
-              if (response.data) {
-                Swal.fire(
-                  "Deleted!",
-                  `Your book "${title}" has been deleted.`,
-                  "success"
-                );
-  
-                refetch();
-              }
-            })
-            .catch((error) => {
-              console.error("Error deleting Book:", error);
-              Swal.fire(
-                "Error!",
-                "An error occurred while deleting the book.",
-                "error"
-              );
-            });
-        } 
-        else {
-            
-            localStorage.removeItem("")
+        if (email === undefined || email === "undefined") {
+          localStorage.removeItem("");
+        } else {
+          const res = await axiosPublic.delete(`/myCarts/${id}`);
+          if (res.data) {
+            Swal.fire(
+              "Deleted!",
+              `Your product "${title}" has been deleted.`,
+              "success"
+            );
+            refetch();
+          } else {
+            Swal.fire(
+              "Error!",
+              "An error occurred while deleting the book.",
+              "error"
+            );
+          }
         }
-     
       }
     });
   };
@@ -116,11 +129,12 @@ const CartDetails = ({ cart, refetch }) => {
         <p>${cart.unit_price} per unit</p>
         <p>{cart?.dimensions}</p>
         <select>
-          {cart.color.map((option, index) => (
-            <option key={index} style={{ color: option.toLowerCase() }}>
-              {option}
-            </option>
-          ))}
+          {cart?.color?.length > 0 &&
+            cart?.color.map((option, index) => (
+              <option key={index} style={{ color: option.toLowerCase() }}>
+                {option}
+              </option>
+            ))}
         </select>
         <div className="flex items-center">
           <button
@@ -142,7 +156,10 @@ const CartDetails = ({ cart, refetch }) => {
 
         <div className="flex justify-between items-center my-2">
           <p>Total Price: ${(cart.unit_price * cart.quantity).toFixed(2)}</p>
-          <button onClick={() => handleDeleteCart(cart?._id, cart?.title)} className="hover:text-red-500 rounded-lg transition-all duration-300">
+          <button
+            onClick={() => handleDeleteCart(cart?._id, cart?.title)}
+            className="hover:text-red-500 rounded-lg transition-all duration-300"
+          >
             <span className="flex items-center gap-3">
               <TrashIcon className="size-5" />{" "}
               <span className="text-xl">Remove</span>
