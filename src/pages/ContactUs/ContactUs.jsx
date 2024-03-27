@@ -53,7 +53,7 @@ const ContactUs = () => {
           </p>
         </div>
         <div className="grid lg:grid-cols-3 items-center gap-4 p-2 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-lg mt-8">
-          <div className="bg-[#011c2b] rounded-lg p-6 max-lg:text-center">
+          <div className="bg-yellow-500  rounded-lg p-6 max-lg:text-center">
             <h2 className="text-xl font-bold text-white">
               Contact Information
             </h2>

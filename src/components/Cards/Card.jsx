@@ -1,12 +1,16 @@
 import PropTypes from "prop-types";
 import "./card.css";
 import { Link } from "react-router-dom";
-const Card = ({ product }) => {
 import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
 import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
-import { Link } from "react-router-dom";
+import useMyCarts from "../../hooks/carts/useMyCarts";
+// import { Link } from "react-router-dom";
 import toast from 'react-hot-toast';
+const Card = ({ product }) => {
+  const { user } = useContext(AuthContext);
+  const { refetch } = useMyCarts()
+  const axiosPublic = useAxiosPublic();
 
   // handel add to cart function
   const handleAddToCart = async (id) => {
@@ -45,6 +49,7 @@ import toast from 'react-hot-toast';
       toast.success(`${product?.title} Added to cart`);
     } else {
       const res = await axiosPublic.post("/myCarts", cartData);
+      refetch()
 
       setTimeout(() => {
         toast.success(`${product?.title} Added to cart`);
