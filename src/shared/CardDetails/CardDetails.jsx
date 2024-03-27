@@ -5,17 +5,15 @@ import { FaStar, FaRegHeart } from "react-icons/fa";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { FaPlus, FaMinus, FaArrowRightArrowLeft } from "react-icons/fa6";
 import { useEffect, useState } from "react";
-
 import { RiShoppingBag2Line } from "react-icons/ri";
 import { Navigation } from "swiper/modules";
+import toast from 'react-hot-toast';
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 
 import "./Table.css";
-import toast from "react-hot-toast";
 import useAuth from "../../hooks/auth/useAuth";
-
 
 const CardDetails = () => {
   const axiosPublic = useAxiosPublic();
@@ -42,7 +40,6 @@ const CardDetails = () => {
       }
     }
   }, [param]);
-
 
   // handel add to cart function
   const handleAddToCart = async (id) => {
@@ -144,9 +141,6 @@ const CardDetails = () => {
       }
     }
   };
-
-
-
 
   return (
     <div className="container">
@@ -297,7 +291,6 @@ const CardDetails = () => {
                 </button>
               </div>
             </div>
-
             <button className="bg-yellow-400 md:p-2 lg:py-2 lg:px-5 flex items-center gap-2">
               <RiShoppingBag2Line className="text-xl" /> Add to cart
             </button>
@@ -323,6 +316,7 @@ const CardDetails = () => {
         </button>
 
 
+        <hr className="my-5" />
         <hr className="my-5" />
 
         <div

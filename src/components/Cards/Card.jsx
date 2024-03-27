@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
 import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
-import toast from 'react-hot-toast';
 import useMyCarts from "../../hooks/carts/useMyCarts";
-
+// import { Link } from "react-router-dom";
+import toast from 'react-hot-toast';
 const Card = ({ product }) => {
   const { user } = useContext(AuthContext);
-  const {refetch } = useMyCarts()
+  const { refetch } = useMyCarts()
   const axiosPublic = useAxiosPublic();
 
   // handel add to cart function
