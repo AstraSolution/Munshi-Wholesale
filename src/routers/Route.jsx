@@ -4,13 +4,13 @@ import Error from "../pages/error/Error";
 import Home from "../pages/home/Home";
 import Dashboard from "../pages/dashboard/Dashboard";
 import Profile from "../pages/profile/Profile";
-import AddProduct from "../pages/AddProduct/AddProduct";
 import MyCart from "../pages/myCart/MyCart";
 import AllProducts from "../pages/AllProducts/AllProducts";
 import WishList from "../components/WishList/WishList";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import CardDetails from "../shared/CardDetails/CardDetails";
+// import AddProduct from "../pages/addProduct/AddProduct";
 
 const router = createBrowserRouter([
   {
@@ -47,7 +47,7 @@ const router = createBrowserRouter([
   {
 
     path: "/add-product",
-    element: <AddProduct />
+    // element: <AddProduct />
   },
   {
 
@@ -70,7 +70,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/add-product",
-        element: <AddProduct />,
+        // element: <AddProduct />,
       },
     ],
   },

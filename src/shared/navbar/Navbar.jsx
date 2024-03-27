@@ -11,15 +11,16 @@ import Logo from "../logo/Logo";
 import { useState } from "react";
 import useAuth from "../../hooks/auth/useAuth";
 import useMyCarts from "../../hooks/carts/useMyCarts";
-import { AiOutlineHeart } from 'react-icons/ai';
+import SearchBar from "./SearchBar";
+import SearchBarM from "./SearchBarM";
 import useWishListdata from "../../hooks/wishlist/useWishListdata";
+import { AiOutlineHeart } from 'react-icons/ai';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { user, logOut } = useAuth();
   const { carts, totalPrice } = useMyCarts();
-
   const [wishListProduct] = useWishListdata()
 
   const openSlider = () => {
@@ -57,19 +58,7 @@ const Navbar = () => {
               <Logo />
             </div>
 
-            <form className="hidden lg:flex items-center">
-              <input
-                type="text"
-                placeholder="Search..."
-                className="py-2 px-4 w-96 rounded-l-lg text-lg focus:outline-none"
-              />
-              <button
-                type="submit"
-                className="bg-yellow-400 py-2 px-3 rounded-r-lg text-lg font-semibold"
-              >
-                Search
-              </button>
-            </form>
+            <SearchBar />
 
             <div className="flex items-center gap-2">
               <Link to="/wishList">
@@ -94,6 +83,7 @@ const Navbar = () => {
               <div className="hidden lg:block">
                 <p className="text-white font-semibold text-lg">My Cart:</p>
                 <p className="text-yellow-500 font-semibold">
+                  {" "}
                   {carts?.length} - ${totalPrice}
                 </p>
               </div>

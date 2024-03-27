@@ -14,7 +14,11 @@ const WishList = () => {
     const [wishListProduct, WishlistReFetech] = useWishListdata();
     const { user } = useContext(AuthContext);
     const { refetch } = useMyCarts()
-    console.log(wishListProduct);
+
+
+    
+
+
 
     const handleProductDelete = (id, title) => {
         Swal.fire({
@@ -152,13 +156,13 @@ const WishList = () => {
                         <th className="py-2 px-4"> Action</th>
                     </tr>
                 </thead>
-                <tbody className="divide-y bg-sky-500">
+                <tbody className="divide-y bg-white ">
                     {
                         wishListProduct?.map((product, i) => (
 
                             <tr className="py-4">
                                 <td className="py-2 px-2 md:px-3 lg:px-5">{i + 1} </td>
-                                <td className="py-2 flex items-center">
+                                <td className="py-2 flex items-center px-6">
                                     <img src={product?.product_image[0]} alt="" className='w-12 h-12 rounded-full mr-2  ' />
                                     <img src={product?.product_image[1]} alt="" className='w-12 h-12  rounded-full mr-2 lg:block hidden' />
                                 </td>
