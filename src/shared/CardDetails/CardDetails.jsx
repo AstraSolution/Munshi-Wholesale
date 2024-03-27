@@ -1,3 +1,7 @@
+import React from "react";
+import "./Table.css";
+import "swiper/css";
+import "swiper/css/navigation";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
 import { useParams } from "react-router-dom";
@@ -6,22 +10,31 @@ import { MdOutlineModeEdit } from "react-icons/md";
 import { FaPlus, FaMinus, FaArrowRightArrowLeft } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { RiShoppingBag2Line } from "react-icons/ri";
-
 import { Navigation } from "swiper/modules";
+import toast from 'react-hot-toast';
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-
-import "./Table.css";
-import toast from "react-hot-toast";
 import useAuth from "../../hooks/auth/useAuth";
 
+import {
+  Button,
+  Dialog,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
+  Rating,
+  Textarea,
+} from "@material-tailwind/react";
+
 const CardDetails = () => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(!open);
+
   const axiosPublic = useAxiosPublic();
   const param = useParams();
   const [quantity, setQuantity] = useState(1);
+  const [rating, setRating] = useState(0);
   const { user } = useAuth();
-  const [ favorite, setFavorite] = useState(false)
+  const [favorite, setFavorite] = useState(false);
 
   const { data: product = {} } = useQuery({
     queryKey: ["product"],
@@ -31,18 +44,23 @@ const CardDetails = () => {
     },
   });
 
+  const handleRating = () => {
+    const message = document.getElementById("message").value;
+    console.log(rating, message, product?._id);
+    setRating(0);
+    handleOpen();
+  };
 
   useEffect(() => {
-        // Check if the product is already in the wishlist    
-        const wishlists = JSON.parse(localStorage.getItem("wishlist")) || [];
-        for (const item of wishlists) {
-          if (item.product_id === param?.id) {
-            setFavorite(true)
-            break;
-          }
-        }
+    // Check if the product is already in the wishlist
+    const wishlists = JSON.parse(localStorage.getItem("wishlist")) || [];
+    for (const item of wishlists) {
+      if (item.product_id === param?.id) {
+        setFavorite(true);
+        break;
+      }
+    }
   }, [param]);
-
 
   // handel add to cart function
   const handleAddToCart = async (id) => {
@@ -59,23 +77,23 @@ const CardDetails = () => {
       stock_limit: product?.quantity,
       title: product?.title,
       color: [...color],
-      dimensions: product?.dimensions
+      dimensions: product?.dimensions,
     };
 
-     // Check if the product is already in the Cart
-     let productExistsInCarts = false;
-     const carts = JSON.parse(localStorage.getItem("carts")) || [];
-     for (const item of carts) {
-       if (item.product_id === id) {
-         productExistsInCarts = true;
-         break;
-       }
-     }
+    // Check if the product is already in the Cart
+    let productExistsInCarts = false;
+    const carts = JSON.parse(localStorage.getItem("carts")) || [];
+    for (const item of carts) {
+      if (item.product_id === id) {
+        productExistsInCarts = true;
+        break;
+      }
+    }
 
-     if (productExistsInCarts) {
-       toast.error(`${product?.title} is already in your Carts`);
-       return; // Stop execution if the product already exists
-     }
+    if (productExistsInCarts) {
+      toast.error(`${product?.title} is already in your Carts`);
+      return; // Stop execution if the product already exists
+    }
 
     if (!user) {
       carts.push(cartData);
@@ -108,13 +126,13 @@ const CardDetails = () => {
       stock_limit: product?.quantity,
       title: product?.title,
       color: [...color],
-      dimensions: product?.dimensions
+      dimensions: product?.dimensions,
     };
-  
+
     // Check if the product is already in the wishlist
     const wishlists = JSON.parse(localStorage.getItem("wishlist")) || [];
-    const index = wishlists.findIndex(item => item.product_id === id);
-  
+    const index = wishlists.findIndex((item) => item.product_id === id);
+
     if (index !== -1) {
       // Product already exists, remove it from wishlist
       wishlists.splice(index, 1);
@@ -128,7 +146,7 @@ const CardDetails = () => {
       setFavorite(true); // Toggle favorite state
       toast.success(`${product?.title} added to wishlist`);
     }
-  
+
     if (user) {
       try {
         if (index !== -1) {
@@ -144,11 +162,9 @@ const CardDetails = () => {
       }
     }
   };
-  
-
 
   return (
-    <div className="container">
+    <div className="container mx-auto">
       <div className="flex flex-col md:flex-row">
         {/* First half */}
         <div className="w-full md:w-1/2 flex flex-col items-center p-10">
@@ -180,6 +196,7 @@ const CardDetails = () => {
           </div>
         </div>
 
+        {/* Second half */}
         <div className="w-full md:w-1/2 p-10">
           <h2 className="text-xl font-semibold">{product?.title}</h2>
           <div className="flex gap-2 items-center text-yellow-400 my-2">
@@ -194,10 +211,47 @@ const CardDetails = () => {
                 : "0 "}
               Reviews
             </h2>
-            <h2 className="text-gray-500">
-              <MdOutlineModeEdit className="inline" />
-              Write a Review
-            </h2>
+
+            {/* Modal */}
+            <Button
+              className="text-gray-600 p-2"
+              onClick={handleOpen}
+              variant="gradient"
+              color="white"
+            >
+              <MdOutlineModeEdit className="inline mr-1" /> Write a Review
+            </Button>
+
+            <Dialog open={open} size="md" handler={handleOpen}>
+              <DialogHeader className="justify-center">
+                Tell us about the product
+              </DialogHeader>
+              <DialogBody>
+                <div className="mb-3 text-center">
+                  <Rating
+                    unratedColor="amber"
+                    ratedColor="amber"
+                    id="rating"
+                    onChange={(value) => setRating(value)}
+                  />
+                </div>
+                <Textarea label="Message" id="message" />
+              </DialogBody>
+              <DialogFooter>
+                <Button
+                  variant="text"
+                  color="red"
+                  onClick={handleOpen}
+                  className="mr-1"
+                >
+                  <span>Cancel</span>
+                </Button>
+                <Button variant="gradient" color="green" onClick={handleRating}>
+                  <span>Confirm</span>
+                </Button>
+              </DialogFooter>
+            </Dialog>
+            {/* Modal */}
           </div>
           <hr className="my-5" />
           <h2 className="text-yellow-400 text-xl font-medium">
@@ -219,9 +273,6 @@ const CardDetails = () => {
               ))}
             </div>
           </div>
-
-          {/* Specification Table  */}
-          {/* <h2 className="font-semibold mb-2">Specification</h2> */}
 
           <table>
             <thead>
@@ -304,10 +355,10 @@ const CardDetails = () => {
             </button>
           </div>
           <button
-            onClick={() => handleAddToWishlist(product?._id)}
             className="text-gray-500 flex items-center gap-2"
+            onClick={() => handleAddToWishlist(product?._id)}
           >
-            <FaRegHeart className={`${favorite ? 'text-red-500' : ""} `}/>
+            <FaRegHeart className={`${favorite ? "text-red-500" : ""} `} />
             Add to Wishlist
           </button>
 
@@ -324,6 +375,128 @@ const CardDetails = () => {
             <p>{product?.return_policy}</p>
           </div>
         </div>
+      </div>
+
+      {/* Review Card */}
+      <div className="max-w-7xl mx-auto my-16">
+        <Swiper
+          modules={[Navigation]}
+          spaceBetween={50}
+          slidesPerView={3}
+          navigation
+        >
+          {/* Slide 1 */}
+          <SwiperSlide>
+            <img
+              src="https://i.ibb.co/sH9rW6p/Apon-02.jpg"
+              alt="profile"
+              className="w-[100px] h-[100px] rounded-full border-[3px] border-yellow-400 absolute"
+            />
+
+            <div className="bg-gray-100 rounded-lg border-[3px] border-yellow-400 p-7 mt-10">
+              <h3 className="text-xl text-center mt-3">Taiatul Islam Apon</h3>
+        <hr className="my-5" />
+              <div className="flex gap-3 text-yellow-400 justify-center my-3">
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+              </div>
+
+              <p className="text-justify bg-gray-200 rounded-lg p-5">
+                As I embarked on my journey through the captivating world of
+                Echoes of Eternity, I found myself entranced from the very first
+                note.
+              </p>
+            </div>
+          </SwiperSlide>
+
+          {/* Slide 2 */}
+          <SwiperSlide className="bg-gray-100 rounded-lg border-[3px] border-yellow-400 p-5">
+            <img
+              src="https://i.ibb.co/sH9rW6p/Apon-02.jpg"
+              alt="profile"
+              className="w-[100px] h-[100px] mx-auto rounded-full border-[3px] border-yellow-400"
+            />
+
+            <div className="">
+              <h3 className="text-xl text-center mt-3">Taiatul Islam Apon</h3>
+
+              <div className="flex gap-3 text-yellow-400 justify-center my-3">
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+              </div>
+
+              <p className="text-justify bg-gray-200 rounded-lg p-5">
+                As I embarked on my journey through the captivating world of
+                Echoes of Eternity, I found myself entranced from the very first
+                note.
+              </p>
+            </div>
+          </SwiperSlide>
+
+          {/* Slide 3 */}
+          <SwiperSlide className="">
+            <img
+              src="https://i.ibb.co/sH9rW6p/Apon-02.jpg"
+              alt="profile"
+              className="w-[100px] h-[100px] mx-auto rounded-full border-[3px] border-yellow-400 -mb-9"
+            />
+            <div className="bg-gray-100 rounded-lg border-[3px] border-yellow-400 p-5">
+              <h3 className="text-xl text-center mt-7">Taiatul Islam Apon</h3>
+
+              <div className="flex gap-3 text-yellow-400 justify-center my-3">
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+              </div>
+
+              <p className="text-justify bg-gray-200 rounded-lg p-5">
+                As I embarked on my journey through the captivating world of
+                Echoes of Eternity, I found myself entranced from the very first
+                note.
+              </p>
+            </div>
+          </SwiperSlide>
+
+          {/* Slide 4 */}
+          <SwiperSlide>
+            <div className="bg-gray-100 rounded-lg border-[3px] border-yellow-400 p-5">
+              <div className="flex gap-5 mb-5">
+                <img
+                  src="https://i.ibb.co/sH9rW6p/Apon-02.jpg"
+                  alt="profile"
+                  className="w-[100px] h-[100px] rounded-full border-[3px] border-yellow-400"
+                />
+                <div>
+                  <h3 className="text-xl text-center mt-7">
+                    Taiatul Islam Apon
+                  </h3>
+
+                  <div className="flex gap-3 text-yellow-400 justify-center my-3">
+                    <FaStar />
+                    <FaStar />
+                    <FaStar />
+                    <FaStar />
+                    <FaStar />
+                  </div>
+                </div>
+              </div>
+
+              <p className="text-justify bg-gray-200 rounded-lg p-5">
+                As I embarked on my journey through the captivating world of
+                Echoes of Eternity, I found myself entranced from the very first
+                note.
+              </p>
+            </div>
+          </SwiperSlide>
+        </Swiper>
       </div>
     </div>
   );

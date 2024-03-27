@@ -1,31 +1,33 @@
 import PropTypes from "prop-types";
 import "./card.css";
+import { Link } from "react-router-dom";
 import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../AuthProvider/AuthProvider";
-import { Link, } from "react-router-dom";
-import toast, { Toaster } from 'react-hot-toast';
 import useMyCarts from "../../hooks/carts/useMyCarts";
-import useWishListdata from "../../hooks/wishlist/useWishListdata";
+// import { Link } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
+import { useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-
-
+import useWishList from "../../hooks/wishlist/useWishlist";
+import useAuth from "../../hooks/auth/useAuth";
+// import { isAllOf } from "@reduxjs/toolkit";
 
 const Card = ({ product }) => {
-  const { user } = useContext(AuthContext);
-  const { refetch } = useMyCarts()
+  const { user } = useAuth()
+  const { refetch } = useMyCarts();
   const axiosPublic = useAxiosPublic();
   const { _id } = product || [];
-  const [favorite , setFavorite] = useState()
- 
-  
-  const [wishListProduct, WishlistReFetech] = useWishListdata();
+  const [favorite, setFavorite] = useState(false);
+
+  console.log(favorite);
+  const { wishListProduct, isLoading, WishlistReFetech } = useWishList();
   console.log(wishListProduct);
 
-  const filteredData = wishListProduct.filter((product) => product.product_id === _id);
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+
+  const filteredData = wishListProduct?.filter((product) => product.product_id === _id);
   console.log(filteredData);
-
-
 
   // handel add to cart function
   const handleAddToCart = async (id) => {
@@ -67,16 +69,13 @@ const Card = ({ product }) => {
       toast.success(`${product?.title} Added to cart`);
     } else {
       const res = await axiosPublic.post("/myCarts", cartData);
-      refetch()
+      refetch();
       setTimeout(() => {
         toast.success(`${product?.title} Added to cart`);
       }, 1000);
       console.log(res?.data);
     }
   };
-
-
-
 
   const handleAddToWishlist = async () => {
     const images = product?.image || [];
@@ -94,65 +93,35 @@ const Card = ({ product }) => {
       stock_limit: product?.quantity,
       title: product?.title,
       color: [...color],
-      dimensions: product?.dimensions
+      dimensions: product?.dimensions,
     };
 
 
-    if (user?.email) {
-      axiosPublic
-        .post("/wishlist", wishlistData)
-        .then((response) => {
-          WishlistReFetech();
-         toast.success("wish list add successfull")
-        })
-        .catch((error) => {
-          console.error("Error adding to wishlist:", error);
-        });
-    } else {
-      toast.error("please login")
+    //   // Check if the product is already in the wishlist
+    const wishlists = JSON.parse(localStorage.getItem("wishlist")) || [];
+    const index = wishlists.findIndex((item) => item.product_id === _id);
+
+    if (user) {
+      const res = await axiosPublic.post("/wishlist", wishlistData);
+      return res.data
+    }
+    else {
+      if (index !== -1) {
+        // Product already exists, remove it from wishlist
+        wishlists.splice(index, 1);
+        localStorage.setItem("wishlist", JSON.stringify(wishlists));
+        setFavorite(false); // Toggle favorite state
+        toast.success(`${product?.title} removed from wishlist`);
+      } else {
+        // Product doesn't exist, add it to wishlist
+        wishlists.push(wishlistData);
+        localStorage.setItem("wishlist", JSON.stringify(wishlists));
+        setFavorite(true); // Toggle favorite state
+        toast.success(`${product?.title} added to wishlist`);
+      }
     }
 
-
-
-    //   // Check if the product is already in the wishlist
-      // const wishlists = JSON.parse(localStorage.getItem("wishlist")) || [];
-      // const index = wishlists.findIndex(item => item.product_id === _id);
-
-      // if (index !== -1) {
-      //   // Product already exists, remove it from wishlist
-      //   wishlists.splice(index, 1);
-      //   localStorage.setItem("wishlist", JSON.stringify(wishlists));
-      //   setFavorite(false); // Toggle favorite state
-      //   toast.success(`${product?.title} removed from wishlist`);
-      // } else {
-      //   // Product doesn't exist, add it to wishlist
-      //   wishlists.push(wishlistData);
-      //   localStorage.setItem("wishlist", JSON.stringify(wishlists));
-      //   setFavorite(true); // Toggle favorite state
-      //   toast.success(`${product?.title} added to wishlist`);
-      // }
-
-      // if (user) {
-      //   try {
-      //     if (index !== -1) {
-      //       // Remove from server wishlist
-      //       await axiosPublic.delete(`/wishlist/${id}`);
-      //     } else {
-      //       // Add to server wishlist
-      //       await axiosPublic.post("/wishlist", wishlistData);
-      //     }
-      //   } catch (error) {
-      //     console.error("Error updating wishlist:", error);
-      //     toast.error("Failed to update wishlist. Please try again later.");
-      //   }
-      // }
-
-
-
   };
-
-
-
 
   // delete operation
   const handleDeleteProduct = () => {
@@ -163,24 +132,43 @@ const Card = ({ product }) => {
         console.log(response.data);
         console.log("delete");
         WishlistReFetech();
-        toast.error("wish list Remove successfull")
+        toast.error("wish list Remove successfull");
       })
       .catch((error) => {
         console.error("Error removing item from wishlist:", error);
       });
   };
 
-
-
-
   return (
     <div className="center">
+      <div>
+        {filteredData?.length > 0 ? (
+          <button
+            onClick={handleDeleteProduct}
+            className="  text-red-700 text-center text-xl border mb-6 border-gray-600 border-opacity-30 backdrop-blur-md p-3 bg-black/30 rounded-full"
+          >
+            <FaHeart />
+          </button>
+        ) : (
+          filteredData?.length === 0 && (
+            <div>
+              <button
+                onClick={handleAddToWishlist}
+                className=" text-white text-center text-xl border mb-6 border-gray-600 border-opacity-30 backdrop-blur-md p-3 bg-black/30 rounded-full"
+              >
+                <FaRegHeart />
+              </button>
+            </div>
+          )
+        )}
+      </div>
+
       <div className="container-card">
 
-  
+
 
         <div className="card">
-        
+
 
 
           <div className="imgBx">
@@ -193,14 +181,14 @@ const Card = ({ product }) => {
             <h2 className="text-white text-center -mt-1">$ {product?.price}</h2>
 
             <div>
-              {filteredData.length > 0 ? (
+              {filteredData?.length > 0 ? (
                 <button
                   onClick={handleDeleteProduct}
                   className="  text-red-700 text-center text-xl border mb-6 border-gray-600 border-opacity-30 backdrop-blur-md p-3 bg-black/30 rounded-full"
                 >
                   <FaHeart />
                 </button>
-              ) : filteredData.length === 0 && (
+              ) : filteredData?.length === 0 && (
                 <div>
                   <button
                     onClick={handleAddToWishlist}
@@ -209,11 +197,11 @@ const Card = ({ product }) => {
                     <FaRegHeart />
                   </button>
                 </div>
-              ) }
+              )}
             </div>
 
 
-         
+
 
 
             {/* <button onClick={handleAddToWishlist} className="text-white text-center my-4 "> wish </button> */}

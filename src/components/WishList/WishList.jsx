@@ -1,24 +1,25 @@
-import React, { useContext } from 'react';
+import  { useContext } from 'react';
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
-import useWishListdata from "../../hooks/wishlist/useWishListdata";
 import { Link } from 'react-router-dom';
 import { MdDelete, MdAddShoppingCart } from "react-icons/md";
 import toast, { Toaster } from 'react-hot-toast';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import useMyCarts from '../../hooks/carts/useMyCarts';
+import useWishList from '../../hooks/wishlist/useWishlist';
 
 
 const WishList = () => {
     const axiosPublic = useAxiosPublic();
-    const [wishListProduct, WishlistReFetech] = useWishListdata();
+    const {wishlistProduct, isLoading, WishlistReFetech} = useWishList();
     const { user } = useContext(AuthContext);
-    const { refetch } = useMyCarts()
+    const { refetch } = useMyCarts();
+ 
+    if(isLoading){
+        return <p className=' text-center text-3xl'>Loading...</p>
+    }
 
-
-    
-
-
+    console.log(wishlistProduct);
 
     const handleProductDelete = (id, title) => {
         Swal.fire({
@@ -91,7 +92,7 @@ const WishList = () => {
                 .post("/myCarts", cartData)
                 .then((response) => {
                     if (response.status === 200) {
-                        toast.success("Add to Cart Successfull")
+                        toast.success(`${title} is added to Cart`)
                         axiosPublic
                             .delete(`/wishlist/${id}`)
                             .then((response) => {
@@ -122,13 +123,13 @@ const WishList = () => {
 
 
 
-    if (wishListProduct.length === 0) {
+    if (wishlistProduct?.length === 0) {
         return (
             <div className="text-center my-20">
                 <p className=" my-10 font-bold text-sm md:text-xl lg:text-2xl">Your Wishlist is empty.</p>
                 <Link to="/allProducts">
-                    <button class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
-                        <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                    <button className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+                        <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                             Add to wishlist
                         </span>
                     </button>
@@ -156,13 +157,12 @@ const WishList = () => {
                         <th className="py-2 px-4"> Action</th>
                     </tr>
                 </thead>
-                <tbody className="divide-y bg-white ">
+                <tbody className="divide-y bg-white">
                     {
-                        wishListProduct?.map((product, i) => (
-
-                            <tr className="py-4">
+                        wishlistProduct?.map((product, i) => (
+                            <tr key={i} className="py-4">
                                 <td className="py-2 px-2 md:px-3 lg:px-5">{i + 1} </td>
-                                <td className="py-2 flex items-center px-6">
+                                <td className="py-2 flex items-center">
                                     <img src={product?.product_image[0]} alt="" className='w-12 h-12 rounded-full mr-2  ' />
                                     <img src={product?.product_image[1]} alt="" className='w-12 h-12  rounded-full mr-2 lg:block hidden' />
                                 </td>
@@ -189,7 +189,6 @@ const WishList = () => {
                                 </td>
                             </tr>
                         ))}
-                    {/* <!-- Additional rows go here --> */}
                 </tbody>
             </table>
             <Toaster></Toaster>
@@ -199,6 +198,7 @@ const WishList = () => {
 
 
     );
+
 };
 
 export default WishList;
