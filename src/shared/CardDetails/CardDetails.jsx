@@ -48,7 +48,6 @@ const CardDetails = () => {
   });
 
   const handleRating = () => {
-    // const rating = document.getElementById("rating");
     const message = document.getElementById("message").value;
     console.log(rating, message, product?._id);
     setRating(0);
@@ -168,7 +167,7 @@ const CardDetails = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container mx-auto">
       <div className="flex flex-col md:flex-row">
         {/* First half */}
         <div className="w-full md:w-1/2 flex flex-col items-center p-10">
@@ -200,6 +199,7 @@ const CardDetails = () => {
           </div>
         </div>
 
+        {/* Second half */}
         <div className="w-full md:w-1/2 p-10">
           <h2 className="text-xl font-semibold">{product?.title}</h2>
           <div className="flex gap-2 items-center text-yellow-400 my-2">
@@ -351,44 +351,37 @@ const CardDetails = () => {
               </div>
             </div>
 
-            <button className="bg-yellow-400 md:p-2 lg:py-2 lg:px-5 flex items-center gap-2">
+            <button
+              onClick={() => handleAddToCart(product?._id)}
+              className="bg-yellow-400 md:p-2 lg:py-2 lg:px-5 flex items-center gap-2"
+            >
               <RiShoppingBag2Line className="text-xl" /> Add to cart
             </button>
           </div>
-          <h2 className="text-gray-500 flex items-center gap-2">
-            <FaRegHeart />
-            Add to Wishlist
-          </h2>
-
           <button
-            onClick={() => handleAddToCart(product?._id)}
-            className="bg-yellow-400 md:p-2 lg:py-2 lg:px-5 flex items-center gap-2"
+            className="text-gray-500 flex items-center gap-2"
+            onClick={() => handleAddToWishlist(product?._id)}
           >
-            <RiShoppingBag2Line className="text-xl" /> Add to cart
+            <FaRegHeart className={`${favorite ? "text-red-500" : ""} `} />
+            Add to Wishlist
           </button>
-        </div>
-        <button
-          onClick={() => handleAddToWishlist(product?._id)}
-          className="text-gray-500 flex items-center gap-2"
-        >
-          <FaRegHeart className={`${favorite ? "text-red-500" : ""} `} />
-          Add to Wishlist
-        </button>
 
-        <hr className="my-5" />
+          <hr className="my-5" />
 
-        <div
-          className={
-            product?.return_available
-              ? "border-2 border-gray-100 p-3 flex items-center gap-4"
-              : "hidden"
-          }
-        >
-          <FaArrowRightArrowLeft />
-          <p>{product?.return_policy}</p>
+          <div
+            className={
+              product?.return_available
+                ? "border-2 border-gray-100 p-3 flex items-center gap-4"
+                : "hidden"
+            }
+          >
+            <FaArrowRightArrowLeft />
+            <p>{product?.return_policy}</p>
+          </div>
         </div>
       </div>
 
+      {/* Review Card */}
       <div className="max-w-7xl mx-auto my-16">
         <Swiper
           modules={[Navigation]}
