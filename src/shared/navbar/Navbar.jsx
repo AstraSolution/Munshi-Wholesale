@@ -12,15 +12,20 @@ import { useState } from "react";
 import useAuth from "../../hooks/auth/useAuth";
 import useMyCarts from "../../hooks/carts/useMyCarts";
 import SearchBar from "./SearchBar";
-import SearchBarM from "./SearchBarM";
-// import { AiOutlineHeart } from 'react-icons/ai';
+// import SearchBarM from "./SearchBarM";
 import { AiOutlineHeart } from 'react-icons/ai';
+import useWishList from "../../hooks/wishlist/useWishlist";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { user, logOut } = useAuth();
   const { carts, totalPrice } = useMyCarts();
+  const { wishlistProduct, isLoading } = useWishList();
+
+  if(isLoading){
+    return <p className=" text-center">Loading...</p>
+  }
 
   const openSlider = () => {
     setIsOpen(true);
@@ -60,11 +65,11 @@ const Navbar = () => {
             <SearchBar />
 
             <div className="flex items-center gap-2">
-              <Link to="/wishList">
+            <Link to="/wishList">
                 <div className="px-2">
                   <span className="indicator-item badge text-red-500 ">
 
-                    {0}
+                    {wishlistProduct?.length}
                   </span>
             
                   <AiOutlineHeart className="mx-auto text-red-600 text-5xl" />
@@ -83,8 +88,7 @@ const Navbar = () => {
                 <p className="text-white font-semibold text-lg">My Cart:</p>
                 <p className="text-yellow-500 font-semibold">
                   {" "}
-                  {carts?.length} - ${totalPrice}
-                  {carts?.length} - ${(totalPrice).toFixed(2)}
+                  {carts?.length} - ${totalPrice.toFixed(2)}
                 </p>
               </div>
             </div>
@@ -199,7 +203,7 @@ const Navbar = () => {
             </div>
 
             <div>
-              {carts.splice(0, 3)?.map((cart) => (
+              {carts.slice(0,3)?.map((cart) => (
                 <div
                   key={cart?._id}
                   className="py-2 px-5 flex gap-3 border-b my-3"
