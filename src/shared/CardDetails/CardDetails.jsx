@@ -2,10 +2,11 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
 import { useParams } from "react-router-dom";
-import { FaStar, FaRegHeart } from "react-icons/fa";
+import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { FaPlus, FaMinus, FaArrowRightArrowLeft } from "react-icons/fa6";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 import { RiShoppingBag2Line } from "react-icons/ri";
 import { Navigation } from "swiper/modules";
@@ -36,6 +37,7 @@ const CardDetails = () => {
   const param = useParams();
   const [quantity, setQuantity] = useState(1);
   const [rating, setRating] = useState(0);
+
   const { user } = useAuth();
   const [favorite, setFavorite] = useState(false);
 
@@ -47,9 +49,42 @@ const CardDetails = () => {
     },
   });
 
+  const { data: reviews = [] } = useQuery({
+    queryKey: ["reviews"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/reviews/${param?.id}`);
+      return res.data;
+    },
+  });
+
   const handleRating = () => {
     const message = document.getElementById("message").value;
-    console.log(rating, message, product?._id);
+
+    const newComment = {
+      user_name: "Taiatul Islam",
+      user_email: "taiatulislamapon@gmail.com",
+      user_image: "https://i.ibb.co/sH9rW6p/Apon-02.jpg",
+      comment: message,
+      rating,
+      product_id: product?._id,
+    };
+
+    axiosPublic
+      .post("/reviews", newComment)
+      .then((response) => {
+        console.log(response);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your Comment Added.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+
     setRating(0);
     handleOpen();
   };
@@ -202,16 +237,16 @@ const CardDetails = () => {
         {/* Second half */}
         <div className="w-full md:w-1/2 p-10">
           <h2 className="text-xl font-semibold">{product?.title}</h2>
+
           <div className="flex gap-2 items-center text-yellow-400 my-2">
-            <FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
+            <Rating
+              unratedColor="amber"
+              ratedColor="amber"
+              readonly
+              value={5}
+            />
             <h2 className="text-gray-500 mx-5">
-              {product?.product_reviews
-                ? `${product?.product_reviews.length} `
-                : "0 "}
+              {reviews ? `${reviews.length} ` : "0 "}
               Reviews
             </h2>
 
@@ -382,124 +417,42 @@ const CardDetails = () => {
       </div>
 
       {/* Review Card */}
-      <div className="max-w-7xl mx-auto my-16">
+      <div
+        className={`${reviews ? "block max-w-7xl mx-auto my-16" : "hidden"}`}
+      >
         <Swiper
-          modules={[Navigation]}
+          modules={Navigation}
           spaceBetween={50}
           slidesPerView={3}
           navigation
         >
-          {/* Slide 1 */}
-          <SwiperSlide>
-            <img
-              src="https://i.ibb.co/sH9rW6p/Apon-02.jpg"
-              alt="profile"
-              className="w-[100px] h-[100px] rounded-full border-[3px] border-yellow-400 absolute"
-            />
+          {reviews?.map((review) => (
+            <SwiperSlide key={review?._id}>
+              <img
+                src={review?.user_image}
+                alt="profile"
+                className="w-[100px] h-[100px] mx-auto rounded-full border-[3px] border-yellow-400 -mb-9"
+              />
+              <div className="bg-gray-100 rounded-lg border-[3px] border-yellow-400 p-5">
+                <h3 className="text-xl text-center mt-7">
+                  {review?.user_name}
+                </h3>
 
-            <div className="bg-gray-100 rounded-lg border-[3px] border-yellow-400 p-7 mt-10">
-              <h3 className="text-xl text-center mt-3">Taiatul Islam Apon</h3>
-
-              <div className="flex gap-3 text-yellow-400 justify-center my-3">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-              </div>
-
-              <p className="text-justify bg-gray-200 rounded-lg p-5">
-                As I embarked on my journey through the captivating world of
-                Echoes of Eternity, I found myself entranced from the very first
-                note.
-              </p>
-            </div>
-          </SwiperSlide>
-
-          {/* Slide 2 */}
-          <SwiperSlide className="bg-gray-100 rounded-lg border-[3px] border-yellow-400 p-5">
-            <img
-              src="https://i.ibb.co/sH9rW6p/Apon-02.jpg"
-              alt="profile"
-              className="w-[100px] h-[100px] mx-auto rounded-full border-[3px] border-yellow-400"
-            />
-
-            <div className="">
-              <h3 className="text-xl text-center mt-3">Taiatul Islam Apon</h3>
-
-              <div className="flex gap-3 text-yellow-400 justify-center my-3">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-              </div>
-
-              <p className="text-justify bg-gray-200 rounded-lg p-5">
-                As I embarked on my journey through the captivating world of
-                Echoes of Eternity, I found myself entranced from the very first
-                note.
-              </p>
-            </div>
-          </SwiperSlide>
-
-          {/* Slide 3 */}
-          <SwiperSlide className="">
-            <img
-              src="https://i.ibb.co/sH9rW6p/Apon-02.jpg"
-              alt="profile"
-              className="w-[100px] h-[100px] mx-auto rounded-full border-[3px] border-yellow-400 -mb-9"
-            />
-            <div className="bg-gray-100 rounded-lg border-[3px] border-yellow-400 p-5">
-              <h3 className="text-xl text-center mt-7">Taiatul Islam Apon</h3>
-
-              <div className="flex gap-3 text-yellow-400 justify-center my-3">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-              </div>
-
-              <p className="text-justify bg-gray-200 rounded-lg p-5">
-                As I embarked on my journey through the captivating world of
-                Echoes of Eternity, I found myself entranced from the very first
-                note.
-              </p>
-            </div>
-          </SwiperSlide>
-
-          {/* Slide 4 */}
-          <SwiperSlide>
-            <div className="bg-gray-100 rounded-lg border-[3px] border-yellow-400 p-5">
-              <div className="flex gap-5 mb-5">
-                <img
-                  src="https://i.ibb.co/sH9rW6p/Apon-02.jpg"
-                  alt="profile"
-                  className="w-[100px] h-[100px] rounded-full border-[3px] border-yellow-400"
-                />
-                <div>
-                  <h3 className="text-xl text-center mt-7">
-                    Taiatul Islam Apon
-                  </h3>
-
-                  <div className="flex gap-3 text-yellow-400 justify-center my-3">
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                  </div>
+                <div className="text-center">
+                  <Rating
+                    unratedColor="amber"
+                    ratedColor="amber"
+                    readonly
+                    value={review?.rating}
+                  />
                 </div>
-              </div>
 
-              <p className="text-justify bg-gray-200 rounded-lg p-5">
-                As I embarked on my journey through the captivating world of
-                Echoes of Eternity, I found myself entranced from the very first
-                note.
-              </p>
-            </div>
-          </SwiperSlide>
+                <p className="text-justify bg-gray-200 rounded-lg p-5">
+                  {review?.comment}
+                </p>
+              </div>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </div>
