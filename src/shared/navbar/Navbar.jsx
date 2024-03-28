@@ -11,17 +11,21 @@ import Logo from "../logo/Logo";
 import { useState } from "react";
 import useAuth from "../../hooks/auth/useAuth";
 import useMyCarts from "../../hooks/carts/useMyCarts";
-// import { AiOutlineHeart } from 'react-icons/ai';
-
+import SearchBar from "./SearchBar";
+// import SearchBarM from "./SearchBarM";
+import { AiOutlineHeart } from 'react-icons/ai';
+import useWishList from "../../hooks/wishlist/useWishlist";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { user, logOut } = useAuth();
   const { carts, totalPrice } = useMyCarts();
+  const { wishlistProduct, isLoading } = useWishList();
 
-
-
+  if(isLoading){
+    return <p className=" text-center">Loading...</p>
+  }
 
   const openSlider = () => {
     setIsOpen(true);
@@ -47,17 +51,10 @@ const Navbar = () => {
     { label: "Sign In", link: "/login" },
     { label: "Register", link: "/register" },
     { label: "Dashboard", link: "/dashboard" },
-
   ];
-
-
-
-
-
 
   return (
     <div>
-    
       <div className="bg-black">
         <div className="max-w-7xl mx-auto py-5 px-5">
           <div className="flex justify-between items-center">
@@ -65,21 +62,19 @@ const Navbar = () => {
               <Logo />
             </div>
 
-            <form className="hidden lg:flex items-center">
-              <input
-                type="text"
-                placeholder="Search..."
-                className="py-2 px-4 w-96 rounded-l-lg text-lg focus:outline-none"
-              />
-              <button
-                type="submit"
-                className="bg-yellow-400 py-2 px-3 rounded-r-lg text-lg font-semibold"
-              >
-                Search
-              </button>
-            </form>
+            <SearchBar />
 
             <div className="flex items-center gap-2">
+            <Link to="/wishList">
+                <div className="px-2">
+                  <span className="indicator-item badge text-red-500 ">
+
+                    {wishlistProduct?.length}
+                  </span>
+            
+                  <AiOutlineHeart className="mx-auto text-red-600 text-5xl" />
+                </div>
+              </Link>
               <button onClick={openCart}>
                 <ShoppingBagIcon className="size-6 md:size-8 lg:size-12 text-white" />
               </button>
@@ -91,10 +86,12 @@ const Navbar = () => {
               </div>
               <div className="hidden lg:block">
                 <p className="text-white font-semibold text-lg">My Cart:</p>
-                <p className="text-yellow-500 font-semibold"> {carts?.length} - ${totalPrice}</p>
+                <p className="text-yellow-500 font-semibold">
+                  {" "}
+                  {carts?.length} - ${totalPrice.toFixed(2)}
+                </p>
               </div>
             </div>
-          
           </div>
         </div>
       </div>
@@ -206,12 +203,16 @@ const Navbar = () => {
             </div>
 
             <div>
-              {carts?.map((cart) => (
+              {carts.slice(0,3)?.map((cart) => (
                 <div
                   key={cart?._id}
                   className="py-2 px-5 flex gap-3 border-b my-3"
                 >
-                  <img src={cart?.product_image[0]} alt="" className="size-28" />
+                  <img
+                    src={cart?.product_image[0]}
+                    alt=""
+                    className="size-28"
+                  />
 
                   <div className="space-y-2">
                     <h2 className="text-xl lg:text-2xl font-bold">

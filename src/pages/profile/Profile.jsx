@@ -76,6 +76,7 @@ const Profile = () => {
   };
 
   return (
+    
     <div className="container-xl px-4 mt-4">
       {/* Toggle Edit Mode Button */}
       <button
@@ -149,7 +150,6 @@ const Profile = () => {
                 {/* Form Row*/}
 
                 {/* Form Row */}
-
                 <div className="mb-3">
                   <label className="small mb-1" htmlFor="inputGender">
                     Gender
