@@ -1,21 +1,15 @@
-import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
 import { useParams } from "react-router-dom";
 import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { FaPlus, FaMinus, FaArrowRightArrowLeft } from "react-icons/fa6";
+import { RiShoppingBag2Line } from "react-icons/ri";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-
-import { RiShoppingBag2Line } from "react-icons/ri";
-import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/navigation";
-
 import "./Table.css";
-
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/auth/useAuth";
 
@@ -30,15 +24,18 @@ import {
 } from "@material-tailwind/react";
 
 const CardDetails = () => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(!open);
-
   const axiosPublic = useAxiosPublic();
   const param = useParams();
+  const { user } = useAuth();
+
+  console.log(user);
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(!open);
+
   const [quantity, setQuantity] = useState(1);
   const [rating, setRating] = useState(0);
 
-  const { user } = useAuth();
   const [favorite, setFavorite] = useState(false);
 
   const { data: product = {} } = useQuery({
@@ -49,7 +46,7 @@ const CardDetails = () => {
     },
   });
 
-  const { data: reviews = [] } = useQuery({
+  const { data: reviews = [], refetch } = useQuery({
     queryKey: ["reviews"],
     queryFn: async () => {
       const res = await axiosPublic.get(`/reviews/${param?.id}`);
@@ -80,6 +77,7 @@ const CardDetails = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+        refetch();
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -215,12 +213,7 @@ const CardDetails = () => {
           </div>
 
           <div className="w-full">
-            <Swiper
-              modules={[Navigation]}
-              spaceBetween={5}
-              slidesPerView={4}
-              navigation
-            >
+            <Swiper spaceBetween={5} slidesPerView={4} navigation>
               {product?.image?.map((image) => (
                 <SwiperSlide key={image}>
                   <img
@@ -421,7 +414,7 @@ const CardDetails = () => {
         className={`${reviews ? "block max-w-7xl mx-auto my-16" : "hidden"}`}
       >
         <Swiper
-          modules={Navigation}
+          // modules={Navigation}
           spaceBetween={50}
           slidesPerView={3}
           navigation
