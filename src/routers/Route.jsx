@@ -6,6 +6,7 @@ import Dashboard from "../pages/dashboard/Dashboard";
 import Profile from "../pages/profile/Profile";
 import MyCart from "../pages/myCart/MyCart";
 import AllProducts from "../pages/AllProducts/AllProducts";
+import CheckOut from "../pages/checkOut/CheckOut";
 import WishList from "../components/WishList/WishList";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
         element: <MyCart />,
       },
       {
+        path: "/checkout",
+        element: <CheckOut />,
+      },
+      {
         path: "/allProducts",
         element: <AllProducts />,
       },
@@ -46,26 +51,23 @@ const router = createBrowserRouter([
     ],
   },
   {
-
     path: "/add-product",
     // element: <AddProduct />
   },
   {
-
     path: "/login",
-    element: <Login></Login>
+    element: <Login></Login>,
   },
   {
     path: "/register",
-    element: <Register></Register>
+    element: <Register></Register>,
   },
   {
     path: "/contact-us",
-    element: <ContactUs/>
+    element: <ContactUs />,
   },
 
   {
-
     path: "/dashboard",
     element: <Dashboard />,
     children: [
