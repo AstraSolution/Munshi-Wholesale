@@ -13,6 +13,7 @@ import Checkout from "../pages/checkout/Checkout";
 import AboutUs from "../pages/aboutUs/AboutUs";
 import FAQ from "../pages/faq/FAQ";
 import Profile_Update_Page from "../pages/user_dashboard/Profile_Update_Page";
+import Wish_List from "../pages/wishlist/Wish_List";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "aboutUs",
         element: <AboutUs />,
+      },
+      {
+        path: "wishlist",
+        element: <Wish_List></Wish_List>
       },
       {
         path: "faq",

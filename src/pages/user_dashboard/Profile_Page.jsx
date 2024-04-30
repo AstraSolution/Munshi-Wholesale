@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 
 const Profile_Page = () => {
     return (
-        <div className='lg:flex lg:gap-2 container mx-auto px-1'>
+        <div className='lg:flex lg:gap-4 container mx-auto px-1'>
             {/* left side  */}
             <div className='lg:w-4/12 w-full  '>
                 <div>
-                    <div className="max-w-2xl sm:max-w-sm md:max-w-sm lg:max-w-sm xl:max-w-sm sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mt-2 lg:min-h-screen bg-white shadow-xl rounded-lg text-gray-900">
+                    <div className=" mt-1 lg:min-h-screen bg-white shadow-xl rounded-lg text-gray-900">
                         {/* cover photo  */}
                         <div className="relative rounded-t-lg h-32 overflow-hidden">
                             <img className="object-cover object-top w-full" src="https://images.unsplash.com/photo-1549880338-65ddcdfd017b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ" alt="" />
@@ -29,6 +29,10 @@ const Profile_Page = () => {
                             <h2 className="font-semibold">Siyam Ahmed </h2>
                             <p className="text-gray-500">Email </p>
                             <p className="text-gray-500">Freelance Web Designer</p>
+                        </div>
+                        <div className='px-2'>
+                            <h1> Bio </h1>
+                            <p className='textsm md:text-lg lg:text-xl '>I am Siyam Ahmed A problem solver who demonstrates skills like critical thinking, analytical reasoning, creativity, and persistence. They excel at identifying, analyzing, and solving complex problems using systematic approaches. This involves breaking down problems, generating solutions, evaluating alternatives, and implementing effective strategies. Effective communication and collaboration skills are also crucial for working in teams and conveying solutions clearly</p>
                         </div>
 
                       
