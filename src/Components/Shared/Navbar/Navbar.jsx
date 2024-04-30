@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FaRegHeart } from "react-icons/fa";
 
 export default function Navbar() {
   return (
@@ -28,6 +29,20 @@ export default function Navbar() {
         </li>
         <li>
           <Link to={"/dashboard"}>Dashboard</Link>
+        </li>
+        <li>
+
+          <Link to={"/wishlist"}>
+            <div className="flex  items-center ">
+              <div className="relative ">
+                <div className="  absolute left-4 -top-2 ">
+                  <p className="flex h-2 w-2 items-center justify-center bg-[#FFA500] p-3 rounded-full  text-sm text-white">73</p>
+                </div>
+                <FaRegHeart className="text-2xl " />
+
+              </div>
+            </div>
+          </Link>
         </li>
       </ul>
     </div>

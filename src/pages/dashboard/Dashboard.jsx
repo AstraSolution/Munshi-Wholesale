@@ -5,15 +5,18 @@ import { motion } from "framer-motion";
 // * React icons
 import { IoIosArrowBack } from "react-icons/io";
 // import { SlSettings } from "react-icons/sl";
-import { AiOutlineAppstore } from "react-icons/ai";
+import { AiOutlineAppstore  } from "react-icons/ai";
 import { BsPerson } from "react-icons/bs";
+import { FaCartArrowDown  } from "react-icons/fa";
 // import { HiOutlineDatabase } from "react-icons/hi";
 // import { TbReportAnalytics } from "react-icons/tb";
 // import { RiBuilding3Line } from "react-icons/ri";
 import { useMediaQuery } from "react-responsive";
-import { MdMenu } from "react-icons/md";
+import { MdMenu , MdChangeHistory } from "react-icons/md";
 import { IoIosSearch } from "react-icons/io";
-import { NavLink, useLocation,} from "react-router-dom";
+
+
+import { Link, NavLink, useLocation, useRoutes } from "react-router-dom";
 
 const Dashboard = () => {
   let isTabletMid = useMediaQuery({ query: "(max-width: 768px)" });
@@ -88,7 +91,7 @@ const Dashboard = () => {
       >
         <div className="flex items-center justify-between gap-2.5 font-medium border-b py-3 border-slate-300 mx-3">
 
-          <span className="text-xl whitespace-pre">Munshi Wholesale </span>
+         <Link to={'/'}> <span className="text-xl whitespace-pre">Munshi Wholesale </span></Link>
           {/* Toggle icon for medium and small devices */}
           {(isTabletMid || isSmallDevice) && (
             <motion.div
@@ -127,20 +130,21 @@ const Dashboard = () => {
                     ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium "
                     : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
               }>
-                <BsPerson size={23} className="min-w-max" />
-                Home
+                <AiOutlineAppstore size={23} className="min-w-max" />
+               Dashboard
               </NavLink>
             </li>
+
             <li>
               <NavLink to={"/dashboard/profile"} className={({ isActive, isPending }) =>
                 isPending
                   ? "pending"
                   : isActive
-                    ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium "
+                    ? "bg-gray-600 text-[#FFA500] p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium "
                     : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
               }>
                 <BsPerson size={23} className="min-w-max" />
-                Profile
+               My Profile
               </NavLink>
             </li>
             <li>
@@ -148,10 +152,10 @@ const Dashboard = () => {
                 isPending
                   ? "pending"
                   : isActive
-                    ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium "
+                    ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium bg-gray-600 text-[#FFA500]"
                     : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
               }>
-                <BsPerson size={23} className="min-w-max" />
+                <MdChangeHistory  size={23} className="min-w-max" />
                 All Orders
               </NavLink>
             </li>
@@ -164,7 +168,7 @@ const Dashboard = () => {
                     ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium bg-gray-600 text-[#FFA500] "
                     : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
               }>
-                <AiOutlineAppstore size={23} className="min-w-max" />
+                <FaCartArrowDown  size={23} className="min-w-max" />
                 My Order
               </NavLink>
             </li>
@@ -189,7 +193,7 @@ const Dashboard = () => {
       </motion.div>
 
       {/* Sidebar toggle for small devices */}
-      <div className="flex justify-between items-center py-1 gap-6 px-1 md:py-2 md:px-3">
+      <div className="flex  justify-between items-center py-1 gap-6 px-1 md:py-2 md:px-3">
         <div className="p-1 text-white lg:hidden" onClick={() => setOpen(true)}>
           <MdMenu size={25} />
         </div>
