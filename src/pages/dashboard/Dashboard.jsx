@@ -13,7 +13,7 @@ import { BsPerson } from "react-icons/bs";
 import { useMediaQuery } from "react-responsive";
 import { MdMenu } from "react-icons/md";
 import { IoIosSearch } from "react-icons/io";
-import { NavLink, useLocation, useRoutes } from "react-router-dom";
+import { Link, NavLink, useLocation, useRoutes } from "react-router-dom";
 
 const Dashboard = () => {
   let isTabletMid = useMediaQuery({ query: "(max-width: 768px)" });
@@ -88,7 +88,7 @@ const Dashboard = () => {
       >
         <div className="flex items-center justify-between gap-2.5 font-medium border-b py-3 border-slate-300 mx-3">
 
-          <span className="text-xl whitespace-pre">Munshi Wholesale </span>
+         <Link to={'/'}> <span className="text-xl whitespace-pre">Munshi Wholesale </span></Link>
           {/* Toggle icon for medium and small devices */}
           {(isTabletMid || isSmallDevice) && (
             <motion.div
@@ -128,7 +128,7 @@ const Dashboard = () => {
                     : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
               }>
                 <BsPerson size={23} className="min-w-max" />
-                Profile
+               My Profile
               </NavLink>
             </li>
 
@@ -165,7 +165,7 @@ const Dashboard = () => {
       </motion.div>
 
       {/* Sidebar toggle for small devices */}
-      <div className="flex justify-between items-center py-1 gap-6 px-1 md:py-2 md:px-3">
+      <div className="flex  justify-between items-center py-1 gap-6 px-1 md:py-2 md:px-3">
         <div className="p-1 text-white lg:hidden" onClick={() => setOpen(true)}>
           <MdMenu size={25} />
         </div>

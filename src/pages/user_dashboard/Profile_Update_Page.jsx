@@ -1,11 +1,15 @@
 import React from 'react';
 import { CiCamera } from "react-icons/ci";
 import { CiEdit } from "react-icons/ci";
-import { Link } from 'react-router-dom';
 
-const Profile_Page = () => {
+
+
+const Profile_Update_Page = () => {
+
+
     return (
-        <div className='lg:flex lg:gap-2 container mx-auto px-1'>
+        <div>
+              <div className='lg:flex lg:gap-2 container mx-auto px-1'>
             {/* left side  */}
             <div className='lg:w-4/12 w-full  '>
                 <div>
@@ -20,7 +24,7 @@ const Profile_Page = () => {
                         </div>
                         {/* Profile image */}
                         <div className="mx-auto  w-32 h-32 relative -mt-16 border-4 border-white rounded-full overflow-hidden">
-                            <img className="object-cover object-center h-32" src='https://i.ibb.co/5jQYxLn/about1.jpg' alt='Woman looking front' />
+                            <img className="object-cover object-center h-32" src='https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='Woman looking front' />
                             {/* Edit icon */}
                             {/* <CiCamera className="absolute bottom-4 right-0 w-6 h-6 text-white fill-current bg-black rounded-full p-1 cursor-pointer hover:bg-gray-900"></CiCamera> */}
 
@@ -30,8 +34,10 @@ const Profile_Page = () => {
                             <p className="text-gray-500">Email </p>
                             <p className="text-gray-500">Freelance Web Designer</p>
                         </div>
-
-                      
+                       
+                        {/* <div className="p-4 border-t mx-8 mt-2">
+                            <button className="w-1/2 block mx-auto rounded-full bg-gray-900 hover:shadow-lg font-semibold text-white px-6 py-2">Follow</button>
+                        </div> */}
                     </div>
                 </div>
             </div>
@@ -39,12 +45,10 @@ const Profile_Page = () => {
             <div className='lg:w-8/12 w-full mx-auto mt-3 lg:mt-0 '>
                 <div>
                     <div className='flex items-center justify-between  '>
-                        <h1 > Parsonal Information </h1>
-                        <Link to={"/dashboard/profile_update"}>
-                            <button><CiEdit className='text-3xl cursor-pointer '></CiEdit></button>
-                        </Link>
+                        <h1 > Edit Now Information </h1>
+                        <CiEdit className='text-3xl cursor-pointer '></CiEdit>
                     </div>
-                    <div className='border-b-2 border-gray-600 pt-2 '></div>
+                        <div className='border-b-2 border-gray-600 pt-2 '></div>
 
 
                     <div className='my-2 '>
@@ -78,12 +82,17 @@ const Profile_Page = () => {
                             <h1 className='py-2'> Country :- </h1>
                             <h3 className='border border-gray-600 rounded-md   w-full py-1 px-2 '> Country </h3>
                         </div>
+                        
+                        <div className="p-4  mx-8 mt-2">
+                            <button className="w-1/2 block mx-auto rounded-full bg-gray-900 hover:shadow-lg font-semibold text-white px-6 py-2">Save Now </button>
+                        </div>
                     </div>
 
                 </div>
             </div>
         </div>
+        </div>
     );
 };
 
-export default Profile_Page;
+export default Profile_Update_Page;
