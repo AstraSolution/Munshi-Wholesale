@@ -13,7 +13,7 @@ import { BsPerson } from "react-icons/bs";
 import { useMediaQuery } from "react-responsive";
 import { MdMenu } from "react-icons/md";
 import { IoIosSearch } from "react-icons/io";
-import { NavLink, useLocation, useRoutes } from "react-router-dom";
+import { NavLink, useLocation,} from "react-router-dom";
 
 const Dashboard = () => {
   let isTabletMid = useMediaQuery({ query: "(max-width: 768px)" });
@@ -128,7 +128,31 @@ const Dashboard = () => {
                     : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
               }>
                 <BsPerson size={23} className="min-w-max" />
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={"/dashboard/profile"} className={({ isActive, isPending }) =>
+                isPending
+                  ? "pending"
+                  : isActive
+                    ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium "
+                    : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
+              }>
+                <BsPerson size={23} className="min-w-max" />
                 Profile
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={"/dashboard/allOrders"} className={({ isActive, isPending }) =>
+                isPending
+                  ? "pending"
+                  : isActive
+                    ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium "
+                    : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
+              }>
+                <BsPerson size={23} className="min-w-max" />
+                All Orders
               </NavLink>
             </li>
 
