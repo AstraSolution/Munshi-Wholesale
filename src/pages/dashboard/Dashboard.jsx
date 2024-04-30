@@ -5,14 +5,17 @@ import { motion } from "framer-motion";
 // * React icons
 import { IoIosArrowBack } from "react-icons/io";
 // import { SlSettings } from "react-icons/sl";
-import { AiOutlineAppstore } from "react-icons/ai";
+import { AiOutlineAppstore  } from "react-icons/ai";
 import { BsPerson } from "react-icons/bs";
+import { FaCartArrowDown  } from "react-icons/fa";
 // import { HiOutlineDatabase } from "react-icons/hi";
 // import { TbReportAnalytics } from "react-icons/tb";
 // import { RiBuilding3Line } from "react-icons/ri";
 import { useMediaQuery } from "react-responsive";
-import { MdMenu } from "react-icons/md";
+import { MdMenu , MdChangeHistory } from "react-icons/md";
 import { IoIosSearch } from "react-icons/io";
+
+
 import { Link, NavLink, useLocation, useRoutes } from "react-router-dom";
 
 const Dashboard = () => {
@@ -127,8 +130,33 @@ const Dashboard = () => {
                     ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium "
                     : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
               }>
+                <AiOutlineAppstore size={23} className="min-w-max" />
+               Dashboard
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink to={"/dashboard/profile"} className={({ isActive, isPending }) =>
+                isPending
+                  ? "pending"
+                  : isActive
+                    ? "bg-gray-600 text-[#FFA500] p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium "
+                    : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
+              }>
                 <BsPerson size={23} className="min-w-max" />
                My Profile
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={"/dashboard/allOrders"} className={({ isActive, isPending }) =>
+                isPending
+                  ? "pending"
+                  : isActive
+                    ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium bg-gray-600 text-[#FFA500]"
+                    : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
+              }>
+                <MdChangeHistory  size={23} className="min-w-max" />
+                All Orders
               </NavLink>
             </li>
 
@@ -140,7 +168,7 @@ const Dashboard = () => {
                     ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium bg-gray-600 text-[#FFA500] "
                     : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
               }>
-                <AiOutlineAppstore size={23} className="min-w-max" />
+                <FaCartArrowDown  size={23} className="min-w-max" />
                 My Order
               </NavLink>
             </li>
