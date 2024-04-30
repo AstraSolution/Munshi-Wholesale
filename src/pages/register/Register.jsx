@@ -2,6 +2,9 @@ import React from 'react'
 
 export default function Register() {
   return (
-    <div>Register</div>
+    <div>
+      <h1>This is register page</h1>
+      <input type="email" name="" id="" />
+    </div>
   )
 }
