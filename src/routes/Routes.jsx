@@ -10,7 +10,6 @@ import Cart from "../pages/cart/Cart";
 import Checkout from "../pages/checkout/Checkout";
 import AboutUs from "../pages/aboutUs/AboutUs";
 import FAQ from "../pages/faq/FAQ";
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -53,6 +52,10 @@ const router = createBrowserRouter([
   },
   {
     path: "dashboard",
+    element: <Dashboard />,
+  },
+  {
+    path: "dashboard/Home",
     element: <Dashboard />,
   },
 ]);
