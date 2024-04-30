@@ -6,7 +6,7 @@
 
 @layer utilities {
   .font-Montserrat {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     /* You can define additional properties like font-weight, font-size, etc. here if needed */
   }
 }
@@ -15,7 +15,7 @@
   html {
     @apply font-Montserrat;
   }
- 
+
   h1 {
     @apply text-xl font-medium capitalize;
   }
@@ -28,3 +28,21 @@
 .active {
   @apply bg-gray-600 text-yellow-600;
 } */
+
+.float-label-input {
+  margin: 0;
+}
+
+.float-label-input:focus-within label,
+.float-label-input input:not(:placeholder-shown) + label {
+  transform: translateY(-1.5rem) scale(0.75);
+  background-color: #fff;
+}
+
+::selection {
+  background-color: #f5e141;
+}
+
+.font-oswald {
+  font-family: "Oswald", sans-serif;
+}
