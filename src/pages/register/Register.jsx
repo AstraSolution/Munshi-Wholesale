@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion"; // Import motion from Framer Motion
+import { motion } from "framer-motion";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import FACEBOOK_ICON from "../../assets/icons/FacebookIcon.svg";
 import GOOGLE_ICON from "../../assets/icons/GoogleIcon.png";
@@ -18,7 +18,7 @@ export default function Register() {
 
   const onSubmit = () => {};
 
-  // Variants for Framer Motion animations
+  // variants for framer motion
   const variants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
