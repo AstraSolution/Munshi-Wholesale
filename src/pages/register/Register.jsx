@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion"; // Import motion from Framer Motion
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import FACEBOOK_ICON from "../../assets/icons/FacebookIcon.svg";
+import GOOGLE_ICON from "../../assets/icons/GoogleIcon.png";
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(true);
@@ -28,12 +30,39 @@ export default function Register() {
         initial="hidden"
         animate="visible"
         variants={variants}
-        className="m-8 p-8 border rounded-md shadow-md w-[400px] max-w-[400px]"
+        className="m-5 p-8 space-y-5 border rounded-md shadow-md w-[400px] max-w-[400px]"
       >
-        <h2 className="text-center text-3xl font-semibold pb-8">Register</h2>
+        <h2 className="text-center text-3xl font-semibold pb-3 ">Register</h2>
+
+        {/* social login buttons  */}
+        <div className="grid grid-cols-2 gap-3">
+          <motion.button
+            whileHover={{ scale: 1.06 }}
+            className="flex justify-center items-center gap-2 shadow-sm border py-3 w-full rounded-lg"
+          >
+            <img src={GOOGLE_ICON} className="w-5" alt="" />
+            <span>Google</span>
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.06 }}
+            className="flex justify-center items-center gap-2 shadow-sm border py-3 w-full rounded-lg"
+          >
+            <img src={FACEBOOK_ICON} className="w-5" alt="" />
+            <span>Facebook</span>
+          </motion.button>
+        </div>
+
+        {/* devider  */}
+        <div className="flex items-center justify-center gap-5">
+          <hr className="bg-[#343A40] max-w-[20%] w-[20%]" />
+          <p>Or</p>
+          <hr className="bg-[#343A40] max-w-[20%] w-[20%]" />
+        </div>
+
+        {/* register form  */}
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* full name field  */}
-          <div className="relative float-label-input pb-5">
+          <div className="relative float-label-input pb-4">
             <input
               type="text"
               name="fullName"
@@ -53,7 +82,7 @@ export default function Register() {
           </div>
 
           {/* email field */}
-          <div className="relative float-label-input pb-5">
+          <div className="relative float-label-input pb-4">
             <input
               type="email"
               name="email"
@@ -79,7 +108,7 @@ export default function Register() {
           </div>
 
           {/* password field  */}
-          <div className="relative float-label-input pb-5">
+          <div className="relative float-label-input pb-4">
             <input
               type={showPassword ? "password" : "text"}
               name="password"
@@ -104,7 +133,7 @@ export default function Register() {
             )}
 
             <motion.p
-              whileHover={{ scale: 1.1 }} // Framer Motion animation on hover
+              whileHover={{ scale: 1.1 }}
               onClick={() => setShowPassword(!showPassword)}
               className="cursor-pointer absolute right-4 top-3"
             >
@@ -125,7 +154,7 @@ export default function Register() {
 
           {/* register button  */}
           <motion.button
-            whileHover={{ scale: 1.05 }} // Framer Motion animation on hover
+            whileHover={{ scale: 1.05 }}
             type="submit"
             className="bg-[#FFBA00] w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
