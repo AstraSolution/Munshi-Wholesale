@@ -15,6 +15,18 @@ export default function Navbar() {
           <Link to={"/register"}>Register</Link>
         </li>
         <li>
+          <Link to={"/aboutUs"}>AboutUs</Link>
+        </li>
+        <li>
+          <Link to={"/faq"}>FAQ</Link>
+        </li>
+        <li>
+          <Link to={"/cart"}>Cart</Link>
+        </li>
+        <li>
+          <Link to={"/checkout"}>Checkout</Link>
+        </li>
+        <li>
           <Link to={"/dashboard"}>Dashboard</Link>
         </li>
       </ul>
