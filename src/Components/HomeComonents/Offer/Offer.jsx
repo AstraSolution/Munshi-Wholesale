@@ -2,7 +2,7 @@ import OfferCard from "../../Shared/OfferCard/OfferCard";
 
 const Offer = () => {
   return (
-    <div className="my-16 px-10">
+    <div>
       {/* Offer */}
       <div>
         <div className="flex gap-10">

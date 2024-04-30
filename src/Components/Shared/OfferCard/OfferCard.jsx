@@ -6,13 +6,12 @@ const OfferCard = ({ image, title, offerTitle, offer }) => {
       className="rounded-lg shadow-[-5px_0px_20px_5px_rgba(0,0,0,0.3)] relative h-[400px] p-8"
       style={{
         backgroundImage: `url(${image})`,
-        backgroundOrigin: "border-box",
         backgroundRepeat: "no-repeat",
         borderRadius: "15px",
       }}
     >
-      <div className="float-right bg-[#ffffff9e] hover:shadow-md h-full p-7 rounded-lg">
-        <pre className="text-3xl font-semibold float-right montserrat uppercase">
+      <div className="ml-20 p-5 bg-[#ffffff48] hover:bg-[#ffffff97] hover:shadow-lg h-full rounded-lg">
+        <pre className="text-3xl font-semibold montserrat uppercase">
           {title.replace(" ", "\n")}
         </pre>
 
