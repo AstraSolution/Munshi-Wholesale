@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { StarRating } from '../../Components/Shared/StarRating/StarRating';
 
-
 const My_Order_Page = () => {
   const [data, setData] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -13,6 +12,7 @@ const My_Order_Page = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const { register, handleSubmit, reset } = useForm();
   const [loading, setLoading] = useState(false);
+  const [reviewText, setReviewText] = useState('');
 
   useEffect(() => {
     fetch('/products.json')
@@ -27,18 +27,21 @@ const My_Order_Page = () => {
     setShowModal(true);
   };
 
+  const handleReviewChange = (e) => {
+    setReviewText(e.target.value);
+  };
 
   const onSubmit = async (formData) => {
-    setLoading(true); 
+    setLoading(true);
     try {
       const reviewInformation = {
         title: selectedProduct?.title,
         review: formData.review,
         rating: rating
       }
-      
+
       console.log(reviewInformation);
-    
+
 
       // Close the modal
       setShowModal(false);
@@ -52,7 +55,7 @@ const My_Order_Page = () => {
     }
   };
 
-
+  const isReviewValid = reviewText?.length >= 20;
 
   return (
     <motion.div
@@ -98,15 +101,15 @@ const My_Order_Page = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.8 }}
-                className='py-2 px-1 md:w-44'
+                className='py-2 px-1 md:w-60 '
               >
                 <select
                   className='w-full px-4 py-1 md:py-1.5 text-white border rounded-lg bg-gray-800 focus:outline-none focus:border-blue-500 font-oswald'
                 >
                   <option value='all'>All</option>
-                  <option value='burger'>Burger</option>
-                  <option value='snack'>Snack</option>
-                  <option className='pb-2' value='beverage'>Beverage</option>
+                  <option value='pending'>Pending</option>
+                  <option value='canceled'>Canceled</option>
+                  <option className='pb-2' value='done'>Done</option>
                 </select>
               </motion.div>
             </div>
@@ -145,13 +148,8 @@ const My_Order_Page = () => {
                     <td className="border border-gray-400 p-2 text-sm md:text-md text-center">Pending</td>
                     <td onClick={() => handleReviewClick(product)} className="border cursor-pointer border-gray-400 p-2 text-sm md:text-md text-center">Review</td>
                     <td className="flex items-center justify-center gap-3 md:py-6 py-4 border border-gray-400 p-2">
-                      <Link >
-                        <span className="p-2 w-fit text-white cursor-pointer text-sm rounded-md">
-                          Cancel
-                        </span>
-                      </Link>
-                      <span className="md:p-2 p-3 cursor-pointer w-fit text-white text-sm rounded-md">
-                        Delete
+                      <span className="p-2 w-fit text-white cursor-pointer text-sm rounded-md">
+                        Cancel
                       </span>
                     </td>
                   </motion.tr>
@@ -173,7 +171,6 @@ const My_Order_Page = () => {
                   Rating
                 </label>
                 <div className='text-center text-2xl '>
-                  {/* <Star_Rating rating={rating} onChange={setRating} /> */}
                   <StarRating rating={rating} onChange={setRating}></StarRating>
                 </div>
               </div>
@@ -187,12 +184,20 @@ const My_Order_Page = () => {
                   id="review"
                   placeholder="Review"
                   {...register("review", { required: true })}
+                  value={reviewText}
+                  onChange={handleReviewChange}
+
                 />
+              </div>
+              <div>
+                {
+                  isReviewValid ? "" : "Minimum 20 Words Review"
+                }
               </div>
 
               <div className='flex items-center gap-3 text-right mt-10'>
                 <button onClick={() => setShowModal(false)} className="rounded-full bg-gray-900 hover:shadow-lg font-semibold text-white px-6 py-2"> Close </button>
-                <button type="submit" className="rounded-full bg-gray-900 hover:shadow-lg font-semibold text-white px-6 py-2">
+                <button type="submit" disabled={!isReviewValid} className={`rounded-full bg-gray-900 hover:shadow-lg font-semibold text-white px-6 py-2 ${!isReviewValid ? 'opacity-50 cursor-not-allowed' : ''}`}>
                   {loading ? "Loading..." : "Confirm"}
                 </button>
               </div>

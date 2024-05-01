@@ -12,7 +12,6 @@ import Cart from "../pages/cart/Cart";
 import Checkout from "../pages/checkout/Checkout";
 import AboutUs from "../pages/aboutUs/AboutUs";
 import FAQ from "../pages/faq/FAQ";
-import Profile_Update_Page from "../pages/user_dashboard/Profile_Update_Page";
 import Wish_List from "../pages/wishlist/Wish_List";
 import DashboardHome from "../pages/admindashboard/DashboardHome";
 import AllOrders from "../pages/admindashboard/AllOrders";
@@ -75,10 +74,7 @@ const router = createBrowserRouter([
         path: "/dashboard/profile",
         element: <Profile_Page></Profile_Page>
       },
-      {
-        path: "/dashboard/profile_update",
-        element: <Profile_Update_Page></Profile_Update_Page>
-      },
+     
       {
         path: "/dashboard/allOrders",
         element: <AllOrders></AllOrders>
