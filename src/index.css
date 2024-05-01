@@ -19,7 +19,9 @@
   h1 {
     @apply text-xl font-medium capitalize;
   }
+  
 }
+
 
 /* .link {
   @apply p-2.5 flex rounded-md gap-4 items-center md:cursor-pointer cursor-default duration-700 font-medium;
