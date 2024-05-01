@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { FaRegHeart } from "react-icons/fa";
 
@@ -8,6 +7,12 @@ export default function Navbar() {
       <ul className=" flex justify-center gap-5 py-4">
         <li>
           <Link to={"/"}>Home</Link>
+        </li>
+        <li>
+          <Link to={"/shop"}>Shop</Link>
+        </li>
+        <li>
+          <Link to={"/details"}>Details</Link>
         </li>
         <li>
           <Link to={"/login"}>Login</Link>
