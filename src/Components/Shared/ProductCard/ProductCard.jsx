@@ -4,7 +4,8 @@ const ProductCard = () => {
   return (
     <div>
       <div
-        className="rounded-lg shadow-[-5px_0px_20px_5px_rgba(0,0,0,0.3)] relative h-[400px] group"
+        className="rounded-lg shadow-sm relative h-[400px] group"
+        // shadow-[-5px_0px_20px_5px_rgba(0,0,0,0.3)]
         style={{
           backgroundImage: "url('https://i.ibb.co/9yKTfmn/shop02-1-1.jpg')",
           backgroundPosition: "center",
@@ -23,7 +24,7 @@ const ProductCard = () => {
         </div>
       </div>
       <div className="mt-5">
-        <h2 className="text-xl montserrat">Woodwork Vacuum Grinding</h2>
+        <h2 className="text-2xl montserrat">Woodwork Vacuum Grinding</h2>
         <p className="text-lg my-3 text-black montserrat">
           <FaStar className="inline mr-2" />
           <FaStar className="inline mr-2" />

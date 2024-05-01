@@ -1,6 +1,5 @@
 import Offer from "../../Components/HomeComonents/Offer/Offer";
 import ProductCard from "../../Components/Shared/ProductCard/ProductCard";
-import SectionBanner from "../../Components/Shared/SectionBanner/SectionBanner";
 
 function Home() {
   return (
@@ -16,8 +15,6 @@ function Home() {
         <ProductCard></ProductCard>
         <ProductCard></ProductCard>
       </div>
-
-      <SectionBanner></SectionBanner>
     </div>
   );
 }
