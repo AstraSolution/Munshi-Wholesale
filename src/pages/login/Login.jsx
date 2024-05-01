@@ -25,12 +25,12 @@ export default function Login() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex justify-center items-center min-h-screen bg-[url('https://i.ibb.co/M56D6xg/intro-section-pattern.png')]">
       <motion.div
         initial="hidden"
         animate="visible"
         variants={variants}
-        className="m-5 p-8 space-y-5 border rounded-md shadow-md w-[400px] max-w-[400px]"
+        className="bg-white m-5 p-8 space-y-5 border rounded-md shadow-md w-[400px] max-w-[400px]"
       >
         <h2 className="text-center text-3xl font-semibold pb-3 ">Login</h2>
 
@@ -74,9 +74,9 @@ export default function Login() {
                   message: "Invalid email address",
                 },
               })}
-              className="shadow-sm block w-full bg-transparent  focus:outline-none focus:shadow-outline border border-[#ffc20a4d] rounded-md py-3 px-4 appearance-none leading-normal"
+              className="shadow-sm block w-full bg-transparent  focus:outline-none focus:shadow-outline border border-[#ddd] rounded-md py-3 px-4 appearance-none leading-normal"
             />
-            <label className="absolute top-3 left-0 text-[#ffc10a] pointer-events-none transition duration-200 ease-in-outbg-white px-4">
+            <label className="absolute top-3 left-0 text-[#000] pointer-events-none transition duration-200 ease-in-outbg-white px-4">
               Email
             </label>
 
@@ -100,9 +100,9 @@ export default function Login() {
                   message: "Password must be at least 6 characters",
                 },
               })}
-              className="shadow-sm block w-full bg-transparent  focus:outline-none focus:shadow-outline border border-[#ffc20a4d] rounded-md py-3 px-4 appearance-none leading-normal"
+              className="shadow-sm block w-full bg-transparent  focus:outline-none focus:shadow-outline border border-[#ddd] rounded-md py-3 px-4 appearance-none leading-normal"
             />
-            <label className="absolute top-3 left-0 text-[#ffc10a] pointer-events-none transition duration-200 ease-in-outbg-white px-4">
+            <label className="absolute top-3 left-0 text-[#000] pointer-events-none transition duration-200 ease-in-outbg-white px-4">
               Password
             </label>
 
@@ -142,7 +142,7 @@ export default function Login() {
             type="submit"
             className="bg-[#FFBA00] w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
-            Register
+            Login
           </motion.button>
 
           {/* redirect login page  */}
