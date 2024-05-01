@@ -2,20 +2,24 @@ import PropTypes from "prop-types";
 
 const SectionBanner = ({ title }) => {
   return (
-    <div className="mt-28">
+    <div className="mt-10">
       <div
-        className="h-[220px] py-14 pl-20 text-white"
+        className="h-[120px] lg:h-[220px] py-5 lg:py-14 pl-20 text-white"
         style={{
           backgroundImage:
-            "linear-gradient(to bottom, #000000c1, #000000ad), url('https://i.ibb.co/s5Rz4gL/bread-4bfab4cb-9c4a-4da3-8220-e5ce979da114.jpg')",
+            "linear-gradient(to right, #000000c9, #000000a1), url('https://i.ibb.co/s5Rz4gL/bread-4bfab4cb-9c4a-4da3-8220-e5ce979da114.jpg')",
           backgroundPosition: "top center",
           backgroundAttachment: "fixed",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
         }}
       >
-        <h2 className="text-5xl font-semibold mb-4">{title}</h2>
-        <h3 className="text-xl">All / Corded Electric Circular Saw</h3>
+        <h2 className="text-lg md:text-3xl lg:text-5xl font-semibold mb-4">
+          {title}
+        </h2>
+        <h3 className="text-base lg:text-xl">
+          All / Corded Electric Circular Saw
+        </h3>
       </div>
     </div>
   );

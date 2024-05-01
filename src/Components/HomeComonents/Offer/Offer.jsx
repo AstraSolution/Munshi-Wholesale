@@ -3,10 +3,10 @@ import { motion } from "framer-motion";
 
 const Offer = () => {
   return (
-    <div>
+    <div className="container mx-auto my-10 px-5 lg:px-10">
       {/* Offer */}
       <div>
-        <div className="flex gap-10">
+        <div className="flex flex-col md:flex-row gap-5 lg:gap-10">
           {/* Offer 01 */}
           <motion.div
             whileHover={{ scale: 1.075 }}
@@ -14,6 +14,7 @@ const Offer = () => {
             style={{
               backgroundImage:
                 "url('https://i.ibb.co/ScC8xjT/grid1-f919fb61-85d8-4d0d-b2bc-bf6f5e6b1285-1.png')",
+              backgroundPosition: "center",
               borderRadius: "15px",
             }}
           >
@@ -38,6 +39,7 @@ const Offer = () => {
             style={{
               backgroundImage:
                 "url('https://i.ibb.co/wKzNBnB/grid2-31570f62-71de-452c-b475-a2ee295133a8-1.png')",
+              backgroundPosition: "center",
               borderRadius: "15px",
             }}
           >
@@ -60,7 +62,7 @@ const Offer = () => {
       {/* Offer */}
 
       {/* Offer Card */}
-      <div className="grid grid-cols-4 gap-5 mt-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-10">
         {/* Card-01 */}
         <OfferCard
           image={"https://i.ibb.co/PzCgYVW/1.png"}

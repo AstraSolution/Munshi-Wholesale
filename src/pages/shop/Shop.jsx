@@ -82,7 +82,7 @@ export default function Shop() {
     <div>
       <SectionBanner title={"Collection"}></SectionBanner>
 
-      <div className="flex justify-between items-center px-10 my-10">
+      <div className="flex justify-between items-center px-5 lg:px-10 my-10">
         <div className="relative max-w-sm">
           <div className="flex items-center">
             <input
@@ -100,9 +100,9 @@ export default function Shop() {
         </div>
 
         <div className="flex items-center gap-3">
-          <h3 className="text-xl">Sort by</h3>
-          <div className="flex gap-8 py-2 px-10 bg-yellow-300 rounded-full">
-            <p className="text-xl">Featured</p>
+          <h3 className="text-lg">Sort by</h3>
+          <div className="flex gap-8 py-2 px-5 bg-yellow-300 rounded-full">
+            <p className="text-lg">Featured</p>
             <p>
               <FaSortDown className="block" />
             </p>
@@ -110,12 +110,12 @@ export default function Shop() {
         </div>
       </div>
 
-      <div className="">
-        <div className="flex px-10">
+      <div>
+        <div className="flex gap-5 px-5 lg:px-10">
           <div className="w-1/4 flex flex-col">
             {/* category section start */}
-            <div className="py-3 px-4">
-              <h2 className="text-xl font-semibold text-gray-800 pb-2 border-b border-gray-200">
+            <div className="py-3 px-0 md:px-4">
+              <h2 className="text-xs md:text-base lg:text-xl font-semibold text-gray-800 pb-2 border-b border-gray-200">
                 Filter by category
               </h2>
 
@@ -130,7 +130,7 @@ export default function Shop() {
                       type="checkbox"
                       className="form-checkbox h-5 w-5"
                     />
-                    <span className="ml-2 text-gray-700">
+                    <span className="text-xs md:text-base ml-1 md:ml-2 text-gray-700">
                       {category?.categoryName}
                     </span>
                   </label>
@@ -147,8 +147,8 @@ export default function Shop() {
             </div>
             {/* category section end */}
 
-            <div className="py-3 px-4">
-              <h2 className="text-xl font-semibold text-gray-800 pb-2 border-b border-gray-200">
+            <div className="py-3 px-0 md:px-4">
+              <h2 className="text-xs md:text-base lg:text-xl font-semibold text-gray-800 pb-2 border-b border-gray-200">
                 Filter by Brands
               </h2>
               <div className="flex flex-col gap-3 my-3">
@@ -159,7 +159,7 @@ export default function Shop() {
                       type="checkbox"
                       className="form-checkbox h-5 w-5"
                     />
-                    <span className="ml-2 text-gray-700">
+                    <span className="text-xs md:text-base ml-1 md:ml-2 text-gray-700">
                       {brand?.brandName}
                     </span>
                   </label>
@@ -177,8 +177,8 @@ export default function Shop() {
             {/* brands section end */}
 
             {/* color section start */}
-            <div className="py-3 px-4">
-              <h2 className="text-xl font-semibold text-gray-800 pb-2 border-b border-gray-200">
+            <div className="py-3 px-0 md:px-4">
+              <h2 className="text-xs md:text-base lg:text-xl font-semibold text-gray-800 pb-2 border-b border-gray-200">
                 Filter by Colors
               </h2>
 
@@ -189,9 +189,11 @@ export default function Shop() {
                       id={color?.name}
                       type="checkbox"
                       className="form-checkbox h-5 w-5"
-                      onChange={() => handleColorChecked(color?.name)}
+                      // onChange={() => handleColorChecked(color?.name)}
                     />
-                    <span className="ml-2 text-gray-700">{color?.name}</span>
+                    <span className="text-xs md:text-base ml-1 md:ml-2 text-gray-700">
+                      {color?.name}
+                    </span>
                   </label>
                 ))}
               </div>
@@ -199,13 +201,13 @@ export default function Shop() {
             {/* color section end */}
 
             {/* price section start */}
-            <div className="py-3 px-4">
-              <h2 className="text-xl font-semibold text-gray-800 pb-5 border-b border-gray-200">
+            <div className="py-3 px-0 md:px-4">
+              <h2 className="text-xs md:text-base lg:text-xl font-semibold text-gray-800 pb-2 border-b border-gray-200">
                 Set Price Range
               </h2>
 
-              <div className="space-y-1 my-3">
-                <div className="flex items-center gap-1">
+              <div className="space-y-1 my-2">
+                <div className="flex flex-col md:flex-row items-center gap-1">
                   <input
                     className="w-full rounded-md border border-gray-300 py-2 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-gray-500"
                     placeholder="Min"
@@ -221,19 +223,16 @@ export default function Shop() {
                   />
                 </div>
               </div>
-            </div>
-
-            {/* price section end */}
-            <div className="px-4">
               <button className="w-full text-white bg-gray-800 hover:bg-gray-900 focus:outline-none font-medium rounded-md py-2 px-4">
                 Apply
               </button>
             </div>
+            {/* price section end */}
           </div>
 
           {/* Side bar end */}
           <div className="w-3/4">
-            <div className="grid grid-cols-3 gap-10 my-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-10 my-10">
               {/* Product-Cards */}
               <ProductCard></ProductCard>
               <ProductCard></ProductCard>
