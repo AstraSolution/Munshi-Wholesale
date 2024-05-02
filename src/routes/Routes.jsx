@@ -17,6 +17,7 @@ import Wish_List from "../pages/wishlist/Wish_List";
 import DashboardHome from "../pages/admindashboard/DashboardHome";
 import AllOrders from "../pages/admindashboard/AllOrders";
 import AllUsers from "../pages/admindashboard/AllUsers";
+import AddProducts from "../pages/admindashboard/AddProducts";
 
 
 const router = createBrowserRouter([
@@ -80,12 +81,16 @@ const router = createBrowserRouter([
         element: <Profile_Update_Page></Profile_Update_Page>
       },
       {
-        path: "/dashboard/allOrders",
+        path: "/dashboard/all-Orders",
         element: <AllOrders></AllOrders>
       },
       {
-        path: "/dashboard/allUsers",
+        path: "/dashboard/all-Users",
         element: <AllUsers></AllUsers>
+      },
+      {
+        path: "/dashboard/add-Products",
+        element: <AddProducts></AddProducts>
       },
      
       {

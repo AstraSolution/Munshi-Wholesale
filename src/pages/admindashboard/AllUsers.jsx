@@ -93,7 +93,7 @@ const AllUsers = () => {
                     <td className="border border-gray-400 p-2">
                       {/* Assuming you have profile images for users */}
                       <img
-                        className="w-20 md:h-16 rounded-lg mx-auto"
+                        className="w-20 h-full md:h-16 rounded-full mx-auto"
                         src={`https://via.placeholder.com/150?text=${user.username}`}
                         alt={`Profile of ${user?.username}`}
                       />
