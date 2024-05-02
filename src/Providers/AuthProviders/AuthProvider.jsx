@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
@@ -7,13 +8,8 @@ import {
   signInWithPopup,
   signOut,
   updateProfile,
-  sendPasswordResetEmail,
-  confirmPasswordReset,
-  sendEmailVerification,
-  reload,
-  FacebookAuthProvider,
 } from "firebase/auth";
-import { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import app from "../../Firebase/firebase.config";
 
 export const AuthContext = createContext(null);
@@ -23,15 +19,9 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const createUser = async (email, password) => {
+  const createUser = (email, password) => {
     setLoading(true);
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    await sendEmailVerification(auth.currentUser);
-    return userCredential;
+    return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const signInUser = (email, password) => {
@@ -39,44 +29,42 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const updateUserProfile = (name, photo) => {
-    return updateProfile(auth.currentUser, {
-      displayName: name,
-      photoURL: photo,
-    });
-  };
-
-  const passwordResetEmail = (email) => {
-    return sendPasswordResetEmail(auth, email);
-  };
-
-  const confirmResetPassword = (code, newPassword) => {
-    return confirmPasswordReset(auth, code, newPassword);
-  };
-
-  const emailVerification = () => {
-    return sendEmailVerification(auth.currentUser);
-  };
-
-  const reloadUser = () => {
-    return reload(auth.currentUser);
-  };
-
   const googleLogin = () => {
     const provider = new GoogleAuthProvider();
     return signInWithPopup(auth, provider);
   };
 
-  const facebookLogin = () => {
-    const provider = new FacebookAuthProvider();
-    return signInWithPopup(auth, provider);
-  };
+  function updateUserProfile(name, photo) {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photo,
+    });
+  }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      localStorage.setItem("email", currentUser?.email);
-      console.log("current user --> ", currentUser);
+      const userEmail = currentUser?.email || user?.email;
+      const loggedUser = { email: userEmail };
+      setUser(currentUser);
       setLoading(false);
+
+      // if (currentUser) {
+      //   axios
+      //     .post("https://localhost:5000/api/v1/access-token", loggedUser, {
+      //       withCredentials: true,
+      //     })
+      //     .then((res) => {
+      //       console.log(res.data);
+      //     });
+      // } else {
+      //   axios
+      //     .post("http://localhost:5000/api/v1/auth/logOut", loggedUser, {
+      //       withCredentials: true,
+      //     })
+      //     .then((res) => {
+      //       console.log(res.data);
+      //     });
+      // }
     });
     return () => {
       unsubscribe();
@@ -84,7 +72,6 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const logOut = () => {
-    localStorage.removeItem("email");
     return signOut(auth);
   };
 
@@ -95,14 +82,8 @@ const AuthProvider = ({ children }) => {
     signInUser,
     updateUserProfile,
     googleLogin,
-    facebookLogin,
     logOut,
-    passwordResetEmail,
-    confirmResetPassword,
-    emailVerification,
-    reloadUser,
   };
-
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );

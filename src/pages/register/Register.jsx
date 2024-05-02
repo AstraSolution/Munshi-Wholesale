@@ -5,8 +5,11 @@ import { motion } from "framer-motion";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import FACEBOOK_ICON from "../../assets/icons/FacebookIcon.svg";
 import GOOGLE_ICON from "../../assets/icons/GoogleIcon.png";
+import useAuth from "../../Hooks/useAuth";
+import axios from "axios";
 
 export default function Register() {
+  const { createUser, updateUserProfiole } = useAuth();
   const [showPassword, setShowPassword] = useState(true);
   const {
     register,
@@ -16,7 +19,27 @@ export default function Register() {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
-  const onSubmit = () => {};
+  // const onSubmit = () => {};
+
+  const onSubmit = async (data) => {
+    const fullName = data.fullName;
+    const email = data.email;
+    const password = data.password;
+
+    const newUser = { fullName, email, password, isFirstLogin: true };
+
+    createUser(email, password).then(async (res) => {
+      const userName = await updateUserProfiole(fullName);
+      if (res.user) {
+        const res = await axios.post(
+          "http://localhost:5000/api/v1/users",
+          newUser
+        );
+        alert("Register Successful");
+        navigate("/");
+      }
+    });
+  };
 
   // variants for framer motion
   const variants = {
