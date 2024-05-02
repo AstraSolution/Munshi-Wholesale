@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const SectionBanner = ({ title }) => {
+const SectionBanner = ({ title, subtTitle }) => {
   return (
     <div className="mt-10">
       <div
@@ -17,9 +17,7 @@ const SectionBanner = ({ title }) => {
         <h2 className="text-lg md:text-3xl lg:text-5xl font-semibold mb-4">
           {title}
         </h2>
-        <h3 className="text-base lg:text-xl">
-          All / Corded Electric Circular Saw
-        </h3>
+        <h3 className="text-base lg:text-xl">{subtTitle}</h3>
       </div>
     </div>
   );
@@ -29,4 +27,5 @@ export default SectionBanner;
 
 SectionBanner.propTypes = {
   title: PropTypes.string,
+  subtTitle: PropTypes.string,
 };
