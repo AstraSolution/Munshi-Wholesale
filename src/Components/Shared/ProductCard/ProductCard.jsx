@@ -1,6 +1,10 @@
 import { FaStar, FaShoppingCart, FaHeart } from "react-icons/fa";
 
 const ProductCard = () => {
+
+
+
+  
   return (
     <div>
       <div
