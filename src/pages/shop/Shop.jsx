@@ -2,10 +2,22 @@ import { useState } from "react";
 import ProductCard from "../../Components/Shared/ProductCard/ProductCard";
 import SectionBanner from "../../Components/Shared/SectionBanner/SectionBanner";
 import { FaSortDown } from "react-icons/fa";
+import useAxiosPublic from "../../Hooks/useAxios";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Shop() {
   const [showAllCategories, setShowAllCategories] = useState(false);
   const [showAllBrands, setShowAllBrands] = useState(false);
+
+  const axiosPublic = useAxiosPublic();
+
+  const { data: products = [] } = useQuery({
+    queryKey: ["products"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/products`);
+      return res.data;
+    },
+  });
 
   const categories = [
     {
@@ -80,7 +92,10 @@ export default function Shop() {
 
   return (
     <div>
-      <SectionBanner title={"Collection"}></SectionBanner>
+      <SectionBanner
+        title={"Collection"}
+        subtTitle={"SHop / Products"}
+      ></SectionBanner>
 
       <div className="flex justify-between items-center px-5 lg:px-10 my-10">
         <div className="relative max-w-sm">
@@ -234,15 +249,12 @@ export default function Shop() {
           <div className="w-3/4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-10 my-10">
               {/* Product-Cards */}
-              <ProductCard></ProductCard>
-              <ProductCard></ProductCard>
-              <ProductCard></ProductCard>
-              <ProductCard></ProductCard>
-              <ProductCard></ProductCard>
-              <ProductCard></ProductCard>
-              <ProductCard></ProductCard>
-              <ProductCard></ProductCard>
-              <ProductCard></ProductCard>
+              {products?.map((product) => (
+                <ProductCard
+                  key={product?._id}
+                  currentProduct={product}
+                ></ProductCard>
+              ))}
             </div>
           </div>
         </div>
