@@ -2,7 +2,7 @@ import { useState } from "react";
 import ProductCard from "../../Components/Shared/ProductCard/ProductCard";
 import SectionBanner from "../../Components/Shared/SectionBanner/SectionBanner";
 import { FaSortDown } from "react-icons/fa";
-import useAxiosPublic from "../../Hooks/useAxios";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 
 export default function Shop() {

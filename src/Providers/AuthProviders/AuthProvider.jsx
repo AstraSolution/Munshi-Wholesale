@@ -34,10 +34,10 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, provider);
   };
 
-  function updateUserProfile(name, photo) {
+  function updateUserProfile(name) {
     return updateProfile(auth.currentUser, {
       displayName: name,
-      photoURL: photo,
+      // photoURL: photo,
     });
   }
 
