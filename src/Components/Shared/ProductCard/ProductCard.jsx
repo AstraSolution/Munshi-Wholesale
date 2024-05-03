@@ -9,22 +9,22 @@ const ProductCard = ({ currentProduct }) => {
   const navigate = useNavigate();
 
   // console.log(isWished);
-  console.log(currentProduct);
+  // console.log(currentProduct);
 
   return (
     <div>
-      <div className="rounded-lg shadow-md h-[200px] lg:h-[350px]">
+      <div className="relative flex items-center rounded-lg shadow-md h-[250px] lg:h-[350px] group border-2 border-gray-200">
         <div
-          className="relative flex items-center isHover"
+          className="mx-auto"
           onClick={() => navigate(`/products/${_id}`, { id: `${_id}` })}
         >
           <img
             src={image[0]}
             alt={title}
-            className="rounded-lg p-3 border-2 border-black"
+            className="rounded-lg p-3 max-h-[250px] lg:max-h-[350px]"
           />
         </div>
-        <div className="hidden w-full isHover-hover:flex justify-center gap-10 absolute bottom-0 z-10">
+        <div className="w-full hidden group-hover:flex justify-center gap-10 absolute bottom-5 z-10">
           <button>
             <FaShoppingCart className="text-2xl text-black" />
           </button>
@@ -36,7 +36,7 @@ const ProductCard = ({ currentProduct }) => {
         </div>
       </div>
       <div className="mt-5">
-        <h2 className="text-xl lg:text-2xl montserrat">{title}</h2>
+        <h2 className="text-xl montserrat">{title}</h2>
         <p className="text-base lg:text-lg my-3 text-black montserrat">
           <FaStar className="inline mr-2" />
           <FaStar className="inline mr-2" />
