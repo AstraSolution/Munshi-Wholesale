@@ -9,7 +9,7 @@ const ProductCard = ({ currentProduct }) => {
   const navigate = useNavigate();
 
   // console.log(isWished);
-  console.log(currentProduct);
+  // console.log(currentProduct);
 
   return (
     <div>

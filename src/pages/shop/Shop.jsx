@@ -4,6 +4,7 @@ import SectionBanner from "../../Components/Shared/SectionBanner/SectionBanner";
 import { FaSortDown } from "react-icons/fa";
 import useAllCategory from "../../Hooks/useAllCategory";
 import useAllProduct from "../../Hooks/useAllProduct";
+import useAllBrand from "../../Hooks/useAllBrand";
 
 export default function Shop() {
   const [showAllCategories, setShowAllCategories] = useState(false);
@@ -11,29 +12,7 @@ export default function Shop() {
 
   const categories = useAllCategory();
   const products = useAllProduct();
-
-  const brands = [
-    {
-      _id: 1,
-      brandName: "Brand-1",
-    },
-    {
-      _id: 2,
-      brandName: "Brand-2",
-    },
-    {
-      _id: 3,
-      brandName: "Brand-3",
-    },
-    {
-      _id: 4,
-      brandName: "Brand-4",
-    },
-    {
-      _id: 5,
-      brandName: "Brand-5",
-    },
-  ];
+  const brands = useAllBrand();
 
   const colors = [
     {
