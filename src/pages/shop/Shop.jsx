@@ -2,45 +2,15 @@ import { useState } from "react";
 import ProductCard from "../../Components/Shared/ProductCard/ProductCard";
 import SectionBanner from "../../Components/Shared/SectionBanner/SectionBanner";
 import { FaSortDown } from "react-icons/fa";
-import useAxiosPublic from "../../Hooks/useAxios";
-import { useQuery } from "@tanstack/react-query";
+import useAllCategory from "../../Hooks/useAllCategory";
+import useAllProduct from "../../Hooks/useAllProduct";
 
 export default function Shop() {
   const [showAllCategories, setShowAllCategories] = useState(false);
   const [showAllBrands, setShowAllBrands] = useState(false);
 
-  const axiosPublic = useAxiosPublic();
-
-  const { data: products = [] } = useQuery({
-    queryKey: ["products"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/products`);
-      return res.data;
-    },
-  });
-
-  const categories = [
-    {
-      _id: 1,
-      categoryName: "category-1",
-    },
-    {
-      _id: 2,
-      categoryName: "category-2",
-    },
-    {
-      _id: 3,
-      categoryName: "category-3",
-    },
-    {
-      _id: 4,
-      categoryName: "category-4",
-    },
-    {
-      _id: 5,
-      categoryName: "category-5",
-    },
-  ];
+  const categories = useAllCategory();
+  const products = useAllProduct();
 
   const brands = [
     {
@@ -80,12 +50,12 @@ export default function Shop() {
     },
   ];
 
-  const defaultCategoriesCount = 4;
+  const defaultCategoriesCount = 5;
   const visibleCategories = showAllCategories
     ? categories
     : categories.slice(0, defaultCategoriesCount);
 
-  const defaultBrandsCount = 4;
+  const defaultBrandsCount = 5;
   const visibleBrands = showAllBrands
     ? brands
     : brands.slice(0, defaultBrandsCount);
@@ -94,10 +64,10 @@ export default function Shop() {
     <div>
       <SectionBanner
         title={"Collection"}
-        subtTitle={"SHop / Products"}
+        subTitle={"Shop / Products"}
       ></SectionBanner>
 
-      <div className="flex justify-between items-center px-5 lg:px-10 my-10">
+      <div className="flex flex-col gap-10 md:gap-0 md:flex-row justify-between items-center px-5 lg:px-10 my-10">
         <div className="relative max-w-sm">
           <div className="flex items-center">
             <input
@@ -107,7 +77,7 @@ export default function Shop() {
             />
             <button
               type="submit"
-              className="bg-black lg:bg-yellow-300 text-white lg:text-black py-2 px-3 rounded-r-lg text-lg font-semibold border-[1px] border-yellow-400"
+              className="bg-yellow-300 text-black py-2 px-3 rounded-r-lg text-lg font-semibold border-[1px] border-yellow-400"
             >
               Search
             </button>
@@ -127,7 +97,7 @@ export default function Shop() {
 
       <div>
         <div className="flex gap-5 px-5 lg:px-10">
-          <div className="w-1/4 flex flex-col">
+          <div className="w-1/3 md:w-1/4 flex flex-col">
             {/* category section start */}
             <div className="py-3 px-0 md:px-4">
               <h2 className="text-xs md:text-base lg:text-xl font-semibold text-gray-800 pb-2 border-b border-gray-200">
@@ -143,9 +113,9 @@ export default function Shop() {
                     <input
                       id={category?.categoryName}
                       type="checkbox"
-                      className="form-checkbox h-5 w-5"
+                      className="form-checkbox min-h-5 min-w-5"
                     />
-                    <span className="text-xs md:text-base ml-1 md:ml-2 text-gray-700">
+                    <span className="text-xs lg:text-base ml-1 md:ml-2 text-gray-700">
                       {category?.categoryName}
                     </span>
                   </label>
@@ -246,7 +216,7 @@ export default function Shop() {
           </div>
 
           {/* Side bar end */}
-          <div className="w-3/4">
+          <div className="w-2/3 md:w-3/4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-10 my-10">
               {/* Product-Cards */}
               {products?.map((product) => (
