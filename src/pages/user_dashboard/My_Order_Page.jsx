@@ -89,7 +89,7 @@ const My_Order_Page = () => {
                 <input
                   type='text'
                   id='search'
-                  className='bg-gray-800 border text-gray-300 text-sm rounded-lg focus:outline-none focus:border-blue-500 block w-full py-2 px-2 dark:text-gray-300'
+                  className='bg-gray-800 border text-gray-300 border-gray-600 text-sm rounded-lg focus:outline-none focus:border-blue-500 block w-full py-2 px-2 dark:text-gray-300'
                   placeholder='Search...'
                 />
                 <button type='button' className='absolute inset-y-0 end-0 flex items-center pe-3'>
@@ -103,7 +103,7 @@ const My_Order_Page = () => {
                 className='py-2 px-1 md:w-60 '
               >
                 <select
-                  className='w-full px-4 py-1 md:py-1.5 text-gray-300 border rounded-lg bg-gray-800 focus:outline-none focus:border-blue-500 font-oswald'
+                  className='w-full px-4 py-1 md:py-1.5 text-gray-300 border-gray-600 border rounded-lg bg-gray-800 focus:outline-none focus:border-blue-500 font-oswald'
                 >
                   <option value='all'>All</option>
                   <option value='pending'>Pending</option>
@@ -122,13 +122,13 @@ const My_Order_Page = () => {
               className="w-full mt-2 "
             >
               <tr className='text-[#FF9D00]'>
-                <th className="border border-gray-400 text-sm md:text-md lg:text-lg py-3">N/A</th>
-                <th className="border border-gray-400 text-sm md:text-md lg:text-lg py-3">Title Name</th>
-                <th className="border border-gray-400 text-sm md:text-md lg:text-lg p-2">Product Image</th>
-                <th className="border border-gray-400 text-sm md:text-md lg:text-lg py-3">Category</th>
-                <th className="border border-gray-400 text-sm md:text-md lg:text-lg py-3">Status</th>
-                <th className="border border-gray-400 text-sm md:text-md lg:text-lg py-3">Review</th>
-                <th className="border border-gray-400 text-sm md:text-md lg:text-lg py-3">Action</th>
+                <th className="border border-gray-600 text-sm md:text-md lg:text-lg py-3">N/A</th>
+                <th className="border border-gray-600 text-sm md:text-md lg:text-lg py-3">Title Name</th>
+                <th className="border border-gray-600 text-sm md:text-md lg:text-lg p-2">Product Image</th>
+                <th className="border border-gray-600 text-sm md:text-md lg:text-lg py-3">Category</th>
+                <th className="border border-gray-600 text-sm md:text-md lg:text-lg py-3">Status</th>
+                <th className="border border-gray-600 text-sm md:text-md lg:text-lg py-3">Review</th>
+                <th className="border border-gray-600 text-sm md:text-md lg:text-lg py-3">Action</th>
               </tr>
               {
                 data?.map((product, i) => (
@@ -140,15 +140,15 @@ const My_Order_Page = () => {
                     // className={i % 2 === 0 ? 'bg-black' : 'bg-gray-800'}
 
                   >
-                    <td className="border border-gray-400 bg-gray-800  p-2 text-center">{i + 1}</td>
-                    <td className="border border-gray-400 bg-gray-800  md:p-2 p-1 text-sm">{product?.title?.slice(0, 30)}.....</td>
-                    <td className="border border-gray-400 bg-gray-800  p-2">
+                    <td className="border border-gray-600 bg-gray-800  p-2 text-center">{i + 1}</td>
+                    <td className="border border-gray-600 bg-gray-800  md:p-2 p-1 text-sm">{product?.title?.slice(0, 30)}.....</td>
+                    <td className="border border-gray-600 bg-gray-800  p-2">
                       <img className='w-20 md:h-16 rounded-lg mx-auto' src={product?.image[0]} alt="" />
                     </td>
-                    <td className="border border-gray-400 bg-gray-800  p-2 text-sm md:text-md text-center">{product?.category}</td>
-                    <td className="border border-gray-400 bg-gray-800  p-2 text-sm md:text-md text-center">Pending</td>
-                    <td onClick={() => handleReviewClick(product)} className="border cursor-pointer border-gray-400 bg-gray-800  p-2 text-sm md:text-md text-center">Review</td>
-                    <td className="flex items-center justify-center gap-3 md:py-6 py-4 border border-gray-400 bg-gray-800  p-2">
+                    <td className="border border-gray-600 bg-gray-800  p-2 text-sm md:text-md text-center">{product?.category}</td>
+                    <td className="border border-gray-600 bg-gray-800  p-2 text-sm md:text-md text-center">Pending</td>
+                    <td onClick={() => handleReviewClick(product)} className="border cursor-pointer border-gray-600 bg-gray-800  p-2 text-sm md:text-md text-center">Review</td>
+                    <td className="flex items-center justify-center gap-3 md:py-6 py-4 border border-gray-600 bg-gray-800  p-2">
                       <span className="p-2 w-fit  cursor-pointer text-sm rounded-md">
                         Cancel
                       </span>
