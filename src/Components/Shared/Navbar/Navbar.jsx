@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { FaRegHeart } from "react-icons/fa";
 
@@ -8,6 +7,9 @@ export default function Navbar() {
       <ul className=" flex justify-center flex-wrap gap-5 py-4">
         <li>
           <Link to={"/"}>Home</Link>
+        </li>
+        <li>
+          <Link to={"/shop"}>Shop</Link>
         </li>
         <li>
           <Link to={"/login"}>Login</Link>
@@ -31,15 +33,15 @@ export default function Navbar() {
           <Link to={"/dashboard"}>Dashboard</Link>
         </li>
         <li>
-
           <Link to={"/wishlist"}>
             <div className="flex  items-center ">
               <div className="relative ">
                 <div className="  absolute left-4 -top-2 ">
-                  <p className="flex h-2 w-2 items-center justify-center bg-[#FFA500] p-3 rounded-full  text-sm text-white">73</p>
+                  <p className="flex h-2 w-2 items-center justify-center bg-[#FFA500] p-3 rounded-full  text-sm text-white">
+                    73
+                  </p>
                 </div>
                 <FaRegHeart className="text-2xl " />
-
               </div>
             </div>
           </Link>

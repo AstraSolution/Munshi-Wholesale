@@ -6,10 +6,12 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import FACEBOOK_ICON from "../../assets/icons/FacebookIcon.svg";
 import GOOGLE_ICON from "../../assets/icons/GoogleIcon.png";
 import useAuth from "../../Hooks/useAuth";
-import axios from "axios";
+import Swal from "sweetalert2";
+import UseAxios from "../../Hooks/useAxios";
 
 export default function Register() {
-  const { createUser, updateUserProfiole } = useAuth();
+  const axiosPublis = UseAxios();
+  const { createUser, updateUserProfiole, googleLogin } = useAuth();
   const [showPassword, setShowPassword] = useState(true);
   const {
     register,
@@ -28,17 +30,45 @@ export default function Register() {
 
     const newUser = { fullName, email, password, isFirstLogin: true };
 
-    createUser(email, password).then(async (res) => {
-      const userName = await updateUserProfiole(fullName);
-      if (res.user) {
-        const res = await axios.post(
-          "http://localhost:5000/api/v1/users",
-          newUser
-        );
-        alert("Register Successful");
+    createUser(email, password)
+      .then(async (res) => {
+        await updateUserProfiole(fullName);
+        if (res.user) {
+          await axiosPublis.post("/api/v1/users", newUser);
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Register Successful",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/");
+        }
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
+  // handle google login
+  const hadleGoogleLogin = () => {
+    googleLogin()
+      .then((res) => {
+        const loggedUser = res.user;
+        console.log(loggedUser);
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "Login Successful",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         navigate("/");
-      }
-    });
+      })
+      .catch((error) => {
+        setErrorMessage(error.message);
+        console.log(error.message);
+      });
   };
 
   // variants for framer motion
@@ -60,6 +90,7 @@ export default function Register() {
         {/* social login buttons  */}
         <div className="grid grid-cols-2 gap-3">
           <motion.button
+            onClick={hadleGoogleLogin}
             whileHover={{ scale: 1.06 }}
             className="flex justify-center items-center gap-2 shadow-sm border py-3 w-full rounded-lg"
           >
