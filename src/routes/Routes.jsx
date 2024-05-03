@@ -17,6 +17,7 @@ import Wish_List from "../pages/wishlist/Wish_List";
 import DashboardHome from "../pages/admindashboard/DashboardHome";
 import AllOrders from "../pages/admindashboard/AllOrders";
 import AllUsers from "../pages/admindashboard/AllUsers";
+import AddProducts from "../pages/admindashboard/AddProducts";
 
 const router = createBrowserRouter([
   {
@@ -41,7 +42,7 @@ const router = createBrowserRouter([
         element: <Shop />,
       },
       {
-        path: "/details",
+        path: "/products/:id",
         element: <ProductDetails />,
       },
       {
@@ -80,14 +81,18 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/dashboard/allOrders",
-        element: <AllOrders></AllOrders>,
+        path: "/dashboard/all-Orders",
+        element: <AllOrders></AllOrders>
       },
       {
-        path: "/dashboard/allUsers",
-        element: <AllUsers></AllUsers>,
+        path: "/dashboard/all-Users",
+        element: <AllUsers></AllUsers>
       },
-
+      {
+        path: "/dashboard/add-Products",
+        element: <AddProducts></AddProducts>
+      },
+     
       {
         path: "/dashboard/my_order",
         element: <My_Order_Page></My_Order_Page>,

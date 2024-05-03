@@ -61,47 +61,47 @@ const AllUsers = () => {
             <table className="w-full mt-2">
               <thead>
                 <tr className="text-[#FF9D00]">
-                  <th className="border border-gray-400 text-sm md:text-md lg:text-lg py-3">
+                  <th className="border bg-gray-800 border-gray-400  text-center text-sm md:text-md lg:text-lg py-3">
                     N/A
                   </th>
-                  <th className="border border-gray-400 text-sm md:text-md lg:text-lg py-3">
+                  <th className="border bg-gray-800 border-gray-400  text-center text-sm md:text-md lg:text-lg py-3">
                     Username
                   </th>
-                  <th className="border border-gray-400 text-sm md:text-md lg:text-lg p-2">
+                  <th className="border bg-gray-800 border-gray-400 text-center text-sm md:text-md lg:text-lg p-2">
                     Profile Image
                   </th>
-                  <th className="border border-gray-400 text-sm md:text-md lg:text-lg py-3">
+                  <th className="border bg-gray-800 border-gray-400 text-center text-sm md:text-md lg:text-lg py-3">
                     Email
                   </th>
-                  <th className="border border-gray-400 text-sm md:text-md lg:text-lg py-3">
+                  <th className="border bg-gray-800 border-gray-400 text-center text-sm md:text-md lg:text-lg py-3">
                     Actions
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {userData?.map((user, i) => (
-                  <tr key={user._id}>
-                    <td className="border border-gray-400 p-2 text-center ">
+                  <tr key={user._id} className="bg-gray-800">
+                    <td className="border border-gray-400 p-2 text-center bg-gray-800 ">
                       {i + 1}
                     </td>
                     <td
                       onClick={() => handleReviewClick(user)}
-                      className="border cursor-pointer border-gray-400 text-white p-2 text-sm md:text-md text-center"
+                      className="border cursor-pointer border-gray-400 bg-gray-800 text-white p-2 text-sm md:text-md text-center"
                     >
                       {user?.username}
                     </td>
-                    <td className="border border-gray-400 p-2">
+                    <td className="border border-gray-400 p-2 bg-gray-800">
                       {/* Assuming you have profile images for users */}
                       <img
-                        className="w-20 md:h-16 rounded-lg mx-auto"
+                        className="w-20 h-full md:h-16 rounded-full mx-auto"
                         src={`https://via.placeholder.com/150?text=${user.username}`}
                         alt={`Profile of ${user?.username}`}
                       />
                     </td>
-                    <td className="border border-gray-400 p-2 text-sm md:text-md text-center ">
+                    <td className="border border-gray-400 p-2 text-sm md:text-md bg-gray-800 text-center ">
                       {user?.email}
                     </td>
-                    <td className="border border-gray-400 p-2 text-sm md:text-md text-center">
+                    <td className="border border-gray-400 bg-gray-800 p-2 text-sm md:text-md text-center">
                       <button
                         className="p-3 mr-2 rounded-2xl bg-neutral-900"
                         onClick={() => toggleBan(user._id)}
@@ -134,10 +134,10 @@ const AllUsers = () => {
               <table className="w-full mt-2">
                 <thead>
                   <tr className="text-[#FF9D00]">
-                    <th className="border border-gray-400 text-sm md:text-md lg:text-lg py-3">
+                    <th className="border bg-gray-800 border-gray-400 text-sm md:text-md lg:text-lg py-3">
                       Order ID
                     </th>
-                    <th className="border border-gray-400 text-sm md:text-md lg:text-lg py-3">
+                    <th className="border bg-gray-800 border-gray-400 text-sm md:text-md lg:text-lg py-3">
                       Product Name
                     </th>
                     <th className="border border-gray-400 text-sm md:text-md lg:text-lg p-2">
@@ -151,16 +151,16 @@ const AllUsers = () => {
                 <tbody>
                   {selectedUser.orders.map((order) => (
                     <tr key={order.orderId}>
-                      <td className="border border-gray-400 p-2 text-center">
+                      <td className="border bg-gray-800 border-gray-400 p-2 text-center">
                         {order.orderId}
                       </td>
-                      <td className="border border-gray-400 p-2 text-sm md:text-md text-center">
+                      <td className="border bg-gray-800 border-gray-400 p-2 text-sm md:text-md text-center">
                         {order.productName}
                       </td>
-                      <td className="border border-gray-400 p-2 text-sm md:text-md text-center">
+                      <td className="border bg-gray-800 border-gray-400 p-2 text-sm md:text-md text-center">
                         {order.quantity}
                       </td>
-                      <td className="border border-gray-400 p-2 text-sm md:text-md text-center">
+                      <td className="border bg-gray-800 border-gray-400 p-2 text-sm md:text-md text-center">
                         {order.totalPrice}
                       </td>
                     </tr>
@@ -170,7 +170,7 @@ const AllUsers = () => {
             </div>
             <button
               onClick={() => setShowModal(false)}
-              className="rounded-full bg-gray-900 hover:shadow-lg font-semibold text-white px-6 py-2 mt-4"
+              className="rounded-full bg-gray-900 hover:shadow-lg font-semibold text-white px-6 py-2 mt-4 mx-auto"
             >
               Close
             </button>

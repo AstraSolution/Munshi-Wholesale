@@ -1,41 +1,36 @@
 import { FaRegHeart } from "react-icons/fa";
 import {
-  MdOutlineModeEdit,
   MdOutlineKeyboardDoubleArrowLeft,
   MdOutlineKeyboardDoubleArrowRight,
 } from "react-icons/md";
-import { FaPlus, FaMinus, FaArrowRightArrowLeft } from "react-icons/fa6";
+import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { RiShoppingBag2Line } from "react-icons/ri";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 
 import "./Table.css";
-import { useState } from "react";
-
-const product = {
-  color: ["red", "blue", "black"],
-  quantity: "10",
-  return_available: true,
-  return_policy: "This item is returnable.",
-  image: [
-    "https://i.ibb.co/bX755vX/4.png",
-    "https://i.ibb.co/ZVKn9Wm/3.png",
-    "https://i.ibb.co/ZVKn9Wm/3.png",
-    "https://i.ibb.co/PzCgYVW/1.png",
-  ],
-};
+import { useParams } from "react-router-dom";
+import useGetaProduct from "../../Hooks/useGetaProduct";
+import SectionBanner from "../../Components/Shared/SectionBanner/SectionBanner";
 
 const ProductDetails = () => {
-  const [quantity, setQuantity] = useState(1);
+  const { id } = useParams();
+  const product = useGetaProduct(id);
+
+  // console.log(product);
 
   return (
     <div>
-      <div className="container mx-auto">
-        <div className="flex flex-col md:flex-row">
+      <SectionBanner
+        title={"Product Details"}
+        subtTitle={`Shop / Products / ${product?.title}`}
+      ></SectionBanner>
+      <div className="container mx-auto mt-10 px-5 lg:px-10">
+        <div className="flex flex-col lg:flex-row">
           {/* First half */}
-          <div className="w-full md:w-1/2 flex flex-col items-center p-10">
-            <div className="text-center">
+          <div className="w-full lg:w-1/2 flex flex-col items-center">
+            <div className="text-center w-full md:max-w-lg">
               <Carousel
                 emulateTouch={true}
                 showIndicators={false}
@@ -75,8 +70,8 @@ const ProductDetails = () => {
           </div>
 
           {/* Second half */}
-          <div className="w-full md:w-1/2 p-10">
-            <h2 className="text-xl font-semibold">Gardening Tools</h2>
+          <div className="w-full lg:w-1/2">
+            <h2 className="text-3xl font-semibold">{product?.title}</h2>
 
             <div className="flex gap-2 items-center text-yellow-400 my-2">
               {/* <Rating
@@ -89,69 +84,13 @@ const ProductDetails = () => {
                 {reviewsLength !== 0 ? `${reviewsLength} ` : "0 "}
                 Reviews
               </h2> */}
-
-              {/* Modal */}
-              <button
-                className="text-gray-600 p-2"
-                // onClick={handleOpen}
-                // variant="gradient"
-                // color="white"
-              >
-                <MdOutlineModeEdit className="inline mr-1" /> Write a Review
-              </button>
-
-              {/* <Dialog open={open} size="md" handler={handleOpen}>
-                <DialogHeader className="justify-center">
-                  Tell us about the product
-                </DialogHeader>
-                <DialogBody>
-                  <div className="mb-3 text-center">
-                    <Rating
-                      unratedColor="amber"
-                      ratedColor="amber"
-                      id="rating"
-                    //   onChange={(value) => setRating(value)}
-                    />
-                  </div>
-                  <Textarea label="Message" id="message" />
-                </DialogBody>
-                <DialogFooter>
-                  <Button
-                    variant="text"
-                    color="red"
-                    // onClick={handleOpen}
-                    className="mr-1"
-                  >
-                    <span>Cancel</span>
-                  </Button>
-                  <Button
-                    variant="gradient"
-                    color="green"
-                    // onClick={handleRating}
-                  >
-                    <span>Confirm</span>
-                  </Button>
-                </DialogFooter>
-              </Dialog> */}
             </div>
 
-            <hr className="my-5" />
+            <hr className="my-3" />
 
-            {/* Color */}
-            <div className="flex items-center gap-10">
-              <h3>Color</h3>
-              <div className="flex items-center gap-4">
-                {product?.color?.map((color) => (
-                  <label key={color}>
-                    <input type="radio" name="color" value={color} />
-                    {color}
-                  </label>
-                ))}
-              </div>
-            </div>
-            <h2 className="text-yellow-500 text-xl font-medium my-1">
-              $ 440.00
-              <span className="text-xs text-black">(Tax included)</span>
+            <h2 className="text-yellow-500 text-2xl font-medium my-1">
+              $ {product?.price}
+              <span className="pl-1 text-xs text-black">(Tax included)</span>
             </h2>
             <h2
               className={`${
@@ -163,16 +102,22 @@ const ProductDetails = () => {
                 : "Stock out"}
             </h2>
 
+            {/* Color */}
+            <div className="flex items-center gap-10 mt-3">
+              <h3>Color</h3>
+              <div className="flex items-center gap-4">
+                {product?.color?.map((color) => (
+                  <label key={color}>
+                    <input type="radio" name="color" value={color} />
+                    {color}
+                  </label>
+                ))}
+              </div>
+            </div>
+
             <hr className="my-5" />
 
-            <p className="text-gray-500 mb-3">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet
-              quas voluptatum aliquid voluptas quaerat animi, nostrum fugiat
-              modi sunt nemo fugit laborum deleniti necessitatibus, cum quam
-              magni atque similique minus pariatur, ipsum voluptates
-              reprehenderit dignissimos. Ipsam at quibusdam, aspernatur maxime
-              nam illo? Aliquid assumenda ut sit suscipit obcaecati a impedit!
-            </p>
+            <p className="text-gray-500 mb-3">{product?.description}</p>
             <table>
               <thead>
                 <tr>
@@ -186,81 +131,59 @@ const ProductDetails = () => {
                 <tr>
                   <td className="text-center">1</td>
                   <td>Brand</td>
-                  <td>Dewalt</td>
+                  <td>{product?.brand}</td>
                 </tr>
                 {/* 2 */}
                 <tr>
                   <td className="text-center">2</td>
                   <td>Model</td>
-                  <td>MD-024</td>
+                  <td>{product?.model}</td>
                 </tr>
                 {/* 3 */}
                 <tr>
                   <td className="text-center">3</td>
                   <td>Material</td>
-                  <td>Plastic</td>
+                  <td>{product?.material}</td>
                 </tr>
                 {/* 4 */}
                 <tr>
                   <td className="text-center">4</td>
                   <td>Weight</td>
-                  <td>250 gm</td>
+                  <td>{product?.weight} gm</td>
                 </tr>
                 {/* 5 */}
                 <tr>
                   <td className="text-center">5</td>
                   <td>Country of Origin</td>
-                  <td>Bangladesh</td>
+                  <td>{product?.country_of_origin}</td>
                 </tr>
                 {/* 6 */}
                 <tr>
                   <td className="text-center">6</td>
                   <td>Manufacturer</td>
-                  <td>China</td>
+                  <td>{product?.manufacturer}</td>
                 </tr>
               </tbody>
             </table>
 
             <hr className="my-5" />
 
-            <div className="flex md:flex-col lg:flex-row md:items-start lg:items-center gap-5 my-5">
-              <div className="flex items-center gap-3">
-                <h3>Quantity</h3>
-                <div className="flex items-center">
-                  <button
-                    onClick={() => {
-                      if (quantity > 1) {
-                        setQuantity(quantity - 1);
-                      }
-                    }}
-                    className="border-2 border-black p-2"
-                  >
-                    <FaMinus />
-                  </button>
-                  <p className="mx-3">{quantity}</p>
-                  <button
-                    onClick={() => setQuantity(quantity + 1)}
-                    className="border-2 border-black p-2"
-                  >
-                    <FaPlus />
-                  </button>
-                </div>
-              </div>
+            <div className="flex flex-row gap-5 my-5">
               <button
                 // onClick={() => handleAddToCart(product?._id)}
-                className="bg-yellow-400 md:p-2 lg:py-2 lg:px-5 flex items-center gap-2"
+                className="bg-yellow-400 p-2 lg:px-5 flex items-center gap-2"
               >
                 <RiShoppingBag2Line className="text-xl" /> Add to cart
               </button>
+              <button
+                className="text-gray-500 p-2 lg:px-5 flex items-center gap-2 border-2 border-yellow-400"
+                //   onClick={() => handleAddToWishlist(product?._id)}
+              >
+                <FaRegHeart />
+                {/* className={`${favorite ? "text-red-500" : ""} `} */}
+                Add to Wishlist
+              </button>
             </div>
-            <button
-              className="text-gray-500 flex items-center gap-2"
-              //   onClick={() => handleAddToWishlist(product?._id)}
-            >
-              <FaRegHeart />
-              {/* className={`${favorite ? "text-red-500" : ""} `} */}
-              Add to Wishlist
-            </button>
 
             <hr className="my-5" />
 
@@ -276,9 +199,6 @@ const ProductDetails = () => {
             </div>
           </div>
         </div>
-
-        {/* Reviews */}
-        {/* <Review id={param?.id} setReviewLength={setReviewLength}></Review> */}
       </div>
     </div>
   );
