@@ -8,6 +8,7 @@ import GOOGLE_ICON from "../../assets/icons/GoogleIcon.png";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import UseAxios from "../../Hooks/useAxios";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Register() {
   const axiosPublis = UseAxios();
@@ -21,8 +22,6 @@ export default function Register() {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
-  // const onSubmit = () => {};
-
   const onSubmit = async (data) => {
     const fullName = data.fullName;
     const email = data.email;
@@ -34,7 +33,7 @@ export default function Register() {
       .then(async (res) => {
         await updateUserProfiole(fullName);
         if (res.user) {
-          await axiosPublis.post("/api/v1/users", newUser);
+          await axiosPublis.post("/users", newUser);
           Swal.fire({
             position: "top-center",
             icon: "success",
@@ -46,7 +45,7 @@ export default function Register() {
         }
       })
       .catch((error) => {
-        console.log(error.message);
+        toast("This email already exist");
       });
   };
 
@@ -229,6 +228,8 @@ export default function Register() {
           </p>
         </form>
       </motion.div>
+
+      <ToastContainer />
     </div>
   );
 }
