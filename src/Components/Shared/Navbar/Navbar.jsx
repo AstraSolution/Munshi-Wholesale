@@ -4,7 +4,7 @@ import { FaRegHeart } from "react-icons/fa";
 export default function Navbar() {
   return (
     <div className="bg-gray-800 text-white">
-      <ul className=" flex justify-center gap-5 py-4">
+      <ul className=" flex justify-center flex-wrap gap-5 py-4">
         <li>
           <Link to={"/"}>Home</Link>
         </li>
