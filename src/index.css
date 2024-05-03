@@ -21,9 +21,7 @@
   h1 {
     @apply text-xl font-medium capitalize;
   }
-
 }
-
 
 /*  the scrollbar  style */
 ::-webkit-scrollbar {
@@ -37,7 +35,6 @@
 ::-webkit-scrollbar-thumb {
   background: #2d3748;
 }
-
 
 
 .float-label-input {
