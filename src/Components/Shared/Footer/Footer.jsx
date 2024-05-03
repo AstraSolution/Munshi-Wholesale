@@ -3,10 +3,10 @@ import React from "react";
 export default function Footer() {
   return (
     <>
-      <footer className="font-[sans-serif] bg-black py-12 px-10">
+      <footer className="font-[sans-serif] bg-black py-12 px-10 font-montserrat">
         <div className="grid container mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-8">
           <div>
-            <h4 className="text-white text-lg font-bold mb-5">Company</h4>
+            <h1 className="text-white text-lg font-bold mb-5 font-montserrat">Company</h1>
             <ul className="space-y-5">
               <li><a className="text-gray-300 hover:text-white text-[15px]">About Us</a></li>
               <li><a className="text-gray-300 hover:text-white text-[15px]">Contact</a></li>
@@ -15,7 +15,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white text-lg font-bold mb-5">Information</h4>
+            <h4 className="text-white text-lg font-bold mb-5 font-montserrat">Information</h4>
             <ul className="space-y-5">
               <li><a className="text-gray-300 hover:text-white text-[15px]">Privacy Policy</a></li>
               <li><a className="text-gray-300 hover:text-white text-[15px]">Terms of Service</a></li>
@@ -24,7 +24,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white text-lg font-bold mb-5">Help</h4>
+            <h4 className="text-white text-lg font-bold mb-5 font-montserrat">Help</h4>
             <ul className="space-y-5">
               <li><a className="text-gray-300 hover:text-white text-[15px]">FAQs</a></li>
               <li><a className="text-gray-300 hover:text-white text-[15px]">Shipping Information</a></li>
@@ -32,8 +32,8 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="md:col-span-2">
-            <h4 className="text-white text-lg font-bold mb-5">Newsletter</h4>
+          <div className="md:col-span-2 font-montserrat">
+            <h4 className="text-white text-lg font-bold mb-5 font-montserrat">Newsletter</h4>
             <p className="text-gray-300 mb-4 text-[15px]">Subscribe to our newsletter to get updates on new products and promotions.
             </p>
             <form className="mb-4">
