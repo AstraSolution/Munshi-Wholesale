@@ -36,9 +36,6 @@
   background: #2d3748;
 }
 
-.active {
-  @apply bg-gray-600 text-yellow-600;
-}
 
 .float-label-input {
   margin: 0;
@@ -54,6 +51,6 @@
   background-color: #f5e141;
 }
 
-.font-oswald {
-  font-family: "Oswald", sans-serif;
+.font-montserrat {
+  font-family: "Montserrat", sans-serif;
 }
