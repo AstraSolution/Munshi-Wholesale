@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from "framer-motion";
 import { IoIosSearch } from "react-icons/io";
-import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { StarRating } from '../../Components/Shared/StarRating/StarRating';
 
@@ -62,7 +61,7 @@ const My_Order_Page = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="container mx-auto md:py-3 py-2 text-white"
+      className="container mx-auto md:py-3 py-2  text-gray-300 "
     >
       <div className="space-y-2">
         <motion.div
@@ -90,7 +89,7 @@ const My_Order_Page = () => {
                 <input
                   type='text'
                   id='search'
-                  className='bg-gray-800 border text-white text-sm rounded-lg focus:outline-none focus:border-blue-500 block w-full py-2 px-2 dark:text-white'
+                  className='bg-gray-800 border text-gray-300 text-sm rounded-lg focus:outline-none focus:border-blue-500 block w-full py-2 px-2 dark:text-gray-300'
                   placeholder='Search...'
                 />
                 <button type='button' className='absolute inset-y-0 end-0 flex items-center pe-3'>
@@ -104,7 +103,7 @@ const My_Order_Page = () => {
                 className='py-2 px-1 md:w-60 '
               >
                 <select
-                  className='w-full px-4 py-1 md:py-1.5 text-white border rounded-lg bg-gray-800 focus:outline-none focus:border-blue-500 font-oswald'
+                  className='w-full px-4 py-1 md:py-1.5 text-gray-300 border rounded-lg bg-gray-800 focus:outline-none focus:border-blue-500 font-oswald'
                 >
                   <option value='all'>All</option>
                   <option value='pending'>Pending</option>
@@ -115,12 +114,12 @@ const My_Order_Page = () => {
             </div>
           </div>
 
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto ">
             <motion.table
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 1 }}
-              className="w-full mt-2"
+              className="w-full mt-2 "
             >
               <tr className='text-[#FF9D00]'>
                 <th className="border border-gray-400 text-sm md:text-md lg:text-lg py-3">N/A</th>
@@ -138,17 +137,19 @@ const My_Order_Page = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 1.2 + (i * 0.1) }}
+                    // className={i % 2 === 0 ? 'bg-black' : 'bg-gray-800'}
+
                   >
-                    <td className="border border-gray-400 p-2 text-center">{i + 1}</td>
-                    <td className="border border-gray-400 md:p-2 p-1 text-sm">{product?.title?.slice(0, 30)}.....</td>
-                    <td className="border border-gray-400 p-2">
+                    <td className="border border-gray-400 bg-gray-800  p-2 text-center">{i + 1}</td>
+                    <td className="border border-gray-400 bg-gray-800  md:p-2 p-1 text-sm">{product?.title?.slice(0, 30)}.....</td>
+                    <td className="border border-gray-400 bg-gray-800  p-2">
                       <img className='w-20 md:h-16 rounded-lg mx-auto' src={product?.image[0]} alt="" />
                     </td>
-                    <td className="border border-gray-400 p-2 text-sm md:text-md text-center">{product?.category}</td>
-                    <td className="border border-gray-400 p-2 text-sm md:text-md text-center">Pending</td>
-                    <td onClick={() => handleReviewClick(product)} className="border cursor-pointer border-gray-400 p-2 text-sm md:text-md text-center">Review</td>
-                    <td className="flex items-center justify-center gap-3 md:py-6 py-4 border border-gray-400 p-2">
-                      <span className="p-2 w-fit text-white cursor-pointer text-sm rounded-md">
+                    <td className="border border-gray-400 bg-gray-800  p-2 text-sm md:text-md text-center">{product?.category}</td>
+                    <td className="border border-gray-400 bg-gray-800  p-2 text-sm md:text-md text-center">Pending</td>
+                    <td onClick={() => handleReviewClick(product)} className="border cursor-pointer border-gray-400 bg-gray-800  p-2 text-sm md:text-md text-center">Review</td>
+                    <td className="flex items-center justify-center gap-3 md:py-6 py-4 border border-gray-400 bg-gray-800  p-2">
+                      <span className="p-2 w-fit  cursor-pointer text-sm rounded-md">
                         Cancel
                       </span>
                     </td>
@@ -165,9 +166,9 @@ const My_Order_Page = () => {
         <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
           <div className="lg:w-4/12 mx-auto bg-gray-800 p-6 rounded-lg">
             <form onSubmit={handleSubmit(onSubmit)}>
-              <h2 className="block md:text-2xl text-white text-sm font-bold mb-2">Review for : {selectedProduct?.title}</h2>
+              <h2 className="block md:text-2xl text-center text-gray-300 text-sm font-bold mb-2">{selectedProduct?.title}</h2>
               <div className="mb-4 px-1 text-center mt-6">
-                <label className="block md:text-2xl text-white text-sm font-bold mb-2" htmlFor="rating">
+                <label className="block md:text-2xl text-gray-300 text-sm font-bold mb-2" htmlFor="rating">
                   Rating
                 </label>
                 <div className='text-center text-2xl '>
@@ -176,11 +177,11 @@ const My_Order_Page = () => {
               </div>
 
               <div className="mb-4 px-1">
-                <label className="block md:text-2xl text-white text-sm font-bold mb-2" htmlFor="review">
+                <label className="block md:text-xl text-gray-300 text-sm font-bold mb-2" htmlFor="review">
                   Review
                 </label>
                 <textarea
-                  className="w-full h-auto md:min-h-60 min-h-32 px-2 py-2 text-white border rounded-lg bg-gray-800 focus:outline-none focus:border-blue-500"
+                  className="w-full h-auto md:min-h-60 min-h-32 px-2 py-2 text-gray-300 border rounded-lg bg-gray-800 focus:outline-none focus:border-blue-500"
                   id="review"
                   placeholder="Review"
                   {...register("review", { required: true })}
@@ -196,8 +197,8 @@ const My_Order_Page = () => {
               </div>
 
               <div className='flex items-center gap-3 text-right mt-10'>
-                <button onClick={() => setShowModal(false)} className="rounded-full bg-gray-900 hover:shadow-lg font-semibold text-white px-6 py-2"> Close </button>
-                <button type="submit" disabled={!isReviewValid} className={`rounded-full bg-gray-900 hover:shadow-lg font-semibold text-white px-6 py-2 ${!isReviewValid ? 'opacity-50 cursor-not-allowed' : ''}`}>
+                <button onClick={() => setShowModal(false)} className="rounded-full bg-gray-900 hover:shadow-lg font-semibold text-gray-300 px-6 py-2"> Close </button>
+                <button type="submit" disabled={!isReviewValid} className={`rounded-full bg-gray-900 hover:shadow-lg font-semibold text-gray-300 px-6 py-2 ${!isReviewValid ? 'opacity-50 cursor-not-allowed' : ''}`}>
                   {loading ? "Loading..." : "Confirm"}
                 </button>
               </div>
@@ -205,6 +206,7 @@ const My_Order_Page = () => {
           </div>
         </div>
       )}
+
     </motion.div>
   );
 };

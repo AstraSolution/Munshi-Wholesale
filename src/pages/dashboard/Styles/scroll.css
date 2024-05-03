@@ -1,0 +1,20 @@
+/* CSS */
+.scrollbar-style {
+  scrollbar-width: thin; /* "auto" or "thin" to show scrollbar */
+  scrollbar-color: #2d3748 #f1f1f1; /* color of the scrollbar handle and track */
+}
+
+/* Track */
+.scrollbar-style::-webkit-scrollbar-track {
+  background: #f1f1f1; /* color of the track */
+}
+
+/* Handle */
+.scrollbar-style::-webkit-scrollbar-thumb {
+  background: #2d3748; /* color of the scrollbar handle (gray-800) */
+}
+
+/* Handle on hover */
+.scrollbar-style::-webkit-scrollbar-thumb:hover {
+  background: #1a202c; /* darker shade of gray on hover */
+}
