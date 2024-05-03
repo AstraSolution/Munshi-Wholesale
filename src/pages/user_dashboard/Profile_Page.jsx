@@ -41,12 +41,46 @@ const Profile_Page = () => {
                             </div>
                             <div className="text-center mt-2 text-gray-200 ">
                                 <h2 className="font-semibold">Siyam Ahmed</h2>
-                                <p className="">Email</p>
-                                <p className="">Freelance Web Designer</p>
+
+
+                                {
+                                    isEditing ? (
+                                        ""
+                                    ) : (
+                                        <p className="">Email</p>
+                                    )
+                                }
+
+
+                                {
+                                    isEditing ? (
+                                        <div className="mb-2 mt-8 px-4 ">
+                                            <label className="block md:text-xl text-left text-gray-300  text-sm font-bold mb-2" htmlFor="title">
+                                                Profession
+                                            </label>
+                                            <select
+                                                className="w-full px-4 py-3 border-gray-600 text-gray-300 border rounded-md bg-[#1A222C]  focus:outline-none focus:border-blue-500"
+
+                                            >
+                                                <option value=''>profession</option>
+                                                <option value='student'>Student</option>
+                                                <option value='business'>Business</option>
+                                                <option className='pb-2' value='doctore'>Doctor</option>
+                                                <option className='pb-2' value='teacher'>Teacher</option>
+                                                <option className='pb-2' value='socialWorker'>Social Worker</option>
+                                                <option className='pb-2' value='mechanicalEngineer'>Mechanical Engineer</option>
+                                            </select>
+
+                                        </div>
+                                    ) : (
+                                        <p className="text-gray-200">Freelance Web Designer</p>
+                                    )
+                                }
+
                             </div>
 
-                            
-                            <div className='px-5 py-4'>
+
+                            <div className='px-4 py-2'>
                                 <h1> Bio </h1>
                                 {isEditing ? (
                                     <textarea
