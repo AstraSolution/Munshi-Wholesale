@@ -14,22 +14,31 @@
 @layer base {
   html {
     @apply font-Montserrat;
+    scrollbar-width: thin;
+    scrollbar-color: #2d3748 #f1f1f1;
   }
 
   h1 {
     @apply text-xl font-medium capitalize;
   }
-  
 }
 
+/*  the scrollbar  style */
+::-webkit-scrollbar {
+  width: 12px;
+}
 
-/* .link {
-  @apply p-2.5 flex rounded-md gap-4 items-center md:cursor-pointer cursor-default duration-700 font-medium;
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2d3748;
 }
 
 .active {
   @apply bg-gray-600 text-yellow-600;
-} */
+}
 
 .float-label-input {
   margin: 0;

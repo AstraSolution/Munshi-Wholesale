@@ -1,5 +1,6 @@
 [
   {
+    "_id": 1,
     "title": "Cordless Drill/Driver Kit",
     "image": [
       "https://i.ibb.co/N6KVm1D/DCD771-C2-K1.jpg",
@@ -28,8 +29,13 @@
       "speed_settings": "2-speed transmission (0-450 / 0-1,500 RPM)",
       "chuck_size": "1/2 inch",
       "clutch_settings": "16-position adjustable clutch",
-      "safety_features": ["Overload protection", "Non-slip grip"],
-      "compatibility": ["20V MAX lithium-ion batteries"]
+      "safety_features": [
+        "Overload protection",
+        "Non-slip grip"
+      ],
+      "compatibility": [
+        "20V MAX lithium-ion batteries"
+      ]
     },
     "included_accessories": [
       "Two 20V MAX lithium-ion batteries",
@@ -39,12 +45,22 @@
     "weight": "3.6 lbs",
     "dimensions": "10.1 x 7.6 x 3.2 inches",
     "warranty": "3-year limited warranty",
-    "color": ["Yellow/Black", "Green/Teal"],
-    "variant": ["Type 1", "Type 2"],
+    "color": [
+      "Yellow/Black",
+      "Green/Teal"
+    ],
+    "variant": [
+      "Type 1",
+      "Type 2"
+    ],
     "material": "Plastic, Metal",
     "certification": "UL Listed",
     "usage": "DIY, Professional",
-    "recommended_applications": ["Wood", "Metal", "Plastic"],
+    "recommended_applications": [
+      "Wood",
+      "Metal",
+      "Plastic"
+    ],
     "features": [
       "Compact and lightweight design",
       "LED work light",
@@ -54,7 +70,10 @@
     "shipping_weight": "5 lbs",
     "shipping_dimensions": "12 x 9 x 5 inches",
     "shipping_restrictions": "This item can be shipped to select countries outside of the U.S.",
-    "shipping_method": ["Standard Shipping", "Expedited Shipping"],
+    "shipping_method": [
+      "Standard Shipping",
+      "Expedited Shipping"
+    ],
     "assembly_required": false,
     "country_of_origin": "China",
     "manufacturer": "Stanley Black & Decker, Inc.",
@@ -62,6 +81,7 @@
     "return_policy": "This item is eligible for return within 30 days of delivery."
   },
   {
+    "_id": 2,
     "title": "Electric Screwdriver Set",
     "image": [
       "https://i.ibb.co/2kZ1tgX/61g-Eq-FMNCKL-AC-SX679.jpg",
@@ -87,8 +107,12 @@
       "max_torque": "4.5 Nm",
       "speed_settings": "Single speed (215 RPM)",
       "chuck_size": "1/4 inch",
-      "safety_features": ["Lock-off switch"],
-      "compatibility": ["Standard screwdriver bits"]
+      "safety_features": [
+        "Lock-off switch"
+      ],
+      "compatibility": [
+        "Standard screwdriver bits"
+      ]
     },
     "included_accessories": [
       "Electric screwdriver",
@@ -98,12 +122,22 @@
     "weight": "0.4 lbs",
     "dimensions": "6.3 x 1.6 x 5.6 inches",
     "warranty": "2-year limited warranty",
-    "color": ["Green/Black"],
-    "variant": ["Standard"],
+    "color": [
+      "Green/Black"
+    ],
+    "variant": [
+      "Standard"
+    ],
     "material": "Plastic, Metal",
     "certification": "CE Certified",
-    "usage": ["DIY"],
-    "recommended_applications": ["Wood", "Metal", "Plastic"],
+    "usage": [
+      "DIY"
+    ],
+    "recommended_applications": [
+      "Wood",
+      "Metal",
+      "Plastic"
+    ],
     "features": [
       "Compact and ergonomic design",
       "Built-in LED light",
@@ -113,7 +147,9 @@
     "shipping_weight": "1 lb",
     "shipping_dimensions": "8 x 4 x 3 inches",
     "shipping_restrictions": "This item is eligible for international shipping.",
-    "shipping_method": ["Standard Shipping"],
+    "shipping_method": [
+      "Standard Shipping"
+    ],
     "assembly_required": false,
     "country_of_origin": "Germany",
     "manufacturer": "Robert Bosch GmbH",
@@ -121,6 +157,7 @@
     "return_policy": "This item is eligible for return within 30 days of delivery."
   },
   {
+    "_id": 3,
     "title": "STIHL Chainsaw (MS 271)",
     "image": [
       "https://i.ibb.co/C2q3RH0/ms271.jpg",
@@ -156,16 +193,28 @@
         "Throttle lockout"
       ]
     },
-    "included_accessories": ["Chainsaw", "Bar cover", "Tool kit"],
+    "included_accessories": [
+      "Chainsaw",
+      "Bar cover",
+      "Tool kit"
+    ],
     "weight": "12.3 lbs",
     "dimensions": "18 x 10 x 11 inches",
     "warranty": "2-year limited warranty",
-    "color": ["Orange/White"],
-    "variant": ["Standard"],
+    "color": [
+      "Orange/White"
+    ],
+    "variant": [
+      "Standard"
+    ],
     "material": "Plastic, Metal",
     "certification": "EPA Certified",
-    "usage": ["Professional"],
-    "recommended_applications": ["Wood"],
+    "usage": [
+      "Professional"
+    ],
+    "recommended_applications": [
+      "Wood"
+    ],
     "features": [
       "High-performance engine",
       "Easy-start system",
@@ -175,7 +224,9 @@
     "shipping_weight": "15 lbs",
     "shipping_dimensions": "20 x 12 x 13 inches",
     "shipping_restrictions": "This item is only available for domestic shipping.",
-    "shipping_method": ["Standard Shipping"],
+    "shipping_method": [
+      "Standard Shipping"
+    ],
     "assembly_required": false,
     "country_of_origin": "Germany",
     "manufacturer": "ANDREAS STIHL AG & Co. KG",
@@ -183,6 +234,7 @@
     "return_policy": "This item is eligible for return within 30 days of delivery."
   },
   {
+    "_id": 4,
     "title": "Makita Impact Driver",
     "image": [
       "https://i.ibb.co/5vVtCKh/Untitled-design-1.jpg",
@@ -209,18 +261,34 @@
       "max_torque": "1600 in-lbs",
       "speed_settings": "4-speed power selection (0-1100 / 0-2100 / 0-3200 / 0-3600 RPM)",
       "drive_type": "1/4 inch hex",
-      "safety_features": ["Built-in LED light", "Electronic brake"]
+      "safety_features": [
+        "Built-in LED light",
+        "Electronic brake"
+      ]
     },
-    "included_accessories": ["Impact driver", "Assorted bits"],
+    "included_accessories": [
+      "Impact driver",
+      "Assorted bits"
+    ],
     "weight": "2.8 lbs",
     "dimensions": "4.8 x 9.4 x 6.2 inches",
     "warranty": "3-year limited warranty",
-    "color": ["Teal/Black"],
-    "variant": ["Standard"],
+    "color": [
+      "Teal/Black"
+    ],
+    "variant": [
+      "Standard"
+    ],
     "material": "Plastic, Metal",
     "certification": "UL Listed",
-    "usage": ["Construction", "Automotive"],
-    "recommended_applications": ["Wood", "Metal"],
+    "usage": [
+      "Construction",
+      "Automotive"
+    ],
+    "recommended_applications": [
+      "Wood",
+      "Metal"
+    ],
     "features": [
       "Compact and ergonomic design",
       "Variable speed control",
@@ -230,7 +298,9 @@
     "shipping_weight": "4 lbs",
     "shipping_dimensions": "8 x 7 x 5 inches",
     "shipping_restrictions": "This item is eligible for international shipping.",
-    "shipping_method": ["Standard Shipping"],
+    "shipping_method": [
+      "Standard Shipping"
+    ],
     "assembly_required": false,
     "country_of_origin": "Japan",
     "manufacturer": "Makita Corporation",
@@ -238,6 +308,7 @@
     "return_policy": "This item is eligible for return within 30 days of delivery."
   },
   {
+    "_id": 5,
     "title": "Angle Grinder",
     "image": [
       "https://i.ibb.co/Gpmqy8D/d4f5afffbc7740cb9af727fdd00d45f2.webp",
@@ -271,16 +342,30 @@
         "Tool-free guard adjustment"
       ]
     },
-    "included_accessories": ["Angle grinder", "Grinding wheel", "Side handle"],
+    "included_accessories": [
+      "Angle grinder",
+      "Grinding wheel",
+      "Side handle"
+    ],
     "weight": "5.8 lbs",
     "dimensions": "16 x 6 x 5 inches",
     "warranty": "5-year limited warranty",
-    "color": ["Red/Black"],
-    "variant": ["Standard"],
+    "color": [
+      "Red/Black"
+    ],
+    "variant": [
+      "Standard"
+    ],
     "material": "Plastic, Metal",
     "certification": "UL Listed",
-    "usage": ["Construction", "Metalworking"],
-    "recommended_applications": ["Metal", "Concrete"],
+    "usage": [
+      "Construction",
+      "Metalworking"
+    ],
+    "recommended_applications": [
+      "Metal",
+      "Concrete"
+    ],
     "features": [
       "Advanced motor technology",
       "Tool-free accessory changes",
@@ -290,7 +375,9 @@
     "shipping_weight": "8 lbs",
     "shipping_dimensions": "18 x 8 x 7 inches",
     "shipping_restrictions": "This item is eligible for domestic shipping only.",
-    "shipping_method": ["Standard Shipping"],
+    "shipping_method": [
+      "Standard Shipping"
+    ],
     "assembly_required": false,
     "country_of_origin": "China",
     "manufacturer": "Milwaukee Electric Tool Corporation",
@@ -298,6 +385,7 @@
     "return_policy": "This item is eligible for return within 30 days of delivery."
   },
   {
+    "_id": 6,
     "title": "Rotary Hammer Drill",
     "image": [
       "https://i.ibb.co/TvPZBsd/o177398v945-GBH228-L-hero.webp",
@@ -317,7 +405,6 @@
       "discount": "10%",
       "offer_image": "https://i.ibb.co/TvPZBsd/o177398v945-GBH228-L-hero.webp"
     },
-
     "specification": {
       "volts": "120 volts",
       "power_source": "Corded Electric",
@@ -326,7 +413,10 @@
       "no_load_speed": "0-900 RPM",
       "blows_per_minute": "0-4,000 BPM",
       "chuck_type": "SDS-plus",
-      "safety_features": ["Kickback control", "Vibration control"]
+      "safety_features": [
+        "Kickback control",
+        "Vibration control"
+      ]
     },
     "included_accessories": [
       "Rotary hammer drill",
@@ -337,12 +427,23 @@
     "weight": "6.9 lbs",
     "dimensions": "17.2 x 11.4 x 4.4 inches",
     "warranty": "1-year limited warranty",
-    "color": ["Blue/Black"],
-    "variant": ["Standard"],
+    "color": [
+      "Blue/Black"
+    ],
+    "variant": [
+      "Standard"
+    ],
     "material": "Metal, Plastic",
     "certification": "UL Listed",
-    "usage": ["Construction", "Renovation"],
-    "recommended_applications": ["Concrete", "Masonry", "Stone"],
+    "usage": [
+      "Construction",
+      "Renovation"
+    ],
+    "recommended_applications": [
+      "Concrete",
+      "Masonry",
+      "Stone"
+    ],
     "features": [
       "Vario-lock positioning",
       "Three-mode operation",
@@ -352,7 +453,9 @@
     "shipping_weight": "9 lbs",
     "shipping_dimensions": "19 x 13 x 6 inches",
     "shipping_restrictions": "This item can be shipped within the U.S. only.",
-    "shipping_method": ["Standard Shipping"],
+    "shipping_method": [
+      "Standard Shipping"
+    ],
     "assembly_required": false,
     "country_of_origin": "Germany",
     "manufacturer": "Robert Bosch GmbH",
@@ -360,6 +463,7 @@
     "return_policy": "This item is eligible for return within 30 days of delivery."
   },
   {
+    "_id": 7,
     "title": "DEWALT Circular Saw [DCS391B]",
     "image": [
       "https://i.ibb.co/TqzKY0r/DCS391-B-2-1.jpg",
@@ -386,18 +490,35 @@
       "max_depth_of_cut": "2-1/4 inches at 90 degrees",
       "bevel_capacity": "0-50 degrees",
       "no_load_speed": "5,150 RPM",
-      "safety_features": ["Electric brake", "Integrated dust blower"]
+      "safety_features": [
+        "Electric brake",
+        "Integrated dust blower"
+      ]
     },
-    "included_accessories": ["Circular saw", "6-1/2 inch carbide-tipped blade"],
+    "included_accessories": [
+      "Circular saw",
+      "6-1/2 inch carbide-tipped blade"
+    ],
     "weight": "7.1 lbs",
     "dimensions": "15.8 x 10.2 x 9.2 inches",
     "warranty": "3-year limited warranty",
-    "color": ["Yellow/Black"],
-    "variant": ["Standard"],
+    "color": [
+      "Yellow/Black"
+    ],
+    "variant": [
+      "Standard"
+    ],
     "material": "Metal, Plastic",
     "certification": "UL Listed",
-    "usage": ["Construction", "Woodworking"],
-    "recommended_applications": ["Wood", "Plastic", "Metal"],
+    "usage": [
+      "Construction",
+      "Woodworking"
+    ],
+    "recommended_applications": [
+      "Wood",
+      "Plastic",
+      "Metal"
+    ],
     "features": [
       "High-strength magnesium shoe",
       "Bevel detents at 22.5 and 45 degrees",
@@ -407,7 +528,9 @@
     "shipping_weight": "9 lbs",
     "shipping_dimensions": "18 x 12 x 8 inches",
     "shipping_restrictions": "This item is eligible for domestic shipping only.",
-    "shipping_method": ["Standard Shipping"],
+    "shipping_method": [
+      "Standard Shipping"
+    ],
     "assembly_required": false,
     "country_of_origin": "China",
     "manufacturer": "Stanley Black & Decker, Inc.",
@@ -415,6 +538,7 @@
     "return_policy": "This item is eligible for return within 30 days of delivery."
   },
   {
+    "_id": 8,
     "title": "Makita Jigsaw",
     "image": [
       "https://i.ibb.co/crmgfv2/Untitled-design.jpg",
@@ -444,7 +568,10 @@
       "stroke_length": "11/16 inch",
       "strokes_per_minute": "0-3,100 SPM",
       "bevel_capacity": "45 degrees",
-      "safety_features": ["Built-in dust blower", "Tool-less blade change"]
+      "safety_features": [
+        "Built-in dust blower",
+        "Tool-less blade change"
+      ]
     },
     "included_accessories": [
       "Jigsaw",
@@ -455,12 +582,23 @@
     "weight": "5.2 lbs",
     "dimensions": "14.2 x 13.8 x 4.6 inches",
     "warranty": "1-year limited warranty",
-    "color": ["Teal/Black"],
-    "variant": ["Standard"],
+    "color": [
+      "Teal/Black"
+    ],
+    "variant": [
+      "Standard"
+    ],
     "material": "Metal, Plastic",
     "certification": "UL Listed",
-    "usage": ["Construction", "Woodworking"],
-    "recommended_applications": ["Wood", "Metal", "Plastic"],
+    "usage": [
+      "Construction",
+      "Woodworking"
+    ],
+    "recommended_applications": [
+      "Wood",
+      "Metal",
+      "Plastic"
+    ],
     "features": [
       "Variable speed control dial",
       "Built-in LED light",
@@ -470,7 +608,9 @@
     "shipping_weight": "7 lbs",
     "shipping_dimensions": "16 x 15 x 6 inches",
     "shipping_restrictions": "This item can be shipped within the U.S. only.",
-    "shipping_method": ["Standard Shipping"],
+    "shipping_method": [
+      "Standard Shipping"
+    ],
     "assembly_required": false,
     "country_of_origin": "Japan",
     "manufacturer": "Makita Corporation",
@@ -478,6 +618,7 @@
     "return_policy": "This item is eligible for return within 30 days of delivery."
   },
   {
+    "_id": 9,
     "title": "Belt Sander",
     "image": [
       "https://i.ibb.co/HX3hHL9/352-VS-1-1.jpg",
@@ -503,18 +644,36 @@
       "belt_size": "3 x 21 inches",
       "belt_speed": "850-1,300 SFPM",
       "dust_collection": "Dust bag",
-      "safety_features": ["Lock-on switch", "Flush sanding capability"]
+      "safety_features": [
+        "Lock-on switch",
+        "Flush sanding capability"
+      ]
     },
-    "included_accessories": ["Belt sander", "80-grit sanding belt", "Dust bag"],
+    "included_accessories": [
+      "Belt sander",
+      "80-grit sanding belt",
+      "Dust bag"
+    ],
     "weight": "10.75 lbs",
     "dimensions": "14.5 x 9.5 x 8.2 inches",
     "warranty": "3-year limited warranty",
-    "color": ["Gray/Black"],
-    "variant": ["Standard"],
+    "color": [
+      "Gray/Black"
+    ],
+    "variant": [
+      "Standard"
+    ],
     "material": "Metal, Plastic",
     "certification": "UL Listed",
-    "usage": ["Construction", "Woodworking"],
-    "recommended_applications": ["Wood", "Metal", "Plastic"],
+    "usage": [
+      "Construction",
+      "Woodworking"
+    ],
+    "recommended_applications": [
+      "Wood",
+      "Metal",
+      "Plastic"
+    ],
     "features": [
       "Variable speed control",
       "Belt tracking knob",
@@ -524,7 +683,9 @@
     "shipping_weight": "13 lbs",
     "shipping_dimensions": "16 x 12 x 10 inches",
     "shipping_restrictions": "This item is eligible for domestic shipping only.",
-    "shipping_method": ["Standard Shipping"],
+    "shipping_method": [
+      "Standard Shipping"
+    ],
     "assembly_required": false,
     "country_of_origin": "China",
     "manufacturer": "PORTER-CABLE",
@@ -532,6 +693,7 @@
     "return_policy": "This item is eligible for return within 30 days of delivery."
   },
   {
+    "_id": 10,
     "title": "Random Orbital Sander",
     "image": [
       "https://i.ibb.co/Z6kpZFm/Untitled-design.jpg",
@@ -558,18 +720,35 @@
       "orbit_diameter": "3/32 inch",
       "no_load_speed": "12,000 OPM",
       "dust_collection": "Dust bag",
-      "safety_features": ["Dust-sealed switch", "Rubber over-molded grip"]
+      "safety_features": [
+        "Dust-sealed switch",
+        "Rubber over-molded grip"
+      ]
     },
-    "included_accessories": ["Random orbital sander", "Dust bag"],
+    "included_accessories": [
+      "Random orbital sander",
+      "Dust bag"
+    ],
     "weight": "3.16 lbs",
     "dimensions": "7 x 5 x 6 inches",
     "warranty": "2-year limited warranty",
-    "color": ["Orange/Black"],
-    "variant": ["Standard"],
+    "color": [
+      "Orange/Black"
+    ],
+    "variant": [
+      "Standard"
+    ],
     "material": "Plastic",
     "certification": "UL Listed",
-    "usage": ["Construction", "Woodworking"],
-    "recommended_applications": ["Wood", "Metal", "Plastic"],
+    "usage": [
+      "Construction",
+      "Woodworking"
+    ],
+    "recommended_applications": [
+      "Wood",
+      "Metal",
+      "Plastic"
+    ],
     "features": [
       "Hook-and-loop sanding pad",
       "Compact design",
@@ -579,7 +758,9 @@
     "shipping_weight": "5 lbs",
     "shipping_dimensions": "10 x 8 x 7 inches",
     "shipping_restrictions": "This item is eligible for domestic shipping only.",
-    "shipping_method": ["Standard Shipping"],
+    "shipping_method": [
+      "Standard Shipping"
+    ],
     "assembly_required": false,
     "country_of_origin": "China",
     "manufacturer": "BLACK+DECKER",
