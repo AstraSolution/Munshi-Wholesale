@@ -1,4 +1,4 @@
-import useAxiosPublic from "../Hooks/useAxios";
+import useAxiosPublic from "./useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 
 const useGetAllNews = (id) => {
