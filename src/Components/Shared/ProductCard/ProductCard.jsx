@@ -4,12 +4,9 @@ import { FaStar, FaShoppingCart, FaHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ currentProduct }) => {
-  const { _id, title, image, price } = currentProduct;
+  const { _id, title, image, price, offer } = currentProduct;
   const [isWished, setIsWished] = useState(false);
   const navigate = useNavigate();
-
-  // console.log(isWished);
-  // console.log(currentProduct);
 
   return (
     <div>
@@ -23,6 +20,16 @@ const ProductCard = ({ currentProduct }) => {
             alt={title}
             className="rounded-lg p-3 max-h-[250px] lg:max-h-[350px]"
           />
+          {offer?.discount !== "N/A" && (
+            <div className="absolute top-2 right-2 w-8 h-8 lg:w-12 lg:h-12">
+              <div className="relative">
+                <img src="https://i.ibb.co/KzpjhpT/new.png" alt="offer" />
+                <p className="absolute text-white text-xs top-2 right-1 lg:top-4 lg:right-3">
+                  {offer?.discount}
+                </p>
+              </div>
+            </div>
+          )}
         </div>
         <div className="w-full hidden group-hover:flex justify-center gap-10 absolute bottom-5 z-10">
           <button>
@@ -44,10 +51,18 @@ const ProductCard = ({ currentProduct }) => {
           <FaStar className="inline mr-2" />
           <FaStar className="inline" />
         </p>
-        <div className="flex items-center gap-10">
-          <p className="text-xl lg:text-3xl font-bold">$ {price}</p>
-          <p className="text-lg lg:text-2xl line-through">$840.00</p>
-        </div>
+        {offer?.discount === "N/A" ? (
+          <div>
+            <p className="text-xl lg:text-3xl font-bold">$ {price}</p>
+          </div>
+        ) : (
+          <div className="flex items-center gap-10">
+            <p className="text-xl lg:text-3xl font-bold">
+              $ {(price - (price * parseInt(offer?.discount)) / 100).toFixed(2)}
+            </p>
+            <p className="text-lg lg:text-2xl line-through">$ {price}</p>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,10 +1,10 @@
-import useAxiosPublic from "../Hooks/useAxios";
+import useAxios from "./useAxios";
 import { useQuery } from "@tanstack/react-query";
 
 const useAllCategory = () => {
-  const axiosPublic = useAxiosPublic();
+  const axiosPublic = useAxios();
 
-  const { data: categories = [] } = useQuery({
+  const { data: categories = [], isLoading } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
       const res = await axiosPublic.get("/category");
@@ -12,7 +12,7 @@ const useAllCategory = () => {
     },
   });
 
-  return categories;
+  return { categories, categoryLoading: isLoading };
 };
 
 export default useAllCategory;

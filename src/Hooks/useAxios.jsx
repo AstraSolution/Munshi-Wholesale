@@ -6,8 +6,8 @@ const instance = axios.create({
   withCredentials: true,
 });
 
-const UseAxios = () => {
+const useAxios = () => {
   return instance;
 };
 
-export default UseAxios;
+export default useAxios;

@@ -1,10 +1,10 @@
-import useAxiosPublic from "../Hooks/useAxios";
+import useAxios from "../Hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 
 const useAllBrand = () => {
-  const axiosPublic = useAxiosPublic();
+  const axiosPublic = useAxios();
 
-  const { data: brands = [] } = useQuery({
+  const { data: brands = [], isLoading } = useQuery({
     queryKey: ["brands"],
     queryFn: async () => {
       const res = await axiosPublic.get("/brands");
@@ -12,7 +12,7 @@ const useAllBrand = () => {
     },
   });
 
-  return brands;
+  return { brands, brandsLoading: isLoading };
 };
 
 export default useAllBrand;
