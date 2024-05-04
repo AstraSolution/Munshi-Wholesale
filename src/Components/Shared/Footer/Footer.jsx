@@ -2,15 +2,56 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <div>
-      <footer className="bg-gray-800 text-white py-4">
-        <div className="container mx-auto flex justify-between items-center">
-          <p className="text-sm">
-            &copy; 2024 Your Company. All rights reserved.
-          </p>
-          <p className="text-sm">About Us | Services | Contact</p>
+    <>
+      <footer className="font-[sans-serif] bg-black py-12 px-10 font-montserrat">
+        <div className="grid container mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-8">
+          <div>
+            <h1 className="text-white text-lg font-bold mb-5 font-montserrat">Company</h1>
+            <ul className="space-y-5">
+              <li><a className="text-gray-300 hover:text-white text-[15px]">About Us</a></li>
+              <li><a className="text-gray-300 hover:text-white text-[15px]">Contact</a></li>
+              <li><a className="text-gray-300 hover:text-white text-[15px]">Careers</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-white text-lg font-bold mb-5 font-montserrat">Information</h4>
+            <ul className="space-y-5">
+              <li><a className="text-gray-300 hover:text-white text-[15px]">Privacy Policy</a></li>
+              <li><a className="text-gray-300 hover:text-white text-[15px]">Terms of Service</a></li>
+              <li><a className="text-gray-300 hover:text-white text-[15px]">Refund Policy</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-white text-lg font-bold mb-5 font-montserrat">Help</h4>
+            <ul className="space-y-5">
+              <li><a className="text-gray-300 hover:text-white text-[15px]">FAQs</a></li>
+              <li><a className="text-gray-300 hover:text-white text-[15px]">Shipping Information</a></li>
+              <li><a className="text-gray-300 hover:text-white text-[15px]">Returns & Exchanges</a></li>
+            </ul>
+          </div>
+
+          <div className="md:col-span-2 font-montserrat">
+            <h4 className="text-white text-lg font-bold mb-5 font-montserrat">Newsletter</h4>
+            <p className="text-gray-300 mb-4 text-[15px]">Subscribe to our newsletter to get updates on new products and promotions.
+            </p>
+            <form className="mb-4">
+              <div className="flex items-center">
+                <input type="email" placeholder="Enter your email"
+                  className="bg-gray-800 px-4 py-3.5 rounded-l-lg w-full text-[15px] text-gray-300 outline-none" />
+                <button type="button"
+                  className="bg-gray-700 text-[15px] text-gray-300 tracking-wide px-4 py-3.5 rounded-r-lg">Subscribe</button>
+              </div>
+            </form>
+          </div>
+       
         </div>
+
+        <p className='text-gray-300 text-right text-[15px] mt-8'>© 2024<a href='https://astrasolution.com/' target='_blank'
+          className="hover:underline mx-1">astrasolution.com</a>All Rights Reserved.
+        </p>
       </footer>
-    </div>
+    </>
   );
 }

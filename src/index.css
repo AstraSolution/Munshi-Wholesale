@@ -1,3 +1,56 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&family=Play:wght@700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .font-Montserrat {
+    font-family: "Montserrat", sans-serif;
+    /* You can define additional properties like font-weight, font-size, etc. here if needed */
+  }
+}
+
+@layer base {
+  html {
+    @apply font-Montserrat;
+    scrollbar-width: thin;
+    scrollbar-color: #2d3748 #f1f1f1;
+  }
+
+  h1 {
+    @apply text-xl font-medium capitalize;
+  }
+}
+
+/*  the scrollbar  style */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2d3748;
+}
+
+
+.float-label-input {
+  margin: 0;
+}
+
+.float-label-input:focus-within label,
+.float-label-input input:not(:placeholder-shown) + label {
+  transform: translateY(-1.5rem) scale(0.75);
+  background-color: #fff;
+}
+
+::selection {
+  background-color: #f5e141;
+}
+
+.font-montserrat {
+  font-family: "Montserrat", sans-serif;
+}

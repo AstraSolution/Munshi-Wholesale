@@ -10,7 +10,7 @@ const Category2 = () => {
             <div className="">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     {/* 1st col */}
-                    <div className="sm:col-span-2 py-10 pl-5 bg-gradient-to-br ☐ from-gray-400/90 to-gray-100 text-white rounded-3xl relative h-[320px] flex items-end">
+                    <div className="sm:col-span-2 py-10 pl-5 bg-gradient-to-br ☐ from-gray-400/90 to-gray-100 text-white rounded-xl relative h-[320px] flex items-end hover:scale-105 duration-300">
                         <div>
                             <div className="mb-4">
                                 <p className="mb-[2px] text-white">Enjoy</p>
@@ -28,7 +28,7 @@ const Category2 = () => {
                         <img src={Image1} alt="" className="w-[320px] absolute top-1/2 -translate-y-1/2 -right-0" />
                     </div>
                     {/* 2nd col */}
-                    <div className="py-10 pl-5 bg-gradient-to-br ☐ from-brandGreen/90 to-brandGreen/70 text-white rounded-3xl relative h-[320px] flex items-end">
+                    <div className="py-10 pl-5 bg-gradient-to-br ☐ from-brandGreen/90 to-brandGreen/70 text-white rounded-xl relative h-[320px] flex items-end hover:scale-110 duration-300">
                         <div>
                             <div className="mb-4">
                                 <p className="mb-[2px] text-white">Enjoy</p>
@@ -46,7 +46,7 @@ const Category2 = () => {
                         <img src={Image2} alt="" className="w-[320px] absolute bottom-0" />
                     </div>
                     {/* 3rd col */}
-                    <div className="py-10 pl-5 bg-gradient-to-br ☐ from-brandBlue to-brandBlue/90 text-white rounded-3xl relative h-[320px] flex items-end">
+                    <div className="py-10 pl-5 bg-gradient-to-br ☐ from-brandBlue to-brandBlue/90 text-white rounded-xl relative h-[320px] flex items-end hover:scale-110 duration-300">
                         <div>
                             <div className="mb-4">
                                 <p className="mb-[2px] text-white">Enjoy</p>
