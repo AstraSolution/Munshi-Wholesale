@@ -25,7 +25,7 @@ const Profile_Page = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className='lg:flex lg:gap-4 container mx-auto px-1'>
                     {/* Left side */}
-                    <div className='lg:w-4/12 w-full'>
+                    <div className='lg:w-4/12 w-full '>
                         <div className="mt-1 lg:mt-3 lg:min-h-screen bg-gray-800 shadow-xl rounded-lg text-gray-300 ">
                             {/* Cover photo */}
                             <div className="relative rounded-t-lg h-32 overflow-hidden">
@@ -41,14 +41,50 @@ const Profile_Page = () => {
                             </div>
                             <div className="text-center mt-2 text-gray-200 ">
                                 <h2 className="font-semibold">Siyam Ahmed</h2>
-                                <p className="">Email</p>
-                                <p className="">Freelance Web Designer</p>
+
+
+                                {
+                                    isEditing ? (
+                                        ""
+                                    ) : (
+                                        <p className="">Email</p>
+                                    )
+                                }
+
+
+                                {
+                                    isEditing ? (
+                                        <div className="mb-2 mt-8 px-4 ">
+                                            <label className="block md:text-xl text-left text-gray-300  text-sm font-bold mb-2" htmlFor="title">
+                                                Profession
+                                            </label>
+                                            <select
+                                                className="w-full px-4 py-3 border-gray-600 text-gray-300 border rounded-md bg-[#1A222C]  focus:outline-none focus:border-blue-500"
+
+                                            >
+                                                <option value=''>profession</option>
+                                                <option value='student'>Student</option>
+                                                <option value='business'>Business</option>
+                                                <option className='pb-2' value='doctore'>Doctor</option>
+                                                <option className='pb-2' value='teacher'>Teacher</option>
+                                                <option className='pb-2' value='socialWorker'>Social Worker</option>
+                                                <option className='pb-2' value='mechanicalEngineer'>Mechanical Engineer</option>
+                                            </select>
+
+                                        </div>
+                                    ) : (
+                                        <p className="text-gray-200">Freelance Web Designer</p>
+                                    )
+                                }
+
                             </div>
-                            <div className='px-2'>
+
+
+                            <div className='px-4 py-2'>
                                 <h1> Bio </h1>
                                 {isEditing ? (
                                     <textarea
-                                        className="w-full h-auto md:min-h-60 min-h-32   px-4 py-2 text-gray-300 border rounded-lg bg-gray-800 focus:outline-none focus:border-blue-500 "
+                                        className="w-full h-auto md:min-h-60 min-h-32 border-gray-600 px-4 py-2 text-gray-300 border rounded-lg bg-[#1A222C] focus:outline-none focus:border-blue-500 "
                                         id="bio"
                                         placeholder="Bio"
                                         required
@@ -61,7 +97,7 @@ const Profile_Page = () => {
                         </div>
                     </div>
                     {/* Right side */}
-                    <div className='lg:w-8/12 w-full mx-auto mt-3 lg:mt-3 bg-gray-800 p-4 rounded-md '>
+                    <div className='lg:w-8/12 w-full mx-auto mt-3 lg:mt-3 bg-gray-800 p-6 rounded-md '>
                         <div>
                             <div className='flex items-center justify-between text-gray-300'>
                                 <h1>Personal Information</h1>
@@ -79,7 +115,7 @@ const Profile_Page = () => {
                                                     Full Name
                                                 </label>
                                                 <input
-                                                    className="w-full px-4 py-2 text-gray-300 border rounded-lg bg-gray-800  focus:outline-none focus:border-blue-500"
+                                                    className="w-full px-4 py-3 border-gray-600 text-gray-300 border rounded-md bg-[#1A222C]  focus:outline-none focus:border-blue-500"
                                                     id="fullName"
                                                     type="text"
                                                     placeholder="Full Name"
@@ -105,7 +141,7 @@ const Profile_Page = () => {
                                                     Phone Number
                                                 </label>
                                                 <input
-                                                    className="w-full px-4 py-2 text-gray-300 border rounded-lg bg-gray-800  focus:outline-none focus:border-blue-500"
+                                                    className="w-full px-4 py-3 text-gray-300 border border-gray-600 rounded-md bg-[#1A222C]  focus:outline-none focus:border-blue-500"
                                                     id="phoneNumber"
                                                     type="number"
                                                     placeholder="Phone Number"
@@ -132,7 +168,7 @@ const Profile_Page = () => {
                                                     Post Code
                                                 </label>
                                                 <input
-                                                    className="w-full px-4 py-2 text-gray-300 border rounded-lg bg-gray-800  focus:outline-none focus:border-blue-500"
+                                                    className="w-full px-4 py-3 border-gray-600 text-gray-300 border rounded-md bg-[#1A222C]  focus:outline-none focus:border-blue-500"
                                                     id="postCode"
                                                     type="text"
                                                     placeholder="Post Code"
@@ -162,7 +198,7 @@ const Profile_Page = () => {
                                                     State
                                                 </label>
                                                 <input
-                                                    className="w-full px-4 py-2 text-gray-300 border rounded-lg bg-gray-800  focus:outline-none focus:border-blue-500"
+                                                    className="w-full px-4 py-3 border-gray-600 text-gray-300 border rounded-md bg-[#1A222C]  focus:outline-none focus:border-blue-500"
                                                     id="state"
                                                     type="text"
                                                     placeholder="State"
@@ -189,7 +225,7 @@ const Profile_Page = () => {
                                                     District
                                                 </label>
                                                 <input
-                                                    className="w-full px-4 py-2 text-gray-300 border rounded-lg bg-gray-800  focus:outline-none focus:border-blue-500"
+                                                    className="w-full px-4 py-3 border-gray-600 text-gray-300 border rounded-md bg-[#1A222C]  focus:outline-none focus:border-blue-500"
                                                     id="district"
                                                     type="text"
                                                     placeholder="District"
@@ -218,7 +254,7 @@ const Profile_Page = () => {
                                                     Country
                                                 </label>
                                                 <input
-                                                    className="w-full px-4 py-2 text-gray-300 border rounded-lg bg-gray-800  focus:outline-none focus:border-blue-500"
+                                                    className="w-full px-4 py-3  border-gray-600 text-gray-300 border rounded-md bg-[#1A222C]  focus:outline-none focus:border-blue-500"
                                                     id="country"
                                                     type="text"
                                                     placeholder="Country"
@@ -240,7 +276,7 @@ const Profile_Page = () => {
                                 <div className="p-4  mx-8 mt-2">
                                     {
                                         isEditing ? (
-                                            <button className="w-1/2 block mx-auto rounded-full bg-gray-900 hover:shadow-lg font-semibold text-white px-6 py-2">Save Now </button>
+                                            <button className="w-1/2 block mx-auto rounded-full bg-[#1A222C] hover:shadow-lg font-semibold text-gray-300 px-6 py-2">Save Now </button>
 
                                         ) : ("")
                                     }
