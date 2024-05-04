@@ -75,6 +75,8 @@ const ProductCard = ({ currentProduct, currentUser }) => {
       color: color,
     };
 
+    console.log(addWishlist);
+    
     axiosPublic
       .post("/wishlist", addWishlist)
       .then((response) => {
