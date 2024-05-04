@@ -2,11 +2,56 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { FaStar, FaShoppingCart, FaHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
-const ProductCard = ({ currentProduct }) => {
-  const { _id, title, image, price, offer } = currentProduct;
+const ProductCard = ({ currentProduct, currentUser }) => {
+  const { _id, title, image, price, offer, color, dimensions, quantity } =
+    currentProduct;
   const [isWished, setIsWished] = useState(false);
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
+
+  // console.log(currentProduct);
+
+  // Handle add to cart
+  const handleCart = () => {
+    let countDis = price;
+    if (offer?.discount !== "N/A") {
+      countDis = (price - (price * parseInt(offer?.discount)) / 100).toFixed(2);
+    }
+
+    const addCart = {
+      customer_name: currentUser?.fullName,
+      customer_email: currentUser?.email,
+      product_id: _id,
+      unit_price: countDis,
+      total_price: countDis,
+      quantity: 1,
+      product_image: image,
+      stock_limit: quantity,
+      title: title,
+      dimensions: dimensions,
+      color: color,
+    };
+
+    axiosPublic
+      .post("/myCarts", addCart)
+      .then((response) => {
+        if (response.status === 200) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Product add to cart successfully.",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
 
   return (
     <div>
@@ -32,7 +77,7 @@ const ProductCard = ({ currentProduct }) => {
           )}
         </div>
         <div className="w-full hidden group-hover:flex justify-center gap-10 absolute bottom-5 z-10">
-          <button>
+          <button onClick={() => handleCart()}>
             <FaShoppingCart className="text-2xl text-black" />
           </button>
           <button onClick={() => setIsWished(!isWished)}>
@@ -72,4 +117,5 @@ export default ProductCard;
 
 ProductCard.propTypes = {
   currentProduct: PropTypes.object,
+  currentUser: PropTypes.object,
 };

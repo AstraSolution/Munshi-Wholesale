@@ -1,8 +1,8 @@
-import useAxios from "./useAxios";
+import useAxiosPublic from "./useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 
 const useAllCategory = () => {
-  const axiosPublic = useAxios();
+  const axiosPublic = useAxiosPublic();
 
   const { data: categories = [], isLoading } = useQuery({
     queryKey: ["categories"],
