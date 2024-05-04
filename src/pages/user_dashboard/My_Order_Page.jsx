@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import { IoIosSearch } from "react-icons/io";
 import { useForm } from 'react-hook-form';
 import { StarRating } from '../../Components/Shared/StarRating/StarRating';
-import UseAxios from '../../Hooks/useAxios';
 import { Toaster, toast } from 'react-hot-toast';
+import useAxiosPublic from '../../Hooks/useAxiosPublic';
 
 const My_Order_Page = () => {
   const [data, setData] = useState(null);
@@ -14,7 +14,7 @@ const My_Order_Page = () => {
   const { register, handleSubmit, reset } = useForm();
   const [loading, setLoading] = useState(false);
   const [reviewText, setReviewText] = useState('');
-  const instance = UseAxios()
+  const axiosPublic = useAxiosPublic()
 
   useEffect(() => {
     fetch('/products.json')
@@ -47,7 +47,7 @@ const My_Order_Page = () => {
       console.log(reviewInformation);
 
 
-      const res = await instance.post("/reviews", reviewInformation);
+      const res = await axiosPublic.post("/reviews", reviewInformation);
       console.log(res.data);
       if (res?.data) {
         toast.success('Review Successfull!')

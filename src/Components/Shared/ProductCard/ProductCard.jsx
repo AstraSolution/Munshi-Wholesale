@@ -53,6 +53,48 @@ const ProductCard = ({ currentProduct, currentUser }) => {
       });
   };
 
+  // Handle wishlist
+  const handleWishlist = () => {
+    let countDis = price;
+    if (offer?.discount !== "N/A") {
+      countDis = (price - (price * parseInt(offer?.discount)) / 100).toFixed(2);
+    }
+    setIsWished(!isWished);
+
+    const addWishlist = {
+      customer_name: currentUser?.fullName,
+      customer_email: currentUser?.email,
+      product_id: _id,
+      unit_price: countDis,
+      total_price: countDis,
+      quantity: 1,
+      product_image: image,
+      stock_limit: quantity,
+      title: title,
+      dimensions: dimensions,
+      color: color,
+    };
+
+    console.log(addWishlist);
+    
+    axiosPublic
+      .post("/wishlist", addWishlist)
+      .then((response) => {
+        if (response) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Product add wishlist successfully.",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
   return (
     <div>
       <div className="relative flex items-center rounded-lg shadow-md h-[250px] lg:h-[350px] group border-2 border-gray-200">
@@ -80,7 +122,7 @@ const ProductCard = ({ currentProduct, currentUser }) => {
           <button onClick={() => handleCart()}>
             <FaShoppingCart className="text-2xl text-black" />
           </button>
-          <button onClick={() => setIsWished(!isWished)}>
+          <button onClick={() => handleWishlist()}>
             <FaHeart
               className={`text-2xl ${isWished ? "text-red-500" : "text-black"}`}
             />
