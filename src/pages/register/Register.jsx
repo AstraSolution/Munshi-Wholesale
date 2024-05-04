@@ -7,11 +7,11 @@ import FACEBOOK_ICON from "../../assets/icons/FacebookIcon.svg";
 import GOOGLE_ICON from "../../assets/icons/GoogleIcon.png";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
-import UseAxios from "../../Hooks/useAxios";
 import { ToastContainer, toast } from "react-toastify";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 export default function Register() {
-  const axiosPublis = UseAxios();
+  const axiosPublis = useAxiosPublic();
   const { createUser, updateUserProfiole, googleLogin } = useAuth();
   const [showPassword, setShowPassword] = useState(true);
   const {
@@ -28,10 +28,11 @@ export default function Register() {
     const password = data.password;
 
     const newUser = { fullName, email, password, isFirstLogin: true };
-
+    console.log(newUser)
     createUser(email, password)
       .then(async (res) => {
-        await updateUserProfiole(fullName);
+        // const updatedUser = await updateUserProfiole(fullName);
+        // console.log(updatedUser);
         if (res.user) {
           await axiosPublis.post("/users", newUser);
           Swal.fire({
@@ -45,6 +46,7 @@ export default function Register() {
         }
       })
       .catch((error) => {
+        console.log(error);
         toast("This email already exist");
       });
   };
