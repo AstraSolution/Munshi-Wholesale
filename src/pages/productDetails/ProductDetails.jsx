@@ -1,3 +1,4 @@
+// React icons
 import { FaRegHeart } from "react-icons/fa";
 import {
   MdOutlineKeyboardDoubleArrowLeft,
@@ -6,6 +7,7 @@ import {
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { RiShoppingBag2Line } from "react-icons/ri";
 
+// React responsive carousal
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 
@@ -18,15 +20,13 @@ const ProductDetails = () => {
   const { id } = useParams();
   const product = useGetaProduct(id);
 
-  // console.log(product);
-
   return (
     <div>
       <SectionBanner
         title={"Product Details"}
-        subtTitle={`Shop / Products / ${product?.title}`}
+        subTitle={`Shop / Products / ${product?.title}`}
       ></SectionBanner>
-      <div className="container mx-auto mt-10 px-5 lg:px-10">
+      <div className="container mx-auto my-10 px-5 lg:px-10">
         <div className="flex flex-col lg:flex-row">
           {/* First half */}
           <div className="w-full lg:w-1/2 flex flex-col items-center">
@@ -73,19 +73,6 @@ const ProductDetails = () => {
           <div className="w-full lg:w-1/2">
             <h2 className="text-3xl font-semibold">{product?.title}</h2>
 
-            <div className="flex gap-2 items-center text-yellow-400 my-2">
-              {/* <Rating
-                unratedColor="amber"
-                ratedColor="amber"
-                readonly
-                value={5}
-              />
-              <h2 className="text-gray-500 mx-5">
-                {reviewsLength !== 0 ? `${reviewsLength} ` : "0 "}
-                Reviews
-              </h2> */}
-            </div>
-
             <hr className="my-3" />
 
             <h2 className="text-yellow-500 text-2xl font-medium my-1">
@@ -103,19 +90,27 @@ const ProductDetails = () => {
             </h2>
 
             {/* Color */}
-            <div className="flex items-center gap-10 mt-3">
-              <h3>Color</h3>
+            <div className="flex items-center gap-5 mt-3">
+              <h3 className="text-lg font-semibold">Color</h3>
               <div className="flex items-center gap-4">
                 {product?.color?.map((color) => (
-                  <label key={color}>
-                    <input type="radio" name="color" value={color} />
+                  <label
+                    key={color}
+                    className="border-2 border-gray-400 rounded-full py-1 px-3 text-sm flex items-center"
+                  >
+                    <input
+                      type="radio"
+                      name="color"
+                      value={color}
+                      className="mr-1 text-start"
+                    />
                     {color}
                   </label>
                 ))}
               </div>
             </div>
 
-            <hr className="my-5" />
+            <hr className="my-3" />
 
             <p className="text-gray-500 mb-3">{product?.description}</p>
             <table>
@@ -166,7 +161,7 @@ const ProductDetails = () => {
               </tbody>
             </table>
 
-            <hr className="my-5" />
+            <hr className="my-3" />
 
             <div className="flex flex-row gap-5 my-5">
               <button
@@ -185,7 +180,7 @@ const ProductDetails = () => {
               </button>
             </div>
 
-            <hr className="my-5" />
+            <hr className="my-3" />
 
             <div
               className={
