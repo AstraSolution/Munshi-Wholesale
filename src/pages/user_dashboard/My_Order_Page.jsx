@@ -66,8 +66,6 @@ const My_Order_Page = () => {
   };
 
 
-
-
   const isReviewValid = reviewText?.length >= 20;
 
   return (
@@ -76,14 +74,14 @@ const My_Order_Page = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="container mx-auto md:py-3 py-2  text-gray-300 "
+        className=" px-4 md:py-3 py-2  text-gray-300 "
       >
         <div className="space-y-2">
           <motion.div
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="p-5 rounded-lg bg-50-50"
+            className=" rounded-lg bg-50-50"
           >
             <div className='flex items-center justify-between'>
               <motion.h1

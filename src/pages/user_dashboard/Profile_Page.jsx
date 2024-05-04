@@ -8,9 +8,9 @@ import useAxiosPublic from '../../Hooks/useAxiosPublic';
 
 
 const Profile_Page = () => {
-    const { currentUser } = useCurrentUser()
+    const { currentUser, refetch } = useCurrentUser()
     const axiosPublic = useAxiosPublic();
-   
+
 
     const { register, handleSubmit } = useForm();
     const [isEditing, setIsEditing] = useState(false);
@@ -66,9 +66,9 @@ const Profile_Page = () => {
 
                 if (res.status === 200) {
                     toast.success(" Profile Update successfully");
+                    refetch()
+                    setIsEditing(false);
 
-                    setIsEditing(false); 
-                    
 
                 } else {
                     console.error("Update failed: User not found or update unsuccessful");
