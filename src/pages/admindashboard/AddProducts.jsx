@@ -156,14 +156,14 @@ const AddProducts = () => {
   };
 
   return (
-    <section className="max-w-full px-4 lg:py-4 mx-auto bg-gray-800 rounded-lg  mb-9">
+    <section className="w-full px-4 lg:py-4 bg-[#1A222C] rounded-lg  mb-9">
       <h1 className="text-center text-2xl font-bold text-gray-300 ">
         Product information
       </h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-3">
           <div className="lg:flex  gap-5 ">
-            <div className="lg:w-8/12 w-full border-2 px-4 py-4 my-2 mb-5">
+            <div className="lg:w-8/12 w-full  rounded-md bg-[#1F2937] border-slate-600 px-4 py-4 my-2 mb-5">
               {/*  title */}
               <div>
                 <label className="text-gray-300 text-lg ">
@@ -171,7 +171,7 @@ const AddProducts = () => {
                   Product Title{" "}
                 </label>
                 <input
-                  className="w-full px-4 py-2 text-white border rounded-lg bg-gray-800  focus:outline-none focus:border-blue-500"
+                  className="w-full px-4 py-2 text-white border rounded-md bg-gray-800   border-[#3D4D60]"
                   {...register("title")}
                   placeholder="Product Title"
                   type="text"
@@ -181,27 +181,69 @@ const AddProducts = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3  ">
                 {/*  brand */}
                 <div className="w-full">
-                  <label className="text-gray-300 text-lg  "> Brand </label>
-                  <input
+                  <label className="text-gray-300 text-lg  ">Brand</label>
+                  <select
                     className="w-full px-4 py-2 text-white border rounded-lg bg-gray-800  focus:outline-none focus:border-blue-500"
                     {...register("brand")}
-                    placeholder=" Brand Name"
-                    type="text"
                     required
-                  />
-                </div>
+                  >
+                    <option value="">Select Brand</option>
 
+                    <option value="DeWalt ">DeWalt</option>
+                    <option value="Milwaukee ">Milwaukee</option>
+                    <option value="Makita ">Makita</option>
+                    <option value="Bosch ">Bosch</option>
+                    <option value="Ridgid ">Ridgid</option>
+                    <option value="Craftsman ">Craftsman</option>
+                    <option value="Stanley ">Stanley</option>
+                    <option value="Husqvarna ">Husqvarna</option>
+                    <option value="Hitachi ">Hitachi</option>
+                    <option value="Black & Decker ">Black & Decker</option>
+                    <option value="Ryobi ">Ryobi</option>
+                    <option value="Porter-Cable ">Porter-Cable</option>
+                    <option value="Dremel ">Dremel</option>
+                    <option value="Kobalt ">Kobalt</option>
+                    <option value="Fein ">Fein</option>
+                    <option value="Worx ">Worx</option>
+                    <option value="Hilti ">Hilti</option>
+                    <option value="Paslode ">Paslode</option>
+                    <option value="Ingersoll Rand ">Ingersoll Rand</option>
+                    <option value="Stihl ">Stihl</option>
+                  </select>
+                </div>
                 {/*  category */}
-                <div className="w-full ">
-                 <label className="text-gray-300 text-lg  "> Category </label>
-                  <input
+                <div className="w-full">
+                  <label className="text-gray-300 text-lg  ">Category</label>
+                  <select
                     className="w-full px-4 py-2 text-white border rounded-lg bg-gray-800  focus:outline-none focus:border-blue-500"
                     {...register("category")}
-                    placeholder="Category Name"
-                    type="text"
                     required
-                  />
+                  >
+                    <option value="">Select Category</option>
+
+                    <option value="Power Tools">Power Tools</option>
+                    <option value="Hand Tools">Hand Tools</option>
+                    <option value="Gardening Tools">Gardening Tools</option>
+                    <option value="Electrical Equipment ">Electrical Equipment</option>
+                    <option value="Safety Equipment ">Safety Equipment</option>
+                    <option value="Construction Equipment ">Construction Equipment</option>
+                    <option value="Automotive Tools ">Automotive Tools</option>
+                    <option value="Measuring & Layout Tools ">Measuring & Layout Tools</option>
+                    <option value="Woodworking Tools ">Woodworking Tools</option>
+                    <option value="Metalworking Tools ">Metalworking Tools</option>
+                    <option value="Painting Supplies ">Painting Supplies</option>
+                    <option value="Plumbing Tools ">Plumbing Tools</option>
+                    <option value="Cleaning Equipment ">Cleaning Equipment</option>
+                    <option value="Storage & Organization ">Storage & Organization</option>
+                    <option value="Welding & Soldering ">Welding & Soldering</option>
+                    <option value="Fasteners & Hardware ">Fasteners & Hardware</option>
+                    <option value="Material Handling ">Material Handling</option>
+                    <option value="Adhesives & Sealants ">Adhesives & Sealants</option>
+                    <option value="Air Tools ">Air Tools</option>
+                    <option value="Outdoor Power Equipment ">Outdoor Power Equipment</option>
+                  </select>
                 </div>
+
                 {/* model */}
                 <div>
                   <label className="text-gray-300 text-lg  "> Model </label>
@@ -227,7 +269,7 @@ const AddProducts = () => {
               </div>
             </div>
             {/* pricing */}
-            
+
             <div className="border-2 lg:w-4/12 w-full px-4 py-8 my-2">
               <div className="pb-5">
                 <h1 className="border-b-2 text-center text-xl font-semibold text-white pb-4">
@@ -251,10 +293,6 @@ const AddProducts = () => {
                 required
               />
             </div>
-
-            
-            
-           
           </div>
           {/* second step */}
           <div className=" lg:flex  gap-5">
@@ -346,7 +384,7 @@ const AddProducts = () => {
 
               {/* quantity */}
               <div>
-               <label className="text-gray-300 text-lg  "> Quantity </label>
+                <label className="text-gray-300 text-lg  "> Quantity </label>
                 <input
                   className="w-full px-4 py-2 text-white border rounded-lg bg-gray-800  focus:outline-none focus:border-blue-500"
                   {...register("quantity")}
@@ -369,7 +407,7 @@ const AddProducts = () => {
 
               {/* availability */}
               <div>
-               <label className="text-gray-300 text-lg  ">Availability </label>
+                <label className="text-gray-300 text-lg  ">Availability </label>
                 <input
                   className="w-full px-4 py-2 text-white border rounded-lg bg-gray-800  focus:outline-none focus:border-blue-500"
                   {...register("availability")}
@@ -435,7 +473,7 @@ const AddProducts = () => {
 
                 {/* shipping_restrictions */}
                 <div>
-                 <label className="text-gray-300 text-lg  ">
+                  <label className="text-gray-300 text-lg  ">
                     {" "}
                     Shipping Restrictions{" "}
                   </label>
@@ -464,7 +502,10 @@ const AddProducts = () => {
                 </div>
                 {/* manufacturer */}
                 <div>
-                  <label className="text-gray-300 text-lg  "> Manufacturer </label>
+                  <label className="text-gray-300 text-lg  ">
+                    {" "}
+                    Manufacturer{" "}
+                  </label>
                   <input
                     className="w-full px-4 py-2 text-white border rounded-lg bg-gray-800  focus:outline-none focus:border-blue-500"
                     {...register("manufacturer")}
