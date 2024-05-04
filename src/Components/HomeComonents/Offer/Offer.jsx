@@ -6,7 +6,7 @@ const Offer = () => {
     <div className="container mx-auto my-10 px-5 lg:px-10">
       {/* Offer */}
       <div>
-        <div className="flex flex-col md:flex-row gap-5 lg:gap-10">
+        <div className="flex flex-col md:flex-row gap-5 lg:gap-8">
           {/* Offer 01 */}
           <motion.div
             whileHover={{ scale: 1.075 }}
