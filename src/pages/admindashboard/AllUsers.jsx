@@ -1,53 +1,62 @@
 import  { useState } from "react";
+import useAllUsers from "../../Hooks/useAllUsers";
+import useOrders from "../../Hooks/useOrders";
+
 
 const AllUsers = () => {
+  const users = useAllUsers()
+  console.log(users);
+  const { orderProduct,  } = useOrders();
+  console.log(orderProduct);
   const [selectedUser, setSelectedUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
-
-  const handleReviewClick = (user) => {
-    setSelectedUser(user);
+  const handleNameClick = (users) => {
+    setSelectedUser(users);
+    console.log(users);
     setShowModal(true);
   };
 
   // Assuming your user data is defined here
-  const [userData, setUserData] = useState([
-    {
-      _id: 1,
-      username: "JohnDoe",
-      email: "john@example.com",
-      role: "user",
-      orders: [
-        { orderId: 101, productName: "Product A", quantity: 2, totalPrice: 20 },
-        { orderId: 102, productName: "Product B", quantity: 1, totalPrice: 10 },
-      ],
-    },
-    {
-      _id: 2,
-      username: "JaneDoe2",
-      email: "jane@example.com",
-      role: "user",
-      orders: [
-        { orderId: 201, productName: "Product C", quantity: 3, totalPrice: 30 },
-        { orderId: 202, productName: "Product D", quantity: 1, totalPrice: 15 },
-      ],
-    },
-  ]);
+  // const [userData, setUserData] = useState([
+  //   {
+  //     _id: 1,
+  //     username: "JohnDoe",
+  //     email: "john@example.com",
+  //     role: "user",
+  //     orders: [
+  //       { orderId: 101, productName: "Product A", quantity: 2, totalPrice: 20 },
+  //       { orderId: 102, productName: "Product B", quantity: 1, totalPrice: 10 },
+  //     ],
+  //   },
+  //   {
+  //     _id: 2,
+  //     username: "JaneDoe2",
+  //     email: "jane@example.com",
+  //     role: "user",
+  //     orders: [
+  //       { orderId: 201, productName: "Product C", quantity: 3, totalPrice: 30 },
+  //       { orderId: 202, productName: "Product D", quantity: 1, totalPrice: 15 },
+  //     ],
+  //   },
+  // ]);
 
-  const toggleBan = (userId) => {
-    setUserData((prevUserData) =>
-      prevUserData.map((user) =>
-        user._id === userId ? { ...user, isBanned: !user.isBanned } : user
-      )
-    );
-  };
+  // const toggleBan = (userId) => {
+  //   setUserData((prevUserData) =>
+  //     prevUserData.map((user) =>
+  //       user._id === userId ? { ...user, isBanned: !user.isBanned } : user
+  //     )
+  //   );
+  // };
 
-  const toggleAdmin = (userId) => {
-    setUserData((prevUserData) =>
-      prevUserData.map((user) =>
-        user._id === userId ? { ...user, isAdmin: !user.isAdmin } : user
-      )
-    );
-  };
+  // const toggleAdmin = (userId) => {
+  //   setUserData((prevUserData) =>
+  //     prevUserData.map((user) =>
+  //       user._id === userId ? { ...user, isAdmin: !user.isAdmin } : user
+  //     )
+  //   );
+  // };
+
+
 
   return (
     <div className="container mx-auto md:py-3 py-2 text-white">
@@ -79,23 +88,23 @@ const AllUsers = () => {
                 </tr>
               </thead>
               <tbody>
-                {userData?.map((user, i) => (
+                {users?.map((user, i) => (
                   <tr key={user._id} className="bg-gray-800">
                     <td className="border border-gray-400 p-2 text-center bg-gray-800 ">
                       {i + 1}
                     </td>
                     <td
-                      onClick={() => handleReviewClick(user)}
+                      onClick={() => handleNameClick(user)}
                       className="border cursor-pointer border-gray-400 bg-gray-800 text-white p-2 text-sm md:text-md text-center"
                     >
-                      {user?.username}
+                      {user?.fullName}
                     </td>
                     <td className="border border-gray-400 p-2 bg-gray-800">
                       {/* Assuming you have profile images for users */}
                       <img
                         className="w-20 h-full md:h-16 rounded-full mx-auto"
-                        src={`https://via.placeholder.com/150?text=${user.username}`}
-                        alt={`Profile of ${user?.username}`}
+                        src={user?.profilePhoto}
+                        alt= {user?.fullName?.slice(0, 5)}
                       />
                     </td>
                     <td className="border border-gray-400 p-2 text-sm md:text-md bg-gray-800 text-center ">
@@ -104,13 +113,13 @@ const AllUsers = () => {
                     <td className="border border-gray-400 bg-gray-800 p-2 text-sm md:text-md text-center">
                       <button
                         className="p-3 mr-2 rounded-2xl bg-neutral-900"
-                        onClick={() => toggleBan(user._id)}
+                       
                       >
                         {user.isBanned ? "UnBan" : "Ban"}
                       </button>
                       <button
                         className="p-3 rounded-2xl bg-neutral-900"
-                        onClick={() => toggleAdmin(user._id)}
+                        
                       >
                         {user.isAdmin ? "Make User" : "Make Admin"}
                       </button>
@@ -126,9 +135,9 @@ const AllUsers = () => {
       {showModal && selectedUser && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
           <div className="lg:w-4/12 mx-auto bg-gray-800 p-6 rounded-lg">
-            <h2 className="text-xl font-bold text-white">User Profile: {selectedUser.username}</h2>
-            <p>User ID: {selectedUser._id}</p>
-            <p>Email: {selectedUser.email}</p>
+            <h2 className="text-xl font-bold text-white">User Profile: {selectedUser?.username}</h2>
+            <p>User ID: {selectedUser?._id}</p>
+            <p>Email: {selectedUser?.email}</p>
             <h3 className="text-lg font-semibold text-white mt-4">Order History</h3>
             <div className="overflow-x-auto">
               <table className="w-full mt-2">
@@ -149,7 +158,7 @@ const AllUsers = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {selectedUser.orders.map((order) => (
+                  {/* {selectedUser.orders.map((order) => (
                     <tr key={order.orderId}>
                       <td className="border bg-gray-800 border-gray-400 p-2 text-center">
                         {order.orderId}
@@ -164,7 +173,7 @@ const AllUsers = () => {
                         {order.totalPrice}
                       </td>
                     </tr>
-                  ))}
+                  ))} */}
                 </tbody>
               </table>
             </div>

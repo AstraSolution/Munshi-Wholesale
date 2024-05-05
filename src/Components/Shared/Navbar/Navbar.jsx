@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
-import { FaRegHeart } from "react-icons/fa";
+import { FaRegHeart , FaShoppingCart} from "react-icons/fa";
 import useWishlistProducts from "../../../Hooks/useWishlistProducts";
 
 export default function Navbar() {
 
   const [wishlistProduct] = useWishlistProducts()
+
   return (
     <div className="bg-gray-800 text-white">
       <ul className=" flex justify-center flex-wrap gap-5 py-4">
@@ -27,7 +28,7 @@ export default function Navbar() {
           <Link to={"/faq"}>FAQ</Link>
         </li>
         <li>
-          <Link to={"/cart"}>Cart</Link>
+          <Link to={"/carts"}>Carts</Link>
         </li>
 
         <li>
@@ -43,6 +44,20 @@ export default function Navbar() {
                   </p>
                 </div>
                 <FaRegHeart className="text-2xl " />
+              </div>
+            </div>
+          </Link>
+        </li>
+        <li>
+          <Link to={"/carts"}>
+            <div className="flex  items-center ">
+              <div className="relative ">
+                <div className="  absolute left-4 -top-2 ">
+                  <p className="flex h-2 w-2 items-center justify-center bg-[#FFA500] p-3 rounded-full  text-sm text-white">
+                   
+                  </p>
+                </div>
+                <FaShoppingCart className="text-2xl " />
               </div>
             </div>
           </Link>

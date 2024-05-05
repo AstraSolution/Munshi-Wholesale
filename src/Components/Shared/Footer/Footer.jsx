@@ -78,7 +78,7 @@ export default function Footer() {
           </div>
           <div className="md:flex items-center ">
             <p className="text-sm text-center">We Accepted</p>
-            <img className="w-60 mx-auto " src="https://i.ibb.co/QNttYCj/caed1-removebg-preview.png" alt="" />
+            <img className="w-80 mx-auto " src="https://i.ibb.co/QNttYCj/caed1-removebg-preview.png" alt="" />
           </div>
         </div>
       </footer>
