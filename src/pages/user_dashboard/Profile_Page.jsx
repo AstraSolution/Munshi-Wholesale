@@ -118,7 +118,7 @@ const Profile_Page = () => {
     <>
 
       <div className='text-right px-4 '>
-        <button onClick={toggleEditing}><CiEdit className='lg:text-3xl md:text-2xl text-2xl  cursor-pointer  block  ' />
+        <button onClick={toggleEditing}><CiEdit className='lg:text-3xl text-gray-800 md:text-2xl text-2xl  cursor-pointer  block  ' />
         </button>
       </div>
       {/* Profile */}

@@ -1,57 +1,88 @@
 import React from "react";
+import { TfiEmail } from "react-icons/tfi";
 
 export default function Footer() {
   return (
     <>
       <footer className="font-[sans-serif] bg-black py-12 px-10 font-montserrat">
-        <div className="grid container mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-8">
+        <div className="grid container mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3  xl:grid-cols-5 gap-6 md:gap-8 lg:gap-12">
+
           <div>
-            <h1 className="text-white text-lg font-bold mb-5 font-montserrat">Company</h1>
-            <ul className="space-y-5">
-              <li><a className="text-gray-300 hover:text-white text-[15px]">About Us</a></li>
-              <li><a className="text-gray-300 hover:text-white text-[15px]">Contact</a></li>
-              <li><a className="text-gray-300 hover:text-white text-[15px]">Careers</a></li>
+            <div className="">
+
+              <img className="w-44 mb-4 " src="https://i.ibb.co/x576tv6/munshi-removebg-preview.png" alt="" />
+              <ul className="space-y-5">
+                <li><a className="text-gray-300 hover:text-white text-[15px]"> <p>No: 58 A, East Madison Street,
+                  Baltimore, MD, USA 4508</p> </a></li>
+
+                <li className="text-gray-300 text-[15px] hover:text-red-600  flex items-center gap-1"> <span><TfiEmail></TfiEmail></span> <p className="text-sm ">astrasolution07@gmail.com</p></li>
+
+                <li><a className="text-[#FF9D00] text-[15px]"> 0000 - 123 - 456789 </a></li>
+              </ul>
+            </div>
+          </div>
+
+
+          <div className="md:ml-10">
+            <div>
+              <h1 className="text-[#FF9D00] text-lg font-bold lg:mb-5 mb-2 font-montserrat lg:mt-5 mt-1 ">Know Us</h1>
+              <ul className="lg:space-y-2 space-y-1 md:space-y-2">
+
+                <li><a className="text-gray-300 hover:text-red-600 text-[15px]"> Home</a></li>
+                <li><a className="text-gray-300 hover:text-red-600 text-[15px]">About Us</a></li>
+                <li><a className="text-gray-300 hover:text-red-600 text-[15px]">Contact</a></li>
+                <li><a className="text-gray-300 hover:text-red-600 text-[15px]">Faq</a></li>
+                <li><a className="text-gray-300 hover:text-red-600 text-[15px]">Blog</a></li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <h1 className="text-[#FF9D00] text-lg font-bold lg:mb-5 mb-2 font-montserrat lg:mt-5 mt-1">Useful Link</h1>
+            <ul className="lg:space-y-2 space-y-1 md:space-y-2">
+
+              <li><a className="text-gray-300 hover:text-red-600 text-[15px]">Store Map</a></li>
+              <li><a className="text-gray-300 hover:text-red-600 text-[15px]">Help</a></li>
+              <li><a className="text-gray-300 hover:text-red-600 text-[15px]">Services</a></li>
+              <li><a className="text-gray-300 hover:text-red-600 text-[15px]">Search Product</a></li>
+              <li><a className="text-gray-300 hover:text-red-600 text-[15px]">Career</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-white text-lg font-bold mb-5 font-montserrat">Information</h4>
-            <ul className="space-y-5">
-              <li><a className="text-gray-300 hover:text-white text-[15px]">Privacy Policy</a></li>
-              <li><a className="text-gray-300 hover:text-white text-[15px]">Terms of Service</a></li>
-              <li><a className="text-gray-300 hover:text-white text-[15px]">Refund Policy</a></li>
+            <h4 className="text-[#FF9D00] text-lg font-bold lg:mb-5 mb-2 font-montserrat lg:mt-5 mt-1">Information</h4>
+            <ul className="lg:space-y-2 space-y-1 md:space-y-2">
+              <li><a className="text-gray-300 hover:text-red-600 text-[15px]">Order</a></li>
+              <li><a className="text-gray-300 hover:text-red-600 text-[15px]">Order Status</a></li>
+              <li><a className="text-gray-300 hover:text-red-600 text-[15px]">Deliveries</a></li>
+              <li><a className="text-gray-300 hover:text-red-600 text-[15px]">Wishlist</a></li>
+              <li><a className="text-gray-300 hover:text-red-600 text-[15px]">Refund Policy</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-white text-lg font-bold mb-5 font-montserrat">Help</h4>
-            <ul className="space-y-5">
-              <li><a className="text-gray-300 hover:text-white text-[15px]">FAQs</a></li>
-              <li><a className="text-gray-300 hover:text-white text-[15px]">Shipping Information</a></li>
-              <li><a className="text-gray-300 hover:text-white text-[15px]">Returns & Exchanges</a></li>
+            <h4 className="text-[#FF9D00] text-lg font-bold lg:mb-5 mb-2 font-montserrat lg:mt-5 mt-1 ">Special Offers</h4>
+            <ul className="lg:space-y-2 space-y-1 md:space-y-2">
+              <li><a className="text-gray-300 hover:text-red-600 text-[15px]">Terms & Condition</a></li>
+              <li><a className="text-gray-300 hover:text-red-600 text-[15px]">Terms of Service</a></li>
+              <li><a className="text-gray-300 hover:text-red-600 text-[15px]">Privacy Policy</a></li>
+              <li><a className="text-gray-300 hover:text-red-600 text-[15px]">Shipping Information</a></li>
+              <li><a className="text-gray-300 hover:text-red-600 text-[15px]">Returns & Exchanges</a></li>
             </ul>
           </div>
-
-          <div className="md:col-span-2 font-montserrat">
-            <h4 className="text-white text-lg font-bold mb-5 font-montserrat">Newsletter</h4>
-            <p className="text-gray-300 mb-4 text-[15px]">Subscribe to our newsletter to get updates on new products and promotions.
-            </p>
-            <form className="mb-4">
-              <div className="flex items-center">
-                <input type="email" placeholder="Enter your email"
-                  className="bg-gray-800 px-4 py-3.5 rounded-l-lg w-full text-[15px] text-gray-300 outline-none" />
-                <button type="button"
-                  className="bg-gray-700 text-[15px] text-gray-300 tracking-wide px-4 py-3.5 rounded-r-lg">Subscribe</button>
-              </div>
-            </form>
-          </div>
-       
         </div>
 
-        <p className='text-gray-300 text-right text-[15px] mt-8'>© 2024<a href='https://astrasolution.com/' target='_blank'
-          className="hover:underline mx-1">astrasolution.com</a>All Rights Reserved.
-        </p>
+        <div className="border-b mt-10 border-gray-500 w-full  "></div>
+        <div className=" lg:flex  items-center justify-between px-2 md:px-3 lg:px-5 text-gray-300 mt-4">
+          <div className="text-sm ">
+            <p>© 2024 munshi-multispare <span className="hover:text-red-600"> Online Platform</span></p>
+          </div>
+          <div className="md:flex items-center ">
+            <p className="text-sm text-center">We Accepted</p>
+            <img className="w-80 mx-auto " src="https://i.ibb.co/QNttYCj/caed1-removebg-preview.png" alt="" />
+          </div>
+        </div>
       </footer>
+
     </>
   );
 }
