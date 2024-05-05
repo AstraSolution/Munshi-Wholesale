@@ -91,7 +91,8 @@ const BrandChart = () => {
         options={chartData.options}
         series={chartData.series}
         type="line"
-        height={380}
+        height={450}
+        
       />
     )}
     </div>

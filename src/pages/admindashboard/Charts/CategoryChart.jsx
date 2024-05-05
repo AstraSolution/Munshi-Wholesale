@@ -25,7 +25,7 @@ const CategoryChart = () => {
   }));
 
   return (
-    <div style={{ maxWidth: "600px", margin: "0 auto" }}>
+    <div style={{  margin: "0 auto" }}>
       <h2 className="text-center mt-4 mb-5 text-black text-2xl font-bold">Top 10 Categories</h2>
       {categoryLoading ? (
         <p>Loading...</p>
