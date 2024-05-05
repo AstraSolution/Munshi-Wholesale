@@ -1,4 +1,4 @@
-import React from 'react';
+
 import Dashboard from './Dashboard';
 import { Outlet } from 'react-router-dom';
 import Dashboard_Navbar from './Dashboard_Navbar';
@@ -32,7 +32,7 @@ const Dashboard_Layout = () => {
         // </div>
 
 
-        <div className="lg:flex bg-black text-white h-screen lg:overflow-hidden">
+        <div className="lg:flex  text-white h-screen lg:overflow-hidden">
             {/* Fixed Dashboard for large devices */}
             <div className="lg:overflow-y-auto scrollbar-style">
                 <Dashboard />
