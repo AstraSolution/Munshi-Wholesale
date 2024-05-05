@@ -10,6 +10,7 @@ import { AuthContext } from "../../Providers/AuthProviders/AuthProvider";
 export default function Shop() {
   const [showAllCategories, setShowAllCategories] = useState(false);
   const [showAllBrands, setShowAllBrands] = useState(false);
+  const [sort, setSort] = useState(false);
 
   const products = useAllProduct();
   const { categories, categoryLoading } = useAllCategory();
@@ -73,11 +74,39 @@ export default function Shop() {
 
         <div className="flex items-center gap-3">
           <h3 className="text-lg">Sort by</h3>
-          <div className="flex gap-8 py-2 px-5 bg-yellow-300 rounded-full">
-            <p className="text-lg">Featured</p>
-            <p>
-              <FaSortDown className="block" />
-            </p>
+          <div className="flex flex-col">
+            <div
+              className={`${
+                sort
+                  ? "flex gap-6 py-2 px-6 bg-yellow-300 rounded-t-lg relative"
+                  : "flex gap-6 py-2 px-6 bg-yellow-300 rounded-full"
+              }`}
+            >
+              <p className="text-lg">Featured</p>
+              <p>
+                <FaSortDown className="block" onClick={() => setSort(!sort)} />
+              </p>
+              <ul
+                className={`${
+                  sort
+                    ? "block bg-gray-200 py-2 px-[6px] rounded-b-lg absolute top-9 right-0 z-10"
+                    : "hidden"
+                }`}
+              >
+                <li className="hover:bg-white py-1 px-2 rounded-lg">
+                  Alphabet A - Z
+                </li>
+                <li className="hover:bg-white py-1 px-2 rounded-lg">
+                  Alphabet Z-A
+                </li>
+                <li className="hover:bg-white py-1 px-2 rounded-lg">
+                  Price Low to High
+                </li>
+                <li className="hover:bg-white py-1 px-2 rounded-lg">
+                  Price High to Low
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

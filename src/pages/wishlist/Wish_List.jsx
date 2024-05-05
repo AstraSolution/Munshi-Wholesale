@@ -2,10 +2,23 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MdDelete } from "react-icons/md";
 import { FaCartPlus } from "react-icons/fa";
+import useWishlistProducts from "../../Hooks/useWishlistProducts";
+import useAuth from "../../Hooks/useAuth";
+
 
 
 const Wish_List = () => {
+
+    const {user} = useAuth()
+    console.log(user);
+
+   const  [wishlistProduct,] = useWishlistProducts();
+   console.log(wishlistProduct);
+
+
     const [data, setData] = useState(null);
+
+  
 
     useEffect(() => {
         fetch("/wishlist.json")
@@ -13,6 +26,7 @@ const Wish_List = () => {
             .then((data) => setData(data))
             .catch((error) => console.error("Error fetching data:", error));
     }, []);
+
 
     return (
         <div className="container mx-auto md:py-3 py-2 text-gray-300 bg-gray-800  ">

@@ -27,7 +27,7 @@ const Carts = () => {
 
   return (
     <div className="container mx-auto duration-300">
-      {myCarts.length === 0 ? (
+      {myCarts?.length === 0 ? (
         <div className="text-center my-20">
           <p className=" my-10">Your cart is empty.</p>
           <Link
@@ -58,7 +58,7 @@ const Carts = () => {
               ></CartsDetails>
             ))}
             <div className="flex items-center justify-center gap-4 mb-3">
-              <p>Total price: {price.toFixed(2)}</p>
+              <p>Total price: {price?.toFixed(2)}</p>
               <button
                 onClick={handleCheckout}
                 className="button-color px-4 py-2 rounded-full text-sm md:text-base text-white flex items-center gap-1"
