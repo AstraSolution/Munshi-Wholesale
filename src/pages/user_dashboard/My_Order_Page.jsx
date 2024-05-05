@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import { IoIosSearch } from "react-icons/io";
 import { useForm } from 'react-hook-form';
 import { StarRating } from '../../Components/Shared/StarRating/StarRating';
-import UseAxios from '../../Hooks/useAxios';
 import { Toaster, toast } from 'react-hot-toast';
+import useAxiosPublic from '../../Hooks/useAxiosPublic';
 
 const My_Order_Page = () => {
   const [data, setData] = useState(null);
@@ -14,7 +14,7 @@ const My_Order_Page = () => {
   const { register, handleSubmit, reset } = useForm();
   const [loading, setLoading] = useState(false);
   const [reviewText, setReviewText] = useState('');
-  const instance = UseAxios()
+  const axiosPublic = useAxiosPublic()
 
   useEffect(() => {
     fetch('/products.json')
@@ -47,7 +47,7 @@ const My_Order_Page = () => {
       console.log(reviewInformation);
 
 
-      const res = await instance.post("/reviews", reviewInformation);
+      const res = await axiosPublic.post("/reviews", reviewInformation);
       console.log(res.data);
       if (res?.data) {
         toast.success('Review Successfull!')
@@ -66,8 +66,6 @@ const My_Order_Page = () => {
   };
 
 
-
-
   const isReviewValid = reviewText?.length >= 20;
 
   return (
@@ -76,14 +74,14 @@ const My_Order_Page = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="container mx-auto md:py-3 py-2  text-gray-300 "
+        className=" px-4 md:py-3 py-2  text-gray-300 "
       >
         <div className="space-y-2">
           <motion.div
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="p-5 rounded-lg bg-50-50"
+            className=" rounded-lg bg-50-50"
           >
             <div className='flex items-center justify-between'>
               <motion.h1

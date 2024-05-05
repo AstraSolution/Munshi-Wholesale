@@ -4,6 +4,7 @@ import { FaStar, FaShoppingCart, FaHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import useAuth from "../../../Hooks/useAuth";
 
 const ProductCard = ({ currentProduct, currentUser }) => {
   const { _id, title, image, price, offer, color, dimensions, quantity } =
@@ -11,6 +12,8 @@ const ProductCard = ({ currentProduct, currentUser }) => {
   const [isWished, setIsWished] = useState(false);
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
+  const { user } = useAuth();
+  const email = user?.email;
 
   // console.log(currentProduct);
 
@@ -36,13 +39,55 @@ const ProductCard = ({ currentProduct, currentUser }) => {
     };
 
     axiosPublic
-      .post("/myCarts", addCart)
+      .post(`/myCarts/${email}`, addCart)
       .then((response) => {
         if (response.status === 200) {
           Swal.fire({
             position: "top-end",
             icon: "success",
             title: "Product add to cart successfully.",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
+  // Handle wishlist
+  const handleWishlist = () => {
+    let countDis = price;
+    if (offer?.discount !== "N/A") {
+      countDis = (price - (price * parseInt(offer?.discount)) / 100).toFixed(2);
+    }
+    setIsWished(!isWished);
+
+    const addWishlist = {
+      customer_name: currentUser?.fullName,
+      customer_email: currentUser?.email,
+      product_id: _id,
+      unit_price: countDis,
+      total_price: countDis,
+      quantity: 1,
+      product_image: image,
+      stock_limit: quantity,
+      title: title,
+      dimensions: dimensions,
+      color: color,
+    };
+
+    console.log(addWishlist);
+    
+    axiosPublic
+      .post("/wishlist", addWishlist)
+      .then((response) => {
+        if (response) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Product add wishlist successfully.",
             showConfirmButton: false,
             timer: 1500,
           });
@@ -80,7 +125,7 @@ const ProductCard = ({ currentProduct, currentUser }) => {
           <button onClick={() => handleCart()}>
             <FaShoppingCart className="text-2xl text-black" />
           </button>
-          <button onClick={() => setIsWished(!isWished)}>
+          <button onClick={() => handleWishlist()}>
             <FaHeart
               className={`text-2xl ${isWished ? "text-red-500" : "text-black"}`}
             />
