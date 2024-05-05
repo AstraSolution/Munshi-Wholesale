@@ -1,11 +1,12 @@
 
-import { useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { FaCartPlus } from "react-icons/fa";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useCurrentUser from "../../Hooks/useCurrentUser";
 import Swal from "sweetalert2";
 import { motion } from "framer-motion";
+import { Toaster, toast } from "react-hot-toast";
+import useGetMyCarts from "../../Hooks/useGetMyCarts";
 
 const WishListProduct = ({ product, refetch, i }) => {
 
@@ -14,7 +15,7 @@ const WishListProduct = ({ product, refetch, i }) => {
 
     const axiosPublic = useAxiosPublic();
     const { currentUser } = useCurrentUser()
-    console.log(currentUser);
+    const { refetch: Refetch } = useGetMyCarts()
 
     const handleDeleteProduct = (id, title) => {
         Swal.fire({
@@ -60,7 +61,42 @@ const WishListProduct = ({ product, refetch, i }) => {
 
 
 
-    const handleAddToCart = () => {
+    // const handleAddToCart = () => {
+    //     try {
+    //         const addCart = {
+    //             customer_name: currentUser?.fullName,
+    //             customer_email: currentUser?.email,
+    //             product_id: _id,
+    //             unit_price,
+    //             total_price,
+    //             quantity: 1,
+    //             product_image,
+    //             stock_limit,
+    //             title,
+    //             dimensions,
+    //             color,
+    //         };
+
+    //         console.log(addCart);
+
+    //         axiosPublic
+    //             .post(`/myCarts/${currentUser?.email}`, addCart)
+    //             .then((response) => {
+    //                 if (response.status === 200) {
+    //                     toast.success("Product Add To Cart Successfull!!");
+    //                 }
+    //             })
+    //             .catch((error) => {
+    //                 console.error("Error:", error);
+    //                 toast.error("Please try again.?");
+    //             });
+    //     } catch (error) {
+    //         console.error("Error:", error);
+    //     }
+    // };
+
+
+    const handleAddToCart = (id) => {
 
         const addCart = {
             customer_name: currentUser?.fullName,
@@ -77,18 +113,25 @@ const WishListProduct = ({ product, refetch, i }) => {
         };
 
         console.log(addCart);
-
         axiosPublic
-            .post("/myCarts", addCart)
+            .post(`/myCarts/${currentUser?.email}`, addCart)
             .then((response) => {
                 if (response.status === 200) {
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "Product add to cart successfully.",
-                        showConfirmButton: false,
-                        timer: 1500,
-                    });
+                    toast.success("Product Add To Cart Successfull!!");
+                    axiosPublic
+                        .delete(`/wishlist/${id}`)
+                        .then((response) => {
+                            if (response.status === 200) {
+                                refetch();
+                            } else {
+                                toast.error("Please try again.?");
+                            }
+                        })
+                        .catch((error) => {
+                            console.error("Error deleting Product:", error);
+                            toast.error("Please try again.?");
+                        });
+                        Refetch();
                 }
             })
             .catch((error) => {
@@ -99,52 +142,53 @@ const WishListProduct = ({ product, refetch, i }) => {
 
 
 
-
     return (
+        <>
 
-        <motion.tr
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
-            exit={{ opacity: 0, y: -20 }}
-        >
-            <td className="border bg-gray-800 border-gray-600 p-2 text-center ">
-                {i + 1}
-            </td>
-            <td className="border bg-gray-800 border-gray-600 md:p-2 p-1  text-sm  ">
-                {title?.slice(0, 30)}.....
-            </td>
-            <td className="border bg-gray-800 border-gray-600 p-2">
-                <img
-                    className="w-20 md:h-16 rounded-lg  mx-auto "
-                    src={product_image[0]}
-                    alt=""
-                />
-            </td>
-            <td className="border bg-gray-800 border-gray-600 p-2 text-sm md:text-md   text-center  ">
-                {color}
-            </td>
-            <td className="border bg-gray-800 border-gray-600 p-2 text-sm md:text-md   text-center  ">
-                {stock_limit}
-            </td>
-            <td className="border bg-gray-800 border-gray-600 p-2 text-sm md:text-md   text-center  ">
-                $ {unit_price}
-            </td>
-            <td className="border bg-gray-800 border-gray-600 p-2 text-sm md:text-md   text-center  ">
-                $ {total_price}
-            </td>
-            <td className="border bg-gray-800 border-gray-600 p-2 text-sm md:text-md  text-center ">
+            <motion.tr
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                exit={{ opacity: 0, y: -20 }}
+            >
+                <td className="border bg-gray-800 border-gray-600 p-2 text-center ">
+                    {i + 1}
+                </td>
+                <td className="border bg-gray-800 border-gray-600 md:p-2 p-1  text-sm  ">
+                    {title?.slice(0, 30)}.....
+                </td>
+                <td className="border bg-gray-800 border-gray-600 p-2">
+                    <img
+                        className="w-20 md:h-16 rounded-lg  mx-auto "
+                        src={product_image[0]}
+                        alt=""
+                    />
+                </td>
+                <td className="border bg-gray-800 border-gray-600 p-2 text-sm md:text-md   text-center  ">
+                    {color}
+                </td>
+                <td className="border bg-gray-800 border-gray-600 p-2 text-sm md:text-md   text-center  ">
+                    {stock_limit}
+                </td>
+                <td className="border bg-gray-800 border-gray-600 p-2 text-sm md:text-md   text-center  ">
+                    $ {unit_price}
+                </td>
+                <td className="border bg-gray-800 border-gray-600 p-2 text-sm md:text-md   text-center  ">
+                    $ {total_price}
+                </td>
+                <td className="border bg-gray-800 border-gray-600 p-2 text-sm md:text-md  text-center ">
 
-                <div className="flex items-center justify-center lg:gap-6 md:gap-4 gap-2  ">
+                    <div className="flex items-center justify-center lg:gap-6 md:gap-4 gap-2  ">
 
-                    <span onClick={() => handleAddToCart()} className="text-xl cursor-pointer "> <FaCartPlus></FaCartPlus> </span>
+                        <span onClick={() => handleAddToCart()} className="text-xl cursor-pointer "> <FaCartPlus></FaCartPlus> </span>
 
 
-                    <span onClick={() => handleDeleteProduct(_id, title)} className="text-xl text-red-600 cursor-pointer "><MdDelete></MdDelete> </span>
-                </div>
-            </td>
-        </motion.tr>
-
+                        <span onClick={() => handleDeleteProduct(_id, title)} className="text-xl text-red-600 cursor-pointer "><MdDelete></MdDelete> </span>
+                    </div>
+                </td>
+            </motion.tr>
+            <Toaster />
+        </>
     );
 };
 

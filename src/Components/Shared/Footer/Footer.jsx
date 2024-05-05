@@ -9,10 +9,9 @@ export default function Footer() {
 
           <div>
             <div className="">
-
               <img className="w-44 mb-4 " src="https://i.ibb.co/x576tv6/munshi-removebg-preview.png" alt="" />
               <ul className="space-y-5">
-                <li><a className="text-gray-300 hover:text-white text-[15px]"> <p>No: 58 A, East Madison Street,
+                <li><a className="text-gray-300 hover:text-white text-[12px]"> <p>No: 58 A, East Madison Street,
                   Baltimore, MD, USA 4508</p> </a></li>
 
                 <li className="text-gray-300 text-[15px] hover:text-red-600  flex items-center gap-1"> <span><TfiEmail></TfiEmail></span> <p className="text-sm ">astrasolution07@gmail.com</p></li>
@@ -21,6 +20,7 @@ export default function Footer() {
               </ul>
             </div>
           </div>
+
 
 
           <div className="md:ml-10">
