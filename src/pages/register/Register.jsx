@@ -29,6 +29,7 @@ export default function Register() {
 
     const newUser = { fullName, email, password, isFirstLogin: true };
     console.log(newUser)
+    
     createUser(email, password)
       .then(async (res) => {
         // const updatedUser = await updateUserProfiole(fullName);

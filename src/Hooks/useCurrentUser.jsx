@@ -5,7 +5,7 @@ import useAxiosPublic from "./useAxiosPublic";
 const useCurrentUser = () => {
     const axiosPublic = useAxiosPublic();
     const { user } = useAuth();
-    console.log(user);
+
 
     const { data: currentUser = [] , isLoading , refetch  } = useQuery({
         queryKey: ["currentUser", user?.email],

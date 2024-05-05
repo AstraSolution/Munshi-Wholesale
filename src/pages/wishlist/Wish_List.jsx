@@ -4,21 +4,30 @@ import { motion, AnimatePresence } from "framer-motion";
 import useWishlistProducts from "../../Hooks/useWishlistProducts";
 
 import WishListProduct from "./WishListProduct";
+import { Link } from "react-router-dom";
 
 const Wish_List = () => {
 
-   
-
     const [wishlistProduct, isLoading, refetch] = useWishlistProducts();
-    console.log(wishlistProduct);
-
-
-
-
+    
+    if (wishlistProduct?.length === 0) {
+        return (
+            <div className=" flex items-center justify-center text-center my-20  ">
+                <p className=" my-10 px-4 ">Your Wishlist is empty.</p>
+                <Link
+                    to={'/'}
+                    className="button-color px-4 py-2 border rounded-full text-sm md:text-base "
+                >
+                    Add to wishlist
+                </Link>
+            </div>
+        );
+    }
 
 
     return (
         <div className="container mx-auto md:py-3 py-2 text-gray-300 bg-gray-800  ">
+            
             <div className="space-y-2">
                 <motion.div
                     initial={{ opacity: 0, y: -50 }}
