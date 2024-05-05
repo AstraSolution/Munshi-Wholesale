@@ -4,6 +4,7 @@ import { FaStar, FaShoppingCart, FaHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import useAuth from "../../../Hooks/useAuth";
 
 const ProductCard = ({ currentProduct, currentUser }) => {
   const { _id, title, image, price, offer, color, dimensions, quantity } =
@@ -11,6 +12,8 @@ const ProductCard = ({ currentProduct, currentUser }) => {
   const [isWished, setIsWished] = useState(false);
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
+  const { user } = useAuth();
+  const email = user?.email;
 
   // console.log(currentProduct);
 
@@ -36,7 +39,7 @@ const ProductCard = ({ currentProduct, currentUser }) => {
     };
 
     axiosPublic
-      .post("/myCarts", addCart)
+      .post(`/myCarts/${email}`, addCart)
       .then((response) => {
         if (response.status === 200) {
           Swal.fire({

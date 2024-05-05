@@ -54,9 +54,14 @@ export default function Register() {
   // handle google login
   const hadleGoogleLogin = () => {
     googleLogin()
-      .then((res) => {
+      .then(async(res) => {
         const loggedUser = res.user;
-        console.log(loggedUser);
+        const fullName = loggedUser?.displayName;
+        const email = loggedUser?.email;
+        const profilePhoto = loggedUser?.photoURL;
+
+        await axiosPublis.post("/users", { fullName, email, profilePhoto});
+
         Swal.fire({
           position: "top-center",
           icon: "success",
