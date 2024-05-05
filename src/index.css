@@ -36,7 +36,6 @@
   background: #2d3748;
 }
 
-
 .float-label-input {
   margin: 0;
 }
@@ -53,4 +52,12 @@
 
 .font-montserrat {
   font-family: "Montserrat", sans-serif;
+}
+
+/* active navmenu items style  */
+.active {
+  font-weight: bold;
+  border-radius: 5px;
+  color: red;
+  text-decoration: 3px underline;
 }
