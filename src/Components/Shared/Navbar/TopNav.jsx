@@ -3,13 +3,16 @@ import { Link } from "react-router-dom";
 import {
   SearchIcon,
   ShoppingCartIcon,
-  UserCircleIcon,
   HeartIcon,
 } from "@heroicons/react/outline";
 import LOGO from "../../../assets/logo.gif";
+
 import { Badge } from "@material-tailwind/react";
+import useAuth from "../../../Hooks/useAuth";
+import StaggeredDropDown from "./Sub-Compoents/ProfileDropdown";
 
 export default function TopNav() {
+  const { user, logOut } = useAuth();
   return (
     <div className="bg-gray-200">
       <div className="container mx-auto py-4 flex justify-between items-center flex-wrap">
@@ -40,11 +43,13 @@ export default function TopNav() {
               <ShoppingCartIcon className="h-7 w-7 text-gray-600" />
             </Badge>
 
-            <Badge content="5">
+            <Badge content="3">
               <HeartIcon className="h-7 w-7 text-gray-600" />
             </Badge>
 
-            <UserCircleIcon className="h-7 w-7 text-gray-500" />
+            {/* <UserCircleIcon className="h-7 w-7 text-gray-500" /> */}
+            {/* dropdown button  */}
+            <StaggeredDropDown />
           </div>
         </div>
       </div>

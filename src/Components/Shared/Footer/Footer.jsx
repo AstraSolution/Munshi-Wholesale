@@ -4,7 +4,7 @@ import { TfiEmail } from "react-icons/tfi";
 export default function Footer() {
   return (
     <>
-      <footer className="font-[sans-serif] bg-black py-12 px-10 font-montserrat">
+      <footer className="font-[sans-serif] bg-black py-12 px-10 font-montserrat bg-[url('https://i.ibb.co/1rwqq8k/footerbg.png')]">
         <div className="grid container mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3  xl:grid-cols-5 gap-6 md:gap-8 lg:gap-12">
 
           <div>

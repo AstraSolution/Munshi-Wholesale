@@ -3,12 +3,19 @@ import { XIcon, MenuAlt3Icon } from "@heroicons/react/outline";
 import { Button } from "@material-tailwind/react";
 import CustomLink from "./CustomLink";
 import { Link } from "react-router-dom";
+import useAuth from "../../../Hooks/useAuth";
+import { FaArrowRightFromBracket } from "react-icons/fa6";
 
 const NavItems = () => {
+  const { user, logOut } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLogOut = () => {
+    logOut();
   };
 
   const menuItems = (
@@ -41,11 +48,19 @@ const NavItems = () => {
 
           {/* login button */}
           <div className="flex items-center">
-            <Link to={"/login"}>
-              <Button className="hidden md:flex" color="red">
-                Login
+            {user ? (
+              <Button
+                onClick={handleLogOut}
+                color="red"
+                className="hidden capitalize md:flex justify-center items-center text-md gap-2 w-full "
+              >
+                Logout <FaArrowRightFromBracket />
               </Button>
-            </Link>
+            ) : (
+              <Link className="hidden md:flex" to={"/login"}>
+                <Button color="red">Login</Button>
+              </Link>
+            )}
 
             {/* hamburger Icon for mobile */}
             <button
@@ -63,9 +78,9 @@ const NavItems = () => {
       </div>
 
       {/* responsive menu for mobile */}
-      <div className="z-50 relative ">
-        <div className="absolute w-full bg-[#fffffff3] pb-8">
-          <div className={`md:hidden ${isOpen ? "block" : "hidden"}`}>
+      <div className="z-50 relative">
+        <div className="absolute w-full bg-[#fffffff3]">
+          <div className={`md:hidden ${isOpen ? "block" : "hidden"} pb-8`}>
             <ul className="flex flex-col space-y-2 mt-6 mx-4">{menuItems}</ul>
           </div>
         </div>
