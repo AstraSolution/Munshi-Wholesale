@@ -15,10 +15,67 @@ import "./Table.css";
 import { useParams } from "react-router-dom";
 import useGetaProduct from "../../Hooks/useGetaProduct";
 import SectionBanner from "../../Components/Shared/SectionBanner/SectionBanner";
+import Swal from "sweetalert2";
+import useAuth from "../../Hooks/useAuth";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useGetMyCarts from "../../Hooks/useGetMyCarts";
 
 const ProductDetails = () => {
   const { id } = useParams();
+  const axiosPublic = useAxiosPublic();
   const product = useGetaProduct(id);
+  const { user } = useAuth();
+  const { refetch } = useGetMyCarts();
+  const { title, image, price, offer, color, dimensions, quantity } = product;
+  const email = user?.email;
+
+  // Handle add to cart
+  const handleAddToCart = () => {
+    let countDis = price;
+    if (offer?.discount !== "N/A") {
+      countDis = (price - (price * parseInt(offer?.discount)) / 100).toFixed(2);
+    }
+
+    const addCart = {
+      customer_name: user?.displayName,
+      customer_email: user?.email,
+      product_id: id,
+      unit_price: countDis,
+      total_price: countDis,
+      quantity: 1,
+      product_image: image,
+      stock_limit: quantity,
+      title: title,
+      dimensions: dimensions,
+      color: color,
+    };
+
+    axiosPublic
+      .post(`/myCarts/${email}`, addCart)
+      .then((response) => {
+        if (response.status === 200) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Product add to cart successfully.",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          refetch();
+        }
+
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "This product already exist your carts!!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
 
   return (
     <div>
@@ -165,7 +222,7 @@ const ProductDetails = () => {
 
             <div className="flex flex-row gap-5 my-5">
               <button
-                // onClick={() => handleAddToCart(product?._id)}
+                onClick={() => handleAddToCart(product?._id)}
                 className="bg-yellow-400 p-2 lg:px-5 flex items-center gap-2"
               >
                 <RiShoppingBag2Line className="text-xl" /> Add to cart

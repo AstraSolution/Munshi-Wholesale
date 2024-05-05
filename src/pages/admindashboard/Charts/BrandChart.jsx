@@ -1,7 +1,7 @@
 import Chart from "react-apexcharts";
 import useAllBrand from "../../../Hooks/useAllBrand";
 const BrandChart = () => {
-  const brands = useAllBrand();
+  const { brands, brandsLoading } = useAllBrand();
   const topBrands = brands.slice(0, 10);
   const chartData = {
     series: [
@@ -83,6 +83,9 @@ const BrandChart = () => {
       <h2 className="text-center mt-4 mb-5 text-black text-2xl font-bold">
         Top 10 Brands
       </h2>
+      {brandsLoading ? (
+        <p>Loading...</p>
+      ) : (
 
       <Chart
         options={chartData.options}
@@ -90,6 +93,7 @@ const BrandChart = () => {
         type="line"
         height={380}
       />
+    )}
     </div>
   );
 };
