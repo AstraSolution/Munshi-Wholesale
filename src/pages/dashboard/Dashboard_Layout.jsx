@@ -7,7 +7,7 @@ import "./Styles/scroll.css"
 const Dashboard_Layout = () => {
     return (
        
-        <div className="lg:flex   text-white h-screen lg:overflow-hidden">
+        <div className="lg:flex bg-gray-200  text-white h-screen lg:overflow-hidden">
             {/* Fixed Dashboard for large devices */}
             <div className="lg:overflow-y-auto scrollbar-style">
                 <Dashboard />

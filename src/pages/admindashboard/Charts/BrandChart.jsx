@@ -20,6 +20,7 @@ const BrandChart = () => {
         zoom: {
           enabled: false,
         },
+        background: '#f4f4f4', 
       },
       colors: ["#008FFB"],
       dataLabels: {
@@ -29,25 +30,25 @@ const BrandChart = () => {
         width: 10,
         curve: "smooth",
       },
-      // xaxis: {
-      //   type: "category",
-      //   labels: {
-      //     style: {
-      //       colors: "",
-      //     },
-      //   },
-      // },
-      // yaxis: {
-      //   labels: {
-      //     style: {
-      //       colors: "",
-      //     },
-      //   },
-      // },
+      xaxis: {
+        type: "category",
+        labels: {
+          style: {
+            colors: "black",
+          },
+        },
+      },
+      yaxis: {
+        labels: {
+          style: {
+            colors: "black",
+          },
+        },
+      },
       fill: {
         type: "gradient",
         gradient: {
-          shade: "dark",
+          shade: "light",
           gradientToColors: ["#FDD835"],
           shadeIntensity: 1,
           type: "horizontal",
