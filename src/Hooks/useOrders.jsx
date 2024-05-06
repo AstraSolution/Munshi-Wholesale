@@ -15,7 +15,7 @@ const useOrders = () => {
     }
   })
 
-  return  { orderProduct, orderLoading: isLoading,refetch };
+  return  { orderProduct, orderLoading: isLoading, refetch };
 };
 
 export default useOrders;

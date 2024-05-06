@@ -1,62 +1,47 @@
-import  { useState } from "react";
+import { useState } from "react";
 import useAllUsers from "../../Hooks/useAllUsers";
 import useOrders from "../../Hooks/useOrders";
-
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
+import { useQueryClient } from "@tanstack/react-query"; // Import useQueryClient
 
 const AllUsers = () => {
-  const users = useAllUsers()
+  const users = useAllUsers();
   console.log(users);
-  const { orderProduct,  } = useOrders();
+  const { orderProduct } = useOrders();
   console.log(orderProduct);
   const [selectedUser, setSelectedUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const handleNameClick = (users) => {
-    setSelectedUser(users);
-    console.log(users);
+  const handleNameClick = (user) => {
+    setSelectedUser(user);
+    console.log(user);
     setShowModal(true);
   };
+  const axiosPublic = useAxiosPublic();
+  const queryClient = useQueryClient(); 
 
-  // Assuming your user data is defined here
-  // const [userData, setUserData] = useState([
-  //   {
-  //     _id: 1,
-  //     username: "JohnDoe",
-  //     email: "john@example.com",
-  //     role: "user",
-  //     orders: [
-  //       { orderId: 101, productName: "Product A", quantity: 2, totalPrice: 20 },
-  //       { orderId: 102, productName: "Product B", quantity: 1, totalPrice: 10 },
-  //     ],
-  //   },
-  //   {
-  //     _id: 2,
-  //     username: "JaneDoe2",
-  //     email: "jane@example.com",
-  //     role: "user",
-  //     orders: [
-  //       { orderId: 201, productName: "Product C", quantity: 3, totalPrice: 30 },
-  //       { orderId: 202, productName: "Product D", quantity: 1, totalPrice: 15 },
-  //     ],
-  //   },
-  // ]);
+  const toggleAdmin = async (_id, isAdmin) => {
+    try {
+      // Send PATCH request
+      await axiosPublic.patch(`/users/${_id}`, { isAdmin: !isAdmin });
 
-  // const toggleBan = (userId) => {
-  //   setUserData((prevUserData) =>
-  //     prevUserData.map((user) =>
-  //       user._id === userId ? { ...user, isBanned: !user.isBanned } : user
-  //     )
-  //   );
-  // };
-
-  // const toggleAdmin = (userId) => {
-  //   setUserData((prevUserData) =>
-  //     prevUserData.map((user) =>
-  //       user._id === userId ? { ...user, isAdmin: !user.isAdmin } : user
-  //     )
-  //   );
-  // };
-
-
+      queryClient.invalidateQueries("users");
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: `User status updated successfully.`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } catch (error) {
+      console.error("Error toggling admin status:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong! Please try again.",
+      });
+    }
+  };
 
   return (
     <div className="container mx-auto md:py-3 py-2 text-white">
@@ -70,10 +55,10 @@ const AllUsers = () => {
             <table className="w-full mt-2">
               <thead>
                 <tr className="text-[#FF9D00]">
-                  <th className="border bg-gray-800 border-gray-400  text-center text-sm md:text-md lg:text-lg py-3">
+                  <th className="border bg-gray-800 border-gray-400 text-center text-sm md:text-md lg:text-lg py-3">
                     N/A
                   </th>
-                  <th className="border bg-gray-800 border-gray-400  text-center text-sm md:text-md lg:text-lg py-3">
+                  <th className="border bg-gray-800 border-gray-400 text-center text-sm md:text-md lg:text-lg py-3">
                     Username
                   </th>
                   <th className="border bg-gray-800 border-gray-400 text-center text-sm md:text-md lg:text-lg p-2">
@@ -100,11 +85,10 @@ const AllUsers = () => {
                       {user?.fullName}
                     </td>
                     <td className="border border-gray-400 p-2 bg-gray-800">
-                      {/* Assuming you have profile images for users */}
                       <img
                         className="w-20 h-full md:h-16 rounded-full mx-auto"
                         src={user?.profilePhoto}
-                        alt= {user?.fullName?.slice(0, 5)}
+                        alt={user?.fullName?.slice(0, 5)}
                       />
                     </td>
                     <td className="border border-gray-400 p-2 text-sm md:text-md bg-gray-800 text-center ">
@@ -113,13 +97,7 @@ const AllUsers = () => {
                     <td className="border border-gray-400 bg-gray-800 p-2 text-sm md:text-md text-center">
                       <button
                         className="p-3 mr-2 rounded-2xl bg-neutral-900"
-                       
-                      >
-                        {user.isBanned ? "UnBan" : "Ban"}
-                      </button>
-                      <button
-                        className="p-3 rounded-2xl bg-neutral-900"
-                        
+                        onClick={() => toggleAdmin(user._id, user.isAdmin)}
                       >
                         {user.isAdmin ? "Make User" : "Make Admin"}
                       </button>

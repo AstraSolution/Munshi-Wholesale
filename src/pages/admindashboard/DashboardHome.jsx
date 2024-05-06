@@ -1,3 +1,4 @@
+import AllAnalyticsChart from "./Charts/AllAnalyticsChart";
 import BrandChart from "./Charts/BrandChart";
 import CategoryChart from "./Charts/CategoryChart";
 import DashboardStats from "./DashboardStats";
@@ -8,13 +9,14 @@ const DashboardHome = () => {
          <DashboardStats></DashboardStats>  
        
         <div className="lg:flex justify-evenly">
-        <div className="lg:w-[60%]">
+        <div className="lg:w-[60%] ">
         <BrandChart></BrandChart>
         </div>
          <div className="w-full lg:w-[33%]">
          <CategoryChart></CategoryChart>
          </div>
         </div>
+        <AllAnalyticsChart></AllAnalyticsChart>
        <TopProducts></TopProducts>
         </div>
     );
