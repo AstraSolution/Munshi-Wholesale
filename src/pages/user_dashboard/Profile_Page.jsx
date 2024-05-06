@@ -7,7 +7,7 @@ import { Toaster, toast } from "react-hot-toast";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Profile_Page = () => {
-  const { currentUser } = useCurrentUser();
+  const { currentUser, refetch } = useCurrentUser();
   const axiosPublic = useAxiosPublic();
 
   const { register, handleSubmit } = useForm();
@@ -42,9 +42,9 @@ const Profile_Page = () => {
     profession,
   } = currentUser || {};
 
-  // Handle form submission
-  const onSubmit = (data) => {
-    console.log(data);
+  // Toggle editing mode
+  const toggleEditing = () => {
+    setIsEditing(!isEditing);
   };
 
   // Handle profession change
@@ -95,7 +95,7 @@ const Profile_Page = () => {
       .then((res) => {
         if (res.status === 200) {
           toast.success(" Profile Update successfully");
-
+          refetch();
           setIsEditing(false);
         } else {
           console.error("Update failed: User not found or update unsuccessful");
@@ -106,10 +106,6 @@ const Profile_Page = () => {
         console.error("Error occurred during update:", error);
       });
   };
-
-  {
-    isEditing ? "" : <p className="">Email</p>;
-  }
 
   // Functions to handle file selection and preview for cover photo
   const onSelectCoverFile = (e) => {
