@@ -18,6 +18,7 @@ import AllOrders from "../pages/admindashboard/AllOrders";
 import AllUsers from "../pages/admindashboard/AllUsers";
 import AddProducts from "../pages/admindashboard/AddProducts";
 import Carts from "../pages/carts/Carts";
+import User_Dashboard_Home from "../pages/user_dashboard/Dashboard_Home/User_Dashboard_Home";
 
 const router = createBrowserRouter([
   {
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <DashboardHome></DashboardHome>,
+      },
+      {
+        path: "/dashboard/home",
+        element: <User_Dashboard_Home></User_Dashboard_Home>,
       },
       {
         path: "/dashboard/profile",
