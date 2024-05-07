@@ -82,7 +82,7 @@ const Dashboard = () => {
         variants={Nav_animation}
         initial={{ x: isTabletMid ? -250 : 0 }}
         animate={open ? "open" : "closed"}
-        className=" bg-gray-800 text-gray shadow-xl z-[999] max-w-[16rem]  w-[16rem] 
+        className=" bg-black text-gray-100 shadow-xl z-[999] max-w-[16rem]  w-[16rem] 
             overflow-hidden lg:relative fixed  h-screen  "
       >
         <div className="flex items-center justify-between gap-2.5 font-medium border-b py-3 border-slate-300 mx-3">
@@ -162,7 +162,7 @@ const Dashboard = () => {
                 isPending
                   ? "pending"
                   : isActive
-                    ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium bg-gray-600 text-[#FFA500]"
+                    ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium text-[#FFA500]"
                     : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
               }>
                 <MdChangeHistory size={23} className="min-w-max" />
@@ -174,7 +174,7 @@ const Dashboard = () => {
                 isPending
                   ? "pending"
                   : isActive
-                    ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium bg-gray-600 text-[#FFA500]"
+                    ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium  text-[#FFA500]"
                     : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
               }>
                 <BsPerson size={23} className="min-w-max" />
