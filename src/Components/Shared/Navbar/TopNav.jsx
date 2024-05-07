@@ -38,7 +38,7 @@ export default function TopNav() {
               <ShoppingCartIcon className="h-7 w-7 text-gray-600" />
             </Badge>
 
-            <Badge content={wishlistItems}>
+            <Badge className="px-2 py-1.5" content={wishlistItems}>
               <HeartIcon className="h-7 w-7 text-gray-600" />
             </Badge>
 
