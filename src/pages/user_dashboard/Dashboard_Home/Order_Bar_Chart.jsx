@@ -28,21 +28,21 @@ const Order_Bar_Chart = () => {
       <div className="flex flex-col min-h-screen bg-gray-100">
         <Payment_History></Payment_History>
         {/* chart */}
-        <div className="bg-white rounded-md shadow-md p-6 lg:ml-11  mb-6 w-[380px] ">
+        <div className="bg-white rounded-md shadow-md p-6 lg:ml-11  mb-6 lg:w-[380px] sm:w-[200px] ">
           <h2 className="text-xl font-semibold mb-4">Order Status</h2>
           <PieChart
             data={pieChartData}
             label={({ dataEntry }) =>
-              dataEntry.value > 0 ? `${dataEntry.title}: ${dataEntry.value}` : '' // Conditionally show label only if value is greater than 0
+              dataEntry.value > 0 ? `${dataEntry.title}: ${dataEntry.value}` : ''
             }
             labelStyle={{
               fontSize: '4px',
-              fontFamily: 'sans-serif',
+              fontFamily: 'Montserrat',
               fill: '#ffffff',
             }}
+            style={{ width: '100%', height: '100%' }}
             animate={true}
             animationDuration={500}
-            style={{ width: '100%', height: '100%' }}
             radius={50}
             startAngle={0}
             totalValue={pieChartData?.reduce((acc, cur) => acc + cur.value, 0)}
@@ -53,8 +53,8 @@ const Order_Bar_Chart = () => {
 
           <div className="flex justify-center">
             {pieChartData?.map((data, index) => (
-              <div key={index} className="flex items-center mt-1 rounded-md px-2 py-1 mr-2">
-                <span className="w-4 h-4 mr-2 rounded-full" style={{ backgroundColor: data?.color }}></span>
+              <div key={index} className="flex items-center mt-1 rounded-md px1 lg:px-2 py-2 lg:mr-2 mr-1">
+                <span className="w-4 h-4 mr-1 lg:mr-2 rounded-full" style={{ backgroundColor: data?.color }}></span>
                 <span className="text-sm ">{data?.title}</span>
               </div>
             ))}
