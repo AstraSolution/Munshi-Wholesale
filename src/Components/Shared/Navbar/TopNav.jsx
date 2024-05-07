@@ -1,14 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  SearchIcon,
-  ShoppingCartIcon,
-  HeartIcon,
-} from "@heroicons/react/outline";
+import { ShoppingCartIcon, HeartIcon } from "@heroicons/react/outline";
 import LOGO from "../../../assets/logo.gif";
-
 import { Badge } from "@material-tailwind/react";
-import useAuth from "../../../Hooks/useAuth";
 import StaggeredDropDown from "./Sub-Compoents/ProfileDropdown";
 import SearchBar from "./Sub-Compoents/SearchBar";
 import useWishlistProducts from "../../../Hooks/useWishlistProducts";
