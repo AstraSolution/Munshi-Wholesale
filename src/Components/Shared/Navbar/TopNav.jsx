@@ -6,10 +6,15 @@ import { Badge } from "@material-tailwind/react";
 import StaggeredDropDown from "./Sub-Compoents/ProfileDropdown";
 import SearchBar from "./Sub-Compoents/SearchBar";
 import useWishlistProducts from "../../../Hooks/useWishlistProducts";
+import useGetMyCarts from "../../../Hooks/useGetMyCarts";
 
 export default function TopNav() {
   const [wishlistProduct] = useWishlistProducts();
+  const [myCarts] = useGetMyCarts();
   const wishlistItems = wishlistProduct?.length;
+  const cartItems = myCarts?.length;
+  console.log(cartItems);
+
   return (
     <div className="bg-gray-200">
       <div className="container mx-auto py-4 flex justify-between items-center flex-wrap">
@@ -28,13 +33,17 @@ export default function TopNav() {
         {/* cart wishlist profile icons  */}
         <div className="order-2 md:order-3">
           <div className="flex items-center gap-6">
-            <Badge content="5">
-              <ShoppingCartIcon className="h-7 w-7 text-gray-600" />
-            </Badge>
+            <Link to={"/carts"}>
+              <Badge className="px-2 py-1.5" content={cartItems}>
+                <ShoppingCartIcon className="h-7 w-7 text-gray-600" />
+              </Badge>
+            </Link>
 
-            <Badge className="px-2 py-1.5" content={wishlistItems}>
-              <HeartIcon className="h-7 w-7 text-gray-600" />
-            </Badge>
+            <Link to={"/wishlist"}>
+              <Badge className="px-2 py-1.5" content={wishlistItems}>
+                <HeartIcon className="h-7 w-7 text-gray-600" />
+              </Badge>
+            </Link>
 
             {/* dropdown button  */}
             <StaggeredDropDown />
