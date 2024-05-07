@@ -5,10 +5,12 @@ import { useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import useAuth from "../../../Hooks/useAuth";
+import useGetMyCarts from "../../../Hooks/useGetMyCarts";
 
 const ProductCard = ({ currentProduct, currentUser }) => {
   const { _id, title, image, price, offer, color, dimensions, quantity } =
     currentProduct;
+  const { refetch } = useGetMyCarts()
   const [isWished, setIsWished] = useState(false);
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
@@ -49,6 +51,7 @@ const ProductCard = ({ currentProduct, currentUser }) => {
             showConfirmButton: false,
             timer: 1500,
           });
+          refetch()
         }
       })
       .catch((error) => {

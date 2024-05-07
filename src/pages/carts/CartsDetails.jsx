@@ -90,7 +90,7 @@ const CartsDetails = ({ cart, refetch }) => {
             className="mx-auto"
           />
           <h5>{cart?.title}</h5>
-          <h5>{cart?.unit_price} BDT</h5>
+          <h5>{cart?.unit_price?.toFixed(2)} BDT</h5>
           <h5>
             <div className="flex items-center gap-2">
               <button
@@ -109,7 +109,7 @@ const CartsDetails = ({ cart, refetch }) => {
               {error && <p className="text-red-500">{error}</p>}
             </div>
           </h5>
-          <h5>{cart?.total_price} BDT</h5>
+          <h5>{cart?.total_price?.toFixed(2)} BDT</h5>
           <div>
             <button
               onClick={() => handleDeleteCart(cart?._id, cart?.title)}
