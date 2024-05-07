@@ -102,7 +102,7 @@ export default function Footer() {
 
         <div className="container mx-auto text-gray-300 text-sm md:flex justify-between items-center">
           <p className="text-center md:text-left">
-            &copy; 2024 munshi-multispare Online Platform
+            &copy; {new Date().getFullYear()} munshi-multispare Online Platform
           </p>
           <div className="flex md:justify-end items-center">
             <p className="hidden lg:flex">We Accepted</p>

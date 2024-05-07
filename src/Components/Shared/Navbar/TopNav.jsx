@@ -10,9 +10,12 @@ import LOGO from "../../../assets/logo.gif";
 import { Badge } from "@material-tailwind/react";
 import useAuth from "../../../Hooks/useAuth";
 import StaggeredDropDown from "./Sub-Compoents/ProfileDropdown";
+import SearchBar from "./Sub-Compoents/SearchBar";
+import useWishlistProducts from "../../../Hooks/useWishlistProducts";
 
 export default function TopNav() {
-  const { user, logOut } = useAuth();
+  const [wishlistProduct] = useWishlistProducts();
+  const wishlistItems = wishlistProduct?.length;
   return (
     <div className="bg-gray-200">
       <div className="container mx-auto py-4 flex justify-between items-center flex-wrap">
@@ -24,16 +27,8 @@ export default function TopNav() {
         </h3>
 
         {/* search bar  */}
-        <div className="order-3 md:order-2 flex items-center mt-4 md:mt-0 w-[80%] md:w-[40%] lg:w-[50%] ">
-          <input
-            type="text"
-            name="search"
-            placeholder="Search by Product"
-            className="px-4 py-3 rounded-lg w-full"
-          />
-          <span className="-ml-10">
-            <SearchIcon className="h-6 w-6 text-gray-500" />
-          </span>
+        <div className="order-3 md:order-2 md:mt-0 w-[80%] md:w-[40%] lg:w-[50%] mt-4">
+          <SearchBar />
         </div>
 
         {/* cart wishlist profile icons  */}
@@ -43,11 +38,10 @@ export default function TopNav() {
               <ShoppingCartIcon className="h-7 w-7 text-gray-600" />
             </Badge>
 
-            <Badge content="3">
+            <Badge content={wishlistItems}>
               <HeartIcon className="h-7 w-7 text-gray-600" />
             </Badge>
 
-            {/* <UserCircleIcon className="h-7 w-7 text-gray-500" /> */}
             {/* dropdown button  */}
             <StaggeredDropDown />
           </div>
