@@ -6,7 +6,7 @@ import Header from './Header';
 
 const User_Dashboard_Home = () => {
     return (
-        <div className='text-gray-600'>
+        <div className=' mx-auto px-1 text-gray-600'>
             <Header></Header>
             
             <Order_Bar_Chart></Order_Bar_Chart>

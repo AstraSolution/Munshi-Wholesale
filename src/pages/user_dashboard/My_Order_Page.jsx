@@ -176,12 +176,12 @@ const My_Order_Page = () => {
 
         {/* Modal component */}
         {showModal && (
-          <div className="fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-50">
-            <div className="lg:w-4/12 mx-auto bg-gray-100 p-6 rounded-lg">
+          <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+            <div className="lg:w-4/12 mx-auto bg-gray-300 p-6 rounded-lg">
               <form onSubmit={handleSubmit(onSubmit)}>
-                <h2 className="block md:text-2xl text-center text-gray-600 text-sm font-bold mb-2">{selectedProduct?.title}</h2>
+                <h2 className="block md:text-2xl text-center text-gray-800 text-sm font-bold mb-2">{selectedProduct?.title}</h2>
                 <div className="mb-4 px-1 text-center mt-6">
-                  <label className="block md:text-2xl text-gray-600 text-sm font-bold mb-2" htmlFor="rating">
+                  <label className="block md:text-2xl text-gray-800 text-sm font-bold " htmlFor="rating">
                     Rating
                   </label>
                   <div className='text-center text-2xl '>
@@ -189,12 +189,12 @@ const My_Order_Page = () => {
                   </div>
                 </div>
 
-                <div className="mb-4 px-1">
-                  <label className="block md:text-xl text-gray-600 text-sm font-bold " htmlFor="review">
+                <div className="mb-2 px-1">
+                  <label className="block md:text-xl text-gray-800 text-sm font-bold mb-2" htmlFor="review">
                     Review
                   </label>
                   <textarea
-                    className="w-full h-auto md:min-h-40 min-h-32 px-2 py-2 text-gray-900 border rounded-lg bg-gray-100 focus:outline-none focus:border-blue-500 border-gray-600 "
+                    className="w-full h-auto md:min-h-40 min-h-32 px-2 py-2 text-gray-800 border rounded-lg bg-gray-100 focus:outline-none border-gray-600 focus:border-blue-500"
                     id="review"
                     placeholder="Review"
                     {...register("review", { required: true })}
@@ -209,7 +209,7 @@ const My_Order_Page = () => {
                   }
                 </div>
 
-                <div className='flex items-center gap-3 text-right mt-10'>
+                <div className='flex items-center gap-3 text-right mt-6'>
                   <button onClick={() => setShowModal(false)} className="rounded-full bg-gray-900 hover:shadow-lg font-semibold text-gray-300 px-6 py-2"> Close </button>
                   <button type="submit" disabled={!isReviewValid} className={`rounded-full bg-gray-900 hover:shadow-lg font-semibold text-gray-300 px-6 py-2 ${!isReviewValid ? 'opacity-50 cursor-not-allowed' : ''}`}>
                     {loading ? "Loading..." : "Confirm"}

@@ -28,7 +28,7 @@ const Order_Bar_Chart = () => {
       <div className="flex flex-col min-h-screen bg-gray-100">
         <Payment_History></Payment_History>
         {/* chart */}
-        <div className="bg-white rounded-md shadow-md p-6 lg:ml-11  mb-6 lg:w-[380px] sm:w-[200px] ">
+        <div className="bg-white rounded-md shadow-md p-6   mb-6 lg:w-[350px] sm:w-[200px] ">
           <h2 className="text-xl font-semibold mb-4">Order Status</h2>
           <PieChart
             data={pieChartData}

@@ -7,7 +7,7 @@ const Dashboard_Navbar = () => {
     return (
         <div className='bg-gray-100 rounded-md hidden lg:block '>
             <div className='flex items-center justify-between py-4 shadow-sm  '>
-                <h1 className='md:font-medium lg:text-xl text-md mr-2 text-gray-500 px-2 '> Munshi Wholesale </h1>
+                <h1 className='md:font-medium lg:text-xl text-md mr-2 text-gray-800 px-2 '> Munshi Wholesale </h1>
                 <div className='flex items-center md:gap-4 lg:gap-5 gap-3 '>
                     <div className='relative w-full lg:w-60 '>
                         <input
