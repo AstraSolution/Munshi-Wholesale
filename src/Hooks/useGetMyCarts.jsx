@@ -10,8 +10,9 @@ const useGetMyCarts = () => {
   } = useQuery({
     queryKey: ["myCarts"],
     queryFn: async () => {
-      const email = localStorage.getItem("email")
+      const email = localStorage.getItem("email");
       const res = await axiosPublic.get(`/myCarts/${email}`);
+      // console.log("cart data", res.data);
       return res?.data;
     },
   });
@@ -20,7 +21,8 @@ const useGetMyCarts = () => {
   const price = cartsData?.totalPrice;
   const quantity = cartsData?.quantity;
 
-  return { myCarts, price, quantity, isPending, refetch };
+  // return { myCarts, price, quantity, isPending, refetch };
+  return [myCarts, price, quantity, isPending, refetch];
 };
 
 export default useGetMyCarts;
