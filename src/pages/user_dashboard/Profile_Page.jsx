@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { CiCamera, CiEdit } from "react-icons/ci";
 import { useForm } from "react-hook-form";
 import useImageURL from "../../Components/HomeComonents/ImageURL/useImageURL";
@@ -143,7 +143,7 @@ const Profile_Page = () => {
     <>
       <div className="text-right px-4 ">
         <button onClick={toggleEditing}>
-          <CiEdit className="lg:text-3xl md:text-2xl text-2xl  cursor-pointer  block  " />
+          <CiEdit className="lg:text-3xl text-gray-800 md:text-2xl text-2xl  cursor-pointer  block  " />
         </button>
       </div>
       {/* Profile */}

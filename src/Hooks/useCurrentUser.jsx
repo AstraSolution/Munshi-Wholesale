@@ -3,20 +3,23 @@ import useAuth from "./useAuth";
 import useAxiosPublic from "./useAxiosPublic";
 
 const useCurrentUser = () => {
-    const axiosPublic = useAxiosPublic();
-    const { user } = useAuth();
+  const axiosPublic = useAxiosPublic();
+  const { user } = useAuth();
 
-    const { data: currentUser = [], isPending , isLoading ,  } = useQuery({
-        queryKey: ["currentUser", user?.email],
-        queryFn: async () => {
-           
-            const res = await axiosPublic.get(`/users/${user?.email}`)
-            console.log( "user" , res.data);
-            return res.data
-        }
-    })
+  const {
+    data: currentUser = {},
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["currentUser", user?.email],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/users/${user?.email}`);
 
-    return { currentUser, isLoading , isPending};
+      return res.data;
+    },
+  });
+
+  return { currentUser, isLoading, refetch };
 };
 
 export default useCurrentUser;

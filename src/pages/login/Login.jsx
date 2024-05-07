@@ -9,9 +9,11 @@ import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 export default function Login() {
   const { signInUser, googleLogin } = useAuth();
+  const axiosPublic = useAxiosPublic()
   const [showPassword, setShowPassword] = useState(true);
   const {
     register,
@@ -36,6 +38,7 @@ export default function Login() {
         navigate("/");
       })
       .catch((error) => {
+        console.log(error);
         toast("Invalid Email or Password!");
       });
   };
@@ -43,9 +46,13 @@ export default function Login() {
   // handle google login
   const hadleGoogleLogin = () => {
     googleLogin()
-      .then((res) => {
+      .then(async(res) => {
         const loggedUser = res.user;
-        console.log(loggedUser);
+        const fullName = loggedUser?.displayName;
+        const email = loggedUser?.email;
+        const profilePhoto = loggedUser?.photoURL;
+
+        await axiosPublic.post("/users", { fullName, email, profilePhoto});
         Swal.fire({
           position: "top-center",
           icon: "success",

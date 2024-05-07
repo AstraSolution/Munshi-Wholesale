@@ -1,4 +1,3 @@
-
 import Category from "../../Components/HomeComonents/Category/Category";
 import Category2 from "../../Components/HomeComonents/Category/Category2";
 import Hero from "../../Components/HomeComonents/Hero/Hero";
