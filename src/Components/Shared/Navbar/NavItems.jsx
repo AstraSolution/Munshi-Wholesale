@@ -41,7 +41,7 @@ const NavItems = () => {
         <div className="container mx-auto flex justify-between items-center">
           {/* menu for medium and large device  */}
           <div>
-            <ul className="hidden md:flex items-center space-x-6">
+            <ul className="hidden md:flex items-center space-x-10">
               {menuItems}
             </ul>
           </div>
