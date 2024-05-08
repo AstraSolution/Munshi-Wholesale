@@ -8,14 +8,24 @@ import { AiOutlineAppstore } from "react-icons/ai";
 import { BsPerson } from "react-icons/bs";
 import { FaCartArrowDown } from "react-icons/fa";
 import { useMediaQuery } from "react-responsive";
-import { MdMenu, MdChangeHistory , MdLogout } from "react-icons/md";
-import { IoIosSearch , IoMdSettings } from "react-icons/io";
+import { MdMenu, MdChangeHistory, MdLogout } from "react-icons/md";
+import { IoIosSearch, IoMdSettings } from "react-icons/io";
 import { IoHome } from "react-icons/io5";
 
 
-import { Link, NavLink, useLocation, } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate, } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
 
 const Dashboard = () => {
+  const { user, logOut } = useAuth();
+  const navigate = useNavigate()
+
+  const handleLogOut = () => {
+    logOut();
+    navigate('/login')
+  };
+
+
   let isTabletMid = useMediaQuery({ query: "(max-width: 768px)" });
   let isSmallDevice = useMediaQuery({ query: "(max-width: 640px)" });
   const [open, setOpen] = useState(isTabletMid ? false : true);
@@ -239,11 +249,14 @@ const Dashboard = () => {
                         Settings
                       </NavLink>
                     </li>
-                    <li className="p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium  text-[#FFA500] ">
-                        <MdLogout  size={23} className="min-w-max" />
-                        Logout
-                    </li>
+
+
                    
+                    <li onClick={handleLogOut} className="p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium  text-[#FFA500] ">
+                      <MdLogout size={23} className="min-w-max" />
+                      Logout
+                    </li>
+
                   </ul>
                 </div>
 
