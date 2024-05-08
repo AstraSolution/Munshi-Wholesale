@@ -116,7 +116,7 @@ const My_Order_Page = () => {
                   className='py-2 px-1 md:w-60 '
                 >
                   <select
-                    className='w-full px-4 py-1 md:py-1.5 text-gray-600 border-gray-600 border rounded-lg bg-gray-100 focus:outline-none focus:border-blue-500 font-oswald'
+                    className='w-full px-4 py-2 md:py-2 text-md text-gray-600 border-gray-600 border rounded-lg bg-gray-100 focus:outline-none focus:border-blue-500 font-oswald'
                   >
                     <option value='all'>All</option>
                     <option value='pending'>Pending</option>
@@ -194,7 +194,7 @@ const My_Order_Page = () => {
                     Review
                   </label>
                   <textarea
-                    className="w-full h-auto md:min-h-40 min-h-32 px-2 py-2 text-gray-800 border rounded-lg bg-gray-100 focus:outline-none border-gray-600 focus:border-blue-500"
+                    className="w-full h-auto md:min-h-40 min-h-32 px-2 py-2 text-black border rounded-lg bg-gray-100 focus:outline-none border-gray-600 focus:border-blue-500"
                     id="review"
                     placeholder="Review"
                     {...register("review", { required: true })}

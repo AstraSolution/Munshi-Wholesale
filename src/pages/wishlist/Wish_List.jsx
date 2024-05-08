@@ -22,7 +22,7 @@ const Wish_List = () => {
 
     if (wishlistProduct?.length === 0) {
         return (
-            <div className=" flex items-center justify-center text-center my-20  ">
+            <div className="  items-center justify-center text-center my-20  ">
                 <p className=" my-10 px-4 ">Your Wishlist is empty.</p>
                 <Link
                     to={'/shop'}
@@ -38,7 +38,7 @@ const Wish_List = () => {
 
 
     return (
-        <div className="container mx-auto md:py-3 py-2 text-gray-300 bg-gray-800  ">
+        <div className="container mx-auto md:py-3 my-10 text-gray-800 bg-white  ">
 
             <div className="space-y-2">
                 <motion.div
@@ -55,28 +55,28 @@ const Wish_List = () => {
                     <div className="overflow-x-auto">
                         <table className="w-full mt-2">
                             <tr className="text-[#FF9D00]  ">
-                                <th className="border bg-gray-800 border-gray-600 text-center text-sm md:text-md lg:text-lg py-3">
+                                <th className="border bg-gray-100 border-gray-300 text-center text-sm md:text-md lg:text-lg py-3">
                                     N/A
                                 </th>
-                                <th className="border bg-gray-800 border-gray-600 text-center text-sm md:text-md lg:text-lg py-3">
+                                <th className="border bg-gray-100 border-gray-300 text-center text-sm md:text-md lg:text-lg py-3">
                                     Title Name
                                 </th>
-                                <th className="border bg-gray-800 border-gray-600 text-center text-sm md:text-md lg:text-lg p-2">
+                                <th className="border bg-gray-100 border-gray-300 text-center text-sm md:text-md lg:text-lg p-2">
                                     Product Image
                                 </th>
-                                <th className="border bg-gray-800 border-gray-600 text-center text-sm md:text-md lg:text-lg p-2">
+                                <th className="border bg-gray-100 border-gray-300 text-center text-sm md:text-md lg:text-lg p-2">
                                     Color
                                 </th>
-                                <th className="border bg-gray-800 border-gray-600 text-center text-sm md:text-md lg:text-lg py-3">
+                                <th className="border bg-gray-100 border-gray-300 text-center text-sm md:text-md lg:text-lg py-3">
                                     Stock Limit
                                 </th>
-                                <th className="border bg-gray-800 border-gray-600 text-center text-sm md:text-md lg:text-lg py-3">
+                                <th className="border bg-gray-100 border-gray-300 text-center text-sm md:text-md lg:text-lg py-3">
                                     Unit Price
                                 </th>
-                                <th className="border bg-gray-800 border-gray-600 text-center text-sm md:text-md lg:text-lg py-3">
+                                <th className="border bg-gray-100 border-gray-300 text-center text-sm md:text-md lg:text-lg py-3">
                                     Total Price
                                 </th>
-                                <th className="border bg-gray-800 border-gray-600 text-center text-sm md:text-md lg:text-lg py-3">
+                                <th className="border bg-gray-100 border-gray-300 text-center text-sm md:text-md lg:text-lg py-3">
                                     Action
                                 </th>
                             </tr>

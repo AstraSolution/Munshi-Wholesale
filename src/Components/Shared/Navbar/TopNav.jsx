@@ -10,10 +10,11 @@ import useGetMyCarts from "../../../Hooks/useGetMyCarts";
 
 export default function TopNav() {
   const [wishlistProduct] = useWishlistProducts();
-  const [myCarts] = useGetMyCarts();
   const wishlistItems = wishlistProduct?.length;
+
+  const [myCarts] = useGetMyCarts();
   const cartItems = myCarts?.length;
-  console.log(cartItems);
+
 
   return (
     <div className="bg-gray-200">
