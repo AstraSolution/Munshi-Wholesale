@@ -1,4 +1,5 @@
 import BestSeller from "../../Components/HomeComonents/BestSeller/BestSeller";
+import BuyNow from "../../Components/HomeComonents/BuyNow/BuyNow";
 import Category from "../../Components/HomeComonents/Category/Category";
 import Category2 from "../../Components/HomeComonents/Category/Category2";
 import Featured from "../../Components/HomeComonents/Featured/Featured";
@@ -14,6 +15,7 @@ function Home() {
       <Offer />
       <BestSeller></BestSeller>
       <Featured></Featured>
+      <BuyNow></BuyNow>
     </div>
   );
 }
