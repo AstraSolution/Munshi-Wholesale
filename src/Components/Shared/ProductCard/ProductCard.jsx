@@ -102,7 +102,7 @@ const ProductCard = ({ currentProduct }) => {
     <div>
       <div className="relative flex items-center rounded-lg shadow-md h-[250px] lg:h-[350px] group border-2 border-gray-200">
         <div
-          className="mx-auto"
+          className=""
           onClick={() => navigate(`/products/${_id}`, { id: `${_id}` })}
         >
           <img

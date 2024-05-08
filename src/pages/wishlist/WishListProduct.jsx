@@ -8,15 +8,17 @@ import { motion } from "framer-motion";
 import { Toaster, toast } from "react-hot-toast";
 import useGetMyCarts from "../../Hooks/useGetMyCarts";
 
-const WishListProduct = ({ product, refetch, i }) => {
+const WishListProduct = ({ product, wishlistRefetch, i }) => {
 
 
     const { _id, product_image, title, color, stock_limit, total_price, unit_price, dimensions } = product || {}
 
     const axiosPublic = useAxiosPublic();
     const { currentUser } = useCurrentUser()
-    const { refetch: Refetch } = useGetMyCarts()
+    const { refetch } = useGetMyCarts()
 
+
+    // wishlist product delete fun
     const handleDeleteProduct = (id, title) => {
         Swal.fire({
             title: `Delete product`,
@@ -38,7 +40,7 @@ const WishListProduct = ({ product, refetch, i }) => {
                                 `Your product "${title}" has been deleted.`,
                                 "success"
                             );
-                            refetch();
+                            wishlistRefetch();
                         } else {
                             Swal.fire(
                                 "Error!",
@@ -60,44 +62,8 @@ const WishListProduct = ({ product, refetch, i }) => {
     };
 
 
-
-    // const handleAddToCart = () => {
-    //     try {
-    //         const addCart = {
-    //             customer_name: currentUser?.fullName,
-    //             customer_email: currentUser?.email,
-    //             product_id: _id,
-    //             unit_price,
-    //             total_price,
-    //             quantity: 1,
-    //             product_image,
-    //             stock_limit,
-    //             title,
-    //             dimensions,
-    //             color,
-    //         };
-
-    //         console.log(addCart);
-
-    //         axiosPublic
-    //             .post(`/myCarts/${currentUser?.email}`, addCart)
-    //             .then((response) => {
-    //                 if (response.status === 200) {
-    //                     toast.success("Product Add To Cart Successfull!!");
-    //                 }
-    //             })
-    //             .catch((error) => {
-    //                 console.error("Error:", error);
-    //                 toast.error("Please try again.?");
-    //             });
-    //     } catch (error) {
-    //         console.error("Error:", error);
-    //     }
-    // };
-
-
+    // wishlist product add to cart fun
     const handleAddToCart = (id) => {
-
         const addCart = {
             customer_name: currentUser?.fullName,
             customer_email: currentUser?.email,
@@ -117,21 +83,20 @@ const WishListProduct = ({ product, refetch, i }) => {
             .post(`/myCarts/${currentUser?.email}`, addCart)
             .then((response) => {
                 if (response.status === 200) {
-                    toast.success("Product Add To Cart Successfull!!");
+                    toast.success("Product Add To Cart Successfully!!");
                     axiosPublic
                         .delete(`/wishlist/${id}`)
                         .then((response) => {
                             if (response.status === 200) {
-                                refetch();
+                                wishlistRefetch();
                             } else {
-                                toast.error("Please try again.?");
+                                toast.error("Please try again.");
                             }
                         })
                         .catch((error) => {
                             console.error("Error deleting Product:", error);
-                            toast.error("Please try again.?");
                         });
-                        Refetch();
+                    refetch();
                 }
             })
             .catch((error) => {
@@ -180,9 +145,7 @@ const WishListProduct = ({ product, refetch, i }) => {
 
                     <div className="flex items-center justify-center lg:gap-6 md:gap-4 gap-2  ">
 
-                        <span onClick={() => handleAddToCart()} className="text-xl cursor-pointer "> <FaCartPlus></FaCartPlus> </span>
-
-
+                        <span onClick={() => handleAddToCart(_id)} className="text-xl cursor-pointer "> <FaCartPlus></FaCartPlus> </span>
                         <span onClick={() => handleDeleteProduct(_id, title)} className="text-xl text-red-600 cursor-pointer "><MdDelete></MdDelete> </span>
                     </div>
                 </td>
