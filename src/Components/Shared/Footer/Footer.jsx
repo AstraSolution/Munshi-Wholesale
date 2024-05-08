@@ -1,6 +1,7 @@
 import React from "react";
 import { TfiEmail } from "react-icons/tfi";
 import FooterLink from "./FooterLink";
+import LIGHT_LOGO from "../../../assets/light-logo.png";
 
 export default function Footer() {
   return (
@@ -9,11 +10,7 @@ export default function Footer() {
         <div className="grid container mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3  xl:grid-cols-5 gap-6 md:gap-8 lg:gap-12">
           <div>
             <div className="">
-              <img
-                className="w-44 mb-4 "
-                src="https://i.ibb.co/x576tv6/munshi-removebg-preview.png"
-                alt=""
-              />
+              <img className="w-44 mb-4 " src={LIGHT_LOGO} alt="" />
               <ul className="space-y-5">
                 <li>
                   <a className="text-gray-300 hover:text-white text-[12px]">

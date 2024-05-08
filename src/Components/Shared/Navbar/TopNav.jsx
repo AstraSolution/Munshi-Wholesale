@@ -22,12 +22,12 @@ export default function TopNav() {
         {/* logo  */}
         <h3 className="order-1">
           <Link to={"/"}>
-            <img src={LOGO} className="w-32" alt="" />
+            <img src={LOGO} className="w-32 md:w-24 lg:w-32" alt="" />
           </Link>
         </h3>
 
         {/* search bar  */}
-        <div className="order-3 md:order-2 md:mt-0 w-[80%] md:w-[40%] lg:w-[50%] mt-4">
+        <div className="order-3 md:order-2 md:mt-0 w-[85%] md:w-[55%] lg:w-[50%] mt-4">
           <SearchBar />
         </div>
 
