@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { IoIosSearch } from "react-icons/io";
 
 const AllOrders = () => {
   const [data, setData] = useState(null);
@@ -11,6 +10,15 @@ const AllOrders = () => {
       .then((data) => setData(data))
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
+
+  const handleStatusChange = (productId) => {
+    // Simulate updating status to "Shipped"
+    setData((prevData) =>
+      prevData.map((product) =>
+        product._id === productId ? { ...product, status: "Shipped" } : product
+      )
+    );
+  };
 
   return (
     <div className="container mx-auto md:py-3 py-2 text-white ">
@@ -23,32 +31,6 @@ const AllOrders = () => {
         >
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-bold pb-1 font-oswald ">All Orders </h1>
-            {/* <div className="flex items-center justify-between md:gap-6 gap-2 ">
-              <div className="relative w-full">
-                <input
-                  type="text"
-                  id="search"
-                  className="bg-gray-800 border  text-white text-sm rounded-lg focus:outline-none focus:border-blue-500 block w-full  py-2  px-2   dark:text-white"
-                  placeholder="Search..."
-                />
-                <button
-                  type="button"
-                  className="absolute inset-y-0 end-0 flex items-center pe-3"
-                >
-                  <IoIosSearch size={23} className="min-w-max" />
-                </button>
-              </div>
-              <div className="py-2 px-1 md:w-44">
-                <select className=" w-full px-4 py-1 md:py-1.5  text-white border rounded-lg bg-gray-800 focus:outline-none focus:border-blue-500 font-oswald ">
-                  <option value="all">All</option>
-                  <option value="burger"> Burger </option>
-                  <option value="snack"> Snack </option>
-                  <option className="pb-2" value="beverage">
-                    Beverage
-                  </option>
-                </select>
-              </div>
-            </div> */}
           </div>
 
           <div className="overflow-x-auto">
@@ -96,8 +78,16 @@ const AllOrders = () => {
                       {product?.category}
                     </td>
                     <td className="border bg-gray-800 border-gray-400 p-2 text-sm md:text-md  text-center ">
-                      {" "}
-                      Shipped
+                      {product.status === "Processing" ? (
+                        <button
+                          onClick={() => handleStatusChange(product._id)}
+                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        >
+                          Ship
+                        </button>
+                      ) : (
+                        "Shipped"
+                      )}
                     </td>
                   </motion.tr>
                 ))}

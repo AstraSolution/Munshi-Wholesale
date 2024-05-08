@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import { IoIosSearch } from "react-icons/io";
 import { useForm } from 'react-hook-form';
 import { StarRating } from '../../Components/Shared/StarRating/StarRating';
-import UseAxios from '../../Hooks/useAxios';
 import { Toaster, toast } from 'react-hot-toast';
+import useAxiosPublic from '../../Hooks/useAxiosPublic';
 
 const My_Order_Page = () => {
   const [data, setData] = useState(null);
@@ -14,7 +14,7 @@ const My_Order_Page = () => {
   const { register, handleSubmit, reset } = useForm();
   const [loading, setLoading] = useState(false);
   const [reviewText, setReviewText] = useState('');
-  const instance = UseAxios()
+  const axiosPublic = useAxiosPublic()
 
   useEffect(() => {
     fetch('/products.json')
@@ -47,7 +47,7 @@ const My_Order_Page = () => {
       console.log(reviewInformation);
 
 
-      const res = await instance.post("/reviews", reviewInformation);
+      const res = await axiosPublic.post("/reviews", reviewInformation);
       console.log(res.data);
       if (res?.data) {
         toast.success('Review Successfull!')
@@ -66,8 +66,6 @@ const My_Order_Page = () => {
   };
 
 
-
-
   const isReviewValid = reviewText?.length >= 20;
 
   return (
@@ -76,14 +74,14 @@ const My_Order_Page = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="container mx-auto md:py-3 py-2  text-gray-300 "
+        className=" px-4 md:py-3 py-2  text-gray-600"
       >
         <div className="space-y-2">
           <motion.div
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="p-5 rounded-lg bg-50-50"
+            className=" rounded-lg bg-50-50"
           >
             <div className='flex items-center justify-between'>
               <motion.h1
@@ -104,12 +102,12 @@ const My_Order_Page = () => {
                   <input
                     type='text'
                     id='search'
-                    className='bg-gray-800 border text-gray-300 border-gray-600 text-sm rounded-lg focus:outline-none focus:border-blue-500 block w-full py-2 px-2 dark:text-gray-300'
+                    className='bg-gray-100 border border-gray-800  text-md rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full px-2  py-2 text-gray-900 '
                     placeholder='Search...'
                   />
-                  <button type='button' className='absolute inset-y-0 end-0 flex items-center pe-3'>
+                  <p className='absolute inset-y-0 end-0 flex items-center pe-3'>
                     <IoIosSearch size={23} className='min-w-max' />
-                  </button>
+                  </p>
                 </motion.div>
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
@@ -118,7 +116,7 @@ const My_Order_Page = () => {
                   className='py-2 px-1 md:w-60 '
                 >
                   <select
-                    className='w-full px-4 py-1 md:py-1.5 text-gray-300 border-gray-600 border rounded-lg bg-gray-800 focus:outline-none focus:border-blue-500 font-oswald'
+                    className='w-full px-4 py-2 md:py-2 text-md text-gray-600 border-gray-600 border rounded-lg bg-gray-100 focus:outline-none focus:border-blue-500 font-oswald'
                   >
                     <option value='all'>All</option>
                     <option value='pending'>Pending</option>
@@ -155,15 +153,15 @@ const My_Order_Page = () => {
                     // className={i % 2 === 0 ? 'bg-black' : 'bg-gray-800'}
 
                     >
-                      <td className="border border-gray-600 bg-gray-800  p-2 text-center">{i + 1}</td>
-                      <td className="border border-gray-600 bg-gray-800  md:p-2 p-1 text-sm">{product?.title?.slice(0, 30)}.....</td>
-                      <td className="border border-gray-600 bg-gray-800  p-2">
+                      <td className="border border-gray-600 divide-gray-200  p-2 text-center">{i + 1}</td>
+                      <td className="border border-gray-600 divide-gray-200  md:p-2 p-1 text-sm">{product?.title?.slice(0, 30)}.....</td>
+                      <td className="border border-gray-600 divide-gray-200  p-2">
                         <img className='w-20 md:h-16 rounded-lg mx-auto' src={product?.image[0]} alt="" />
                       </td>
-                      <td className="border border-gray-600 bg-gray-800  p-2 text-sm md:text-md text-center">{product?.category}</td>
-                      <td className="border border-gray-600 bg-gray-800  p-2 text-sm md:text-md text-center">Pending</td>
-                      <td onClick={() => handleReviewClick(product)} className="border cursor-pointer border-gray-600 bg-gray-800  p-2 text-sm md:text-md text-center">Review</td>
-                      <td className="flex items-center justify-center gap-3 md:py-6 py-4 border border-gray-600 bg-gray-800  p-2">
+                      <td className="border border-gray-600 divide-gray-200  p-2 text-sm md:text-md text-center">{product?.category}</td>
+                      <td className="border border-gray-600 divide-gray-200  p-2 text-sm md:text-md text-center">Pending</td>
+                      <td onClick={() => handleReviewClick(product)} className="border cursor-pointer border-gray-600 divide-gray-200  p-2 text-sm md:text-md text-center">Review</td>
+                      <td className="flex items-center justify-center gap-3 md:py-6 py-4 border border-gray-600 divide-gray-200  p-2">
                         <span className="p-2 w-fit  cursor-pointer text-sm rounded-md">
                           Cancel
                         </span>
@@ -179,11 +177,11 @@ const My_Order_Page = () => {
         {/* Modal component */}
         {showModal && (
           <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
-            <div className="lg:w-4/12 mx-auto bg-gray-800 p-6 rounded-lg">
+            <div className="lg:w-4/12 mx-auto bg-gray-300 p-6 rounded-lg">
               <form onSubmit={handleSubmit(onSubmit)}>
-                <h2 className="block md:text-2xl text-center text-gray-300 text-sm font-bold mb-2">{selectedProduct?.title}</h2>
+                <h2 className="block md:text-2xl text-center text-gray-800 text-sm font-bold mb-2">{selectedProduct?.title}</h2>
                 <div className="mb-4 px-1 text-center mt-6">
-                  <label className="block md:text-2xl text-gray-300 text-sm font-bold mb-2" htmlFor="rating">
+                  <label className="block md:text-2xl text-gray-800 text-sm font-bold " htmlFor="rating">
                     Rating
                   </label>
                   <div className='text-center text-2xl '>
@@ -191,12 +189,12 @@ const My_Order_Page = () => {
                   </div>
                 </div>
 
-                <div className="mb-4 px-1">
-                  <label className="block md:text-xl text-gray-300 text-sm font-bold mb-2" htmlFor="review">
+                <div className="mb-2 px-1">
+                  <label className="block md:text-xl text-gray-800 text-sm font-bold mb-2" htmlFor="review">
                     Review
                   </label>
                   <textarea
-                    className="w-full h-auto md:min-h-60 min-h-32 px-2 py-2 text-gray-300 border rounded-lg bg-gray-800 focus:outline-none focus:border-blue-500"
+                    className="w-full h-auto md:min-h-40 min-h-32 px-2 py-2 text-black border rounded-lg bg-gray-100 focus:outline-none border-gray-600 focus:border-blue-500"
                     id="review"
                     placeholder="Review"
                     {...register("review", { required: true })}
@@ -211,7 +209,7 @@ const My_Order_Page = () => {
                   }
                 </div>
 
-                <div className='flex items-center gap-3 text-right mt-10'>
+                <div className='flex items-center gap-3 text-right mt-6'>
                   <button onClick={() => setShowModal(false)} className="rounded-full bg-gray-900 hover:shadow-lg font-semibold text-gray-300 px-6 py-2"> Close </button>
                   <button type="submit" disabled={!isReviewValid} className={`rounded-full bg-gray-900 hover:shadow-lg font-semibold text-gray-300 px-6 py-2 ${!isReviewValid ? 'opacity-50 cursor-not-allowed' : ''}`}>
                     {loading ? "Loading..." : "Confirm"}

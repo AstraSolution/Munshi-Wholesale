@@ -5,54 +5,57 @@ const categories = [
   {
     _id: 1,
     categoryName: "Total Orders",
-    categoryDescription: "Description for Category 1",
-    bgColorCode: "#ff0000",
-    linkColorCode: "#00ff00",
-    categoryImage: "https://via.placeholder.com/150", 
+    categoryDescription: 10000,
+    bgColorCode: "#1F2937",
+    
+    categoryImage: 'https://i.ibb.co/8XPQ2Gn/iconmonstr-product-3-240-removebg-preview.png',
   },
   {
     _id: 2,
     categoryName: "Total users",
-    categoryDescription: "Description for Category 2",
-    bgColorCode: "#00ff00",
-    linkColorCode: "#0000ff",
-    categoryImage: "https://via.placeholder.com/150", 
+    categoryDescription: 10000,
+    bgColorCode: "#1F2937",
+    categoryImage: 'https://i.ibb.co/xGQfNW2/customer.png',
   },
   {
-    _id: 2,
+    _id: 3,
     categoryName: "Total sales",
-    categoryDescription: "Description for Category 2",
-    bgColorCode: "#00ff00",
-    linkColorCode: "#0000ff",
-    categoryImage: "https://via.placeholder.com/150", 
+    categoryDescription: 10000,
+    bgColorCode: "#1F2937",
+    categoryImage: 'https://i.ibb.co/W05p5Zt/shopping-cart.png',
   },
-  
+  {
+    _id: 3,
+    categoryName: "All Products",
+    categoryDescription: 10000,
+    bgColorCode: "#1F2937",
+    categoryImage: 'https://i.ibb.co/PZPVNmx/iconmonstr-product-3-240.png',
+  },
 ];
 
 const DashboardStats = () => {
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-white">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 text-white">
         {categories.map((category) => (
           <motion.div
             key={category._id}
             whileHover={{ scale: 1.1 }}
-            className="flex items-center rounded-xl"
+            className=" rounded-lg  "
             style={{ backgroundColor: `${category?.bgColorCode}` }}
           >
-            <div className="w-[40%]">
-              <img
-                src={category?.categoryImage}
-                alt={category?.categoryName}
-                className="w-[120px] h-[120px]"
-              />
-            </div>
-            <div className="w-[70%]">
-              <h3 className="text-xl font-bold uppercase font-oswald">
-                {category?.categoryName}
-              </h3>
-              <h3 className="mb-2 text-xs">{category?.categoryDescription}</h3>
+            <div className="ml-3 mb-3">
+          
+                <img
+                  src={category.categoryImage}
+                  alt={category.categoryName}
+                  className="h-10 mt-3 ml-28 lg:ml-0"
+                />
              
+            </div>
+            <div className="text-center lg:text-left lg:ml-3">
+              <h3 className="text-xl font-bold">{category.categoryName}</h3>
+              <h3 className="mb-2 text-lg font-normal">$ {category.categoryDescription}</h3>
             </div>
           </motion.div>
         ))}

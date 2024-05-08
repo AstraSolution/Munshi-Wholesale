@@ -4,16 +4,13 @@ import { motion } from "framer-motion";
 
 // * React icons
 import { IoIosArrowBack } from "react-icons/io";
-// import { SlSettings } from "react-icons/sl";
 import { AiOutlineAppstore } from "react-icons/ai";
 import { BsPerson } from "react-icons/bs";
 import { FaCartArrowDown } from "react-icons/fa";
-// import { HiOutlineDatabase } from "react-icons/hi";
-// import { TbReportAnalytics } from "react-icons/tb";
-// import { RiBuilding3Line } from "react-icons/ri";
 import { useMediaQuery } from "react-responsive";
-import { MdMenu, MdChangeHistory } from "react-icons/md";
-import { IoIosSearch } from "react-icons/io";
+import { MdMenu, MdChangeHistory , MdLogout } from "react-icons/md";
+import { IoIosSearch , IoMdSettings } from "react-icons/io";
+import { IoHome } from "react-icons/io5";
 
 
 import { Link, NavLink, useLocation, } from "react-router-dom";
@@ -85,7 +82,7 @@ const Dashboard = () => {
         variants={Nav_animation}
         initial={{ x: isTabletMid ? -250 : 0 }}
         animate={open ? "open" : "closed"}
-        className=" bg-gray-800 text-gray shadow-xl z-[999] max-w-[16rem]  w-[16rem] 
+        className=" bg-black text-gray-100 shadow-xl z-[999] max-w-[16rem]  w-[16rem] 
             overflow-hidden lg:relative fixed  h-screen  "
       >
         <div className="flex items-center justify-between gap-2.5 font-medium border-b py-3 border-slate-300 mx-3">
@@ -122,6 +119,20 @@ const Dashboard = () => {
           <ul className="whitespace-pre px-2.5 text-[0.9rem] py-5 flex flex-col gap-1  font-medium overflow-x-hidden scrollbar-thin scrollbar-track-white scrollbar-thumb-slate-100   md:h-[68%] h-[70%]">
 
             <li>
+              <NavLink to={"/dashboard/home"} className={({ isActive, isPending }) =>
+                isPending
+                  ? "pending"
+                  : isActive
+                    ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium "
+                    : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
+              }>
+                <AiOutlineAppstore size={23} className="min-w-max" />
+                Dashboard Home
+              </NavLink>
+            </li>
+
+
+            <li>
               <NavLink to={"/dashboard"} className={({ isActive, isPending }) =>
                 isPending
                   ? "pending"
@@ -151,7 +162,7 @@ const Dashboard = () => {
                 isPending
                   ? "pending"
                   : isActive
-                    ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium bg-gray-600 text-[#FFA500]"
+                    ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium text-[#FFA500]"
                     : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
               }>
                 <MdChangeHistory size={23} className="min-w-max" />
@@ -163,7 +174,7 @@ const Dashboard = () => {
                 isPending
                   ? "pending"
                   : isActive
-                    ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium bg-gray-600 text-[#FFA500]"
+                    ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium  text-[#FFA500]"
                     : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
               }>
                 <BsPerson size={23} className="min-w-max" />
@@ -175,7 +186,7 @@ const Dashboard = () => {
                 isPending
                   ? "pending"
                   : isActive
-                    ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium "
+                    ? " bg-gray-600 text-[#FFA500] p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium "
                     : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
               }>
                 <BsPerson size={23} className="min-w-max" />
@@ -201,14 +212,41 @@ const Dashboard = () => {
 
           {open && (
             <div className="flex-1 text-sm z-50  max-h-48 my-auto  whitespace-pre   w-full  font-medium  ">
-              <div className="flex border-y border-slate-300 p-4 items-center justify-between">
+              <div className="flex border-t border-gray-400 p-4 items-center justify-between">
                 <div>
-                  <p>Spark</p>
-                  <small>No-cost $0/month</small>
+                  <ul>
+                    <li>
+                      <NavLink to={"/"} className={({ isActive, isPending }) =>
+                        isPending
+                          ? "pending"
+                          : isActive
+                            ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium bg-gray-600 text-[#FFA500] "
+                            : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
+                      }>
+                        <IoHome size={23} className="min-w-max" />
+                        Home
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to={"/"} className={({ isActive, isPending }) =>
+                        isPending
+                          ? "pending"
+                          : isActive
+                            ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium bg-gray-600 text-[#FFA500] "
+                            : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
+                      }>
+                        <IoMdSettings size={23} className="min-w-max" />
+                        Settings
+                      </NavLink>
+                    </li>
+                    <li className="p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium  text-[#FFA500] ">
+                        <MdLogout  size={23} className="min-w-max" />
+                        Logout
+                    </li>
+                   
+                  </ul>
                 </div>
-                <p className="text-teal-500 py-1.5 px-3 text-xs bg-teal-50 rounded-xl">
-                  Upgrade
-                </p>
+
               </div>
             </div>
           )}
