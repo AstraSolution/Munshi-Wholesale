@@ -1,29 +1,23 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import ProductCard from "../../Components/Shared/ProductCard/ProductCard";
 import SectionBanner from "../../Components/Shared/SectionBanner/SectionBanner";
 import { FaSortDown } from "react-icons/fa";
 import useAllCategory from "../../Hooks/useAllCategory";
 import useAllProduct from "../../Hooks/useAllProduct";
 import useAllBrand from "../../Hooks/useAllBrand";
-import { AuthContext } from "../../Providers/AuthProviders/AuthProvider";
+import useCurrentUser from "../../Hooks/useCurrentUser";
 
 export default function Shop() {
   const [showAllCategories, setShowAllCategories] = useState(false);
   const [showAllBrands, setShowAllBrands] = useState(false);
   const [sort, setSort] = useState(false);
 
-  const products = useAllProduct();
+  const { products } = useAllProduct();
   const { categories, categoryLoading } = useAllCategory();
   const { brands, brandsLoading } = useAllBrand();
+  const { currentUser } = useCurrentUser();
 
-  const { user } = useContext(AuthContext);
-
-  const currentUser = {
-    fullName: user?.displayName,
-    email: user?.email,
-  };
-
-  console.log(products)
+  console.log(products);
 
   const colors = [
     {
@@ -246,7 +240,7 @@ export default function Shop() {
           <div className="w-2/3 md:w-3/4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-10 my-10">
               {/* Product-Cards */}
-              {products?.products?.map((product) => (
+              {products?.map((product) => (
                 <ProductCard
                   key={product?._id}
                   currentProduct={product}
