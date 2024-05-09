@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Newsletter() {
   return (
-    <div className="bg-[url('https://dt-fixxer.myshopify.com/cdn/shop/files/grid-12.jpg?v=1665381381')] bg-[#00000065] bg-blend-overlay">
+    <div className="bg-[url('https://dt-fixxer.myshopify.com/cdn/shop/files/grid-12.jpg?v=1665381381')] bg-[#ffffff73] bg-blend-overlay">
       <div className="container mx-auto py-12 sm:py-16">
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="text-center">

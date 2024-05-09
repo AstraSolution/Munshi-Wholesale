@@ -1,3 +1,4 @@
+import Brands from "../../Components/HomeComonents/Brands/Brands";
 import Category from "../../Components/HomeComonents/Category/Category";
 import Category2 from "../../Components/HomeComonents/Category/Category2";
 import Hero from "../../Components/HomeComonents/Hero/Hero";
@@ -13,6 +14,7 @@ function Home() {
       <Category />
       <Category2 />
       <Offer />
+      <Brands />
       <Newsletter />
     </div>
   );
