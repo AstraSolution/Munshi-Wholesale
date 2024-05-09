@@ -41,7 +41,9 @@ export default function Brands() {
   };
   return (
     <div className="container mx-auto">
-      <h3 className="text-red-600 text-2xl font-semibold pb-6">Shop By Brands</h3>
+      <h3 className="text-red-600 text-2xl font-semibold pb-6">
+        Shop By Brands
+      </h3>
       <Slider {...settings} className="">
         {brands?.map((brand) => (
           <div

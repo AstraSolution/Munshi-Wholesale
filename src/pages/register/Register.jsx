@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import FACEBOOK_ICON from "../../assets/icons/FacebookIcon.svg";
 import GOOGLE_ICON from "../../assets/icons/GoogleIcon.png";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
@@ -229,7 +228,6 @@ export default function Register() {
           </p>
         </form>
       </motion.div>
-
       <ToastContainer />
     </div>
   );
