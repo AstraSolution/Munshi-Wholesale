@@ -10,7 +10,7 @@ const Category = () => {
             <div className="py-8">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     {/* 1st col */}
-                    <div className="py-10 pl-5 bg-gradient-to-br ☐ from-black/90 to-black/70 text-white rounded-xl relative h-[320px] flex items-end hover:scale-110 duration-300">
+                    <div className="py-10 pl-5 bg-gradient-to-br from-black/90 to-black/70 text-white rounded-xl relative h-[320px] flex items-end hover:scale-110 duration-300">
                         <div>
                             <div className="mb-4">
                                 <p className="mb-[2px] text-gray-400">Enjoy</p>
@@ -28,7 +28,7 @@ const Category = () => {
                         <img src={Image1} alt="" className="w-[320px] absolute bottom-0" />
                     </div>
                     {/* 2nd col */}
-                    <div className="py-10 pl-5 bg-gradient-to-br ☐ from-brandYellow/90 to-brandYellow/90 text-white rounded-xl relative h-[320px] flex items-end hover:scale-110 duration-300">
+                    <div className="py-10 pl-5 bg-gradient-to-br from-brandYellow/90 to-brandYellow/90 text-white rounded-xl relative h-[320px] flex items-end hover:scale-110 duration-300">
                         <div>
                             <div className="mb-4">
                                 <p className="mb-[2px] text-white">Enjoy</p>
@@ -46,7 +46,7 @@ const Category = () => {
                         <img src={Image2} alt="" className="w-[320px] absolute -right-4 lg:top-[40px]" />
                     </div>
                     {/* 3rd col */}
-                    <div className="sm:col-span-2 py-10 pl-5 bg-gradient-to-br ☐ from-primary/90 to-primary/90 text-white rounded-xl relative h-[320px] flex items-end hover:scale-105 duration-300">
+                    <div className="sm:col-span-2 py-10 pl-5 bg-gradient-to-br from-primary/90 to-primary/90 text-white rounded-xl relative h-[320px] flex items-end hover:scale-105 duration-300">
                         <div>
                             <div className="mb-4">
                                 <p className="mb-[2px] text-white">Enjoy</p>
