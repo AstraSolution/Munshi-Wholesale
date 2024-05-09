@@ -1,31 +1,36 @@
 import Slider from "react-slick";
-import Image1 from "../../../assets/hero/headphone.png";
-import Image2 from "../../../assets/category/vr.png";
-import Image3 from "../../../assets/category/macbook.png";
 import Button from "../../Shared/Button/Button";
+import Img1 from "../../../assets/hero/yellow-drill-1.png";
+import bg1 from "../../../assets/hero/bg1.png";
+import Img2 from "../../../assets/hero/yellow-tools-kit-1.png";
+import bg2 from "../../../assets/hero/bg2.png";
+import Img3 from "../../../assets/hero/yellow-chainsaw1.png";
 
 const Hero = () => {
   const HeroData = [
     {
       id: 1,
-      img: Image1,
-      subtitle: "Beats Solo",
-      title: "Wireless",
-      title2: "Headphone",
+      bg: bg1,
+      img: Img1,
+      subtitle: "Order Now and Get",
+      title: "20% off on",
+      title2: "Drill Machine",
     },
     {
       id: 2,
-      img: Image2,
-      subtitle: "Beats Solo",
-      title: "Wireless",
-      title2: "Virtual",
+      bg: bg2,
+      img: Img2,
+      subtitle: "Order Today and Get",
+      title: "22% off on",
+      title2: "Tools Kit",
     },
     {
       id: 3,
-      img: Image3,
-      subtitle: "Beats Solo",
-      title: "Branded",
-      title2: "Laptops",
+      img: Img3,
+      bg: bg2,
+      subtitle: "Get This Week",
+      title: "25% off on",
+      title2: "Chainsaw",
     },
   ];
 
@@ -43,30 +48,39 @@ const Hero = () => {
   };
 
   return (
-    <div className="container mx-auto">
-      {/* Hero section */}
-      <div className="overflow-hidden rounded-3xl min-h-[550px] sm:min-h-[650px] hero-bg-color flex justify-center items-center">
-        <div className="container sm:pb-0 pb-8">
-          <Slider {...settings}>
-            {HeroData.map((data) => (
-              <div key={data.id}>
-                <div className="grid grid-cols-1 sm:grid-cols-2">
+    <div className="container mx-auto mt-2 mb-7 drop-shadow rounded-3xl">
+      <Slider {...settings}>
+        {HeroData.map((data) => (
+          <div key={data.id}>
+            {/* Hero section */}
+            <div
+              className="overflow-hidden rounded-3xl min-h-[550px] sm:min-h-[650px] hero-bg-color flex justify-center items-center"
+              style={{
+                backgroundImage: `url(${data.bg})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                borderRadius: "1.5rem",
+              }}
+            >
+              <div className="container sm:pb-0 pb-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 w-full">
                   {/* text content section */}
-                  <div className="flex flex-col justify-center gap-4 sm:pl-3 pt-12 sm:pt-0 text-center sm:text-left order-2 sm:order-1 relative z-10">
+                  <div className="flex flex-col w-screen justify-center gap-4 sm:pl-3 pt-12 sm:pt-0 text-center sm:text-left order-2 sm:order-1 relative z-10">
                     <h1 className="text-2xl sm:text-6xl lg:text-2xl font-bold">
                       {data.subtitle}
                     </h1>
                     <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold">
                       {data.title}
                     </h1>
-                    <h1 className="text-5xl uppercase text-white dark:text-white/5 sm:text-[80px] md:text-[100px] xl:text-[150px] font-bold">
+                    <h1 className="text-5xl min-w-full uppercase text-nowrap text-transparent bg-clip-text bg-gradient-to-r from-brandYellow/90 to-[#fff]/90 sm:text-[80px] md:text-[100px] xl:text-[150px] font-bold">
                       {data.title2}
                     </h1>
                     <div>
                       <Button
                         text="Shop By Category"
-                        bgColor="bg-primary"
-                        textColor="text-white"
+                        bgColor="bg-brandYellow/90"
+                        textColor="text-black"
                       />
                     </div>
                   </div>
@@ -82,10 +96,10 @@ const Hero = () => {
                   </div>
                 </div>
               </div>
-            ))}
-          </Slider>
-        </div>
-      </div>
+            </div>
+          </div>
+        ))}
+      </Slider>
     </div>
   );
 };

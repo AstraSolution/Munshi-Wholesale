@@ -8,7 +8,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 const Carts = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  let { myCarts, price, isPending, refetch } = useGetMyCarts();
+  let { myCarts, price, quantity, isPending, refetch } = useGetMyCarts();
 
   if (isPending) {
     return <p className=" min-h-screen text-center my-auto">Loading...</p>;
@@ -16,8 +16,8 @@ const Carts = () => {
 
   const handleCheckout = async () => {
     const email = await user?.email;
-
-    const res = await axiosSecure.post("/order", { email: email });
+    
+    const res = await axiosSecure.post(`/order`, { email: email });
     if (res?.data?.url) {
       const url = await res.data.url;
       window.open(url, "_blank");
@@ -57,11 +57,12 @@ const Carts = () => {
                 refetch={refetch}
               ></CartsDetails>
             ))}
-            <div className="flex items-center justify-center gap-4 mb-3">
-              <p>Total price: {price?.toFixed(2)}</p>
+            <div className="flex items-center  justify-around gap-4 mb-3">
+              <p className="bg-black  hover:bg-gray-800 px-4 py-2 rounded-full text-white">Total Quantity: <span className=" text-[#FFA500]">{ quantity }</span></p>
+              <p className="bg-black  hover:bg-gray-800 px-4 py-2 rounded-full text-white">Total price: <span className="text-[#FFA500]">{price?.toFixed(2)}</span></p>
               <button
                 onClick={handleCheckout}
-                className="button-color px-4 py-2 rounded-full text-sm md:text-base text-white flex items-center gap-1"
+                className=" bg-black text-[#FFA500] hover:bg-gray-800 px-4 py-2 rounded-full text-sm md:text-base  flex items-center gap-1"
               >
                 Checkout
               </button>

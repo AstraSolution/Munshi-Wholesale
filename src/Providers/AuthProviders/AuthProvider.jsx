@@ -46,13 +46,14 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       setLoading(false);
 
-      // if (userEmail) {
-      //   const userEmail = { email:userEmail };
-      //   axiosPublic
-      //     .post("/jwt", userEmail, {
-      //       withCredentials: true,
-      //     })
-      // }
+      const handleCreateToken = async () => {
+        const email = { email: userEmail };
+        await axiosPublic.post("/jwt", email, {
+          withCredentials: true,
+        });
+      };
+      handleCreateToken();
+
       // if (currentUser) {
       //   axios
       //     .post("https://localhost:5000/api/v1/access-token", loggedUser, {
