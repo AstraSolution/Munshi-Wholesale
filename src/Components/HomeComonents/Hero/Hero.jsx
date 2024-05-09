@@ -48,7 +48,7 @@ const Hero = () => {
     };
 
     return (
-        <div className="container mx-auto mt-2 drop-shadow rounded-3xl">
+        <div className="container mx-auto mt-2 mb-7 drop-shadow rounded-3xl">
             <Slider {...settings}>
                 {HeroData.map((data) => (
                     <div key={data.id}>
@@ -60,19 +60,20 @@ const Hero = () => {
                                 backgroundSize: 'cover',
                                 backgroundPosition: 'center',
                                 backgroundRepeat: 'no-repeat',
+                                borderRadius: '1.5rem'
                             }}
                         >
                             <div className="container sm:pb-0 pb-8">
-                                <div className="grid grid-cols-1 sm:grid-cols-2">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 w-full">
                                     {/* text content section */}
-                                    <div className="flex flex-col justify-center gap-4 sm:pl-3 pt-12 sm:pt-0 text-center sm:text-left order-2 sm:order-1 relative z-10">
+                                    <div className="flex flex-col w-screen justify-center gap-4 sm:pl-3 pt-12 sm:pt-0 text-center sm:text-left order-2 sm:order-1 relative z-10">
                                         <h1 className="text-2xl sm:text-6xl lg:text-2xl font-bold">
                                             {data.subtitle}
                                         </h1>
                                         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold">
                                             {data.title}
                                         </h1>
-                                        <h1 className="text-5xl uppercase text-nowrap text-yellow-500/40 sm:text-[80px] md:text-[100px] xl:text-[150px] font-bold">
+                                        <h1 className="text-5xl min-w-full uppercase text-nowrap text-transparent bg-clip-text bg-gradient-to-r from-brandYellow/90 to-[#fff]/90 sm:text-[80px] md:text-[100px] xl:text-[150px] font-bold">
                                             {data.title2}
                                         </h1>
                                         <div>
