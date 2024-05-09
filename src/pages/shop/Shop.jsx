@@ -17,7 +17,7 @@ export default function Shop() {
   const { brands, brandsLoading } = useAllBrand();
   const { currentUser } = useCurrentUser();
 
-  console.log(products)
+  console.log(products);
 
   const colors = [
     {
@@ -240,7 +240,7 @@ export default function Shop() {
           <div className="w-2/3 md:w-3/4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-10 my-10">
               {/* Product-Cards */}
-              {products?.products?.map((product) => (
+              {products?.map((product) => (
                 <ProductCard
                   key={product?._id}
                   currentProduct={product}

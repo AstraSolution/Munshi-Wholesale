@@ -12,8 +12,6 @@ const useAllProduct = () => {
     },
   });
 
-  console.log(products);
-
   return products;
 };
 
