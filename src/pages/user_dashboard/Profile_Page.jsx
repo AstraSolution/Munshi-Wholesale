@@ -158,14 +158,14 @@ const Profile_Page = () => {
                     onClick={() => {
                       document.getElementById("coverFileInput").click();
                     }}
-                    className="absolute bottom-1 right-2 w-8 h-8 text-gray-800 fill-current bg-black rounded-full p-1 cursor-pointer hover:bg-gray-900"
+                    className="absolute bottom-1 right-2 w-8 h-8 text-gray-800 fill-current bg-white rounded-full p-1 cursor-pointer hover:bg-gray-200"
                   />
                 )}
               </div>
 
               {/* profile Photo */}
 
-              <div className="mx-auto w-32 h-32 relative -mt-16 border-4 border-gray-300 rounded-full overflow-hidden">
+              <div className="mx-auto w-32 h-32 relative -mt-16 border-4 border-blue-600 rounded-full overflow-hidden">
                 {isEditing ? (
                   <>
                     {profilePreview ? (
@@ -187,14 +187,16 @@ const Profile_Page = () => {
                   onChange={onSelectProfileFile}
                 />
                 {isEditing && (
-                  <CiCamera
+                  <CiCamera 
+               
                     onClick={() => {
                       document.getElementById("profileFileInput").click();
                     }}
-                    className="absolute bottom-6 right-0 w-6 h-6 text-gray-800 fill-current bg-black rounded-full p-1 cursor-pointer hover:bg-gray-900"
+                    className="absolute bottom-6 -right-1.5 w-7 h-10  text-gray-800 fill-current rounded-full p-1 cursor-pointer hover:bg-gray-200"
                   />
                 )}
               </div>
+
 
               <div className="text-center mt-2 text-gray-800 ">
                 <h2 className="font-semibold text-xl "> {fullName} </h2>
@@ -261,7 +263,7 @@ const Profile_Page = () => {
 
                   />
                 ) : (
-                  <p className='text-sm md:text-lg lg:text-lg text-gray-800 lg:mt-3 '>
+                  <p className='text-sm md:text-lg lg:text-lg text-gray-800 lg:mt-3 pb-10 mt-1'>
                     {bio ? bio : "Introduce Your Self "}
 
                   </p>
@@ -271,7 +273,7 @@ const Profile_Page = () => {
           </div>
 
           {/* Right side */}
-          <div className='lg:w-8/12 w-full mx-auto mt-3 lg:mt-3 bg-gray-100 p-6 rounded-md '>
+          <div className='lg:w-8/12 w-full mx-auto mt-3 lg:mt-3 bg-gray-100 lg:p-6 md:p-4 p-2 rounded-md '>
             <div>
               <div className='flex items-center justify-between text-gray-800'>
                 <h1>Personal Information</h1>
