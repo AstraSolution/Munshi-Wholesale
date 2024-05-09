@@ -10,7 +10,7 @@ import useAllProduct from "../../../Hooks/useAllProduct";
 import ProductCard from "../../Shared/ProductCard/ProductCard";
 
 const BuyNow = () => {
-  const products = useAllProduct();
+  const { products } = useAllProduct();
 
   return (
     <div className="px-10 my-20">
