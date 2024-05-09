@@ -15,7 +15,7 @@ const WishListProduct = ({ product, wishlistRefetch, i }) => {
 
     const axiosPublic = useAxiosPublic();
     const { currentUser } = useCurrentUser()
-    const { refetch } = useGetMyCarts()
+    const {myCartRefetch} = useGetMyCarts()
 
 
     // wishlist product delete fun
@@ -84,7 +84,7 @@ const WishListProduct = ({ product, wishlistRefetch, i }) => {
             .then((response) => {
                 if (response.status === 200) {
                     toast.success("Product Add To Cart Successfully!!");
-                   
+
                     axiosPublic
                         .delete(`/wishlist/${id}`)
                         .then((response) => {
@@ -97,7 +97,7 @@ const WishListProduct = ({ product, wishlistRefetch, i }) => {
                         .catch((error) => {
                             console.error("Error deleting Product:", error);
                         });
-                    refetch();
+                    myCartRefetch();
                 }
             })
             .catch((error) => {

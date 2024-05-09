@@ -263,7 +263,7 @@ const Profile_Page = () => {
 
                   />
                 ) : (
-                  <p className='text-sm md:text-lg lg:text-lg text-gray-800 lg:mt-3 '>
+                  <p className='text-sm md:text-lg lg:text-lg text-gray-800 lg:mt-3 pb-10 mt-1'>
                     {bio ? bio : "Introduce Your Self "}
 
                   </p>
@@ -273,7 +273,7 @@ const Profile_Page = () => {
           </div>
 
           {/* Right side */}
-          <div className='lg:w-8/12 w-full mx-auto mt-3 lg:mt-3 bg-gray-100 p-6 rounded-md '>
+          <div className='lg:w-8/12 w-full mx-auto mt-3 lg:mt-3 bg-gray-100 lg:p-6 md:p-4 p-2 rounded-md '>
             <div>
               <div className='flex items-center justify-between text-gray-800'>
                 <h1>Personal Information</h1>

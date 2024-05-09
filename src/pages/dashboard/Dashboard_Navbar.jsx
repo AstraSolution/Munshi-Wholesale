@@ -1,9 +1,14 @@
 import React from 'react';
 
 import { IoIosSearch } from "react-icons/io";
+import useCurrentUser from '../../Hooks/useCurrentUser';
 
 
 const Dashboard_Navbar = () => {
+
+    const {currentUser} = useCurrentUser()
+
+
     return (
         <div className='bg-gray-100 rounded-md hidden lg:block '>
             <div className='flex items-center justify-between py-4 shadow-sm  '>
@@ -20,7 +25,7 @@ const Dashboard_Navbar = () => {
                             <IoIosSearch size={23} className='min-w-max text-gray-900  ' />
                         </p >
                     </div >
-                    <img src="https://i.ibb.co/9HmwSVd/avatar4.jpg" alt="" className="className='  w-10 h-10 border-2  border-white rounded-full dark:border-gray-800'" />
+                    <img src={currentUser?.profilePhoto} alt="" className="className=' cursor-pointer w-12 h-12 border-2  border-white rounded-full dark:border-gray-800'" />
 
                 </div >
             </div>
