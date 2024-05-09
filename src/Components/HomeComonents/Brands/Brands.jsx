@@ -8,7 +8,7 @@ export default function Brands() {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
+    slidesToShow: 5,
     slidesToScroll: 1,
     rows: 2,
     initialSlide: 0,
