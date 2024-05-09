@@ -28,8 +28,8 @@ export default function Register() {
     const password = data.password;
 
     const newUser = { fullName, email, password, isFirstLogin: true };
-    console.log(newUser)
-    
+    console.log(newUser);
+
     createUser(email, password)
       .then(async (res) => {
         // const updatedUser = await updateUserProfiole(fullName);
@@ -55,13 +55,13 @@ export default function Register() {
   // handle google login
   const hadleGoogleLogin = () => {
     googleLogin()
-      .then(async(res) => {
+      .then(async (res) => {
         const loggedUser = res.user;
         const fullName = loggedUser?.displayName;
         const email = loggedUser?.email;
         const profilePhoto = loggedUser?.photoURL;
 
-        await axiosPublis.post("/users", { fullName, email, profilePhoto});
+        await axiosPublis.post("/users", { fullName, email, profilePhoto });
 
         Swal.fire({
           position: "top-center",
@@ -95,7 +95,7 @@ export default function Register() {
         <h2 className="text-center text-3xl font-semibold pb-3 ">Register</h2>
 
         {/* social login buttons  */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="">
           <motion.button
             onClick={hadleGoogleLogin}
             whileHover={{ scale: 1.06 }}
@@ -103,13 +103,6 @@ export default function Register() {
           >
             <img src={GOOGLE_ICON} className="w-5" alt="" />
             <span>Google</span>
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.06 }}
-            className="flex justify-center items-center gap-2 shadow-sm border py-3 w-full rounded-lg "
-          >
-            <img src={FACEBOOK_ICON} className="w-5" alt="" />
-            <span>Facebook</span>
           </motion.button>
         </div>
 
