@@ -1,11 +1,11 @@
 import React, { useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Pagination } from "swiper/modules";
 
 // Import Swiper styles
 import "swiper/css";
-import "swiper/css/navigation";
+import "swiper/css/pagination";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 
@@ -119,24 +119,32 @@ const reviews = [
 
 export default function Reviews() {
   return (
-    <div className="container max-w-7xl mx-auto my-16">
-      <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
-        {reviews?.map((review) => (
-          <SwiperSlide key={review.review} className="text-center">
+    <div className="py-14 px-10 md:px-0 max-w-[600px] mx-auto">
+      <Swiper
+        pagination={{
+          dynamicBullets: true,
+        }}
+        modules={[Pagination]}
+        className="mySwiper"
+      >
+        {reviews.map((review) => (
+          <SwiperSlide key={review.clientReview} className="text-center py-10">
             <img
-              className="w-12 rounded-full mx-auto"
+              className="w-10 rounded-full mx-auto"
               src={review.userProfile}
               alt=""
             />
-            <h3 className="font-semibold text-2xl">{review.userName}</h3>
-            <spans className="flex justify-center">
+            <h3 className="font-semibold text-red-600 text-lg py-1">
+              {review.userName}
+            </h3>
+            <span className="flex justify-center">
               <Rating
                 style={{ maxWidth: 100 }}
                 value={review?.starRating}
                 readOnly
               />
-            </spans>
-            <p className="mt-10 max-w-5xl mx-auto">{review.clientReview}</p>
+            </span>
+            <p className="pt-8">{review.clientReview}</p>
           </SwiperSlide>
         ))}
       </Swiper>

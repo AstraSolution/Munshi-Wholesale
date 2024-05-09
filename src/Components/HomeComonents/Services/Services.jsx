@@ -35,7 +35,7 @@ export default function Services() {
         {serviceItems.map((item) => (
           <motion.div
             key={item.id}
-            className="flex items-center gap-4 p-5 rounded-lg shadow-sm bg-gray-100"
+            className="flex items-center gap-4 p-5 rounded-xl shadow-sm bg-gray-100"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.2 }}
