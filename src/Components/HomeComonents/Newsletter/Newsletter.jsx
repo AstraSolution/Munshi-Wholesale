@@ -8,7 +8,7 @@ export default function Newsletter() {
               Stay Updated with Our{" "}
               <span className="text-yellow-700">Newsletter</span>
             </h2>
-            <p className="mt-4 text-lg sm:text-xl text-gray-300 lg:w-1/2 mx-auto">
+            <p className="mt-4 text-lg sm:text-xl text-gray-300 lg:w-1/2 mx-auto pb-3">
               Subscribe to our newsletter and get the latest news, updates, and
               insights in the world of hardware tech.
             </p>
