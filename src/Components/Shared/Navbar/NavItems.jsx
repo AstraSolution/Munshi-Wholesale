@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+
+import React, { useState, useEffect, useRef } from "react";
 import { XIcon, MenuAlt3Icon } from "@heroicons/react/outline";
 import { Button } from "@material-tailwind/react";
 import CustomLink from "./CustomLink";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import { FaArrowRightFromBracket } from "react-icons/fa6";
 
 const NavItems = () => {
   const { user, logOut } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef(null);
+  const location = useLocation();
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
@@ -21,24 +24,42 @@ const NavItems = () => {
   const menuItems = (
     <>
       <li>
-        <CustomLink path={"/"}>Home</CustomLink>
+        <CustomLink path={"/"} onClick={toggleNavbar}>Home</CustomLink>
       </li>
       <li>
-        <CustomLink path={"/shop"}>Shop</CustomLink>
+        <CustomLink path={"/shop"} onClick={toggleNavbar}>Shop</CustomLink>
       </li>
       <li>
-        <CustomLink path={"/aboutUs"}>AboutUs</CustomLink>
+        <CustomLink path={"/aboutUs"} onClick={toggleNavbar}>AboutUs</CustomLink>
       </li>
       <li>
-        <CustomLink path={"/faq"}>FAQ</CustomLink>
+        <CustomLink path={"/faq"} onClick={toggleNavbar}>FAQ</CustomLink>
       </li>
     </>
   );
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    setIsOpen(false); 
+  }, [location.pathname]); 
+
+
   return (
     <nav className="">
       <div className="bg-yellow-600 py-6 md:py-3 -mt-20 md:mt-0">
-        <div className="container mx-auto flex justify-between items-center">
+        <div className="container mx-auto flex justify-between items-center nav-container">
           {/* menu for medium and large device  */}
           <div>
             <ul className="hidden md:flex items-center space-x-10">
@@ -79,9 +100,9 @@ const NavItems = () => {
 
       {/* responsive menu for mobile */}
       <div className="z-50 relative">
-        <div className="absolute w-full bg-[#fffffff3]">
-          <div className={`md:hidden ${isOpen ? "block" : "hidden"} pb-8`}>
-            <ul className="flex flex-col space-y-2 mt-6 mx-4">{menuItems}</ul>
+        <div ref={menuRef} className={`absolute w-full bg-[#fffffff3] ${isOpen ? "" : "hidden"}`}>
+          <div className={`pb-8 md:hidden ${isOpen ? "block" : "hidden"} mt-6 mx-4`}>
+            <ul className="flex flex-col space-y-2">{menuItems}</ul>
           </div>
         </div>
       </div>

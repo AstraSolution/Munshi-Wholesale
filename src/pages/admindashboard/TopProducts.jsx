@@ -5,9 +5,7 @@ const TopProducts = () => {
   const products = useAllProduct();
 
   // Select 10 random products
-  const randomProducts = products
-    .sort(() => Math.random() - 0.5) // Shuffle the array
-    .slice(0, 10); // Take the first 10 products
+  const randomProducts = products.sort(() => Math.random() - 0.5).slice(0, 10); // Take the first 10 products
 
   return (
     <div className="container mx-auto md:py-3 py-2 text-white ">
