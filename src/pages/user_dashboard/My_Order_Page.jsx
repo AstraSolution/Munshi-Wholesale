@@ -5,9 +5,10 @@ import { useForm } from 'react-hook-form';
 import { StarRating } from '../../Components/Shared/StarRating/StarRating';
 import { Toaster, toast } from 'react-hot-toast';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
+import useOrders from '../../Hooks/useOrders';
 
 const My_Order_Page = () => {
-  const [data, setData] = useState(null);
+  // const [data, setData] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [rating, setRating] = useState(0);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -16,12 +17,17 @@ const My_Order_Page = () => {
   const [reviewText, setReviewText] = useState('');
   const axiosPublic = useAxiosPublic()
 
-  useEffect(() => {
-    fetch('/products.json')
-      .then(response => response.json())
-      .then(data => setData(data))
-      .catch(error => console.error('Error fetching data:', error));
-  }, []);
+  const [orderProduct] = useOrders();
+  console.log(orderProduct);
+  console.log(orderProduct.orders);
+
+
+  // date and time formate convert
+  function convertToLocalTime(utcTimeString) {
+    const utcTime = new Date(utcTimeString);
+    const localTime = new Date(utcTime.getTime() - (utcTime.getTimezoneOffset() * 60));
+    return localTime.toLocaleString();
+  }
 
   // Function to handle review button click
   const handleReviewClick = (product) => {
@@ -34,12 +40,13 @@ const My_Order_Page = () => {
   };
 
 
+
   const onSubmit = async (formData) => {
     setLoading(true);
     try {
       const reviewInformation = {
         title: selectedProduct?.title,
-        product_id: selectedProduct?._id,
+        product_id: selectedProduct?.product_id,
         review: formData.review,
         rating: rating
       }
@@ -48,9 +55,8 @@ const My_Order_Page = () => {
 
 
       const res = await axiosPublic.post("/reviews", reviewInformation);
-      console.log(res.data);
       if (res?.data) {
-        toast.success('Review Successfull!')
+        toast.success('Review Add Successfull!')
       }
       reset({ review: '' });
       // Close the modal
@@ -61,7 +67,7 @@ const My_Order_Page = () => {
       console.error("Error submitting form:", error);
       toast.error("Please Try Again ? ");
     } finally {
-      setLoading(false); // Set loading state to false regardless of success or failure
+      setLoading(false);
     }
   };
 
@@ -119,7 +125,7 @@ const My_Order_Page = () => {
                     className='w-full px-4 py-2 md:py-2 text-md text-gray-600 border-gray-600 border rounded-lg bg-gray-100 focus:outline-none focus:border-blue-500 font-oswald'
                   >
                     <option value='all'>All</option>
-                    <option value='pending'>Pending</option>
+                    <option value='processing'>Processing</option>
                     <option value='canceled'>Canceled</option>
                     <option className='pb-2' value='done'>Done</option>
                   </select>
@@ -138,34 +144,44 @@ const My_Order_Page = () => {
                   <th className="border border-gray-600 text-sm md:text-md lg:text-lg py-3">N/A</th>
                   <th className="border border-gray-600 text-sm md:text-md lg:text-lg py-3">Title Name</th>
                   <th className="border border-gray-600 text-sm md:text-md lg:text-lg p-2">Product Image</th>
-                  <th className="border border-gray-600 text-sm md:text-md lg:text-lg py-3">Category</th>
+                  <th className="border border-gray-600 text-sm md:text-md lg:text-lg py-3">Order date</th>
+                  <th className="border border-gray-600 text-sm md:text-md lg:text-lg py-3">Total Price</th>
                   <th className="border border-gray-600 text-sm md:text-md lg:text-lg py-3">Status</th>
                   <th className="border border-gray-600 text-sm md:text-md lg:text-lg py-3">Review</th>
-                  <th className="border border-gray-600 text-sm md:text-md lg:text-lg py-3">Action</th>
                 </tr>
                 {
-                  data?.map((product, i) => (
+                  orderProduct?.myOrders?.map((product, i) => (
                     <motion.tr
-                      key={product.i}
+                      key={product._id}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: 1.2 + (i * 0.1) }}
-                    // className={i % 2 === 0 ? 'bg-black' : 'bg-gray-800'}
+                    
 
                     >
                       <td className="border border-gray-600 divide-gray-200  p-2 text-center">{i + 1}</td>
-                      <td className="border border-gray-600 divide-gray-200  md:p-2 p-1 text-sm">{product?.title?.slice(0, 30)}.....</td>
+                      <td className="border border-gray-600 divide-gray-200  md:p-2 p-1 text-gray-900 text-sm">{product?.title?.slice(0, 30)}.....</td>
                       <td className="border border-gray-600 divide-gray-200  p-2">
-                        <img className='w-20 md:h-16 rounded-lg mx-auto' src={product?.image[0]} alt="" />
+                        <img className='w-20 md:h-16 rounded-lg mx-auto' src={product?.cover_image?.[0]} alt="" />
                       </td>
-                      <td className="border border-gray-600 divide-gray-200  p-2 text-sm md:text-md text-center">{product?.category}</td>
-                      <td className="border border-gray-600 divide-gray-200  p-2 text-sm md:text-md text-center">Pending</td>
+                      <td className="border border-gray-600 divide-gray-200  p-2 text-sm md:text-md text-center">
+                        {convertToLocalTime(product?.orderDate)}
+                      </td>
+                      <td className="border border-gray-600 divide-gray-200  p-2 text-sm md:text-md text-center">
+                        {product?.totalPrice.toFixed(2)}
+                      </td>
+
+                      <td className={`border border-gray-600 text-gray-900 divide-gray-200 p-2 text-sm md:text-md text-center 
+                      ${product?.status === 'Processing' ? 'text-yellow-900' :
+                          product?.status === 'Canceled' ? 'text-red-600' :
+                            product?.status === 'Complete' ? 'text-green-600' : '' 
+                        }`}>
+                        {product?.status}
+                      </td>
+
+
                       <td onClick={() => handleReviewClick(product)} className="border cursor-pointer border-gray-600 divide-gray-200  p-2 text-sm md:text-md text-center">Review</td>
-                      <td className="flex items-center justify-center gap-3 md:py-6 py-4 border border-gray-600 divide-gray-200  p-2">
-                        <span className="p-2 w-fit  cursor-pointer text-sm rounded-md">
-                          Cancel
-                        </span>
-                      </td>
+
                     </motion.tr>
                   ))
                 }
