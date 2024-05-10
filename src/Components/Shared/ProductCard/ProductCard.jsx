@@ -5,20 +5,20 @@ import { useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import useCurrentUser from "../../../Hooks/useCurrentUser";
-import useAuth from "../../../Hooks/useAuth";
 import useGetMyCarts from "../../../Hooks/useGetMyCarts";
 
 const ProductCard = ({ currentProduct }) => {
   const { _id, title, image, price, offer, color, dimensions, quantity } =
     currentProduct;
-  const { refetch } = useGetMyCarts();
+  const { myCartRefetch } = useGetMyCarts();
   const [isWished, setIsWished] = useState(false);
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
   const { currentUser } = useCurrentUser();
 
+
   // Handle add to cart
-  const handleCart = () => {
+  const handleCart = async() => {
     let countDis = price;
     if (offer?.discount !== "N/A") {
       countDis = (price - (price * parseInt(offer?.discount)) / 100).toFixed(2);
@@ -38,23 +38,18 @@ const ProductCard = ({ currentProduct }) => {
       color: color,
     };
 
-    axiosPublic
-      .post(`/myCarts/${currentUser?.email}`, addCart)
-      .then((response) => {
-        if (response.status === 200) {
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Product add to cart successfully.",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          refetch();
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    const res = await axiosPublic.post(`/myCarts/${currentUser?.email}`, addCart)
+
+    if(res.data) {
+      Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Product add to cart successfully.",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              myCartRefetch()
+    }
   };
 
   // Handle wishlist

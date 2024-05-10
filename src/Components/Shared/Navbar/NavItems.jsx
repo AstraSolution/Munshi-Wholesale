@@ -42,6 +42,11 @@ const NavItems = () => {
           FAQ
         </CustomLink>
       </li>
+      <li>
+        <CustomLink path={"/contactUs"} onClick={toggleNavbar}>
+          ContactUs
+        </CustomLink>
+      </li>
 
       {/* login button for small device  */}
       {user ? (

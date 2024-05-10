@@ -19,6 +19,7 @@ import AllUsers from "../pages/admindashboard/AllUsers";
 import AddProducts from "../pages/admindashboard/AddProducts";
 import Carts from "../pages/carts/Carts";
 import User_Dashboard_Home from "../pages/user_dashboard/Dashboard_Home/User_Dashboard_Home";
+import ContactUs from "../pages/contactUs/ContactUs";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: "aboutUs",
         element: <AboutUs />,
+      },
+      {
+        path: "contactUs",
+        element: <ContactUs />,
       },
       {
         path: "wishlist",

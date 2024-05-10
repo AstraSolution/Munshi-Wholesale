@@ -1,4 +1,5 @@
 import React from 'react';
+import Requment_Product from './Requment_Product';
 
 const Payment_History = () => {
     return (
@@ -26,17 +27,8 @@ const Payment_History = () => {
                         <li className="py-2">Address: 123 Main St, City</li>
                     </ul>
                 </div>
-
                 {/* Recommended Products */}
-                <div className="bg-white rounded-md shadow-md p-6">
-                    <h2 className="text-lg font-semibold mb-4">Recommended Products</h2>
-                    <ul className="divide-y divide-gray-200">
-                        {/* Placeholder for recommended products */}
-                        <li className="py-2">Product 1</li>
-                        <li className="py-2">Product 2</li>
-                        <li className="py-2">Product 3</li>
-                    </ul>
-                </div>
+                <Requment_Product></Requment_Product>
 
 
             </div>
