@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { XIcon, MenuAlt3Icon } from "@heroicons/react/outline";
 import { Button } from "@material-tailwind/react";
 import CustomLink from "./CustomLink";
@@ -34,6 +34,9 @@ const NavItems = () => {
       </li>
       <li>
         <CustomLink path={"/faq"} onClick={toggleNavbar}>FAQ</CustomLink>
+      </li>
+      <li>
+        <CustomLink path={"/contactUs"} onClick={toggleNavbar}>ContactUs</CustomLink>
       </li>
     </>
   );
