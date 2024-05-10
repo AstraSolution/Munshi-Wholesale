@@ -7,6 +7,7 @@ import Featured from "../../Components/HomeComonents/Featured/Featured";
 import Hero from "../../Components/HomeComonents/Hero/Hero";
 import Newsletter from "../../Components/HomeComonents/Newsletter/Newsletter";
 import Offer from "../../Components/HomeComonents/Offer/Offer";
+import Reviews from "../../Components/HomeComonents/Reviews/Reviews";
 import Services from "../../Components/HomeComonents/Services/Services";
 
 function Home() {
@@ -21,6 +22,7 @@ function Home() {
       <Featured></Featured>
       <BuyNow></BuyNow>
       <Brands />
+      <Reviews />
       <Newsletter />
     </div>
   );

@@ -1,5 +1,4 @@
-
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { XIcon, MenuAlt3Icon } from "@heroicons/react/outline";
 import { Button } from "@material-tailwind/react";
 import CustomLink from "./CustomLink";
@@ -24,20 +23,43 @@ const NavItems = () => {
   const menuItems = (
     <>
       <li>
-        <CustomLink path={"/"} onClick={toggleNavbar}>Home</CustomLink>
+        <CustomLink path={"/"} onClick={toggleNavbar}>
+          Home
+        </CustomLink>
       </li>
       <li>
-        <CustomLink path={"/shop"} onClick={toggleNavbar}>Shop</CustomLink>
+        <CustomLink path={"/shop"} onClick={toggleNavbar}>
+          Shop
+        </CustomLink>
       </li>
       <li>
-        <CustomLink path={"/aboutUs"} onClick={toggleNavbar}>AboutUs</CustomLink>
+        <CustomLink path={"/aboutUs"} onClick={toggleNavbar}>
+          AboutUs
+        </CustomLink>
       </li>
       <li>
-        <CustomLink path={"/faq"} onClick={toggleNavbar}>FAQ</CustomLink>
+        <CustomLink path={"/faq"} onClick={toggleNavbar}>
+          FAQ
+        </CustomLink>
       </li>
       <li>
-        <CustomLink path={"/contactUs"} onClick={toggleNavbar}>ContactUs</CustomLink>
+        <CustomLink path={"/contactUs"} onClick={toggleNavbar}>
+          ContactUs
+        </CustomLink>
       </li>
+
+      {/* login button for small device  */}
+      {user ? (
+        <></>
+      ) : (
+        <li className="flex md:hidden">
+          <Button color="red" className="w-full">
+            <Link color="red" to={"/login"}>
+              Login
+            </Link>
+          </Button>
+        </li>
+      )}
     </>
   );
 
@@ -55,9 +77,8 @@ const NavItems = () => {
   }, []);
 
   useEffect(() => {
-    setIsOpen(false); 
-  }, [location.pathname]); 
-
+    setIsOpen(false);
+  }, [location.pathname]);
 
   return (
     <nav className="">
@@ -103,8 +124,15 @@ const NavItems = () => {
 
       {/* responsive menu for mobile */}
       <div className="z-50 relative">
-        <div ref={menuRef} className={`absolute w-full bg-[#fffffff3] ${isOpen ? "" : "hidden"}`}>
-          <div className={`pb-8 md:hidden ${isOpen ? "block" : "hidden"} mt-6 mx-4`}>
+        <div
+          ref={menuRef}
+          className={`absolute w-full bg-[#fffffff3] ${isOpen ? "" : "hidden"}`}
+        >
+          <div
+            className={`pb-8 md:hidden ${
+              isOpen ? "block" : "hidden"
+            } mt-6 mx-4`}
+          >
             <ul className="flex flex-col space-y-2">{menuItems}</ul>
           </div>
         </div>
