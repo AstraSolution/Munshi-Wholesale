@@ -4,18 +4,18 @@ import { FaStar, FaShoppingCart, FaHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import useCurrentUser from "../../../Hooks/useCurrentUser";
 import useAuth from "../../../Hooks/useAuth";
+import useGetMyCarts from "../../../Hooks/useGetMyCarts";
 
-const ProductCard = ({ currentProduct, currentUser }) => {
+const ProductCard = ({ currentProduct }) => {
   const { _id, title, image, price, offer, color, dimensions, quantity } =
     currentProduct;
+  const { refetch } = useGetMyCarts();
   const [isWished, setIsWished] = useState(false);
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
-  const { user } = useAuth();
-  const email = user?.email;
-
-  // console.log(currentProduct);
+  const { currentUser } = useCurrentUser();
 
   // Handle add to cart
   const handleCart = () => {
@@ -39,7 +39,7 @@ const ProductCard = ({ currentProduct, currentUser }) => {
     };
 
     axiosPublic
-      .post(`/myCarts/${email}`, addCart)
+      .post(`/myCarts/${currentUser?.email}`, addCart)
       .then((response) => {
         if (response.status === 200) {
           Swal.fire({
@@ -49,6 +49,7 @@ const ProductCard = ({ currentProduct, currentUser }) => {
             showConfirmButton: false,
             timer: 1500,
           });
+          refetch();
         }
       })
       .catch((error) => {
@@ -79,7 +80,7 @@ const ProductCard = ({ currentProduct, currentUser }) => {
     };
 
     console.log(addWishlist);
-    
+
     axiosPublic
       .post("/wishlist", addWishlist)
       .then((response) => {
@@ -102,7 +103,7 @@ const ProductCard = ({ currentProduct, currentUser }) => {
     <div>
       <div className="relative flex items-center rounded-lg shadow-md h-[250px] lg:h-[350px] group border-2 border-gray-200">
         <div
-          className="mx-auto"
+          className=""
           onClick={() => navigate(`/products/${_id}`, { id: `${_id}` })}
         >
           <img

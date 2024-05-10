@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
@@ -11,7 +10,6 @@ import {
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import app from "../../Firebase/firebase.config";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
@@ -19,8 +17,6 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const axiosPublic = useAxiosPublic()
-
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -50,13 +46,14 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       setLoading(false);
 
-      // if (userEmail) {
-      //   const userEmail = { email:userEmail };
-      //   axiosPublic
-      //     .post("/jwt", userEmail, {
-      //       withCredentials: true,
-      //     })
-      // }
+      const handleCreateToken = async () => {
+        const email = { email: userEmail };
+        await axiosPublic.post("/jwt", email, {
+          withCredentials: true,
+        });
+      };
+      handleCreateToken();
+
       // if (currentUser) {
       //   axios
       //     .post("https://localhost:5000/api/v1/access-token", loggedUser, {

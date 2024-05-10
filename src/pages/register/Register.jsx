@@ -99,14 +99,14 @@ export default function Register() {
           <motion.button
             onClick={hadleGoogleLogin}
             whileHover={{ scale: 1.06 }}
-            className="flex justify-center items-center gap-2 shadow-sm border py-3 w-full rounded-lg"
+            className="flex justify-center items-center gap-2 shadow-sm border py-3 w-full rounded-lg "
           >
             <img src={GOOGLE_ICON} className="w-5" alt="" />
             <span>Google</span>
           </motion.button>
           <motion.button
             whileHover={{ scale: 1.06 }}
-            className="flex justify-center items-center gap-2 shadow-sm border py-3 w-full rounded-lg"
+            className="flex justify-center items-center gap-2 shadow-sm border py-3 w-full rounded-lg "
           >
             <img src={FACEBOOK_ICON} className="w-5" alt="" />
             <span>Facebook</span>

@@ -21,7 +21,9 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useGetMyCarts from "../../Hooks/useGetMyCarts";
 
 const ProductDetails = () => {
-  const { id } = useParams();
+
+
+  const { id  } = useParams();
   const axiosPublic = useAxiosPublic();
   const product = useGetaProduct(id);
   const { user } = useAuth();

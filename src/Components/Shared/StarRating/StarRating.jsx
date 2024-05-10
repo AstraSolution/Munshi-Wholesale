@@ -11,7 +11,7 @@
             <span
               key={index}
               onClick={() => handleClick(starValue)}
-              style={{ cursor: 'pointer', color: starValue <= rating ? '#FF9D00' : '#C7C7C7' }}
+              style={{ cursor: 'pointer', color: starValue <= rating ? '#FF9D00' : '#69696A' }}
             >
               ★
             </span>
