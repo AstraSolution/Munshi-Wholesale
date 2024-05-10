@@ -130,8 +130,8 @@ const Dashboard = () => {
           )}
         </div>
 
-        <div className="flex flex-col h-full">
-          <ul className="whitespace-pre px-2.5 text-[0.9rem] py-5 flex flex-col gap-1  font-medium overflow-x-hidden scrollbar-thin scrollbar-track-white scrollbar-thumb-slate-100   md:h-[68%] h-[70%]">
+        <div className="flex flex-col h-full ">
+          <ul className="whitespace-pre px-2.5 text-[0.9rem] py-5 flex flex-col gap-1  font-medium overflow-x-hidden scrollbar-thin scrollbar-track-white scrollbar-thumb-slate-100  md:h-[68%] h-[70%]">
 
             <li>
               <NavLink to={"/dashboard/home"} className={({ isActive, isPending }) =>
@@ -226,7 +226,7 @@ const Dashboard = () => {
 
 
           {open && (
-            <div className="flex-1 text-sm z-50  max-h-48 my-auto  whitespace-pre   w-full  font-medium  ">
+            <div className="flex-1 text-sm z-50  max-h-60 my-auto  whitespace-pre   w-full  font-medium  ">
               <div className="flex border-t border-gray-400 p-4 items-center justify-between">
                 <div>
                   <ul>
@@ -276,7 +276,7 @@ const Dashboard = () => {
         <div className="p-1 text-gray-800 lg:hidden" onClick={() => setOpen(true)}>
           <MdMenu size={25} />
         </div>
-        <div className='relative w-full lg:w-60 md:w-80 '>
+        <div className='relative w-full lg:hidden lg:w-60 md:w-80 '>
           <input
             type='text'
             id='search'
