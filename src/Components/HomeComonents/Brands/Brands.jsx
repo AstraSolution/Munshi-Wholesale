@@ -1,64 +1,56 @@
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/grid";
+
+// import required modules
+import { Grid } from "swiper/modules";
 import useAllBrand from "../../../Hooks/useAllBrand";
-import Slider from "react-slick";
+import { Link } from "react-router-dom";
 
 export default function Brands() {
   const { brands } = useAllBrand();
-
-  var settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 5,
-    rows: 2,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: false,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
-      },
-    ],
-  };
   return (
     <div className="container mx-auto">
-      <h3 className="text-red-600 text-2xl font-semibold pb-6">
-        Shop By Brands
-      </h3>
-      <Slider {...settings} className="">
-        {brands?.map((brand) => (
-          <div
-            key={brand?._id}
-            className="p-5 rounded-md shadow-md text-center space-y-2"
-          >
-            <img
-              className="w-12 mx-auto"
-              src={brand?.brandImage}
-              alt={brand?.brandName}
-            />
-            <h4 className="text-lg font-semibold">{brand?.brandName}</h4>
-          </div>
+      <h2 className=" font-bold text-2xl lg:text-3xl pb-6 text-center">
+        Shop by Brands
+      </h2>
+      <Swiper
+        spaceBetween={10}
+        breakpoints={{
+          320: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 40,
+          },
+          1024: {
+            slidesPerView: 5,
+            spaceBetween: 50,
+          },
+        }}
+        modules={[Grid]}
+        className="mySwiper"
+      >
+        {brands.map((brand) => (
+          <SwiperSlide key={brand._id}>
+            <div className="border p-5 rounded-lg shadow-md">
+              <img className="w-14 mx-auto" src={brand.brandImage} alt="" />
+              <p className="text-red-600 text-center font-semibold text-sm md:text-md lg:text-lg pt-2">
+                <Link to={`/shop/${brand.brandName}`}>{brand.brandName}</Link>
+              </p>
+            </div>
+          </SwiperSlide>
         ))}
-      </Slider>
+      </Swiper>
     </div>
   );
 }
