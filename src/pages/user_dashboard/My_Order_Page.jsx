@@ -23,6 +23,7 @@ const My_Order_Page = () => {
 
   // Filtered orders based on status and search query
   const [filteredOrders, setFilteredOrders] = useState([]);
+  
   useEffect(() => {
     if (orderProduct?.myOrders) {
       let filtered = orderProduct.myOrders;
@@ -139,7 +140,7 @@ const My_Order_Page = () => {
                     <option value='all'>All</option>
                     <option value='Processing'>Processing</option>
                     <option value='Canceled'>Canceled</option>
-                    <option className='pb-2' value='Complete'>Done</option>
+                    <option className='pb-2' value='Complete'>Complete</option>
                   </select>
                 </motion.div>
               </div>
