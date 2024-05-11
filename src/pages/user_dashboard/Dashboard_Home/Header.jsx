@@ -3,12 +3,16 @@ import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import useWishlistProducts from '../../../Hooks/useWishlistProducts';
 import { Link } from 'react-router-dom';
 import useGetMyCarts from '../../../Hooks/useGetMyCarts';
+import useOrders from '../../../Hooks/useOrders';
 
 
 const Header = () => {
 
     const [wishlistProduct] = useWishlistProducts();
     const wishlistItems = wishlistProduct?.length;
+
+    const [orderProduct] = useOrders()
+    const orderItems = orderProduct?.myOrders?.length
 
     const { myCarts } = useGetMyCarts();
     const cartItems = myCarts?.length;
@@ -45,7 +49,7 @@ const Header = () => {
                         <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
                     </div>
                     <div className="text-right">
-                        <p className="text-2xl">557</p>
+                        <p className="text-2xl">{orderItems}</p>
                         <p>Orders</p>
                     </div>
                 </div>
