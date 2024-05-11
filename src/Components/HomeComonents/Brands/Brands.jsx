@@ -1,4 +1,3 @@
-import React, { useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -45,7 +44,7 @@ export default function Brands() {
           <SwiperSlide key={brand._id}>
             <div className="border p-5 rounded-lg shadow-md">
               <img className="w-14 mx-auto" src={brand.brandImage} alt="" />
-              <p className="text-red-600 text-center font-semibold text-lg pt-2">
+              <p className="text-red-600 text-center font-semibold text-sm md:text-md lg:text-lg pt-2">
                 <Link to={`/shop/${brand.brandName}`}>{brand.brandName}</Link>
               </p>
             </div>

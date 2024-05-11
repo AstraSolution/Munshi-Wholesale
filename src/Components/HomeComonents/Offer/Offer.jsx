@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const Offer = () => {
   return (
-    <div className="container mx-auto my-10 px-5 lg:px-10">
+    <div className="my-10">
       {/* Offer */}
       <div>
         <div className="flex flex-col md:flex-row gap-5 lg:gap-8">

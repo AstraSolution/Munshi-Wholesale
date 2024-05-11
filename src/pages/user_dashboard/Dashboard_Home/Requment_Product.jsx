@@ -2,18 +2,11 @@ import React from 'react'
 import useAllProduct from '../../../Hooks/useAllProduct';
 import { Link } from 'react-router-dom';
 
+
 export default function Requment_Product() {
     const products = useAllProduct();
     console.log(products);
-    // Check if products are fetched
-    if (!products || products.length === 0) {
-        return (
 
-            <div className="min-h-screen">
-                <LoadingPage></LoadingPage>
-            </div>
-        )
-    }
 
     // Randomize and select 3 products
     const randomProducts = products?.products?.sort(() => Math.random() - 0.5).slice(0, 3);
