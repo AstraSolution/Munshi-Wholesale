@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import FACEBOOK_ICON from "../../assets/icons/FacebookIcon.svg";
 import GOOGLE_ICON from "../../assets/icons/GoogleIcon.png";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
@@ -13,7 +12,7 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 export default function Login() {
   const { signInUser, googleLogin } = useAuth();
-  const axiosPublic = useAxiosPublic()
+  const axiosPublic = useAxiosPublic();
   const [showPassword, setShowPassword] = useState(true);
   const {
     register,
@@ -46,13 +45,13 @@ export default function Login() {
   // handle google login
   const hadleGoogleLogin = () => {
     googleLogin()
-      .then(async(res) => {
+      .then(async (res) => {
         const loggedUser = res.user;
         const fullName = loggedUser?.displayName;
         const email = loggedUser?.email;
         const profilePhoto = loggedUser?.photoURL;
 
-        await axiosPublic.post("/users", { fullName, email, profilePhoto});
+        await axiosPublic.post("/users", { fullName, email, profilePhoto });
         Swal.fire({
           position: "top-center",
           icon: "success",
@@ -85,7 +84,7 @@ export default function Login() {
         <h2 className="text-center text-3xl font-semibold pb-3 ">Login</h2>
 
         {/* social login buttons  */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="">
           <motion.button
             onClick={hadleGoogleLogin}
             whileHover={{ scale: 1.06 }}
@@ -93,13 +92,6 @@ export default function Login() {
           >
             <img src={GOOGLE_ICON} className="w-5" alt="" />
             <span>Google</span>
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.06 }}
-            className="flex justify-center items-center gap-2 shadow-sm border py-3 w-full rounded-lg"
-          >
-            <img src={FACEBOOK_ICON} className="w-5" alt="" />
-            <span>Facebook</span>
           </motion.button>
         </div>
 
@@ -177,10 +169,6 @@ export default function Login() {
               </small>
             </motion.p>
           </div>
-
-          <small className="flex justify-end -mt-3 mb-4">
-            <Link className="underline">Forget Password?</Link>
-          </small>
 
           {/* error message */}
           {errorMessage && (

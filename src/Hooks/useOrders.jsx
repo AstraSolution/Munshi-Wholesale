@@ -7,7 +7,7 @@ const useOrders = () => {
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
 
-  const { data: orderProduct = [], isLoading, refetch } = useQuery({
+  const { data: orderProduct = [], isLoading, refetch:orderRefetch } = useQuery({
     queryKey: ["orderProduct", user?.email],
     queryFn: async () => {
       const res = await axiosPublic.get(`/my-orders/${user?.email}`)
@@ -15,7 +15,7 @@ const useOrders = () => {
     }
   })
 
-  return  { orderProduct, orderLoading: isLoading, refetch };
+  return [orderProduct, isLoading, orderRefetch];
 };
 
 export default useOrders;
