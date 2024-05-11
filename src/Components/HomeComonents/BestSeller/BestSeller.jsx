@@ -8,13 +8,13 @@ const BestSeller = () => {
   // console.log(products);
 
   return (
-    <div className="px-10 my-20">
+    <div className="mt-20">
       <div className="relative">
         <h2 className="text-4xl font-bold montserrat text-center">
           Pick Our Best One
         </h2>
 
-        <Link to="/shop" className="absolute right-0 top-0">
+        <Link to="/shop" className="absolute right-0 top-0 hidden lg:block">
           <button className="bg-yellow-400 py-2 px-4 rounded-lg font-medium">
             Show All
           </button>
@@ -30,7 +30,7 @@ const BestSeller = () => {
           ></ProductCard>
         ))}
       </div>
-      <Link to="/shop">
+      <Link to="/shop" className="block lg:hidden">
         <button className="bg-yellow-400 py-2 px-4 rounded-lg font-medium mx-auto mt-5 flex justify-center">
           Show All
         </button>

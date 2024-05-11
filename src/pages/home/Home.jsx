@@ -12,15 +12,15 @@ import Services from "../../Components/HomeComonents/Services/Services";
 
 function Home() {
   return (
-    <div>
+    <div className="container mx-auto">
       <Hero />
       <Services />
       <Category />
       <Category2 />
       <Offer />
-      <BestSeller></BestSeller>
-      <Featured></Featured>
-      <BuyNow></BuyNow>
+      <BestSeller />
+      <Featured />
+      <BuyNow />
       <Brands />
       <Reviews />
       <Newsletter />
