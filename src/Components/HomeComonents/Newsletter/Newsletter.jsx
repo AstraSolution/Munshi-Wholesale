@@ -5,6 +5,18 @@ import Swal from "sweetalert2";
 const sendEmail = (e, userEmail) => {
   e.preventDefault();
 
+  // regular expression for email validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailRegex.test(userEmail)) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Please enter a valid email address.",
+    });
+    return;
+  }
+
   emailjs
     .sendForm("service_n73ougm", "template_58zam7o", e.target, {
       userEmail: userEmail,
@@ -27,7 +39,7 @@ const sendEmail = (e, userEmail) => {
       }
     );
 
-  // Reset email input
+  // reset email input
   e.target.reset();
 };
 
