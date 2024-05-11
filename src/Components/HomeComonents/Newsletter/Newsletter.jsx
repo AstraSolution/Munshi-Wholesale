@@ -1,9 +1,7 @@
-
-
 export default function Newsletter() {
   return (
-    <div className="bg-[url('https://dt-fixxer.myshopify.com/cdn/shop/files/grid-12.jpg?v=1665381381')] bg-[#ffffff73] bg-blend-overlay">
-      <div className="container mx-auto py-12 sm:py-16">
+    <div className="my-10 bg-[url('https://dt-fixxer.myshopify.com/cdn/shop/files/grid-12.jpg?v=1665381381')] bg-[#ffffff73] bg-blend-overlay bg-no-repeat bg-cover">
+      <div className="py-12 sm:py-16">
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-2xl sm:text-4xl md:text-4xl font-extrabold text-white">

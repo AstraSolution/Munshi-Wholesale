@@ -6,33 +6,25 @@ import useAllCategory from "../../Hooks/useAllCategory";
 import useAllProduct from "../../Hooks/useAllProduct";
 import useAllBrand from "../../Hooks/useAllBrand";
 import useCurrentUser from "../../Hooks/useCurrentUser";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 export default function Shop() {
+  const axiosPublic = useAxiosPublic();
+
   const [showAllCategories, setShowAllCategories] = useState(false);
   const [showAllBrands, setShowAllBrands] = useState(false);
   const [sort, setSort] = useState(false);
 
   const { products } = useAllProduct();
+
   const { categories, categoryLoading } = useAllCategory();
   const { brands, brandsLoading } = useAllBrand();
   const { currentUser } = useCurrentUser();
 
-  console.log(products);
+  let categoryFilter = [];
+  let brandFilter = [];
 
-  const colors = [
-    {
-      id: 1,
-      name: "Red",
-    },
-    {
-      id: 2,
-      name: "Blue",
-    },
-    {
-      id: 3,
-      name: "Yellow",
-    },
-  ];
+  // console.log(products);
 
   const defaultCategoriesCount = 5;
   const visibleCategories = showAllCategories
@@ -43,6 +35,34 @@ export default function Shop() {
   const visibleBrands = showAllBrands
     ? brands
     : brands.slice(0, defaultBrandsCount);
+
+  // Filtering Array
+  const handleFilter = (value, type) => {
+    const check = document.getElementById(value).checked;
+
+    if (type === "category") {
+      if (check === true) {
+        categoryFilter.push(value);
+      } else {
+        categoryFilter = categoryFilter.filter(
+          (categoryValue) => categoryValue !== value
+        );
+      }
+    } else if (type === "brand") {
+      if (check === true) {
+        brandFilter.push(value);
+      } else {
+        brandFilter = brandFilter.filter((brandValue) => brandValue !== value);
+      }
+    }
+
+    console.log(brandFilter);
+
+    // const filterProducts = axiosPublic
+    //   .get(`/products?page=1&limit=5&searchItems={category:${categoryFilter}}`)
+    //   .then((res) => console.log(res.data));
+    // console.log(filterProducts);
+  };
 
   return (
     <div>
@@ -93,7 +113,7 @@ export default function Shop() {
                   Alphabet A - Z
                 </li>
                 <li className="hover:bg-white py-1 px-2 rounded-lg">
-                  Alphabet Z-A
+                  Alphabet Z - A
                 </li>
                 <li className="hover:bg-white py-1 px-2 rounded-lg">
                   Price Low to High
@@ -128,6 +148,9 @@ export default function Shop() {
                         id={category?.categoryName}
                         type="checkbox"
                         className="form-checkbox min-h-5 min-w-5"
+                        onChange={() =>
+                          handleFilter(category?.categoryName, "category")
+                        }
                       />
                       <span className="text-xs lg:text-base ml-1 md:ml-2 text-gray-700">
                         {category?.categoryName}
@@ -164,6 +187,7 @@ export default function Shop() {
                         id={brand?.brandName}
                         type="checkbox"
                         className="form-checkbox h-5 w-5"
+                        onChange={() => handleFilter(brand?.brandName, "brand")}
                       />
                       <span className="text-xs md:text-base ml-1 md:ml-2 text-gray-700">
                         {brand?.brandName}
@@ -182,30 +206,6 @@ export default function Shop() {
               )}
             </div>
             {/* brands section end */}
-
-            {/* color section start */}
-            <div className="py-3 px-0 md:px-4">
-              <h2 className="text-xs md:text-base lg:text-xl font-semibold text-gray-800 pb-2 border-b border-gray-200">
-                Filter by Colors
-              </h2>
-
-              <div className="flex flex-col gap-3 my-3">
-                {colors?.map((color) => (
-                  <label key={color?.id} className="inline-flex items-center">
-                    <input
-                      id={color?.name}
-                      type="checkbox"
-                      className="form-checkbox h-5 w-5"
-                      // onChange={() => handleColorChecked(color?.name)}
-                    />
-                    <span className="text-xs md:text-base ml-1 md:ml-2 text-gray-700">
-                      {color?.name}
-                    </span>
-                  </label>
-                ))}
-              </div>
-            </div>
-            {/* color section end */}
 
             {/* price section start */}
             <div className="py-3 px-0 md:px-4">

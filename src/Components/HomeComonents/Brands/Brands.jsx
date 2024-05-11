@@ -1,9 +1,9 @@
-import React from "react";
 import useAllBrand from "../../../Hooks/useAllBrand";
 import Slider from "react-slick";
 
 export default function Brands() {
   const { brands } = useAllBrand();
+
   var settings = {
     dots: false,
     infinite: true,
@@ -40,18 +40,19 @@ export default function Brands() {
     ],
   };
   return (
-    <div className="container mx-auto">
-      <Slider
-        {...settings}
-        className=""
-      >
+    <div>
+      <Slider {...settings}>
         {brands?.map((brand) => (
           <div
-            key={brand._id}
+            key={brand?._id}
             className="p-5 rounded-md shadow-md text-center space-y-2"
           >
-            <img className="w-12 mx-auto" src={brand.brandImage} alt="" />
-            <h4 className="text-lg font-semibold">{brand.brandName}</h4>
+            <img
+              className="w-12 mx-auto"
+              src={brand?.brandImage}
+              alt={brand?.brandName}
+            />
+            <h4 className="text-lg font-semibold">{brand?.brandName}</h4>
           </div>
         ))}
       </Slider>

@@ -13,14 +13,23 @@ const BuyNow = () => {
   const { products } = useAllProduct();
 
   return (
-    <div className="px-10 my-20">
-      <h2 className="text-4xl font-bold montserrat text-center mb-16">
+    <div className="my-20">
+      <h2 className="text-4xl font-bold montserrat text-center mb-10">
         Buy Now
       </h2>
       <Swiper
         modules={Pagination}
-        spaceBetween={50}
-        slidesPerView={4}
+        slidesPerView={1}
+        breakpoints={{
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 50,
+          },
+        }}
         pagination={{ clickable: true }}
       >
         {products?.map((product) => (
