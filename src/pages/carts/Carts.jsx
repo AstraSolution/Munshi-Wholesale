@@ -8,7 +8,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 const Carts = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  let { myCarts, price, quantity, isPending, refetch } = useGetMyCarts();
+  let { myCarts, price, quantity, isPending, myCartRefetch } = useGetMyCarts();
 
   if (isPending) {
     return <p className=" min-h-screen text-center my-auto">Loading...</p>;
@@ -18,6 +18,7 @@ const Carts = () => {
     const email = await user?.email;
     
     const res = await axiosSecure.post(`/order`, { email: email });
+    console.log(res?.data);
     if (res?.data?.url) {
       const url = await res.data.url;
       window.open(url, "_blank");
@@ -54,7 +55,7 @@ const Carts = () => {
               <CartsDetails
                 key={cart._id}
                 cart={cart}
-                refetch={refetch}
+                myCartRefetch={myCartRefetch}
               ></CartsDetails>
             ))}
             <div className="flex items-center  justify-around gap-4 mb-3">

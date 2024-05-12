@@ -16,7 +16,7 @@ const DashboardHome = () => {
          <CategoryChart></CategoryChart>
          </div>
         </div>
-        <AllAnalyticsChart></AllAnalyticsChart>
+        <AllAnalyticsChart className=""></AllAnalyticsChart>
        <TopProducts></TopProducts>
         </div>
     );

@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import useAllProduct from "../../Hooks/useAllProduct";
 
 const TopProducts = () => {
-  const products = useAllProduct();
+  const { products } = useAllProduct();
   console.log(products);
 
   // Select 10 random products

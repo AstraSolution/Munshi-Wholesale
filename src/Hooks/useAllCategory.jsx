@@ -5,7 +5,7 @@ const useAllCategory = () => {
   const axiosPublic = useAxiosPublic();
 
   const { data: categories = [], isLoading } = useQuery({
-    queryKey: ["categories"],
+    queryKey: "categories",
     queryFn: async () => {
       const res = await axiosPublic.get("/category");
       return res.data;
