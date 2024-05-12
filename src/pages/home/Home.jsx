@@ -7,20 +7,22 @@ import Featured from "../../Components/HomeComonents/Featured/Featured";
 import Hero from "../../Components/HomeComonents/Hero/Hero";
 import Newsletter from "../../Components/HomeComonents/Newsletter/Newsletter";
 import Offer from "../../Components/HomeComonents/Offer/Offer";
+import Reviews from "../../Components/HomeComonents/Reviews/Reviews";
 import Services from "../../Components/HomeComonents/Services/Services";
 
 function Home() {
   return (
-    <div>
+    <div className="container mx-auto">
       <Hero />
       <Services />
       <Category />
       <Category2 />
       <Offer />
-      <BestSeller></BestSeller>
-      <Featured></Featured>
-      <BuyNow></BuyNow>
+      <BestSeller />
+      <Featured />
+      <BuyNow />
       <Brands />
+      <Reviews />
       <Newsletter />
     </div>
   );

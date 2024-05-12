@@ -17,6 +17,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 
+import "./Featured.css";
+
 const Featured = () => {
   const axiosPublic = useAxiosPublic();
 
@@ -29,26 +31,30 @@ const Featured = () => {
   });
 
   return (
-    <div className="px-10 my-20">
-      <h2 className="text-4xl font-bold montserrat text-center mb-16">
+    <div className="my-20">
+      <h2 className="text-4xl font-bold montserrat text-center mb-10">
         Featured
       </h2>
 
       <Swiper
         modules={Pagination}
-        spaceBetween={50}
-        slidesPerView={2}
+        slidesPerView={1}
         pagination={{ clickable: true }}
+        breakpoints={{
+          1024: {
+            slidesPerView: 2,
+            spaceBetween: 40,
+          },
+        }}
       >
         {FeaturedProducts?.map((product) => (
           <SwiperSlide key={product?._id}>
-            <div className="flex gap-10 shadow-lg rounded-lg p-5 border-2 border-gray-200">
-              <div className="text-center w-full md:w-1/2">
+            <div className="flex flex-col md:flex-row gap-10 rounded-lg p-5 border-2 border-gray-200">
+              <div className="text-center w-full md:w-1/2 h-[450px]">
                 <Carousel
                   emulateTouch={true}
                   showIndicators={false}
                   showStatus={false}
-                  className="h-[500px] border-2 border-red-500"
                   renderArrowPrev={(clickHandler, hasPrev) => {
                     return (
                       <div
@@ -76,11 +82,7 @@ const Featured = () => {
                 >
                   {product?.image?.map((image, index) => (
                     <div key={index}>
-                      <img
-                        src={image}
-                        alt="tools"
-                        className="border-2 border-yellow-400"
-                      />
+                      <img src={image} alt="tools" />
                     </div>
                   ))}
                 </Carousel>
@@ -91,9 +93,7 @@ const Featured = () => {
                   {product?.title}
                 </h2>
 
-                <p className="text-gray-500 my-5">
-                  {product?.description.slice(0, 120)}...
-                </p>
+                <p className="text-gray-500 my-5">{product?.description}</p>
 
                 <h2 className="text-3xl font-bold my-1">$ {product?.price}</h2>
 
