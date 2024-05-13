@@ -1,4 +1,3 @@
-
 import Chart from 'react-apexcharts';
 
 const AllAnalyticsChart = () => {
@@ -59,7 +58,7 @@ const AllAnalyticsChart = () => {
     };
 
     return (
-        <div>
+        <div style={{ width: '95%' }}>
             <Chart options={options} series={seriesData} type="area" height={350} />
         </div>
     );

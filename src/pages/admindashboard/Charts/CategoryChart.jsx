@@ -3,6 +3,7 @@ import useAllCategory from "../../../Hooks/useAllCategory";
 
 const CategoryChart = () => {
   const { categories, categoryLoading } = useAllCategory();
+  console.log(categories);
   const topCategories = categories?.slice(0, 10);
 
   const generateRandomColor = () => {
