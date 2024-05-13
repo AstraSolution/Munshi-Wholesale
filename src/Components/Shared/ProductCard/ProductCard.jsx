@@ -1,106 +1,140 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaStar, FaShoppingCart, FaHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import useCurrentUser from "../../../Hooks/useCurrentUser";
-import useGetMyCarts from "../../../Hooks/useGetMyCarts";
+import { AuthContext } from "../../../Providers/AuthProviders/AuthProvider";
 
 const ProductCard = ({ currentProduct }) => {
   const { _id, title, image, price, offer, color, dimensions, quantity } =
     currentProduct;
-  const { myCartRefetch } = useGetMyCarts();
   const [isWished, setIsWished] = useState(false);
-  const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const { currentUser } = useCurrentUser();
 
+  // HandleCart
+  const handleCart = () => {
+    if (user === null) {
+      navigate("/login");
+    } else {
+      let countDis = price;
 
-  // Handle add to cart
-  const handleCart = async() => {
-    let countDis = price;
-    if (offer?.discount !== "N/A") {
-      countDis = (price - (price * parseInt(offer?.discount)) / 100).toFixed(2);
-    }
+      if (offer?.discount !== "N/A") {
+        countDis = (price - (price * parseInt(offer?.discount)) / 100).toFixed(
+          2
+        );
+      }
 
-    const addCart = {
-      customer_name: currentUser?.fullName,
-      customer_email: currentUser?.email,
-      product_id: _id,
-      unit_price: countDis,
-      total_price: countDis,
-      quantity: 1,
-      product_image: image,
-      stock_limit: quantity,
-      title: title,
-      dimensions: dimensions,
-      color: color,
-    };
+      const addCart = {
+        customer_name: currentUser?.fullName,
+        customer_email: currentUser?.email,
+        product_id: _id,
+        unit_price: countDis,
+        total_price: countDis,
+        quantity: 1,
+        product_image: image,
+        stock_limit: quantity,
+        title: title,
+        dimensions: dimensions,
+        color: color,
+      };
 
-    const res = await axiosPublic.post(`/myCarts/${currentUser?.email}`, addCart)
-
-    if(res.data) {
-      Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "Product add to cart successfully.",
-                showConfirmButton: false,
-                timer: 1500,
-              });
-              myCartRefetch()
+      axiosPublic
+        .post(`/myCarts/${currentUser?.email}`, addCart)
+        .then((response) => {
+          console.log(response);
+          if (response.status === 200) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Product add to cart successfully.",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          } else if (response.data.insertedId === null) {
+            Swal.fire({
+              position: "top-end",
+              icon: "error",
+              title: "Product already in cart.",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        })
+        .catch((error) => {
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: `${error.message}`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        });
     }
   };
 
   // Handle wishlist
   const handleWishlist = () => {
-    let countDis = price;
-    if (offer?.discount !== "N/A") {
-      countDis = (price - (price * parseInt(offer?.discount)) / 100).toFixed(2);
-    }
-    setIsWished(!isWished);
+    if (user === null) {
+      navigate("/login");
+    } else {
+      let countDis = price;
+      if (offer?.discount !== "N/A") {
+        countDis = (price - (price * parseInt(offer?.discount)) / 100).toFixed(
+          2
+        );
+      }
+      setIsWished(!isWished);
 
-    const addWishlist = {
-      customer_name: currentUser?.fullName,
-      customer_email: currentUser?.email,
-      product_id: _id,
-      unit_price: countDis,
-      total_price: countDis,
-      quantity: 1,
-      product_image: image,
-      stock_limit: quantity,
-      title: title,
-      dimensions: dimensions,
-      color: color,
-    };
+      const addWishlist = {
+        customer_name: currentUser?.fullName,
+        customer_email: currentUser?.email,
+        product_id: _id,
+        unit_price: countDis,
+        total_price: countDis,
+        quantity: 1,
+        product_image: image,
+        stock_limit: quantity,
+        title: title,
+        dimensions: dimensions,
+        color: color,
+      };
 
-    console.log(addWishlist);
-
-    axiosPublic
-      .post("/wishlist", addWishlist)
-      .then((response) => {
-        if (response) {
+      axiosPublic
+        .post("/wishlist", addWishlist)
+        .then((response) => {
+          console.log(response);
+          if (response) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Product add wishlist successfully.",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        })
+        .catch((error) => {
           Swal.fire({
             position: "top-end",
-            icon: "success",
-            title: "Product add wishlist successfully.",
+            icon: "error",
+            title: `${error.message}`,
             showConfirmButton: false,
             timer: 1500,
           });
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+        });
+    }
   };
 
   return (
     <div>
       <div className="relative flex items-center rounded-lg shadow-md h-[250px] lg:h-[350px] group border-2 border-gray-200">
-        <div
-          className=""
-          onClick={() => navigate(`/products/${_id}`, { id: `${_id}` })}
-        >
+        <div onClick={() => navigate(`/products/${_id}`, { id: `${_id}` })}>
           <img
             src={image[0]}
             alt={title}

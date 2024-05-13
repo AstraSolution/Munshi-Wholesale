@@ -12,9 +12,8 @@ import useCurrentUser from "../../../../Hooks/useCurrentUser";
 import { useRef } from "react";
 
 const Dropdown = () => {
-
   const dropdownRef = useRef(null);
-  const { currentUser } = useCurrentUser()
+  const { currentUser } = useCurrentUser();
   const { user, logOut } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [activeStatus, setActiveStatus] = useState(false);
@@ -39,9 +38,7 @@ const Dropdown = () => {
     }
   }, [currentUser]);
 
-
-
-  // modal outer close 
+  // modal outer close
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -55,9 +52,6 @@ const Dropdown = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
-
-
 
   return (
     <div ref={dropdownRef} className="relative inline-block text-left z-50">
@@ -83,8 +77,9 @@ const Dropdown = () => {
             {/* Active status indicator */}
             {user && (
               <div
-                className={`absolute bottom-0 right-0 ${activeStatus ? "bg-green-500" : "bg-gray-500"
-                  } w-3 h-3 border-2 border-white rounded-full animate-ping`}
+                className={`absolute bottom-0 right-0 ${
+                  activeStatus ? "bg-green-500" : "bg-gray-500"
+                } w-3 h-3 border-2 border-white rounded-full animate-ping`}
               />
             )}
           </div>
@@ -106,7 +101,9 @@ const Dropdown = () => {
                   <li className="text-center text-xl font-bold text-red-500 -mb-3">
                     {currentUser?.fullName}
                   </li>
-                  <li className="text-center font-semibold">{currentUser?.email}</li>
+                  <li className="text-center font-semibold">
+                    {currentUser?.email}
+                  </li>
                   <li>
                     <hr className="border border-gray-300 w-3/4 mx-auto mb-4" />
                   </li>
@@ -146,7 +143,6 @@ const Dropdown = () => {
         </>
       )}
     </div>
-
   );
 };
 
