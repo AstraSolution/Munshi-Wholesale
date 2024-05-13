@@ -11,6 +11,8 @@ export default function Shop() {
   const [showAllCategories, setShowAllCategories] = useState(false);
   const [showAllBrands, setShowAllBrands] = useState(false);
   const [sort, setSort] = useState(false);
+
+
   const { products } = useAllProduct();
   const { categories, categoryLoading } = useAllCategory();
   const { brands, brandsLoading } = useAllBrand();

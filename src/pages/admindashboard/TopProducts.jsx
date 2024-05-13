@@ -2,10 +2,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import useAllProduct from "../../Hooks/useAllProduct";
 
 const TopProducts = () => {
-  const products = useAllProduct();
+  const {products, isPending} = useAllProduct();
+
+  if(isPending){
+    return <p>Loading...</p>
+  }
 
   // Select 10 random products
-  const randomProducts = products.sort(() => Math.random() - 0.5).slice(0, 10); // Take the first 10 products
+  const randomProducts = products?.sort(() => Math.random() - 0.5).slice(0, 10); // Take the first 10 products
 
   return (
     <div className="container mx-auto md:py-3 py-2 text-white ">
