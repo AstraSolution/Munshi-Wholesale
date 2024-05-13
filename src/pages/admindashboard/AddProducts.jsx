@@ -3,18 +3,30 @@ import { LuUpload } from "react-icons/lu";
 import { MdDeleteOutline } from "react-icons/md";
 // import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { Toaster, toast } from "react-hot-toast";
 
 const AddProducts = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
+  const [formData, setFormData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [images, setImages] = useState([]);
   const [fileNames, setFileNames] = useState([]);
   const [fields, setFields] = useState([]);
   const [fieldValues, setFieldValues] = useState([]);
   const axiosPuplic = useAxiosPublic()
+
+
+
+
+
+  useEffect(() => {
+    if (formData) {
+      setImages(formData.images || []);
+    }
+  }, [formData, setValue]);
+
 
   const handleAddField = () => {
     const newFields = [{ fieldName: "" }, ...fields];
@@ -35,17 +47,24 @@ const AddProducts = () => {
     newFieldValues[index] = value;
     setFieldValues(newFieldValues);
   };
+
+
+
+  // multipale image add fn 
   const handleImageChange = (files) => {
     const newImages = [...images];
     const newFileNames = [...fileNames];
+
     for (let i = 0; i < files.length; i++) {
       newImages.push(URL.createObjectURL(files[i]));
       newFileNames.push(files[i].name);
     }
+
     setImages(newImages);
     setFileNames(newFileNames);
   };
 
+  // image remove function
   const handleRemoveImage = (index) => {
     const newImages = [...images];
     const newFileNames = [...fileNames];
@@ -56,11 +75,13 @@ const AddProducts = () => {
   };
 
 
-
-
   const onSubmit = async (data) => {
     try {
+
+
       setLoading(true);
+
+      data.images = images;
       const {
         title,
         brand,
@@ -88,10 +109,12 @@ const AddProducts = () => {
         description,
       } = data;
 
-      // const cover_image = await uploadImage();
+      
+
       const product = {
         title,
         brand,
+        images,
         category,
         price,
         discountPrice,
@@ -117,17 +140,6 @@ const AddProducts = () => {
 
         specification_features: fieldValues,
 
-        // specification: {
-        //   voltes,
-        //   power_source,
-        //   battery_type,
-        //   max_torque,
-        //   speed_settings,
-        //   chuck_size,
-        //   clutch_settings,
-        //   safety_features: ["Overload protection", "Non-slip grip"],
-        //   compatibility: [],
-        // },
 
         upload_time: new Date().toISOString(),
       };
@@ -579,43 +591,43 @@ const AddProducts = () => {
           </div>
         </div>
         {/* Image input */}
-        <div className="mt-6">
-          <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-10 items-center mt-2">
-            {images.map((image, index) => (
-              <div key={index} className="relative mr-4 mb-4">
-                <img
-                  src={image}
-                  alt={fileNames[index]}
-                  className="max-h-40 w-auto"
-                />
-                <button
-                  type="button"
-                  onClick={() => handleRemoveImage(index)}
-                  className="absolute top-0 right-0 bg-red-500  text-gray-900 p-1 rounded-full"
-                >
-                  <MdDeleteOutline />
-                </button>
-              </div>
-            ))}
+        <div className="mb-4 ">
+          <div className="mt-6">
+            <div className=" grid grid-cols-3 md:grid-cols-5 lg:grid-cols-10 items-center mt-2">
+              {images.map((image, index) => (
+                <div key={index} className="relative mr-4 mb-4">
+                  <img
+                    src={image}
+                    alt={fileNames[index]}
+                    className="max-h-40 w-auto"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveImage(index)}
+                    className="absolute top-0 right-0 bg-[#FF9D00] text-white p-1 rounded-full"
+                  >
+                    <MdDeleteOutline />
+                  </button>
+                </div>
+              ))}
+            </div>
+            <label className="block md:text-2xl text-white  text-sm font-bold mb-2">Upload Image</label>
+            <div
+              onClick={() => document.querySelector("#image").click()}
+              className="cursor-pointer mt-4 p-4 border bg-gray-800 rounded-md flex items-center justify-center"
+            >
+              <LuUpload className="text-3xl text-[#FF9D00] mx-auto"></LuUpload>{" "}
+              <p className="ml-2"></p>{" "}
+            </div>
+            <input
+              type="file"
+              id="image"
+              accept="image/*"
+              className="hidden"
+              multiple
+              onChange={(e) => handleImageChange(e.target.files)}
+            />
           </div>
-          {/* Upload button */}
-          <label className="text-gray-900 text-center">Upload Image</label>
-          <div
-            onClick={() => document.querySelector("#image").click()}
-            className="cursor-pointer mt-4 p-4 border border-gray-300 rounded-md flex items-center justify-center"
-          >
-            <LuUpload className="text-3xl text-[#F01543] mx-auto"></LuUpload>{" "}
-            <p className="ml-2"></p>{" "}
-          </div>
-          {/* Hidden file input */}
-          <input
-            type="file"
-            id="image"
-            accept="image/*"
-            className="hidden"
-            multiple
-            onChange={(e) => handleImageChange(e.target.files)}
-          />
         </div>
         {/* Save button */}
         <div className="flex justify-center mt-6">

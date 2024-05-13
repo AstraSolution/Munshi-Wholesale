@@ -14,6 +14,7 @@ const useWishlistProducts = () => {
       return res.data
     }
   })
+  console.log(wishlistProduct);
 
   return [wishlistProduct, isLoading, wishlistRefetch];
 };

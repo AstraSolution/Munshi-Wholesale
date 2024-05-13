@@ -65,11 +65,13 @@ const My_Order_Page = () => {
       };
 
       console.log(reviewInformation);
+      
 
       const res = await axiosPublic.post("/reviews", reviewInformation);
       if (res?.data) {
         toast.success('Review Add Successful!')
       }
+      console.log(res.data);
       reset({ review: '' });
       // Close the modal
       setShowModal(false);
