@@ -1,12 +1,15 @@
 import { motion, AnimatePresence } from "framer-motion";
-import useAllProduct from "../../Hooks/useAllProduct";
+import useTopProducts from "../../Hooks/useTopProducts";
+
 
 const TopProducts = () => {
-  const { products } = useAllProduct();
-  console.log(products);
+ 
 
+  const topProducts = useTopProducts()
+  console.log(topProducts?.popularProducts);
+  const topTenProducts = topProducts?.popularProducts;
   // Select 10 random products
-  const randomProducts = Array.isArray(products) ? products.sort(() => Math.random() - 0.5).slice(0, 10) : [];
+  // const randomProducts = Array.isArray(products) ? products.sort(() => Math.random() - 0.5).slice(0, 10) : [];
 
   return (
     <div className="container mx-auto md:py-3 py-2 text-white ">
@@ -38,7 +41,7 @@ const TopProducts = () => {
                 </th>
               </tr>
               <AnimatePresence>
-                {randomProducts.map((product, i) => (
+                {topTenProducts?.map((product, i) => (
                   <motion.tr
                     key={product._id}
                     initial={{ opacity: 0, y: -20 }}
@@ -55,7 +58,7 @@ const TopProducts = () => {
                     <td className="border bg-gray-800 border-gray-400 p-2">
                       <img
                         className="w-20 md:h-16 rounded-lg  mx-auto "
-                        src={product?.image[0]}
+                        src={product?.image}
                         alt=""
                       />
                     </td>

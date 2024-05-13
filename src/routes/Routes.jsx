@@ -20,6 +20,7 @@ import AddProducts from "../pages/admindashboard/AddProducts";
 import Carts from "../pages/carts/Carts";
 import User_Dashboard_Home from "../pages/user_dashboard/Dashboard_Home/User_Dashboard_Home";
 import ContactUs from "../pages/contactUs/ContactUs";
+import MyReviewPage from "../pages/user_dashboard/Dashboard_Home/MyReviewPage";
 
 const router = createBrowserRouter([
   {
@@ -106,6 +107,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/my_order",
         element: <My_Order_Page></My_Order_Page>,
+      },
+      {
+        path: "/dashboard/my-reviews",
+        element: <MyReviewPage></MyReviewPage>,
       },
     ],
   },

@@ -1,18 +1,15 @@
 import { useEffect, useState } from "react";
 import { useRef } from "react";
 import { motion } from "framer-motion";
-
 // * React icons
 import { IoIosArrowBack } from "react-icons/io";
-import { AiOutlineAppstore } from "react-icons/ai";
-import { BsPerson } from "react-icons/bs";
-import { FaCartArrowDown } from "react-icons/fa";
+import { BsCartCheckFill, BsPerson } from "react-icons/bs";
+import {  FaProductHunt, FaUserTie } from "react-icons/fa";
 import { useMediaQuery } from "react-responsive";
-import { MdMenu, MdChangeHistory, MdLogout } from "react-icons/md";
+import { MdMenu,  MdLogout,MdAddShoppingCart, MdReviews, MdAdminPanelSettings } from "react-icons/md";
 import { IoIosSearch, IoMdSettings } from "react-icons/io";
+import { HiUsers } from "react-icons/hi2";
 import { IoHome } from "react-icons/io5";
-
-
 import { Link, NavLink, useLocation, useNavigate, } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import useCurrentUser from "../../Hooks/useCurrentUser";
@@ -141,7 +138,7 @@ const Dashboard = () => {
                     ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium "
                     : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
               }>
-                <AiOutlineAppstore size={23} className="min-w-max" />
+                <FaUserTie  size={23} className="min-w-max" />
                 Dashboard Home
               </NavLink>
             </li>
@@ -155,7 +152,7 @@ const Dashboard = () => {
                     ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium "
                     : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
               }>
-                <AiOutlineAppstore size={23} className="min-w-max" />
+                <MdAdminPanelSettings   size={23} className="min-w-max" />
                 Dashboard
               </NavLink>
             </li>
@@ -180,7 +177,7 @@ const Dashboard = () => {
                     ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium text-[#FFA500]"
                     : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
               }>
-                <MdChangeHistory size={23} className="min-w-max" />
+                <FaProductHunt  size={23} className="min-w-max" />
                 All Orders
               </NavLink>
             </li>
@@ -192,7 +189,7 @@ const Dashboard = () => {
                     ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium  text-[#FFA500]"
                     : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
               }>
-                <BsPerson size={23} className="min-w-max" />
+                <HiUsers  size={23} className="min-w-max" />
                 All Users
               </NavLink>
             </li>
@@ -204,7 +201,7 @@ const Dashboard = () => {
                     ? " bg-gray-600 text-[#FFA500] p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium "
                     : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
               }>
-                <BsPerson size={23} className="min-w-max" />
+                <MdAddShoppingCart size={23} className="min-w-max" />
                 Add Products
               </NavLink>
             </li>
@@ -217,8 +214,20 @@ const Dashboard = () => {
                     ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium bg-gray-600 text-[#FFA500] "
                     : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
               }>
-                <FaCartArrowDown size={23} className="min-w-max" />
+                <BsCartCheckFill size={23} className="min-w-max" />
                 My Order
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={"/dashboard/my-reviews"} className={({ isActive, isPending }) =>
+                isPending
+                  ? "pending"
+                  : isActive
+                    ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium bg-gray-600 text-[#FFA500] "
+                    : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
+              }>
+                <MdReviews size={23} className="min-w-max" />
+                My Reviews
               </NavLink>
             </li>
 
