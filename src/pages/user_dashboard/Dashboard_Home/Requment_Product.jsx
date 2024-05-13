@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 export default function Requment_Product() {
-    const products = useAllProduct();
+    const [products] = useAllProduct();
    
 
 

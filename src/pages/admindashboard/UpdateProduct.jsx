@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { LuUpload } from "react-icons/lu";
 import { MdDeleteOutline } from "react-icons/md";
-import { useLoaderData , useNavigate} from 'react-router';
+import { useLoaderData, useNavigate } from 'react-router';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import { toast, Toaster } from 'react-hot-toast';
 
@@ -100,9 +100,13 @@ export default function UpdateProduct() {
             const res = await axiosPuplic.put(`/products/${_id}`, updateProduct);
             if (res?.data) {
                 toast.success("Product updated successfully");
-                navigete("/dashboard/my_all_product")
+
+                setTimeout(() => {
+                    navigete("/dashboard/my_all_product")
+                }, 1000);
             }
-            console.log("update data", res.data);
+
+
         } catch (error) {
             console.error("Error updating product:", error);
             toast.error("Please try again");

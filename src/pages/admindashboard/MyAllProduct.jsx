@@ -5,17 +5,19 @@ import { MdDelete } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
+import useAxiosPublic from '../../Hooks/useAxiosPublic';
+import LoadingPage from "../../Components/Shared/Loading/LoadingPage";
 
 export default function MyAllProduct() {
 
-   
+    const axiosPublic = useAxiosPublic();
 
-    const [products, productRefetch] = useAllProduct()
-
+    const [products, isLoading, productRefetch] = useAllProduct()
 
 
 
     const handleDeleteProduct = (id, title) => {
+        console.log(id);
         Swal.fire({
             title: `Delete product`,
             text: `Are you sure you want to delete the product "${title}"?`,
@@ -57,6 +59,14 @@ export default function MyAllProduct() {
         });
     };
 
+    
+    if (isLoading) {
+        return (
+            <div className="min-h-screen">
+                <LoadingPage></LoadingPage>
+            </div>
+        );
+    }
 
 
     return (
@@ -117,6 +127,7 @@ export default function MyAllProduct() {
                                     {
                                         products?.products?.map((product, i) =>
                                             <motion.tr
+                                                key={product._id}
                                                 initial={{ opacity: 0, y: -20 }}
                                                 animate={{ opacity: 1, y: 0 }}
                                                 transition={{ duration: 0.5, delay: i * 0.1 }}
@@ -149,7 +160,7 @@ export default function MyAllProduct() {
                                                 <td className="border bg-white border-gray-200 p-2 text-sm md:text-md   text-center  ">
                                                     {product?.country_of_origin}
                                                 </td>
-                                                <td className="border bg-white border-gray-200 p-2 text-sm md:text-md   text-center  ">
+                                                <td className="border bg-white border-gray-200 p-4 text-sm md:text-md   text-center  ">
                                                     $ {product?.price}
                                                 </td>
                                                 <td className="border bg-white border-gray-200 p-2 text-sm md:text-md   text-center  ">

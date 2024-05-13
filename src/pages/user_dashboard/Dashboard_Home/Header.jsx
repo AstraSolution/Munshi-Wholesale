@@ -16,7 +16,6 @@ const Header = () => {
 
     const totalAmount = orderProduct?.myOrders?.reduce((total, item) => total + item.totalPrice, 0);
 
-    console.log(totalAmount);
 
     const { myCarts } = useGetMyCarts();
     const cartItems = myCarts?.length;

@@ -19,7 +19,7 @@ const Payment_History = () => {
         setVisibleItems(3);
     };
 
-    console.log(orderItems);
+
 
     return (
         <div>
