@@ -6,23 +6,28 @@ import useAllCategory from "../../Hooks/useAllCategory";
 import useAllProduct from "../../Hooks/useAllProduct";
 import useAllBrand from "../../Hooks/useAllBrand";
 import useCurrentUser from "../../Hooks/useCurrentUser";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 export default function Shop() {
-  const axiosPublic = useAxiosPublic();
-
   const [showAllCategories, setShowAllCategories] = useState(false);
   const [showAllBrands, setShowAllBrands] = useState(false);
   const [sort, setSort] = useState(false);
+  let categoryFilter = [];
+  let brandFilter = [];
 
-  const { products } = useAllProduct();
+  const searchItems = {
+    category: categoryFilter,
+    brand: brandFilter,
+  };
+
+  const { products, refetchProduct } = useAllProduct(1, 12, searchItems);
+
+  // `${1},${12},searchItems{category:${categoryFilter},brands:${brandFilter}}`
+
+  // console.log(products);
 
   const { categories, categoryLoading } = useAllCategory();
   const { brands, brandsLoading } = useAllBrand();
   const { currentUser } = useCurrentUser();
-
-  let categoryFilter = [];
-  let brandFilter = [];
 
   // console.log(products);
 
@@ -42,7 +47,10 @@ export default function Shop() {
 
     if (type === "category") {
       if (check === true) {
+        categoryFilter =
+          JSON.parse(localStorage.getItem("categoryFilter")) || [];
         categoryFilter.push(value);
+        localStorage.setItem("categoryFilter", JSON.stringify(categoryFilter));
       } else {
         categoryFilter = categoryFilter.filter(
           (categoryValue) => categoryValue !== value
@@ -56,12 +64,11 @@ export default function Shop() {
       }
     }
 
-    console.log(brandFilter);
+    // console.log(categoryFilter);
+    // console.log(brandFilter);
 
-    // const filterProducts = axiosPublic
-    //   .get(`/products?page=1&limit=5&searchItems={category:${categoryFilter}}`)
-    //   .then((res) => console.log(res.data));
-    // console.log(filterProducts);
+    refetchProduct();
+    console.log(searchItems);
   };
 
   return (
