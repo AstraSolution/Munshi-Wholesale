@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import { LuUpload } from "react-icons/lu";
 import { MdDeleteOutline } from "react-icons/md";
+// import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
+
 import { useEffect, useState } from "react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { Toaster, toast } from "react-hot-toast";
@@ -26,6 +28,7 @@ const AddProducts = () => {
     const newFields = [{ fieldName: "" }, ...fields];
     setFields(newFields);
   };
+
   const handleRemoveField = (index) => {
     const newFields = [...fields];
     newFields.splice(index, 1);
@@ -40,6 +43,8 @@ const AddProducts = () => {
     newFieldValues[index] = value;
     setFieldValues(newFieldValues);
   };
+
+
 
   // multipale image add fn 
   const handleImageChange = (files) => {
@@ -65,9 +70,13 @@ const AddProducts = () => {
     setFileNames(newFileNames);
   };
 
+
   const onSubmit = async (data) => {
     try {
+
+
       setLoading(true);
+
       data.images = images;
       const {
         title,
@@ -95,6 +104,9 @@ const AddProducts = () => {
         return_policy,
         description,
       } = data;
+
+      
+
       const product = {
         title,
         brand,
@@ -121,7 +133,10 @@ const AddProducts = () => {
         manufacturer,
         return_policy,
         description,
+
         specification_features: fieldValues,
+
+
         upload_time: new Date().toISOString(),
       };
       console.log(product);

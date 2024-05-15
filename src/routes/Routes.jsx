@@ -21,6 +21,8 @@ import Carts from "../pages/carts/Carts";
 import User_Dashboard_Home from "../pages/user_dashboard/Dashboard_Home/User_Dashboard_Home";
 import ContactUs from "../pages/contactUs/ContactUs";
 import MyReviewPage from "../pages/user_dashboard/Dashboard_Home/MyReviewPage";
+import MyAllProduct from "../pages/admindashboard/MyAllProduct";
+import UpdateProduct from "../pages/admindashboard/UpdateProduct";
 
 const router = createBrowserRouter([
   {
@@ -90,6 +92,15 @@ const router = createBrowserRouter([
         path: "/dashboard/profile",
         element: <Profile_Page></Profile_Page>,
       },
+      {
+        path: "/dashboard/my_all_product",
+        element: <MyAllProduct></MyAllProduct>,
+      },
+      {
+        path: "/dashboard/update_product/:id",
+        element: <UpdateProduct></UpdateProduct>,
+        loader: ({ params }) => fetch(`https://munshi-wholesale-server.vercel.app/api/v1/products/${params.id}`)
+      },
 
       {
         path: "/dashboard/all-Orders",
@@ -103,7 +114,7 @@ const router = createBrowserRouter([
         path: "/dashboard/add-Products",
         element: <AddProducts></AddProducts>
       },
-     
+
       {
         path: "/dashboard/my_order",
         element: <My_Order_Page></My_Order_Page>,

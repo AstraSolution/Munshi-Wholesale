@@ -194,6 +194,18 @@ const Dashboard = () => {
               </NavLink>
             </li>
             <li>
+              <NavLink to={"/dashboard/my_all_product"} className={({ isActive, isPending }) =>
+                isPending
+                  ? "pending"
+                  : isActive
+                    ? "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium  text-[#FFA500]"
+                    : "p-2.5 flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium"
+              }>
+                <BsPerson size={23} className="min-w-max" />
+                All Product
+              </NavLink>
+            </li>
+            <li>
               <NavLink to={"/dashboard/add-products"} className={({ isActive, isPending }) =>
                 isPending
                   ? "pending"

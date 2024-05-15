@@ -12,7 +12,7 @@ const Dashboard_Layout = () => {
             <div className="">
                 <Dashboard />
             </div>
-            <main className="mx-auto flex-1 px-2 lg:overflow-y-auto">
+            <main className="flex-1 px-2 lg:overflow-y-auto">
                 {/* Dashboard Navbar */}
                 <Dashboard_Navbar />
                 <div className='py-2 '>
