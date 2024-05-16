@@ -1,8 +1,6 @@
 import { useForm } from "react-hook-form";
 import { LuUpload } from "react-icons/lu";
 import { MdDeleteOutline } from "react-icons/md";
-// import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
-
 import { useEffect, useState } from "react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { Toaster, toast } from "react-hot-toast";
@@ -15,14 +13,13 @@ const AddProducts = () => {
   const [fileNames, setFileNames] = useState([]);
   const [fields, setFields] = useState([]);
   const [fieldValues, setFieldValues] = useState([]);
-  const axiosPuplic = useAxiosPublic()
+  const axiosPuplic = useAxiosPublic();
 
   useEffect(() => {
     if (formData) {
       setImages(formData.images || []);
     }
   }, [formData, setValue]);
-
 
   const handleAddField = () => {
     const newFields = [{ fieldName: "" }, ...fields];
@@ -44,9 +41,7 @@ const AddProducts = () => {
     setFieldValues(newFieldValues);
   };
 
-
-
-  // multipale image add fn 
+  // multipale image add fn
   const handleImageChange = (files) => {
     const newImages = [...images];
     const newFileNames = [...fileNames];
@@ -70,11 +65,8 @@ const AddProducts = () => {
     setFileNames(newFileNames);
   };
 
-
   const onSubmit = async (data) => {
     try {
-
-
       setLoading(true);
 
       data.images = images;
@@ -105,8 +97,6 @@ const AddProducts = () => {
         description,
       } = data;
 
-      
-
       const product = {
         title,
         brand,
@@ -136,7 +126,6 @@ const AddProducts = () => {
 
         specification_features: fieldValues,
 
-
         upload_time: new Date().toISOString(),
       };
       console.log(product);
@@ -147,7 +136,7 @@ const AddProducts = () => {
       }
     } catch (error) {
       console.error("Error adding product:", error);
-      toast.error("please Try Again")
+      toast.error("please Try Again");
     } finally {
       setLoading(false);
     }
@@ -222,23 +211,49 @@ const AddProducts = () => {
                     <option value="Power Tools">Power Tools</option>
                     <option value="Hand Tools">Hand Tools</option>
                     <option value="Gardening Tools">Gardening Tools</option>
-                    <option value="Electrical Equipment ">Electrical Equipment</option>
+                    <option value="Electrical Equipment ">
+                      Electrical Equipment
+                    </option>
                     <option value="Safety Equipment ">Safety Equipment</option>
-                    <option value="Construction Equipment ">Construction Equipment</option>
+                    <option value="Construction Equipment ">
+                      Construction Equipment
+                    </option>
                     <option value="Automotive Tools ">Automotive Tools</option>
-                    <option value="Measuring & Layout Tools ">Measuring & Layout Tools</option>
-                    <option value="Woodworking Tools ">Woodworking Tools</option>
-                    <option value="Metalworking Tools ">Metalworking Tools</option>
-                    <option value="Painting Supplies ">Painting Supplies</option>
+                    <option value="Measuring & Layout Tools ">
+                      Measuring & Layout Tools
+                    </option>
+                    <option value="Woodworking Tools ">
+                      Woodworking Tools
+                    </option>
+                    <option value="Metalworking Tools ">
+                      Metalworking Tools
+                    </option>
+                    <option value="Painting Supplies ">
+                      Painting Supplies
+                    </option>
                     <option value="Plumbing Tools ">Plumbing Tools</option>
-                    <option value="Cleaning Equipment ">Cleaning Equipment</option>
-                    <option value="Storage & Organization ">Storage & Organization</option>
-                    <option value="Welding & Soldering ">Welding & Soldering</option>
-                    <option value="Fasteners & Hardware ">Fasteners & Hardware</option>
-                    <option value="Material Handling ">Material Handling</option>
-                    <option value="Adhesives & Sealants ">Adhesives & Sealants</option>
+                    <option value="Cleaning Equipment ">
+                      Cleaning Equipment
+                    </option>
+                    <option value="Storage & Organization ">
+                      Storage & Organization
+                    </option>
+                    <option value="Welding & Soldering ">
+                      Welding & Soldering
+                    </option>
+                    <option value="Fasteners & Hardware ">
+                      Fasteners & Hardware
+                    </option>
+                    <option value="Material Handling ">
+                      Material Handling
+                    </option>
+                    <option value="Adhesives & Sealants ">
+                      Adhesives & Sealants
+                    </option>
                     <option value="Air Tools ">Air Tools</option>
-                    <option value="Outdoor Power Equipment ">Outdoor Power Equipment</option>
+                    <option value="Outdoor Power Equipment ">
+                      Outdoor Power Equipment
+                    </option>
                   </select>
                 </div>
 
@@ -247,7 +262,6 @@ const AddProducts = () => {
                   <label className="text-gray-800 text-lg  "> Model </label>
                   <input
                     className="w-full px-4 py-3 border-gray-600 text-gray-800 border rounded-md bg-gray-100  focus:outline-none focus:border-blue-500"
-
                     {...register("model")}
                     placeholder=" Model Name"
                     type="text"
@@ -266,8 +280,6 @@ const AddProducts = () => {
                   />
                 </div>
               </div>
-
-
             </div>
             {/* pricing */}
 
@@ -299,7 +311,6 @@ const AddProducts = () => {
               </div>
             </div>
           </div>
-
 
           {/* second step */}
           <div className=" lg:flex  gap-5">
@@ -354,7 +365,10 @@ const AddProducts = () => {
                 <div>
                   <label className="text-gray-800 text-lg  ">Color </label>
                   <input
-                    className="p-1 h-10 w-full block bg-white border border-gray-200 cursor-pointer rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700" id="hs-color-input" value="#2563eb" title="Choose your color"
+                    className="p-1 h-10 w-full block bg-white border border-gray-200 cursor-pointer rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700"
+                    id="hs-color-input"
+                    value="#2563eb"
+                    title="Choose your color"
                     {...register("color")}
                     placeholder="Color"
                     type="color"
@@ -436,7 +450,7 @@ const AddProducts = () => {
               </h1>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3">
                 {/* certification */}
-                <div >
+                <div>
                   <label className="text-gray-800 text-lg ">
                     {" "}
                     Certification{" "}
@@ -607,7 +621,9 @@ const AddProducts = () => {
                 </div>
               ))}
             </div>
-            <label className="block md:text-2xl text-white  text-sm font-bold mb-2">Upload Image</label>
+            <label className="block md:text-2xl text-white  text-sm font-bold mb-2">
+              Upload Image
+            </label>
             <div
               onClick={() => document.querySelector("#image").click()}
               className="cursor-pointer mt-4 p-4 border bg-gray-800 rounded-md flex items-center justify-center"
@@ -633,7 +649,6 @@ const AddProducts = () => {
             disabled={loading}
           >
             {loading ? "Adding..." : "Add Product"}
-
           </button>
         </div>
       </form>

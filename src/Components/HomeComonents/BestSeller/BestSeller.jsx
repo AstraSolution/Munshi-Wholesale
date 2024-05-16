@@ -13,6 +13,7 @@ const BestSeller = () => {
       return res.data;
     },
   });
+  console.log(products);
 
   return (
     <div className="mt-20">
