@@ -95,7 +95,7 @@ export default function UpdateProduct() {
                 features,
             }
 
-            console.log(updateProduct);
+           
 
             const res = await axiosPuplic.put(`/products/${_id}`, updateProduct);
             if (res?.data) {
