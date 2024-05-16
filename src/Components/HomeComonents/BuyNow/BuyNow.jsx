@@ -1,3 +1,5 @@
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 import { Pagination } from "swiper/modules";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -6,11 +8,18 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 
-import useAllProduct from "../../../Hooks/useAllProduct";
 import ProductCard from "../../Shared/ProductCard/ProductCard";
 
 const BuyNow = () => {
-  const { products } = useAllProduct();
+  const axiosPublic = useAxiosPublic();
+
+  const { data: products = [] } = useQuery({
+    queryKey: ["products"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/featured-products");
+      return res.data;
+    },
+  });
 
   return (
     <div className="my-20">

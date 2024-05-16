@@ -7,7 +7,6 @@ import Register from "../pages/register/Register";
 import Dashboard_Layout from "../pages/dashboard/Dashboard_Layout";
 import Profile_Page from "../pages/user_dashboard/Profile_Page";
 import My_Order_Page from "../pages/user_dashboard/My_Order_Page";
-import Shop from "../pages/shop/Shop";
 import Checkout from "../pages/checkout/Checkout";
 import AboutUs from "../pages/aboutUs/AboutUs";
 import FAQ from "../pages/faq/FAQ";
@@ -23,6 +22,7 @@ import ContactUs from "../pages/contactUs/ContactUs";
 import MyReviewPage from "../pages/user_dashboard/Dashboard_Home/MyReviewPage";
 import MyAllProduct from "../pages/admindashboard/MyAllProduct";
 import UpdateProduct from "../pages/admindashboard/UpdateProduct";
+import ShopLayout from "../pages/shop/ShopLayout";
 
 const router = createBrowserRouter([
   {
@@ -43,8 +43,8 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: "shop",
-        element: <Shop />,
+        path: "/shop",
+        element: <ShopLayout />,
       },
       {
         path: "products/:id",
@@ -99,20 +99,23 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/update_product/:id",
         element: <UpdateProduct></UpdateProduct>,
-        loader: ({ params }) => fetch(`https://munshi-wholesale-server.vercel.app/api/v1/products/${params.id}`)
+        loader: ({ params }) =>
+          fetch(
+            `https://munshi-wholesale-server.vercel.app/api/v1/products/${params.id}`
+          ),
       },
 
       {
         path: "/dashboard/all-Orders",
-        element: <AllOrders></AllOrders>
+        element: <AllOrders></AllOrders>,
       },
       {
         path: "/dashboard/all-Users",
-        element: <AllUsers></AllUsers>
+        element: <AllUsers></AllUsers>,
       },
       {
         path: "/dashboard/add-Products",
-        element: <AddProducts></AddProducts>
+        element: <AddProducts></AddProducts>,
       },
 
       {
