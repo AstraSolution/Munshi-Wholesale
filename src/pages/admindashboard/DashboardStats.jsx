@@ -12,7 +12,7 @@ const DashboardStats = () => {
   const users = useAllUsers();
   const totalUsers = users?.length;
 
-  const [products] = useAllProduct()
+  const {products} = useAllProduct()
   const tottalProducts = products?.products?.length;
 
   const totalOrders = useTotalOrders()

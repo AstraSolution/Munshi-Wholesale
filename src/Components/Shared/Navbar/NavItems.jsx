@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { XIcon, MenuAlt3Icon } from "@heroicons/react/outline";
 import { Button } from "@material-tailwind/react";
 import CustomLink from "./CustomLink";
