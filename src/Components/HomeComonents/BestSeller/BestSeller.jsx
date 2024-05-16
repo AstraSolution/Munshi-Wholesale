@@ -1,11 +1,24 @@
-import useAllProduct from "../../../Hooks/useAllProduct";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 import ProductCard from "../../Shared/ProductCard/ProductCard";
 import { Link } from "react-router-dom";
 
 const BestSeller = () => {
-  const { products } = useAllProduct();
+  const axiosPublic = useAxiosPublic();
 
-  console.log(products);
+
+
+  const { data: products = [], isPending } = useQuery({
+    queryKey: ["products"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/featured-products");
+      return res.data;
+    },
+  });
+
+  if (isPending) {
+    return <p>loading...</p>
+  }
 
   return (
     <div className="mt-20">
@@ -23,7 +36,7 @@ const BestSeller = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-10 my-10">
         {/* Product-Cards */}
-        {products?.slice(0, 8)?.map((product) => (
+        {products?.map((product) => (
           <ProductCard
             key={product?._id}
             currentProduct={product}
