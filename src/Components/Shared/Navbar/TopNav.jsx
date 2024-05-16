@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { ShoppingCartIcon, HeartIcon } from "@heroicons/react/outline";
 import LOGO from "../../../assets/logo.gif";

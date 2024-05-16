@@ -17,10 +17,6 @@ const AddProducts = () => {
   const [fieldValues, setFieldValues] = useState([]);
   const axiosPuplic = useAxiosPublic()
 
-
-
-
-
   useEffect(() => {
     if (formData) {
       setImages(formData.images || []);
