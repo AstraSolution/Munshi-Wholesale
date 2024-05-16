@@ -6,10 +6,8 @@ import useAllCategory from "../../Hooks/useAllCategory";
 import useAllProduct from "../../Hooks/useAllProduct";
 import useAllBrand from "../../Hooks/useAllBrand";
 import useCurrentUser from "../../Hooks/useCurrentUser";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 export default function Shop() {
-  const axiosPublic = useAxiosPublic();
 
   const [showAllCategories, setShowAllCategories] = useState(false);
   const [showAllBrands, setShowAllBrands] = useState(false);
