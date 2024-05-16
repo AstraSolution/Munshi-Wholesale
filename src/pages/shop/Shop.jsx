@@ -7,7 +7,7 @@ const Shop = ({ categoryFilter, brandFilter }) => {
     brand: brandFilter,
   };
 
-  const { products } = useAllProduct(1, 12, searchItems);
+  const {products}  = useAllProduct(1, 12, searchItems);
 
   console.log(products);
 
