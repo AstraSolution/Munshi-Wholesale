@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 export default function Brands() {
   const { brands } = useAllBrand();
   return (
-    <div className="container mx-auto">
+    <div className="">
       <h2 className=" font-bold text-2xl lg:text-3xl pb-6 text-center">
         Shop by Brands
       </h2>
