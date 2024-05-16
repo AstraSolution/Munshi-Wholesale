@@ -18,7 +18,7 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const axiosPublic = useAxiosPublic()
+  const axiosPublic = useAxiosPublic();
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -54,7 +54,7 @@ const AuthProvider = ({ children }) => {
           withCredentials: true,
         });
       };
-      handleCreateToken();
+      // handleCreateToken();
 
       // if (currentUser) {
       //   axios
