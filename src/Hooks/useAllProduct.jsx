@@ -1,8 +1,6 @@
 import useAxiosPublic from "./useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 
-// route set
-
 const useAllProduct = (page, limit, searchItems) => {
   const axiosPublic = useAxiosPublic();
 

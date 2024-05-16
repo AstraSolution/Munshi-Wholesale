@@ -9,7 +9,7 @@ const Dashboard_Layout = () => {
        
         <div className="lg:flex bg-gray-200  text-white h-screen lg:overflow-hidden">
             {/* Fixed Dashboard for large devices */}
-            <div className="lg:overflow-y-auto scrollbar-style">
+            <div className="">
                 <Dashboard />
             </div>
             <main className="flex-1 px-2 lg:overflow-y-auto">
