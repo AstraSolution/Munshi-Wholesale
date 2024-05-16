@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const BestSeller = () => {
   const { products } = useAllProduct();
 
-  // console.log(products);
+  console.log(products);
 
   return (
     <div className="mt-20">
