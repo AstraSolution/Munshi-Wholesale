@@ -14,6 +14,7 @@ const BestSeller = () => {
     },
 
   });
+  console.log(products);
 
 if (isLoading) {
   return (
