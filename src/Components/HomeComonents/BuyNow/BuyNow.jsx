@@ -21,9 +21,11 @@ const BuyNow = () => {
     },
   });
 
-  if (isLoading ) {
-    return <p>loading...</p>
-  }
+if (isLoading) {
+  return (
+    <div>loading ...</div>
+  )
+}
 
   return (
     <div className="my-20">

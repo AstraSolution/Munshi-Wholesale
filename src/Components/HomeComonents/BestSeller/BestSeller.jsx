@@ -6,19 +6,22 @@ import { Link } from "react-router-dom";
 const BestSeller = () => {
   const axiosPublic = useAxiosPublic();
 
-
-
-  const { data: products = [], isPending } = useQuery({
+  const { data: products = [] , isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
       const res = await axiosPublic.get("/featured-products");
       return res.data;
     },
+
   });
 
-  if (isPending) {
-    return <p>loading...</p>
-  }
+if (isLoading) {
+  return (
+    <div>
+      loading
+    </div>
+  )
+}
 
   return (
     <div className="mt-20">
