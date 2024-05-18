@@ -1,15 +1,20 @@
+import { useEffect } from "react";
 import ProductCard from "../../Components/Shared/ProductCard/ProductCard";
 import useAllProduct from "../../Hooks/useAllProduct";
 
 const Shop = ({ categoryFilter, brandFilter }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const searchItems = {
     category: categoryFilter,
     brand: brandFilter,
   };
 
-  const {products}  = useAllProduct(1, 12, searchItems);
+  const { products } = useAllProduct(1, 12, searchItems);
 
-  console.log(products);
+  // console.log(products);
 
   return (
     <div className="w-2/3 md:w-3/4">

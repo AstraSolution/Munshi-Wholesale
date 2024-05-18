@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SectionBanner from "../../Components/Shared/SectionBanner/SectionBanner";
 import { FaSortDown } from "react-icons/fa";
 import useAllCategory from "../../Hooks/useAllCategory";
 import useAllBrand from "../../Hooks/useAllBrand";
 import Shop from "./Shop";
+import { useLocation } from "react-router-dom";
 
 const ShopLayout = () => {
   const [showAllCategories, setShowAllCategories] = useState(false);
@@ -11,21 +12,31 @@ const ShopLayout = () => {
   const [sort, setSort] = useState(false);
   const [categoryFilter, setCategoryFilter] = useState([]);
   const [brandFilter, setBrandFilter] = useState([]);
-
-  // `${1},${12},searchItems{category:${categoryFilter},brands:${brandFilter}}`
-
+  const { state } = useLocation();
   const { categories, categoryLoading } = useAllCategory();
   const { brands, brandsLoading } = useAllBrand();
 
-  const defaultCategoriesCount = 5;
-  const visibleCategories = showAllCategories
-    ? categories
-    : categories.slice(0, defaultCategoriesCount);
+  let defaultCategoriesCount = 5;
+  if (categories?.length < 5) {
+    defaultCategoriesCount = categories?.length;
+  }
 
-  const defaultBrandsCount = 5;
-  const visibleBrands = showAllBrands
-    ? brands
-    : brands.slice(0, defaultBrandsCount);
+  let defaultBrandsCount = 5;
+  if (brands?.length < 5) {
+    defaultBrandsCount = brands?.length;
+  }
+
+  useEffect(() => {
+    if (state !== null) {
+      if (state?.type === "category") {
+        setCategoryFilter([...categoryFilter, state?.value]);
+        document.getElementById(state?.value).checked = true;
+      } else if (state?.type === "brand") {
+        setBrandFilter([...brandFilter, state?.value]);
+        document.getElementById(state?.value).checked = true;
+      }
+    }
+  }, []);
 
   // Filtering Array
   const handleCategoryFilter = (value) => {
@@ -124,34 +135,64 @@ const ShopLayout = () => {
               {categoryLoading ? (
                 <p className="mt-5">Loading...</p>
               ) : (
-                <div className="flex flex-col gap-3 my-3">
-                  {visibleCategories.map((category) => (
-                    <label
-                      key={category?._id}
-                      className="inline-flex items-center"
-                    >
-                      <input
-                        id={category?.categoryName}
-                        type="checkbox"
-                        className="form-checkbox min-h-5 min-w-5"
-                        onChange={() =>
-                          handleCategoryFilter(category?.categoryName)
-                        }
-                      />
-                      <span className="text-xs lg:text-base ml-1 md:ml-2 text-gray-700">
-                        {category?.categoryName}
-                      </span>
-                    </label>
-                  ))}
-                  {categories?.length > defaultCategoriesCount && (
-                    <button
-                      className="text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none"
-                      onClick={() => setShowAllCategories(!showAllCategories)}
-                    >
-                      {showAllCategories ? "- View Less" : "+ View More"}
-                    </button>
-                  )}
-                </div>
+                <>
+                  <div className="flex flex-col gap-3 my-3">
+                    {categories
+                      ?.slice(0, defaultCategoriesCount)
+                      .map((category) => (
+                        <label
+                          key={category?._id}
+                          className="inline-flex items-center"
+                        >
+                          <input
+                            id={category?.categoryName}
+                            type="checkbox"
+                            className="form-checkbox min-h-5 min-w-5"
+                            onChange={() =>
+                              handleCategoryFilter(category?.categoryName)
+                            }
+                          />
+                          <span className="text-xs lg:text-base ml-1 md:ml-2 text-gray-700">
+                            {category?.categoryName}
+                          </span>
+                        </label>
+                      ))}
+                  </div>
+
+                  <div
+                    className={
+                      showAllCategories ? "flex flex-col gap-3 mb-3" : "hidden"
+                    }
+                  >
+                    {categories?.length > 5 &&
+                      categories
+                        ?.slice(5, categories?.length)
+                        .map((category) => (
+                          <label
+                            key={category?._id}
+                            className="inline-flex items-center"
+                          >
+                            <input
+                              id={category?.categoryName}
+                              type="checkbox"
+                              className="form-checkbox min-h-5 min-w-5"
+                              onChange={() =>
+                                handleCategoryFilter(category?.categoryName)
+                              }
+                            />
+                            <span className="text-xs lg:text-base ml-1 md:ml-2 text-gray-700">
+                              {category?.categoryName}
+                            </span>
+                          </label>
+                        ))}
+                  </div>
+                  <button
+                    className="text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none"
+                    onClick={() => setShowAllCategories(!showAllCategories)}
+                  >
+                    {showAllCategories ? "- View Less" : "+ View More"}
+                  </button>
+                </>
               )}
             </div>
             {/* category section end */}
@@ -163,32 +204,54 @@ const ShopLayout = () => {
               {brandsLoading ? (
                 <p className="mt-5">Loading...</p>
               ) : (
-                <div className="flex flex-col gap-3 my-3">
-                  {visibleBrands.map((brand) => (
-                    <label
-                      key={brand?._id}
-                      className="inline-flex items-center"
-                    >
-                      <input
-                        id={brand?.brandName}
-                        type="checkbox"
-                        className="form-checkbox h-5 w-5"
-                        onChange={() => handleBrandFilter(brand?.brandName)}
-                      />
-                      <span className="text-xs md:text-base ml-1 md:ml-2 text-gray-700">
-                        {brand?.brandName}
-                      </span>
-                    </label>
-                  ))}
-                  {brands?.length > defaultBrandsCount && (
-                    <button
-                      className="text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none"
-                      onClick={() => setShowAllBrands(!showAllBrands)}
-                    >
-                      {showAllBrands ? "- View Less" : "+ View More"}
-                    </button>
-                  )}
-                </div>
+                <>
+                  <div className="flex flex-col gap-3 my-3">
+                    {brands?.slice(0, defaultBrandsCount).map((brand) => (
+                      <label
+                        key={brand?._id}
+                        className="inline-flex items-center"
+                      >
+                        <input
+                          id={brand?.brandName}
+                          type="checkbox"
+                          className="form-checkbox h-5 w-5"
+                          onChange={() => handleBrandFilter(brand?.brandName)}
+                        />
+                        <span className="text-xs md:text-base ml-1 md:ml-2 text-gray-700">
+                          {brand?.brandName}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                  <div
+                    className={
+                      showAllBrands ? "flex flex-col gap-3 mb-3" : "hidden"
+                    }
+                  >
+                    {brands?.slice(5, brands?.length).map((brand) => (
+                      <label
+                        key={brand?._id}
+                        className="inline-flex items-center"
+                      >
+                        <input
+                          id={brand?.brandName}
+                          type="checkbox"
+                          className="form-checkbox h-5 w-5"
+                          onChange={() => handleBrandFilter(brand?.brandName)}
+                        />
+                        <span className="text-xs md:text-base ml-1 md:ml-2 text-gray-700">
+                          {brand?.brandName}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                  <button
+                    className="text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none"
+                    onClick={() => setShowAllBrands(!showAllBrands)}
+                  >
+                    {showAllBrands ? "- View Less" : "+ View More"}
+                  </button>
+                </>
               )}
             </div>
             {/* brands section end */}
