@@ -1,16 +1,15 @@
 import PropTypes from "prop-types";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { FaStar, FaShoppingCart, FaHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { AuthContext } from "../../../Providers/AuthProviders/AuthProvider";
 import Swal from "sweetalert2";
 import useCurrentUser from "../../../Hooks/useCurrentUser";
-import { AuthContext } from "../../../Providers/AuthProviders/AuthProvider";
 
 const ProductCard = ({ currentProduct }) => {
   const { _id, title, image, price, offer, color, dimensions, quantity } =
     currentProduct;
-  const [isWished, setIsWished] = useState(false);
   const axiosPublic = useAxiosPublic();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -89,7 +88,6 @@ const ProductCard = ({ currentProduct }) => {
           2
         );
       }
-      setIsWished(!isWished);
 
       const addWishlist = {
         customer_name: currentUser?.fullName,
@@ -156,9 +154,7 @@ const ProductCard = ({ currentProduct }) => {
             <FaShoppingCart className="text-2xl text-black" />
           </button>
           <button onClick={() => handleWishlist()}>
-            <FaHeart
-              className={`text-2xl ${isWished ? "text-red-500" : "text-black"}`}
-            />
+            <FaHeart className="text-2xl text-black" />
           </button>
         </div>
       </div>
@@ -192,5 +188,4 @@ export default ProductCard;
 
 ProductCard.propTypes = {
   currentProduct: PropTypes.object,
-  currentUser: PropTypes.object,
 };

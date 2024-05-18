@@ -1,6 +1,13 @@
-import Image1 from "../../../assets/category/gaming.png";
-import Image2 from "../../../assets/category/vr.png";
-import Image3 from "../../../assets/category/speaker.png";
+// import Image1 from "../../../assets/category/gaming.png";
+// import Image2 from "../../../assets/category/vr.png";
+// import Image3 from "../../../assets/category/speaker.png";
+
+import Image1 from "../../../assets/hero/yellow-chainsaw1.png";
+import Image2 from "../../../assets/hero/yellow-drill-1.png";
+import Image3 from "../../../assets/hero/yellow-drill-1.png";
+
+import { Link } from "react-router-dom";
+
 import Button from "../../Shared/Button/Button";
 
 const Category2 = () => {
@@ -14,13 +21,18 @@ const Category2 = () => {
               <p className="mb-[2px] text-white">Enjoy</p>
               <p className="text-2xl font-semibold mb-[2px]">With</p>
               <p className="text-4xl xl:text-5xl font-bold opacity-40 mb-2">
-                Gaming
+                Electrical Equipment
               </p>
-              <Button
-                text="Browse"
-                bgColor={"bg-primary"}
-                textColor={"text-white"}
-              />
+              <Link
+                state={{ value: "Electrical Equipment", type: "category" }}
+                to="/shop"
+              >
+                <Button
+                  text="Browse"
+                  bgColor={"bg-primary"}
+                  textColor={"text-white"}
+                />
+              </Link>
             </div>
           </div>
           <img
@@ -36,13 +48,18 @@ const Category2 = () => {
               <p className="mb-[2px] text-white">Enjoy</p>
               <p className="text-2xl font-semibold mb-[2px]">With</p>
               <p className="text-4xl xl:text-5xl font-bold opacity-20 mb-2">
-                VR
+                Safety Equipment
               </p>
-              <Button
-                text="Browse"
-                bgColor={"bg-white"}
-                textColor={"text-brandGreen"}
-              />
+              <Link
+                state={{ value: "Safety Equipment", type: "category" }}
+                to="/shop"
+              >
+                <Button
+                  text="Browse"
+                  bgColor={"bg-white"}
+                  textColor={"text-brandGreen"}
+                />
+              </Link>
             </div>
           </div>
           <img src={Image2} alt="VR" className="w-[320px] absolute bottom-0" />
@@ -54,13 +71,18 @@ const Category2 = () => {
               <p className="mb-[2px] text-white">Enjoy</p>
               <p className="text-2xl font-semibold mb-[2px]">With</p>
               <p className="text-4xl xl:text-5xl font-bold opacity-40 mb-2">
-                Gadget
+                Construction Equipment
               </p>
-              <Button
-                text="Browse"
-                bgColor={"bg-white"}
-                textColor={"text-brandBlue"}
-              />
+              <Link
+                state={{ value: "Construction Equipment", type: "category" }}
+                to="/shop"
+              >
+                <Button
+                  text="Browse"
+                  bgColor={"bg-white"}
+                  textColor={"text-brandBlue"}
+                />
+              </Link>
             </div>
           </div>
           <img

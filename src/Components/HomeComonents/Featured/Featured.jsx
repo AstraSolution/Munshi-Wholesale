@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 // React icons
 import { FaRegHeart } from "react-icons/fa";
 import { RiShoppingBag2Line } from "react-icons/ri";
@@ -18,17 +19,139 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 import "./Featured.css";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../Providers/AuthProviders/AuthProvider";
+import useCurrentUser from "../../../Hooks/useCurrentUser";
 
 const Featured = () => {
   const axiosPublic = useAxiosPublic();
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { currentUser } = useCurrentUser();
 
-  const { data: FeaturedProducts = [] } = useQuery({
-    queryKey: ["FeaturedProducts"],
+  const { data: featuredProducts = [] } = useQuery({
+    queryKey: ["featuredProducts"],
     queryFn: async () => {
       const res = await axiosPublic.get("/featured-products");
       return res.data;
     },
   });
+
+  // HandleCart
+  const handleCart = (product) => {
+    if (user === null) {
+      navigate("/login");
+    } else {
+      let countDis = product?.price;
+
+      if (product?.offer?.discount !== "N/A") {
+        countDis = (
+          product?.price -
+          (product?.price * parseInt(product?.offer?.discount)) / 100
+        ).toFixed(2);
+      }
+
+      const addCart = {
+        customer_name: currentUser?.fullName,
+        customer_email: currentUser?.email,
+        product_id: product?._id,
+        unit_price: countDis,
+        total_price: countDis,
+        quantity: 1,
+        product_image: product?.image,
+        stock_limit: product?.quantity,
+        title: product?.title,
+        dimensions: product?.dimensions,
+        color: product?.color,
+      };
+
+      axiosPublic
+        .post(`/myCarts/${currentUser?.email}`, addCart)
+        .then((response) => {
+          console.log(response);
+          if (response.status === 200) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Product add to cart successfully.",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          } else if (response.data.insertedId === null) {
+            Swal.fire({
+              position: "top-end",
+              icon: "error",
+              title: "Product already in cart.",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        })
+        .catch((error) => {
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: `${error.message}`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        });
+    }
+  };
+
+  // Handle wishlist
+  const handleWishlist = (product) => {
+    if (user === null) {
+      navigate("/login");
+    } else {
+      let countDis = product?.price;
+      if (product?.offer?.discount !== "N/A") {
+        countDis = (
+          product?.price -
+          (product?.price * parseInt(product?.offer?.discount)) / 100
+        ).toFixed(2);
+      }
+
+      const addWishlist = {
+        customer_name: currentUser?.fullName,
+        customer_email: currentUser?.email,
+        product_id: product?._id,
+        unit_price: countDis,
+        total_price: countDis,
+        quantity: 1,
+        product_image: product?.image,
+        stock_limit: product?.quantity,
+        title: product?.title,
+        dimensions: product?.dimensions,
+        color: product?.color,
+      };
+
+      axiosPublic
+        .post("/wishlist", addWishlist)
+        .then((response) => {
+          console.log(response);
+          if (response) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Product add wishlist successfully.",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        })
+        .catch((error) => {
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: `${error.message}`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        });
+    }
+  };
 
   return (
     <div className="my-20">
@@ -47,7 +170,7 @@ const Featured = () => {
           },
         }}
       >
-        {FeaturedProducts?.map((product) => (
+        {featuredProducts?.map((product) => (
           <SwiperSlide key={product?._id}>
             <div className="flex flex-col md:flex-row gap-10 rounded-lg p-5 border-2 border-gray-200">
               <div className="text-center w-full md:w-1/2 h-[450px]">
@@ -99,17 +222,16 @@ const Featured = () => {
 
                 <div className="flex flex-col gap-3 my-5">
                   <button
-                    //   onClick={() => handleAddToCart(product?._id)}
+                    onClick={() => handleCart(product)}
                     className="bg-yellow-400 p-2 lg:px-5 flex items-center gap-2"
                   >
                     <RiShoppingBag2Line className="text-xl" /> Add to cart
                   </button>
                   <button
                     className="text-gray-500 p-2 lg:px-5 flex items-center gap-2 border-2 border-yellow-400"
-                    //   onClick={() => handleAddToWishlist(product?._id)}
+                    onClick={() => handleWishlist(product)}
                   >
                     <FaRegHeart />
-                    {/* className={`${favorite ? "text-red-500" : ""} `} */}
                     Add to Wishlist
                   </button>
                 </div>
