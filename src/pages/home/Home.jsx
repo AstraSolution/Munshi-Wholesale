@@ -12,19 +12,21 @@ import Services from "../../Components/HomeComonents/Services/Services";
 
 function Home() {
   return (
-    <div className="container mx-auto">
-      <Hero />
-      <Services />
-      <Category />
-      <Category2 />
-      <Offer />
-      <BestSeller />
-      <Featured />
-      <BuyNow />
-      <Brands />
-      <Reviews />
+    <>
+      <div className="container mx-auto">
+        <Hero />
+        <Services />
+        <Category />
+        <Category2 />
+        <Offer />
+        <BestSeller />
+        <Featured />
+        <BuyNow />
+        <Brands />
+        <Reviews />
+      </div>
       <Newsletter />
-    </div>
+    </>
   );
 }
 

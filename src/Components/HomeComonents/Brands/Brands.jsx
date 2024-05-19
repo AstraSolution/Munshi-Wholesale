@@ -18,23 +18,23 @@ export default function Brands() {
         Shop by Brands
       </h2>
       <Swiper
-        spaceBetween={10}
+        spaceBetween={15}
         breakpoints={{
           320: {
             slidesPerView: 2,
-            spaceBetween: 20,
+            spaceBetween: 15,
           },
           640: {
             slidesPerView: 2,
-            spaceBetween: 20,
+            spaceBetween: 15,
           },
           768: {
             slidesPerView: 3,
-            spaceBetween: 40,
+            spaceBetween: 15,
           },
           1024: {
             slidesPerView: 5,
-            spaceBetween: 50,
+            spaceBetween: 15,
           },
         }}
         modules={[Grid]}
