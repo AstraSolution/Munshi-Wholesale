@@ -6,6 +6,7 @@ import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../../Providers/AuthProviders/AuthProvider";
 import Swal from "sweetalert2";
 import useCurrentUser from "../../../Hooks/useCurrentUser";
+import useGetMyCarts from "../../../Hooks/useGetMyCarts";
 
 const ProductCard = ({ currentProduct }) => {
   const { _id, title, image, price, offer, color, dimensions, quantity } =
@@ -13,8 +14,8 @@ const ProductCard = ({ currentProduct }) => {
   const axiosPublic = useAxiosPublic();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-
   const { currentUser } = useCurrentUser();
+  const { refetchMyCarts } = useGetMyCarts()
 
   // HandleCart
   const handleCart = () => {
@@ -55,6 +56,7 @@ const ProductCard = ({ currentProduct }) => {
               showConfirmButton: false,
               timer: 1500,
             });
+            refetchMyCarts()
           } else if (response.data.insertedId === null) {
             Swal.fire({
               position: "top-end",

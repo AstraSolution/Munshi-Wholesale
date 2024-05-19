@@ -4,7 +4,7 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
-const CartsDetails = ({ cart, myCartRefetch }) => {
+const CartsDetails = ({ cart, refetchMyCarts }) => {
   const [error, setError] = useState("");
   const [quantity, setQuantity] = useState(cart?.quantity);
   const axiosSecure = useAxiosSecure()
@@ -19,7 +19,7 @@ const CartsDetails = ({ cart, myCartRefetch }) => {
         total_price,
       });
       if (res?.data) {
-        myCartRefetch();
+        refetchMyCarts();
       }
     } else {
       setError(`Opps this book limit is ${cart?.stock_limit}`);
@@ -37,7 +37,7 @@ const CartsDetails = ({ cart, myCartRefetch }) => {
         total_price,
       });
       if (res.data) {
-        myCartRefetch();
+        refetchMyCarts();
       }
     }
   };
@@ -64,7 +64,7 @@ const CartsDetails = ({ cart, myCartRefetch }) => {
                 "success"
               );
 
-              myCartRefetch();
+              refetchMyCarts();
             }
           })
           .catch((error) => {

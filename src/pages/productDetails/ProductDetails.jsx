@@ -27,7 +27,7 @@ const ProductDetails = () => {
   const axiosPublic = useAxiosPublic();
   const product = useGetaProduct(id);
   const { user } = useAuth();
-  const { refetch } = useGetMyCarts();
+  const { refetchMyCarts } = useGetMyCarts();
   const { title, image, price, offer, color, dimensions, quantity } = product;
   const email = user?.email;
 
@@ -63,16 +63,18 @@ const ProductDetails = () => {
             showConfirmButton: false,
             timer: 1500,
           });
-          refetch();
+          refetchMyCarts();
         }
-
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "This product already exist your carts!!",
-          showConfirmButton: false,
-          timer: 1500,
-        });
+        else{
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: "This product already exist your carts!!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+    
       })
       .catch((error) => {
         console.error("Error:", error);

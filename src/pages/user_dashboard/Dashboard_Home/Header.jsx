@@ -1,4 +1,3 @@
-import React from 'react';
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import useWishlistProducts from '../../../Hooks/useWishlistProducts';
 import { Link } from 'react-router-dom';
@@ -7,8 +6,8 @@ import useOrders from '../../../Hooks/useOrders';
 
 
 const Header = () => {
-
-    const [wishlistProduct] = useWishlistProducts();
+s
+    const {wishlistProduct} = useWishlistProducts();
     const wishlistItems = wishlistProduct?.length;
 
     const [orderProduct] = useOrders()

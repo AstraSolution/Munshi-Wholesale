@@ -8,7 +8,7 @@ import LoadingPage from "../../Components/Shared/Loading/LoadingPage";
 
 const Wish_List = () => {
 
-    const [wishlistProduct, isLoading, wishlistRefetch] = useWishlistProducts();
+    const {wishlistProduct, isLoading, refetchWishlist} = useWishlistProducts();
 
 
 
@@ -84,7 +84,7 @@ const Wish_List = () => {
 
                             <AnimatePresence>
                                 {
-                                    wishlistProduct?.map((product, i) => <WishListProduct key={product._id} product={product} wishlistRefetch={wishlistRefetch} i={i} ></WishListProduct>)
+                                    wishlistProduct?.map((product, i) => <WishListProduct key={product._id} product={product} refetchWishlist={refetchWishlist} i={i} ></WishListProduct>)
                                 }
                             </AnimatePresence>
                         </table>

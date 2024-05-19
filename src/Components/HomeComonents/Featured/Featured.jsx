@@ -23,12 +23,16 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProviders/AuthProvider";
 import useCurrentUser from "../../../Hooks/useCurrentUser";
+import useGetMyCarts from "../../../Hooks/useGetMyCarts";
+import useWishlistProducts from "../../../Hooks/useWishlistProducts";
 
 const Featured = () => {
   const axiosPublic = useAxiosPublic();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const { currentUser } = useCurrentUser();
+  const { refetchMyCarts } = useGetMyCarts();
+  const { refetchWishlist } = useWishlistProducts()
 
   const { data: featuredProducts = [] } = useQuery({
     queryKey: ["featuredProducts"],
@@ -78,6 +82,8 @@ const Featured = () => {
               showConfirmButton: false,
               timer: 1500,
             });
+            refetchMyCarts()
+
           } else if (response.data.insertedId === null) {
             Swal.fire({
               position: "top-end",
@@ -139,6 +145,7 @@ const Featured = () => {
               showConfirmButton: false,
               timer: 1500,
             });
+            refetchWishlist()
           }
         })
         .catch((error) => {
