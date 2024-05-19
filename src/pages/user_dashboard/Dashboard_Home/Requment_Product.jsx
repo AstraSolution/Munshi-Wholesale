@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 
 
 export default function Requment_Product() {
-    const [products] = useAllProduct();
+    const {products} = useAllProduct();
    
 
 
     // Randomize and select 3 products
-    const randomProducts = products?.products?.sort(() => Math.random() - 0.5).slice(0, 4);
+    const randomProducts = products?.sort(() => Math.random() - 0.5).slice(0, 4);
     
 
     return (
