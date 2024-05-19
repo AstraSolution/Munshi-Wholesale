@@ -40,7 +40,7 @@ const BuyNow = () => {
           },
           1024: {
             slidesPerView: 4,
-            spaceBetween: 50,
+            spaceBetween: 20,
           },
         }}
         pagination={{ clickable: true }}
