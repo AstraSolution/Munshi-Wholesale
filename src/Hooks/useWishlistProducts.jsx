@@ -9,7 +9,7 @@ const useWishlistProducts = () => {
   const {
     data: wishlistProduct = [],
     isLoading,
-    refetch: wishlistRefetch,
+    refetch: refetchWishlist,
   } = useQuery({
     queryKey: ["wishlistProduct", user?.email],
     queryFn: async () => {
@@ -19,7 +19,7 @@ const useWishlistProducts = () => {
   });
   // console.log(wishlistProduct);
 
-  return [wishlistProduct, isLoading, wishlistRefetch];
+  return {wishlistProduct, isLoading, refetchWishlist};
 };
 
 export default useWishlistProducts;
