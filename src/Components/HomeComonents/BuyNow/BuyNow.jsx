@@ -13,13 +13,17 @@ import ProductCard from "../../Shared/ProductCard/ProductCard";
 const BuyNow = () => {
   const axiosPublic = useAxiosPublic();
 
-  const { data: products = [] } = useQuery({
-    queryKey: ["products"],
+  const { data: buyNow = [], isLoading } = useQuery({
+    queryKey: ["buyNow"],
     queryFn: async () => {
       const res = await axiosPublic.get("/featured-products");
       return res.data;
     },
   });
+
+  if (isLoading) {
+    return <div>loading ...</div>;
+  }
 
   return (
     <div className="my-20">
@@ -41,7 +45,7 @@ const BuyNow = () => {
         }}
         pagination={{ clickable: true }}
       >
-        {products?.map((product) => (
+        {buyNow?.map((product) => (
           <SwiperSlide key={product?._id}>
             <ProductCard currentProduct={product}></ProductCard>
           </SwiperSlide>

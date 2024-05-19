@@ -9,7 +9,12 @@ const useAllProduct = (page, limit, searchItems) => {
     isPending,
     refetch: refetchProduct,
   } = useQuery({
-    queryKey: ["products", page, limit, searchItems],
+    queryKey: [
+      "products",
+      JSON.stringify(page),
+      JSON.stringify(limit),
+      JSON.stringify(searchItems),
+    ],
     queryFn: async () => {
       const url = `/products?page=${page}&limit=${limit}&searchItems=${JSON.stringify(
         searchItems

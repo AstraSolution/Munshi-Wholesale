@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 const OfferCard = ({ image, title, offerTitle, offer }) => {
   return (
     <div
-      className="rounded-lg shadow-[-5px_0px_20px_5px_rgba(0,0,0,0.3)] relative h-[400px] p-8"
+      className="rounded-lg shadow-md border border-gray-200 relative h-[400px] p-8"
       style={{
         backgroundImage: `url(${image})`,
         backgroundRepeat: "no-repeat",

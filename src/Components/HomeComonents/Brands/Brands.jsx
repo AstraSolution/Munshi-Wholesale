@@ -41,13 +41,15 @@ export default function Brands() {
         className="mySwiper"
       >
         {brands.map((brand) => (
-          <SwiperSlide key={brand._id}>
-            <div className="border p-5 rounded-lg shadow-md">
-              <img className="w-14 mx-auto" src={brand.brandImage} alt="" />
-              <p className="text-red-600 text-center font-semibold text-sm md:text-md lg:text-lg pt-2">
-                <Link to={`/shop/${brand.brandName}`}>{brand.brandName}</Link>
-              </p>
-            </div>
+          <SwiperSlide key={brand?._id}>
+            <Link state={{ value: brand?.brandName, type: "brand" }} to="/shop">
+              <div className="border p-5 rounded-lg shadow-md">
+                <img className="w-14 mx-auto" src={brand?.brandImage} alt="" />
+                <p className="text-red-600 text-center font-semibold text-sm md:text-md lg:text-lg pt-2">
+                  {brand?.brandName}
+                </p>
+              </div>
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>
