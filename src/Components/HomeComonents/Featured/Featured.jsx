@@ -166,13 +166,13 @@ const Featured = () => {
         breakpoints={{
           1024: {
             slidesPerView: 2,
-            spaceBetween: 40,
+            spaceBetween: 20,
           },
         }}
       >
         {featuredProducts?.map((product) => (
           <SwiperSlide key={product?._id}>
-            <div className="flex flex-col md:flex-row gap-10 rounded-lg p-5 border-2 border-gray-200">
+            <div className="flex flex-col md:flex-row gap-5 rounded-lg p-5 border-2 border-gray-200">
               <div className="text-center w-full md:w-1/2 h-[450px]">
                 <Carousel
                   emulateTouch={true}
