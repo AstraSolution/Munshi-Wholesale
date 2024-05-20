@@ -10,7 +10,13 @@ import LoadingPage from "../../Components/Shared/Loading/LoadingPage";
 export default function MyAllProduct() {
   const axiosPublic = useAxiosPublic();
 
-  const { products, isLoading, productRefetch } = useAllProduct();
+  const searchItems = "";
+
+  const { products, isLoading, productRefetch } = useAllProduct(
+    1,
+    12,
+    searchItems
+  );
 
   const handleDeleteProduct = (id, title) => {
     console.log(id);
@@ -112,7 +118,7 @@ export default function MyAllProduct() {
                 </tr>
 
                 <AnimatePresence>
-                  {products?.products?.map((product, i) => (
+                  {products?.map((product, i) => (
                     <motion.tr
                       key={product._id}
                       initial={{ opacity: 0, y: -20 }}

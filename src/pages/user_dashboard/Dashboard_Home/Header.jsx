@@ -3,13 +3,14 @@ import useWishlistProducts from "../../../Hooks/useWishlistProducts";
 import { Link } from "react-router-dom";
 import useGetMyCarts from "../../../Hooks/useGetMyCarts";
 import useOrders from "../../../Hooks/useOrders";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const Header = () => {
-  const [wishlistProduct] = useWishlistProducts();
-  const wishlistItems = wishlistProduct?.length;
-
   const [orderProduct] = useOrders();
   const orderItems = orderProduct?.myOrders?.length;
+
+  const { wishlistProduct } = useWishlistProducts();
+  const wishlistItems = wishlistProduct?.length;
 
   const totalAmount = orderProduct?.myOrders?.reduce(
     (total, item) => total + item.totalPrice,
@@ -23,29 +24,32 @@ const Header = () => {
     <div>
       <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 bg-gray-100">
         <Link to={"/wishlist"}>
-          <div className="bg-white  shadow-lg rounded-md flex items-center justify-between py-6 px-3 text-gray-800 font-medium group">
-            <div className="flex justify-center items-center w-14 h-14  bg-[#FF9D00] rounded-full transition-all duration-300 transform group-hover:rotate-12">
+          <div className="bg-white shadow-lg rounded-md flex items-center justify-between py-6 px-3 text-gray-800 font-medium group">
+            <div className="flex justify-center items-center w-14 h-14 bg-[#FF9D00] rounded-full transition-all duration-300 transform group-hover:rotate-12">
               <MdOutlineProductionQuantityLimits
                 size={30}
-                className="stroke-current  text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"
+                className="stroke-current text-white transform transition-transform duration-500 ease-in-out"
               ></MdOutlineProductionQuantityLimits>
             </div>
             <div className="text-right">
               <p className="text-2xl">{wishlistItems} </p>
               <p>Wishlist</p>
+              <Link to="/wishlist" className="text-orange-500">
+                See all <FaArrowRightLong className="inline" />
+              </Link>
             </div>
           </div>
         </Link>
 
-        <div className="bg-white  shadow-lg rounded-md flex items-center justify-between  py-6 px-3  text-gray-800 font-medium group">
-          <div className="flex justify-center items-center w-14 h-14 bg-[#FF9D00]  rounded-full transition-all duration-300 transform group-hover:rotate-12">
+        <div className="bg-white shadow-lg rounded-md flex items-center justify-between py-6 px-3 text-gray-800 font-medium group">
+          <div className="flex justify-center items-center w-14 h-14 bg-[#FF9D00] rounded-full transition-all duration-300 transform group-hover:rotate-12">
             <svg
               width="30"
               height="30"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              className="stroke-current  text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"
+              className="stroke-current  text-white transform transition-transform duration-500 ease-in-out"
             >
               <path
                 strokeLinecap="round"
@@ -58,10 +62,13 @@ const Header = () => {
           <div className="text-right">
             <p className="text-2xl"> {cartItems} </p>
             <p>My carts </p>
+            <Link to="/carts" className="text-orange-500">
+              See all <FaArrowRightLong className="inline" />
+            </Link>
           </div>
         </div>
 
-        <div className="bg-white  shadow-lg rounded-md flex items-center justify-between  py-6 px-3   text-gray-800 font-medium group">
+        <div className="bg-white  shadow-lg rounded-md flex items-center justify-between py-6 px-3 text-gray-800 font-medium group">
           <div className="flex justify-center items-center w-14 h-14 bg-[#FF9D00] rounded-full transition-all duration-300 transform group-hover:rotate-12">
             <svg
               width="30"
@@ -69,7 +76,7 @@ const Header = () => {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              className="stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"
+              className="stroke-current text-white transform transition-transform duration-500 ease-in-out"
             >
               <path
                 strokeLinecap="round"
@@ -82,6 +89,9 @@ const Header = () => {
           <div className="text-right">
             <p className="text-2xl">{orderItems}</p>
             <p>Orders</p>
+            <Link to="/dashboard/my_all_product" className="text-orange-500">
+              See all <FaArrowRightLong className="inline" />
+            </Link>
           </div>
         </div>
         <div className="bg-white  shadow-lg rounded-md flex items-center justify-between  py-6 px-3  text-gray-800 font-medium group">
@@ -92,7 +102,7 @@ const Header = () => {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              className="stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"
+              className="stroke-current text-white transform transition-transform duration-500 ease-in-out"
             >
               <path
                 strokeLinecap="round"
@@ -104,7 +114,7 @@ const Header = () => {
           </div>
           <div className="text-right">
             <p className="text-2xl">${totalAmount}</p>
-            <p>Balances</p>
+            <p>Total Order Amount</p>
           </div>
         </div>
       </div>

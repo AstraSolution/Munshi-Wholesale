@@ -23,12 +23,16 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProviders/AuthProvider";
 import useCurrentUser from "../../../Hooks/useCurrentUser";
+import useGetMyCarts from "../../../Hooks/useGetMyCarts";
+import useWishlistProducts from "../../../Hooks/useWishlistProducts";
 
 const Featured = () => {
   const axiosPublic = useAxiosPublic();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const { currentUser } = useCurrentUser();
+  const { refetchMyCarts } = useGetMyCarts();
+  const { refetchWishlist } = useWishlistProducts()
 
   const { data: featuredProducts = [] } = useQuery({
     queryKey: ["featuredProducts"],
@@ -78,6 +82,8 @@ const Featured = () => {
               showConfirmButton: false,
               timer: 1500,
             });
+            refetchMyCarts()
+
           } else if (response.data.insertedId === null) {
             Swal.fire({
               position: "top-end",
@@ -139,6 +145,7 @@ const Featured = () => {
               showConfirmButton: false,
               timer: 1500,
             });
+            refetchWishlist()
           }
         })
         .catch((error) => {
@@ -155,9 +162,22 @@ const Featured = () => {
 
   return (
     <div className="my-20">
-      <h2 className="text-4xl font-bold montserrat text-center mb-10">
-        Featured
-      </h2>
+      <div className="flex flex-col items-center justify-center mb-10">
+        <h2 className="text-4xl font-bold montserrat text-center mb-3">
+          Featured
+        </h2>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="100"
+          height="12"
+          fill="#fdc62e"
+          version="1.1"
+          viewBox="0 139.474 290.658 11.711"
+          xmlSpace="preserve"
+        >
+          <path fill="#fdc62e" d="M0 139.474H290.658V151.185H0z"></path>
+        </svg>
+      </div>
 
       <Swiper
         modules={Pagination}

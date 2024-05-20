@@ -8,14 +8,14 @@ import { motion } from "framer-motion";
 import { Toaster, toast } from "react-hot-toast";
 import useGetMyCarts from "../../Hooks/useGetMyCarts";
 
-const WishListProduct = ({ product, wishlistRefetch, i }) => {
+const WishListProduct = ({ product, refetchWishlist, i }) => {
 
 
     const { _id, product_image, title, color, stock_limit, total_price, unit_price, dimensions } = product || {}
 
     const axiosPublic = useAxiosPublic();
     const { currentUser } = useCurrentUser()
-    const {myCartRefetch} = useGetMyCarts()
+    const {refetchMyCarts} = useGetMyCarts()
 
 
     // wishlist product delete fun
@@ -34,13 +34,13 @@ const WishListProduct = ({ product, wishlistRefetch, i }) => {
                     .delete(`/wishlist/${id}`)
                     .then((response) => {
                         if (response.status === 200) {
-                            ;
+                            
                             Swal.fire(
                                 "Deleted!",
                                 `Your product "${title}" has been deleted.`,
                                 "success"
                             );
-                            wishlistRefetch();
+                            refetchWishlist();
                         } else {
                             Swal.fire(
                                 "Error!",
@@ -89,7 +89,7 @@ const WishListProduct = ({ product, wishlistRefetch, i }) => {
                         .delete(`/wishlist/${id}`)
                         .then((response) => {
                             if (response.status === 200) {
-                                wishlistRefetch();
+                                refetchWishlist();
                             } else {
                                 toast.error("Please try again.");
                             }
@@ -97,7 +97,7 @@ const WishListProduct = ({ product, wishlistRefetch, i }) => {
                         .catch((error) => {
                             console.error("Error deleting Product:", error);
                         });
-                    myCartRefetch();
+                    refetchMyCarts();
                 }
             })
             .catch((error) => {
