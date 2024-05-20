@@ -77,8 +77,6 @@ const WishListProduct = ({ product, refetchWishlist, i }) => {
             dimensions,
             color,
         };
-
-        console.log(addCart);
         axiosPublic
             .post(`/myCarts/${currentUser?.email}`, addCart)
             .then((response) => {

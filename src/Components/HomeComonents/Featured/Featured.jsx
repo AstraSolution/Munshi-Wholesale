@@ -134,7 +134,7 @@ const Featured = () => {
       };
 
       axiosPublic
-        .post("/wishlist", addWishlist)
+        .post(`/wishlist/${currentUser?.email}`, addWishlist)
         .then((response) => {
           console.log(response);
           if (response) {
