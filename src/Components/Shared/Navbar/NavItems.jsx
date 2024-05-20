@@ -53,7 +53,7 @@ const NavItems = () => {
         <></>
       ) : (
         <li className="flex md:hidden">
-          <Button color="red" className="w-full">
+          <Button color="red" className="w-full btn-shape">
             <Link color="red" to={"/login"}>
               Login
             </Link>
@@ -80,9 +80,11 @@ const NavItems = () => {
     setIsOpen(false);
   }, [location.pathname]);
 
+  // py-6 md:py-3
+
   return (
     <nav className="">
-      <div className="bg-yellow-600 py-6 md:py-3 -mt-20 md:mt-0">
+      <div className="bg-yellow-600  -mt-20 md:mt-0">
         <div className="container mx-auto flex justify-between items-center nav-container">
           {/* menu for medium and large device  */}
           <div>
@@ -94,16 +96,16 @@ const NavItems = () => {
           {/* login button */}
           <div className="flex items-center">
             {user ? (
-              <Button
+              <button
                 onClick={handleLogOut}
                 color="red"
-                className="hidden capitalize md:flex justify-center items-center text-md gap-2 w-full "
+                className="bg-red-600 text-white font-bold px-14 py-6 hidden capitalize md:flex justify-center items-center text-md gap-2 w-full btn-shape"
               >
                 Logout <FaArrowRightFromBracket />
-              </Button>
+              </button>
             ) : (
-              <Link className="hidden md:flex" to={"/login"}>
-                <Button color="red">Login</Button>
+              <Link className="hidden md:flex bg-red-600 text-white font-bold px-14 py-6 capitalize justify-center items-center text-md gap-2 w-full btn-shape" to={"/login"}>
+                <button color="red">Login</button>
               </Link>
             )}
 
