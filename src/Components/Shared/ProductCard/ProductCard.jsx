@@ -133,12 +133,15 @@ const ProductCard = ({ currentProduct }) => {
 
   return (
     <div>
-      <div className="relative flex items-center rounded-lg h-[250px] lg:h-[350px] group border-2 border-gray-200">
-        <div onClick={() => navigate(`/products/${_id}`, { id: `${_id}` })}>
+      <div className="relative flex items-center rounded-lg border-2 border-gray-200 group aspect-square">
+        <div
+          onClick={() => navigate(`/products/${_id}`, { id: `${_id}` })}
+          className="w-full h-full flex items-center justify-center"
+        >
           <img
             src={image[0]}
             alt={title}
-            className="rounded-lg p-3 max-h-[250px] lg:max-h-[350px]"
+            className="rounded-lg p-3 w-full "
           />
           {offer?.discount !== "N/A" && (
             <div className="absolute top-2 right-2 w-8 h-8 lg:w-12 lg:h-12">
@@ -160,7 +163,7 @@ const ProductCard = ({ currentProduct }) => {
           </button>
         </div>
       </div>
-      <div className="mt-5">
+      <div className="mt-5 px-2">
         <h2 className="text-xl montserrat">{title}</h2>
         <p className="text-base lg:text-lg my-3 text-black montserrat">
           <FaStar className="inline mr-2" />
