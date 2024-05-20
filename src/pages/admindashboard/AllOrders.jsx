@@ -1,4 +1,3 @@
-import { motion, AnimatePresence } from "framer-motion";
 import useGetAllOrders from "../../Hooks/useGetAllOrders";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
@@ -7,111 +6,64 @@ const AllOrders = () => {
   const axiosSecure = useAxiosSecure();
 
   const handleStatusChange = async(orderId) => {
-    const res =  await axiosSecure.patch(`/orders/${orderId}`, { status: "Shiped", updatedAt: Date.now()})
-    if(res?.data){
+    const res = await axiosSecure.patch(`/orders/${orderId}`, { status: "Shipped", updatedAt: Date.now() })
+    if (res?.data) {
       refetchOrder()
     }
   };
 
-
-
   return (
-    <div className="container mx-auto md:py-3 py-2 text-white ">
+    <div className="container mx-auto md:py-3 text-white">
       <div className="space-y-2">
-        <motion.div
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="p-5 rounded-lg bg-50-50"
-        >
-          <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold pb-1 font-oswald ">All Orders </h1>
+        <div className="p-5 rounded-lg bg-50-50">
+          <div>
+            <h1 className="text-4xl font-bold text-center text-black py-5">All Orders</h1>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full mt-2">
-              <tr className="text-[#FF9D00]  ">
-                <th className="border bg-gray-800 border-gray-400 text-center text-sm md:text-md lg:text-lg py-3">
-                  SI
-                </th>
-                <th className="border bg-gray-800 border-gray-400 text-center text-sm md:text-md lg:text-lg p-2">
-                  Image
-                </th>
-                <th className="border bg-gray-800 border-gray-400 text-center text-sm md:text-md lg:text-lg py-3">
-                  Title
-                </th>
-                <th className="border bg-gray-800 border-gray-400 text-center text-sm md:text-md lg:text-lg py-3">
-                  Quantity
-                </th>
-                <th className="border bg-gray-800 border-gray-400 text-center text-sm md:text-md lg:text-lg py-3">
-                  Price
-                </th>
-              
-                <th className="border bg-gray-800 border-gray-400 text-center text-sm md:text-md lg:text-lg py-3">
-                  Client Name
-                </th>
-                <th className="border bg-gray-800 border-gray-400 text-center text-sm md:text-md lg:text-lg py-3">
-                  Client Email
-                </th>
-                <th className="border bg-gray-800 border-gray-400 text-center text-sm md:text-md lg:text-lg py-3">
-                  Status
-                </th>
-              </tr>
-              <AnimatePresence>
+          <div className="overflow-x-auto rounded-lg text-black">
+            <table className="">
+              <thead className="bg-gray-700">
+                <tr className="text-orange-500 border text-sm md:text-md lg:text-lg">
+                  <th className="text-center">No</th>
+                  <th className="text-center">Image</th>
+                  <th className="text-center">Title</th>
+                  <th className="text-center">Quantity</th>
+                  <th className="text-center">Price</th>
+                  <th className="text-center">Client Name</th>
+                  <th className="text-center">Client Email</th>
+                  <th className="text-center">Status</th>
+                </tr>
+              </thead>
+              <tbody className="font-medium">
                 {orders?.map((order, i) => (
-                  <motion.tr
-                    key={order._id}
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: i * 0.1 }}
-                    exit={{ opacity: 0, y: -20 }}
-                  >
-                    <td className="border bg-gray-800 border-gray-400 p-2 text-center ">
-                      {i + 1}
+                  <tr key={order._id} className="bg-gray-400 text-sm md:text-md">
+                    <td className="text-center">{i + 1}</td>
+                    <td className="cursor-pointer text-center font-bold">
+                      <img className="w-20 md:h-16 rounded-lg mx-auto" src={order?.cover_image[0]} alt="" />
                     </td>
-                    <td className="border bg-gray-800 border-gray-400 p-2">
-                      <img
-                        className="w-20 md:h-16 rounded-lg  mx-auto "
-                        src={order?.cover_image[0]}
-                        alt=""
-                      />
-                    </td>
-                    <td className="border bg-gray-800 border-gray-400 md:p-2 p-1  text-sm  ">
-                      {order?.title?.slice(0, 30)}
-                    </td>
-                 
-                    <td className="border bg-gray-800 border-gray-400 p-2 text-sm md:text-md   text-center  ">
-                      {order?.quantity}
-                    </td>
-                 
-                    <td className="border bg-gray-800 border-gray-400 p-2 text-sm md:text-md   text-center  ">
-                      {order?.totalPrice}
-                    </td>
-                 
-                    <td className="border bg-gray-800 border-gray-400 p-2 text-sm md:text-md   text-center  ">
-                      {order?.customer_name}
-                    </td>
-                    <td className="border bg-gray-800 border-gray-400 p-2 text-sm md:text-md   text-center  ">
-                      {order?.clientEmail}
-                    </td>
-                    <td className="border bg-gray-800 border-gray-400 p-2 text-sm md:text-md  text-center ">
+                    <td className="text-center">{order?.title?.slice(0, 30)}</td>
+                    <td className="text-center">{order?.quantity}</td>
+                    <td className="text-center">{order?.totalPrice}</td>
+                    <td className="text-center">{order?.customer_name}</td>
+                    <td className="text-center">{order?.clientEmail}</td>
+                    <td className="text-center">
                       {order.status === "Processing" ? (
                         <button
                           onClick={() => handleStatusChange(order._id)}
-                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                          className="bg-orange-400 px-3 py-2 rounded-xl text-black font-semibold"
                         >
                           Ship
                         </button>
                       ) : (
-                         order?.status
+                        order?.status
                       )}
                     </td>
-                  </motion.tr>
+                  </tr>
                 ))}
-              </AnimatePresence>
+              </tbody>
             </table>
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );
