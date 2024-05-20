@@ -6,7 +6,7 @@ import useOrders from '../../../Hooks/useOrders';
 
 
 const Header = () => {
-s
+
     const {wishlistProduct} = useWishlistProducts();
     const wishlistItems = wishlistProduct?.length;
 

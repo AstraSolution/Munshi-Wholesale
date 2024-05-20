@@ -9,14 +9,15 @@ const DashboardStats = () => {
   const users = useAllUsers();
   const totalUsers = users?.length;
 
-  const { products } = useAllProduct();
-  const tottalProducts = products?.products?.length;
+  const { totalProduct } = useAllProduct();
+  const totalProducts = totalProduct;
+  console.log(totalProducts);
 
   const totalOrders = useTotalOrders();
   const totalOrder = totalOrders?.totalProductsOrders;
 
-  const totalSallesProducts = useTotalSells();
-  const totalSellProduct = totalSallesProducts?.totalProductsSold;
+  const totalSalesProducts = useTotalSells();
+  const totalSellProduct = totalSalesProducts?.totalProductsSold;
 
   return (
     <div>
@@ -102,7 +103,7 @@ const DashboardStats = () => {
             </svg>
           </div>
           <div className="text-right">
-            <p className="text-2xl"> {tottalProducts} </p>
+            <p className="text-2xl"> {totalProducts} </p>
             <p>Total Products </p>
           </div>
         </div>
