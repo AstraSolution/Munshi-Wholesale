@@ -3,6 +3,7 @@ import useAllProduct from "../../Hooks/useAllProduct";
 
 const TopProducts = () => {
   const {products, isPending} = useAllProduct();
+  console.log(products);
 
   if(isPending){
     return <p>Loading...</p>

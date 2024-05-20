@@ -1,4 +1,3 @@
-import React from "react";
 import useAllProduct from "../../Hooks/useAllProduct";
 import { motion, AnimatePresence } from "framer-motion";
 import { MdDelete } from "react-icons/md";
