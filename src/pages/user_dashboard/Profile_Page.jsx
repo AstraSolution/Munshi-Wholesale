@@ -26,7 +26,6 @@ const Profile_Page = () => {
   const [profilePreview, setProfilePreview] = useState();
 
   const {
-    _id,
     fullName,
     email,
     state,
