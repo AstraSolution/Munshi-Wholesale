@@ -111,7 +111,7 @@ const Header = () => {
             </svg>
           </div>
           <div className="text-right">
-            <p className="text-2xl">${totalAmount}</p>
+            <p className="text-2xl">${totalAmount.toFixed(2)}</p>
             <p>Total Order Amount</p>
           </div>
         </div>

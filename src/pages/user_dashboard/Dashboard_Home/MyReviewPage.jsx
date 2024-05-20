@@ -176,7 +176,7 @@ const onSubmit = async (formData) => {
                         <td className="border border-gray-600 divide-gray-200 p-2">
                           <img
                             className="w-20 md:h-16 rounded-lg mx-auto"
-                            src={product?.cover_image}
+                            src={product?.image}
                             alt=""
                           />
                         </td>
