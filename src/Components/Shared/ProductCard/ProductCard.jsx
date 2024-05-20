@@ -15,7 +15,7 @@ const ProductCard = ({ currentProduct }) => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const { currentUser } = useCurrentUser();
-  const { refetchMyCarts } = useGetMyCarts()
+  const { refetchMyCarts } = useGetMyCarts();
 
   // HandleCart
   const handleCart = () => {
@@ -56,7 +56,7 @@ const ProductCard = ({ currentProduct }) => {
               showConfirmButton: false,
               timer: 1500,
             });
-            refetchMyCarts()
+            refetchMyCarts();
           } else if (response.data.insertedId === null) {
             Swal.fire({
               position: "top-end",
@@ -133,13 +133,12 @@ const ProductCard = ({ currentProduct }) => {
 
   return (
     <div>
-      <div className="relative flex items-center rounded-lg h-[250px] lg:h-[350px] group border-2 border-gray-200">
-        <div onClick={() => navigate(`/products/${_id}`, { id: `${_id}` })}>
-          <img
-            src={image[0]}
-            alt={title}
-            className="rounded-lg p-3 max-h-[250px] lg:max-h-[350px]"
-          />
+      <div className="relative flex items-center rounded-lg border-2 border-gray-200 group aspect-square">
+        <div
+          onClick={() => navigate(`/products/${_id}`, { id: `${_id}` })}
+          className="w-full h-full flex items-center justify-center"
+        >
+          <img src={image[0]} alt={title} className="rounded-lg p-3 w-full " />
           {offer?.discount !== "N/A" && (
             <div className="absolute top-2 right-2 w-8 h-8 lg:w-12 lg:h-12">
               <div className="relative">
@@ -160,7 +159,7 @@ const ProductCard = ({ currentProduct }) => {
           </button>
         </div>
       </div>
-      <div className="mt-5">
+      <div className="mt-5 px-2">
         <h2 className="text-xl montserrat">{title}</h2>
         <p className="text-base lg:text-lg my-3 text-black montserrat">
           <FaStar className="inline mr-2" />
@@ -174,11 +173,11 @@ const ProductCard = ({ currentProduct }) => {
             <p className="text-xl lg:text-3xl font-bold">$ {price}</p>
           </div>
         ) : (
-          <div className="flex items-center gap-10">
+          <div className="flex items-center gap-5">
             <p className="text-xl lg:text-3xl font-bold">
               $ {(price - (price * parseInt(offer?.discount)) / 100).toFixed(2)}
             </p>
-            <p className="text-lg lg:text-2xl line-through">$ {price}</p>
+            <p className="text-lg lg:text-xl line-through">$ {price}</p>
           </div>
         )}
       </div>

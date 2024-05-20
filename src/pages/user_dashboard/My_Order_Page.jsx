@@ -72,16 +72,15 @@ const My_Order_Page = () => {
         user_email: currentUser?.email,
         image: selectedProduct?.cover_image[0],
       };
-  
+
       console.log(reviewInformation);
-      
 
       const res = await axiosPublic.post("/reviews", reviewInformation);
       if (res?.data) {
         toast.success("Review Add Successful!");
       }
       console.log(res.data);
-      reset({ review: '' });
+      reset({ review: "" });
       // Close the modal
       setShowModal(false);
     } catch (error) {
@@ -91,7 +90,6 @@ const My_Order_Page = () => {
       setLoading(false);
     }
   };
-  
 
   const isReviewValid = reviewText?.length >= 20;
 
@@ -111,14 +109,9 @@ const My_Order_Page = () => {
             className="rounded-lg bg-50-50"
           >
             <div className="flex items-center justify-between">
-              <motion.h1
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                className="text-2xl font-bold pb-1 font-oswald"
-              >
+              <h1 className="text-4xl font-bold text-center text-black py-5">
                 My Order
-              </motion.h1>
+              </h1>
               <div className="flex items-center justify-between md:gap-6 gap-2">
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
@@ -168,26 +161,24 @@ const My_Order_Page = () => {
                   transition={{ duration: 0.5, delay: 1 }}
                   className="w-full mt-2"
                 >
-                  <tr className="text-[#FF9D00]">
-                    <th className="border border-gray-600 text-sm md:text-md lg:text-lg py-3">
-                      N/A
-                    </th>
-                    <th className="border border-gray-600 text-sm md:text-md lg:text-lg py-3">
+                  <tr className="text-[#FF9D00] bg-gray-700">
+                    <th className="text-sm md:text-md lg:text-lg py-3">N/A</th>
+                    <th className="text-sm md:text-md lg:text-lg py-3">
                       Title Name
                     </th>
-                    <th className="border border-gray-600 text-sm md:text-md lg:text-lg p-2">
+                    <th className="text-sm md:text-md lg:text-lg p-2">
                       Product Image
                     </th>
-                    <th className="border border-gray-600 text-sm md:text-md lg:text-lg py-3">
+                    <th className="text-sm md:text-md lg:text-lg py-3">
                       Order date
                     </th>
-                    <th className="border border-gray-600 text-sm md:text-md lg:text-lg py-3">
+                    <th className="text-sm md:text-md lg:text-lg py-3">
                       Total Price
                     </th>
-                    <th className="border border-gray-600 text-sm md:text-md lg:text-lg py-3">
+                    <th className="text-sm md:text-md lg:text-lg py-3">
                       Status
                     </th>
-                    <th className="border border-gray-600 text-sm md:text-md lg:text-lg py-3">
+                    <th className="text-sm md:text-md lg:text-lg py-3">
                       Review
                     </th>
                   </tr>
