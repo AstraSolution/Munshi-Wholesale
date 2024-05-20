@@ -52,7 +52,7 @@ export default function Newsletter() {
   };
 
   return (
-    <div className="bg-[url('https://as2.ftcdn.net/v2/jpg/04/65/81/67/1000_F_465816712_bJPZ9ahoO71J0H2SLxBCWHN3LxyHMwIf.jpg')] bg-[#000000c2] bg-blend-overlay rounded-xl mb-10">
+    <div className="bg-[url('https://as2.ftcdn.net/v2/jpg/04/65/81/67/1000_F_465816712_bJPZ9ahoO71J0H2SLxBCWHN3LxyHMwIf.jpg')] bg-[#000000c2] bg-blend-overlay">
       <div className="container mx-auto py-12 sm:py-16">
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="text-center">

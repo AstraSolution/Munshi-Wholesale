@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { SearchIcon, ShoppingCartIcon } from "@heroicons/react/outline";
-import { IconButton } from "@material-tailwind/react";
-import { Link, useLocation, useParams, useNavigate } from "react-router-dom";
+import { SearchIcon } from "@heroicons/react/outline";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import useProductSearch from "../../../../Hooks/useProductSearch";
 
 const SearchBar = () => {
@@ -100,13 +99,6 @@ const SearchBar = () => {
                         </td>
                         <td className="text-center border-none">
                           ${product?.price}
-                        </td>
-                        <td className="flex justify-center border-none">
-                          <button>
-                            <IconButton color="green">
-                              <ShoppingCartIcon className="h-5 w-5 text-white" />
-                            </IconButton>
-                          </button>
                         </td>
                       </tr>
                     ))}

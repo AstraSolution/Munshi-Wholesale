@@ -10,7 +10,7 @@ const OfferCard = ({ image, title, offerTitle, offer }) => {
         borderRadius: "15px",
       }}
     >
-      <div className="ml-10 p-5 bg-[#ffffff48] hover:bg-[#ffffff97] hover:shadow-lg h-full rounded-lg">
+      <div className="p-2 bg-[#ffffff48] rounded-lg">
         <p className="text-2xl font-semibold montserrat uppercase">{title}</p>
 
         <div className="absolute bottom-10 right-10">
