@@ -64,7 +64,7 @@ const BrandChart = () => {
   return (
     <div>
       <h1 className="text-black font-medium text-center">Top 10 Brands</h1>
-      <canvas ref={chartRef} height="220"></canvas>
+      <canvas ref={chartRef} height="200"></canvas>
     </div>
   );
 };
