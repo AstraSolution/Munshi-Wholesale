@@ -1,4 +1,3 @@
-import React from "react";
 import useAllProduct from "../../Hooks/useAllProduct";
 import { motion, AnimatePresence } from "framer-motion";
 import { MdDelete } from "react-icons/md";
@@ -11,7 +10,7 @@ import LoadingPage from "../../Components/Shared/Loading/LoadingPage";
 export default function MyAllProduct() {
   const axiosPublic = useAxiosPublic();
 
-  const [products, isLoading, productRefetch] = useAllProduct();
+  const { products, isLoading, productRefetch } = useAllProduct();
 
   const handleDeleteProduct = (id, title) => {
     console.log(id);
