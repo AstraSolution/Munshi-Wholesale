@@ -163,7 +163,6 @@ export default function UpdateProduct() {
         shipping_restrictions,
         images,
         discountPrice,
-        features,
       };
 
       console.log(updateProduct);

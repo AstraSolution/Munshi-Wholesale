@@ -1,101 +1,70 @@
-import Chart from "react-apexcharts";
-import useAllBrand from "../../../Hooks/useAllBrand";
+import { useEffect, useRef } from "react";
+import { Chart } from "chart.js/auto";
+
 const BrandChart = () => {
-  const { brands, brandsLoading } = useAllBrand();
+  const chartRef = useRef(null);
+
+  const brands = [
+    { name: "DeWalt", value: 30 },
+    { name: "Milwaukee", value: 25 },
+    { name: "Makita", value: 20 },
+    { name: "Bosch ", value: 15 },
+    { name: "Ridgid ", value: 10 },
+    { name: "Craftsman ", value: 5 },
+    { name: "Husqvarna ", value: 35 },
+    { name: "Stanley ", value: 40 },
+    { name: "Hitachi ", value: 45 },
+    { name: "Black & Decker", value: 50 },
+    { name: "Ryobi ", value: 55 },
+  ];
+
   const topBrands = brands.slice(0, 10);
-  const chartData = {
-    series: [
-      {
-        name: "Top Brands",
-        data: topBrands.map((brand, index) => ({
-          x: brand.brandName,
-          y: index + 1,
-        })),
+
+  useEffect(() => {
+    const ctx = chartRef.current.getContext("2d");
+    const labels = topBrands.map((brand) => brand.name);
+    const dataValues = topBrands.map((brand) => brand.value);
+
+    const myChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Brand Values",
+            data: dataValues,
+            backgroundColor: "rgba(254,231,109)",
+            borderColor: "rgb(254,231,109)",
+            borderWidth: 1,
+          },
+        ],
       },
-    ],
-    options: {
-      chart: {
-        height: 350,
-        type: "line",
-        zoom: {
-          enabled: false,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
         },
-        background: '#f4f4f4', 
-      },
-      colors: ["#008FFB"],
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        width: 10,
-        curve: "smooth",
-      },
-      xaxis: {
-        type: "category",
-        labels: {
-          style: {
-            colors: "black",
+        plugins: {
+          tooltip: {
+            enabled: true,
+          },
+          legend: {
+            display: false,
           },
         },
       },
-      yaxis: {
-        labels: {
-          style: {
-            colors: "black",
-          },
-        },
-      },
-      fill: {
-        type: "gradient",
-        gradient: {
-          shade: "light",
-          gradientToColors: ["#FDD835"],
-          shadeIntensity: 1,
-          type: "horizontal",
-          opacityFrom: 1,
-          opacityTo: 1,
-          stops: [0, 100, 100, 100],
-        },
-      },
-      markers: {
-        size: 5,
-        opacity: 0.9,
-        colors: ["#FFA41B"],
-        strokeColor: "",
-        strokeWidth: 2,
-        hover: {
-          size: 7,
-          sizeOffset: 3,
-        },
-      },
-      tooltip: {
-        enabled: true,
-        shared: true,
-        followCursor: true,
-      },
-      theme: {
-        mode: "dark",
-      },
-    },
-  };
+    });
+
+    return () => {
+      myChart.destroy();
+    };
+  }, [topBrands]);
 
   return (
     <div>
-      <h2 className="text-center mt-4 mb-5 text-black text-2xl font-bold">
-        Top 10 Brands
-      </h2>
-      {brandsLoading ? (
-        <p>Loading...</p>
-      ) : (
-
-      <Chart
-        options={chartData.options}
-        series={chartData.series}
-        type="line"
-        height={450}
-        
-      />
-    )}
+      <h1 className="text-black font-medium text-center">Top 10 Brands</h1>
+      <canvas ref={chartRef} height="220"></canvas>
     </div>
   );
 };

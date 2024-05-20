@@ -41,7 +41,7 @@ const AddProducts = () => {
     setFieldValues(newFieldValues);
   };
 
-  // multipale image add fn
+  // multiple image add fn
   const handleImageChange = (files) => {
     const newImages = [...images];
     const newFileNames = [...fileNames];
@@ -131,7 +131,7 @@ const AddProducts = () => {
 
       const res = await axiosPublic.post("/products", product);
       if (res?.data) {
-        toast.success(" Product Add successfully");
+        toast.success("Product Add successfully");
       }
     } catch (error) {
       console.error("Error adding product:", error);
@@ -584,7 +584,7 @@ const AddProducts = () => {
             <button
               type="button"
               onClick={handleAddField}
-              className="btn text-green-600"
+              className="btn text-yellow-800"
             >
               Add Features
             </button>
@@ -616,7 +616,7 @@ const AddProducts = () => {
             </label>
             <div
               onClick={() => document.querySelector("#image").click()}
-              className="cursor-pointer mt-4 p-4 border bg-gray-800 rounded-md flex items-center justify-center"
+              className="cursor-pointer mt-4 p-4 border bg-gray-300 rounded-md flex items-center justify-center"
             >
               <LuUpload className="text-3xl text-[#FF9D00] mx-auto"></LuUpload>{" "}
               <p className="ml-2"></p>{" "}

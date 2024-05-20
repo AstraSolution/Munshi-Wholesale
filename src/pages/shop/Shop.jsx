@@ -14,7 +14,11 @@ const Shop = ({ categoryFilter, brandFilter }) => {
   };
 
   const [currentPage, setCurrentPage] = useState(1);
-  const { products, totalProduct } = useAllProduct(currentPage, 12, searchItems);
+  const { products, totalProduct } = useAllProduct(
+    currentPage,
+    12,
+    searchItems
+  );
 
   const pageNumber = Array.from(
     { length: Math.ceil(totalProduct / 9) },
