@@ -11,7 +11,7 @@ import Checkout from "../pages/checkout/Checkout";
 import AboutUs from "../pages/aboutUs/AboutUs";
 import FAQ from "../pages/faq/FAQ";
 import ProductDetails from "../pages/productDetails/ProductDetails";
-import Wish_List from "../pages/wishlist/Wish_List";
+import Wishlist from "../pages/wishlist/Wishlist";
 import DashboardHome from "../pages/admindashboard/DashboardHome";
 import AllOrders from "../pages/admindashboard/AllOrders";
 import AllUsers from "../pages/admindashboard/AllUsers";
@@ -68,7 +68,7 @@ const router = createBrowserRouter([
       },
       {
         path: "wishlist",
-        element: <Wish_List></Wish_List>,
+        element: <Wishlist></Wishlist>,
       },
       {
         path: "faq",

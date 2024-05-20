@@ -6,19 +6,17 @@ import useOrders from "../../../Hooks/useOrders";
 import { FaArrowRightLong } from "react-icons/fa6";
 
 const Header = () => {
-  const [orderProduct] = useOrders();
-  const orderItems = orderProduct?.myOrders?.length;
-
   const { wishlistProduct } = useWishlistProducts();
   const wishlistItems = wishlistProduct?.length;
+  const { myCarts } = useGetMyCarts();
+  const cartItems = myCarts?.length;
+  const { myOrders } = useOrders();
+  const orderItems = myOrders?.length;
 
-  const totalAmount = orderProduct?.myOrders?.reduce(
+  const totalAmount = myOrders?.reduce(
     (total, item) => total + item.totalPrice,
     0
   );
-
-  const { myCarts } = useGetMyCarts();
-  const cartItems = myCarts?.length;
 
   return (
     <div>
