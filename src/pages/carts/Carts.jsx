@@ -8,7 +8,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 const Carts = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  let { myCarts, price, quantity, isPending, myCartRefetch } = useGetMyCarts();
+  let { myCarts, price, quantity, isPending, refetchMyCarts } = useGetMyCarts();
 
   if (isPending) {
     return <p className=" min-h-screen text-center my-auto">Loading...</p>;
@@ -55,7 +55,7 @@ const Carts = () => {
               <CartsDetails
                 key={cart._id}
                 cart={cart}
-                myCartRefetch={myCartRefetch}
+                refetchMyCarts={refetchMyCarts}
               ></CartsDetails>
             ))}
             <div className="flex items-center  justify-around gap-4 mb-3">

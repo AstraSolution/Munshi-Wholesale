@@ -1,8 +1,7 @@
-import { useState } from "react";
-import RecentOrders from "./RecentOrders";
 import useOrders from "../../../Hooks/useOrders";
+import { useState } from "react";
 
-const Payment_History = () => {
+export default function RecentOrders() {
   const { myOrders } = useOrders();
 
   const [visibleItems, setVisibleItems] = useState(3);
@@ -18,18 +17,17 @@ const Payment_History = () => {
   };
 
   return (
-    <div>
-      <div className="py-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-        {/* Order History */}
-        <div className="bg-white rounded-md shadow-md p-6">
-          <h2 className="text-lg font-semibold mb-4">Payment History</h2>
+    <>
+      <div className="bg-white rounded-md shadow-md p-6">
+        <div className="">
+          <h2 className="text-lg font-semibold mb-4">Recent Orders</h2>
           {myOrders?.slice(0, visibleItems).map((item) => (
             <div
               key={item._id}
               className="divide-y divide-gray-200 flex items-center justify-between px-2"
             >
-              <p className="">Transaction Id: {item?.tranjectionId}</p>
-              <p className="py-2">Payment: Paid</p>
+              <p className="">{item?.title}</p>
+              <p className="py-2"> ${item?.unit_price}</p>
             </div>
           ))}
           {myOrders && myOrders.length > 3 && (
@@ -52,12 +50,7 @@ const Payment_History = () => {
             </div>
           )}
         </div>
-
-        {/* Recommended Products */}
-        <RecentOrders />
       </div>
-    </div>
+    </>
   );
-};
-
-export default Payment_History;
+}

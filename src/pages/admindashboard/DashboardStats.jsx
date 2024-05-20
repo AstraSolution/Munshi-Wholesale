@@ -6,31 +6,27 @@ import useTotalOrders from "../../Hooks/useTotalOrders";
 import useTotalSells from "../../Hooks/useTotalSells";
 
 const DashboardStats = () => {
-  const users = useAllUsers();
-  const totalUsers = users?.length;
-
-  const { products } = useAllProduct();
-  const tottalProducts = products?.products?.length;
-
-  const totalOrders = useTotalOrders();
-  const totalOrder = totalOrders?.totalProductsOrders;
-
-  const totalSallesProducts = useTotalSells();
-  const totalSellProduct = totalSallesProducts?.totalProductsSold;
+  const { totalUser } = useAllUsers();
+  const { totalProduct } = useAllProduct(1, 9, { category: [], brand: [] });
+  const totalProducts = useTotalOrders();
+  const totalProductsSold = useTotalSells();
 
   return (
     <div>
-      <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 bg-gray-100">
+      <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         <Link to={"/wishlist"}>
           <div className="bg-white  shadow-lg rounded-md flex items-center justify-between py-6 px-3 text-gray-800 font-medium group">
             <div className="flex justify-center items-center w-14 h-14  bg-[#FF9D00] rounded-full transition-all duration-300 transform group-hover:rotate-12">
               <MdOutlineProductionQuantityLimits
                 size={30}
-                className="stroke-current  text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"
+                className="stroke-current text-white transform transition-transform duration-500 ease-in-out"
               ></MdOutlineProductionQuantityLimits>
             </div>
             <div className="text-right">
-              <p className="text-2xl"> {totalSellProduct} </p>
+              <p className="text-2xl">
+                {" "}
+                {totalProductsSold?.totalProductsSold}{" "}
+              </p>
               <p>Total Sell Product</p>
             </div>
           </div>
@@ -44,7 +40,7 @@ const DashboardStats = () => {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              className="stroke-current  text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"
+              className="stroke-current  text-white transform transition-transform duration-500 ease-in-out"
             >
               <path
                 strokeLinecap="round"
@@ -55,7 +51,7 @@ const DashboardStats = () => {
             </svg>
           </div>
           <div className="text-right">
-            <p className="text-2xl"> {totalOrder} </p>
+            <p className="text-2xl"> {totalProducts?.totalProductsOrders} </p>
             <p> Total Order </p>
           </div>
         </div>
@@ -68,7 +64,7 @@ const DashboardStats = () => {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              className="stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"
+              className="stroke-current text-white transform transition-transform duration-500 ease-in-out"
             >
               <path
                 strokeLinecap="round"
@@ -79,7 +75,7 @@ const DashboardStats = () => {
             </svg>
           </div>
           <div className="text-right">
-            <p className="text-2xl">{totalUsers} </p>
+            <p className="text-2xl">{totalUser} </p>
             <p>Total Users </p>
           </div>
         </div>
@@ -91,7 +87,7 @@ const DashboardStats = () => {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              className="stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"
+              className="stroke-current text-white transform transition-transform duration-500 ease-in-out"
             >
               <path
                 strokeLinecap="round"
@@ -102,7 +98,7 @@ const DashboardStats = () => {
             </svg>
           </div>
           <div className="text-right">
-            <p className="text-2xl"> {tottalProducts} </p>
+            <p className="text-2xl"> {totalProduct} </p>
             <p>Total Products </p>
           </div>
         </div>

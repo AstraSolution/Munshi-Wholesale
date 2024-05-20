@@ -8,7 +8,7 @@ import useWishlistProducts from "../../../Hooks/useWishlistProducts";
 import useGetMyCarts from "../../../Hooks/useGetMyCarts";
 
 export default function TopNav() {
-  const [wishlistProduct] = useWishlistProducts();
+  const {wishlistProduct} = useWishlistProducts();
   const wishlistItems = wishlistProduct?.length;
 
   const { myCarts } = useGetMyCarts();

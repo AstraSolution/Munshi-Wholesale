@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 import LoadingPage from "../../Components/Shared/Loading/LoadingPage";
 
 
-const Wish_List = () => {
+const Wishlist = () => {
 
-    const [wishlistProduct, isLoading, wishlistRefetch] = useWishlistProducts();
+    const {wishlistProduct, isLoading, refetchWishlist} = useWishlistProducts();
 
 
 
@@ -84,7 +84,7 @@ const Wish_List = () => {
 
                             <AnimatePresence>
                                 {
-                                    wishlistProduct?.map((product, i) => <WishListProduct key={product._id} product={product} wishlistRefetch={wishlistRefetch} i={i} ></WishListProduct>)
+                                    wishlistProduct?.map((product, i) => <WishListProduct key={product._id} product={product} refetchWishlist={refetchWishlist} i={i} ></WishListProduct>)
                                 }
                             </AnimatePresence>
                         </table>
@@ -95,4 +95,4 @@ const Wish_List = () => {
     );
 };
 
-export default Wish_List;
+export default Wishlist;

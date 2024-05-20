@@ -48,7 +48,7 @@ const AllUsers = () => {
 
   return (
     <div className="container mx-auto">
-      <div>
+      <div className="px-5">
         <h1 className="text-4xl font-bold text-center text-black py-5">
           All Users
         </h1>

@@ -58,7 +58,7 @@ const AllAnalyticsChart = () => {
     };
 
     return (
-        <div style={{ width: '95%' }}>
+        <div style={{  }}>
             <Chart options={options} series={seriesData} type="area" height={350} />
         </div>
     );

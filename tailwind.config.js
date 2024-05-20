@@ -14,12 +14,13 @@ module.exports = withMT({
       },
       container: {
         center: true,
-        padding: {
-          DEFAULT: "1rem",
-          sm: "3rem",
-        },
       },
     },
   },
   plugins: [],
 });
+
+// padding: {
+//   DEFAULT: "1rem",
+//   sm: "3rem",
+// },
