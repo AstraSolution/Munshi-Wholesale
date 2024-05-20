@@ -1,80 +1,126 @@
-import { motion, AnimatePresence } from "framer-motion";
 import useAllProduct from "../../Hooks/useAllProduct";
+import { motion, AnimatePresence } from "framer-motion";
 
-const TopProducts = () => {
-  const {products, isPending} = useAllProduct();
-  console.log(products);
+import LoadingPage from "../../Components/Shared/Loading/LoadingPage";
 
-  if(isPending){
-    return <p>Loading...</p>
+export default function TopProducts() {
+  const searchItems = "";
+
+  const { products, isLoading } = useAllProduct(1, 10, searchItems);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen">
+        <LoadingPage />
+      </div>
+    );
   }
 
-  // Select 10 random products
-  const randomProducts = products?.sort(() => Math.random() - 0.5).slice(0, 10); // Take the first 10 products
+  // Function to shuffle the products array
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
+
+  // Ensure products is an array before shuffling
+  const shuffledProducts = Array.isArray(products)
+    ? shuffleArray([...products])
+    : [];
 
   return (
-    <div className="container mx-auto md:py-3 py-2 text-white ">
-      <div className="space-y-2">
-        <motion.div
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="p-5 rounded-lg bg-50-50"
-        >
-          <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold pb-1 font-oswald ">All Orders </h1>
-          </div>
+    <div>
+      <div className="px-2 md:py-3 my-10 text-gray-800 bg-white">
+        <div className="space-y-2">
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="rounded-lg"
+          >
+            <div>
+              <h1 className="text-3xl font-bold pb-1 text-center mt-7">
+                Top Products{" "}
+              </h1>
+            </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full mt-2">
-              <tr className="text-[#FF9D00]  ">
-                <th className="border bg-gray-800 border-gray-400 text-center text-sm md:text-md lg:text-lg py-3">
-                  N/A
-                </th>
-                <th className="border bg-gray-800 border-gray-400 text-center text-sm md:text-md lg:text-lg py-3">
-                  Title Name
-                </th>
-                <th className="border bg-gray-800 border-gray-400 text-center text-sm md:text-md lg:text-lg p-2">
-                  Product Image
-                </th>
-                <th className="border bg-gray-800 border-gray-400 text-center text-sm md:text-md lg:text-lg py-3">
-                  Category
-                </th>
-              </tr>
-              <AnimatePresence>
-                {randomProducts?.map((product, i) => (
-                  <motion.tr
-                    key={product._id}
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: i * 0.1 }}
-                    exit={{ opacity: 0, y: -20 }}
-                  >
-                    <td className="border bg-gray-800 border-gray-400 p-2 text-center ">
-                      {i + 1}
-                    </td>
-                    <td className="border bg-gray-800 border-gray-400 md:p-2 p-1  text-sm  ">
-                      {product?.title}
-                    </td>
-                    <td className="border bg-gray-800 border-gray-400 p-2">
-                      <img
-                        className="w-20 md:h-16 rounded-lg  mx-auto "
-                        src={product?.image[0]}
-                        alt=""
-                      />
-                    </td>
-                    <td className="border bg-gray-800 border-gray-400 p-2 text-sm md:text-md   text-center  ">
-                      {product?.category}
-                    </td>
-                  </motion.tr>
-                ))}
-              </AnimatePresence>
-            </table>
-          </div>
-        </motion.div>
+            <div className="overflow-x-auto">
+              <table className="w-full mt-2">
+                <thead>
+                  <tr className="text-[#FF9D00]">
+                    <th className="border bg-gray-300 border-gray-200 text-center py-3">
+                      N/A
+                    </th>
+                    <th className="border bg-gray-300 border-gray-200 text-center  py-3">
+                      Title Name
+                    </th>
+                    <th className="border bg-gray-300 border-gray-200 p-2 text-center">
+                      Image
+                    </th>
+                    <th className="border bg-gray-300 border-gray-200 text-center p-2">
+                      Category
+                    </th>
+                    <th className="border bg-gray-300 border-gray-200 text-center  py-3">
+                      Stock
+                    </th>
+                    <th className="border bg-gray-300 border-gray-200 text-center py-3">
+                      Country
+                    </th>
+                    <th className="border bg-gray-300 border-gray-200 text-center py-3">
+                      Price
+                    </th>
+                    <th className="border bg-gray-300 border-gray-200 text-center py-3">
+                      Available
+                    </th>
+                  </tr>
+                </thead>
+                <AnimatePresence>
+                  {shuffledProducts.map((product, i) => (
+                    <motion.tr
+                      key={product._id}
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: i * 0.1 }}
+                      exit={{ opacity: 0, y: -20 }}
+                    >
+                      <td className="border text-center">
+                        {i + 1}
+                      </td>
+                      <td className="border text-center">
+                        {product?.title}
+                      </td>
+                      <td className="border text-center">
+                        <img
+                          className="w-20 md:h-16 rounded-lg mx-auto"
+                          src={product?.image[0]}
+                          alt=""
+                        />
+                      </td>
+                      <td className="border text-center">
+                        {product?.category}
+                      </td>
+                      <td className="border text-center">
+                        {product?.quantity}
+                      </td>
+                      <td className="border text-center">
+                        {product?.country_of_origin}
+                      </td>
+                      <td className="border text-center">
+                        $ {product?.price}
+                      </td>
+                      <td className="border text-center">
+                        {product?.availability}
+                      </td>
+                    </motion.tr>
+                  ))}
+                </AnimatePresence>
+              </table>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </div>
   );
-};
-
-export default TopProducts;
+}
