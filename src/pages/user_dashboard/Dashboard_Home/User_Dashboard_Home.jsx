@@ -1,4 +1,3 @@
-import React from 'react';
 import Order_Bar_Chart from './Order_Bar_Chart';
 import Header from './Header';
 import Payment_History from './Payment_History';

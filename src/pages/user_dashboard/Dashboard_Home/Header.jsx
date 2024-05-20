@@ -6,14 +6,14 @@ import useOrders from '../../../Hooks/useOrders';
 
 
 const Header = () => {
-s
+
     const {wishlistProduct} = useWishlistProducts();
     const wishlistItems = wishlistProduct?.length;
 
-    const [orderProduct] = useOrders()
-    const orderItems = orderProduct?.myOrders?.length
+    const {myOrders} = useOrders()
+    const orderItems = myOrders?.length
 
-    const totalAmount = orderProduct?.myOrders?.reduce((total, item) => total + item.totalPrice, 0);
+    const totalAmount = myOrders?.reduce((total, item) => total + item.totalPrice, 0);
 
 
     const { myCarts } = useGetMyCarts();

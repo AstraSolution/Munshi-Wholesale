@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { PieChart } from 'react-minimal-pie-chart';
 
 import useOrders from '../../../Hooks/useOrders';
@@ -7,15 +7,15 @@ const Order_Bar_Chart = () => {
 
   const [localTime, setLocalTime] = useState(new Date());
 
-  const [orderProduct] = useOrders();
-  const orderItems = orderProduct?.myOrders;
+  const {myOrders} = useOrders();
+  const orderItems = myOrders;
 
   const [pieChartData, setPieChartData] = useState([]);
 
   useEffect(() => {
     if (orderItems) {
       const statusCounts = orderItems.reduce((acc, order) => {
-        if (order.status === 'Completed' || order.status === 'Cancelled' || order.status === 'Processing') {
+        if (order.status === 'Shiped' || order.status === 'Delivered' || order.status === 'Processing') {
           acc[order.status] = (acc[order.status] || 0) + 1;
         }
         return acc;
@@ -33,14 +33,14 @@ const Order_Bar_Chart = () => {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'Completed':
+      case 'Delivered':
         return '#4CAF50';
       case 'Processing':
         return '#FFC107';
-      case 'Cancelled':
+      case 'Shiped':
         return '#F44336';
       default:
-        return '#000000'; // default color
+        return '#FFFFFF'; // default color
     }
   };
 

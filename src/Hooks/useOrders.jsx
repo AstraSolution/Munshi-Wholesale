@@ -14,8 +14,10 @@ const useOrders = () => {
       return res.data
     }
   })
+  console.log(orderProduct);
+  const myOrders = orderProduct?.myOrders;
 
-  return [orderProduct, isLoading, orderRefetch];
+  return {orderProduct, myOrders, isLoading, orderRefetch};
 };
 
 export default useOrders;

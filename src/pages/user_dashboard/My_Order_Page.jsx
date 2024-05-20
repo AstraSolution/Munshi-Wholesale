@@ -18,7 +18,7 @@ const My_Order_Page = () => {
   const axiosPublic = useAxiosPublic();
   const { currentUser } = useCurrentUser();
 
-  const [orderProduct] = useOrders();
+  const {myOrders} = useOrders();
 
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
@@ -27,8 +27,8 @@ const My_Order_Page = () => {
   const [filteredOrders, setFilteredOrders] = useState([]);
 
   useEffect(() => {
-    if (orderProduct?.myOrders) {
-      let filtered = orderProduct.myOrders;
+    if (myOrders) {
+      let filtered = myOrders;
       if (selectedStatus !== "all") {
         filtered = filtered.filter((order) => order.status === selectedStatus);
       }
@@ -39,7 +39,7 @@ const My_Order_Page = () => {
       }
       setFilteredOrders(filtered);
     }
-  }, [orderProduct, selectedStatus, searchQuery]);
+  }, [myOrders, selectedStatus, searchQuery]);
 
   // date and time format convert
   function convertToLocalTime(utcTimeString) {
