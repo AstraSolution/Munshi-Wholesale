@@ -15,7 +15,7 @@ const Order_Bar_Chart = () => {
   useEffect(() => {
     if (orderItems) {
       const statusCounts = orderItems.reduce((acc, order) => {
-        if (order.status === 'Shiped' || order.status === 'Delivered' || order.status === 'Processing') {
+        if (order.status === 'Shipped' || order.status === 'Delivered' || order.status === 'Processing') {
           acc[order.status] = (acc[order.status] || 0) + 1;
         }
         return acc;
@@ -37,7 +37,7 @@ const Order_Bar_Chart = () => {
         return '#4CAF50';
       case 'Processing':
         return '#FFC107';
-      case 'Shiped':
+      case 'Shipped':
         return '#F44336';
       default:
         return '#FFFFFF'; // default color

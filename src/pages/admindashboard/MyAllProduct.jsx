@@ -12,7 +12,7 @@ export default function MyAllProduct() {
 
   const searchItems = ""
 
-  const {products, isLoading, productRefetch} = useAllProduct(1, 12, searchItems);
+  const {products, isLoading, productRefetch} = useAllProduct(1, 50, searchItems);
 
 
   const handleDeleteProduct = (id, title) => {
