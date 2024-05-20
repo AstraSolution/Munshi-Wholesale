@@ -106,14 +106,22 @@ const ProductCard = ({ currentProduct }) => {
       };
 
       axiosPublic
-        .post("/wishlist", addWishlist)
+        .post(`/wishlist/${currentUser?.email}`, addWishlist)
         .then((response) => {
-          console.log(response);
-          if (response) {
+          if (response.status === 200) {
             Swal.fire({
               position: "top-end",
               icon: "success",
               title: "Product add wishlist successfully.",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+          else if(response.status === 203){
+            Swal.fire({
+              position: "top-end",
+              icon: "error",
+              title: "This product already exist your wishlist .",
               showConfirmButton: false,
               timer: 1500,
             });

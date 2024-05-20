@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import LoadingPage from "../../Components/Shared/Loading/LoadingPage";
 
 
-const Wish_List = () => {
+const Wishlist = () => {
 
     const {wishlistProduct, isLoading, refetchWishlist} = useWishlistProducts();
 
@@ -95,4 +95,4 @@ const Wish_List = () => {
     );
 };
 
-export default Wish_List;
+export default Wishlist;
