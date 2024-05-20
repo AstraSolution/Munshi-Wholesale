@@ -15,7 +15,7 @@ const ProductCard = ({ currentProduct }) => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const { currentUser } = useCurrentUser();
-  const { refetchMyCarts } = useGetMyCarts()
+  const { refetchMyCarts } = useGetMyCarts();
 
   // HandleCart
   const handleCart = () => {
@@ -56,7 +56,7 @@ const ProductCard = ({ currentProduct }) => {
               showConfirmButton: false,
               timer: 1500,
             });
-            refetchMyCarts()
+            refetchMyCarts();
           } else if (response.data.insertedId === null) {
             Swal.fire({
               position: "top-end",
@@ -146,11 +146,7 @@ const ProductCard = ({ currentProduct }) => {
           onClick={() => navigate(`/products/${_id}`, { id: `${_id}` })}
           className="w-full h-full flex items-center justify-center"
         >
-          <img
-            src={image[0]}
-            alt={title}
-            className="rounded-lg p-3 w-full "
-          />
+          <img src={image[0]} alt={title} className="rounded-lg p-3 w-full " />
           {offer?.discount !== "N/A" && (
             <div className="absolute top-2 right-2 w-8 h-8 lg:w-12 lg:h-12">
               <div className="relative">
@@ -185,11 +181,11 @@ const ProductCard = ({ currentProduct }) => {
             <p className="text-xl lg:text-3xl font-bold">$ {price}</p>
           </div>
         ) : (
-          <div className="flex items-center gap-10">
+          <div className="flex items-center gap-5">
             <p className="text-xl lg:text-3xl font-bold">
               $ {(price - (price * parseInt(offer?.discount)) / 100).toFixed(2)}
             </p>
-            <p className="text-lg lg:text-2xl line-through">$ {price}</p>
+            <p className="text-lg lg:text-xl line-through">$ {price}</p>
           </div>
         )}
       </div>
