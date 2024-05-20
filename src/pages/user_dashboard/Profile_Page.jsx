@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { CiCamera, CiEdit } from "react-icons/ci";
 import { useForm } from "react-hook-form";
 import useImageURL from "../../Components/HomeComonents/ImageURL/useImageURL";
@@ -267,7 +267,7 @@ const Profile_Page = () => {
                   <p className="mt-2">{email ? email : "user@gmail.com"}</p>
                 )}
 
-                {/* professioon */}
+                {/* profession */}
                 {isEditing ? (
                   <div className="mb-2 mt-8 px-4 ">
                     <label

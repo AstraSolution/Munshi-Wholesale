@@ -14,7 +14,11 @@ const Shop = ({ categoryFilter, brandFilter }) => {
   };
 
   const [currentPage, setCurrentPage] = useState(1);
-  const { products, totalProduct } = useAllProduct(currentPage, 9, searchItems);
+  const { products, totalProduct } = useAllProduct(
+    currentPage,
+    12,
+    searchItems
+  );
 
   const pageNumber = Array.from(
     { length: Math.ceil(totalProduct / 9) },
@@ -39,8 +43,8 @@ const Shop = ({ categoryFilter, brandFilter }) => {
   };
 
   return (
-    <div className="w-2/3 md:w-3/4">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-10 my-10">
+    <div className="w-full px-10 mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7 md:gap-[3%] my-14">
         {/* Product-Cards */}
         {products?.map((product) => (
           <ProductCard
@@ -49,7 +53,7 @@ const Shop = ({ categoryFilter, brandFilter }) => {
           ></ProductCard>
         ))}
       </div>
-      <div className="flex justify-center items-center gap-4 mt-20 mb-10">
+      <div className="flex justify-center items-center gap-4 mt-20 mb-10 pt-20 pb-10 md:pr-36">
         <button
           className={`flex items-center gap-2 px-3 py-2 rounded-lg text-gray-400 cursor-pointer hover:bg-gray-300 ${
             currentPage > 1 && "text-gray-900"
