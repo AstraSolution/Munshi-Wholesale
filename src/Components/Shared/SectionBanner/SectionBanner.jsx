@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const SectionBanner = ({ title, subTitle }) => {
   return (
-    <div className="mt-10">
+    <div className="">
       <div
         className="h-[120px] lg:h-[220px] py-5 lg:py-14 pl-10 md:pl-20 text-white"
         style={{

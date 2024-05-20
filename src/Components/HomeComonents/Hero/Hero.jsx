@@ -54,7 +54,7 @@ const Hero = () => {
           <div key={data?.id}>
             {/* Hero section */}
             <div
-              className="overflow-hidden rounded-3xl min-h-[550px] sm:min-h-[650px] hero-bg-color flex justify-center items-center"
+              className="p-5 overflow-hidden rounded-3xl min-h-[550px] sm:min-h-[650px] hero-bg-color flex justify-center items-center"
               style={{
                 backgroundImage: `url(${data?.bg})`,
                 backgroundSize: "cover",

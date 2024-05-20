@@ -68,7 +68,7 @@ const ShopLayout = () => {
         subTitle={"Shop / Products"}
       ></SectionBanner>
 
-      <div className="flex flex-col gap-10 md:gap-0 md:flex-row justify-between items-center px-5 lg:px-10 my-10">
+      <div className="border-b flex flex-col gap-10 md:gap-0 md:flex-row justify-between items-center px-5 lg:px-10 py-5">
         <div className="relative max-w-sm">
           <div className="flex items-center">
             <input
@@ -125,8 +125,8 @@ const ShopLayout = () => {
       </div>
 
       <div>
-        <div className="flex gap-5 px-5 lg:px-10 relative">
-          <div className="w-1/3 md:w-1/4 flex flex-col">
+        <div className="flex gap-5 px-5 lg:px-10 relative ">
+          <div className="w-1/3 md:w-1/4 flex flex-col border-r">
             {/* category section start */}
             <div className="py-3 px-0 md:px-4">
               <h2 className="text-xs md:text-base lg:text-xl font-semibold text-gray-800 pb-2 border-b border-gray-200">

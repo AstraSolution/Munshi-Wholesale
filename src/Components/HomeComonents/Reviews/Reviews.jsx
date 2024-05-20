@@ -120,6 +120,22 @@ const reviews = [
 export default function Reviews() {
   return (
     <div className="py-14 px-10 md:px-0 max-w-[600px] mx-auto">
+            <div className="flex flex-col items-center justify-center mt-10 mb-2">
+        <h2 className="text-4xl font-bold montserrat text-center mb-3 md:text-nowrap">
+        What Our Customers Are Saying
+        </h2>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="100"
+          height="12"
+          fill="#fdc62e"
+          version="1.1"
+          viewBox="0 139.474 290.658 11.711"
+          xmlSpace="preserve"
+        >
+          <path fill="#fdc62e" d="M0 139.474H290.658V151.185H0z"></path>
+        </svg>
+      </div>
       <Swiper
         pagination={{
           dynamicBullets: true,
@@ -130,7 +146,7 @@ export default function Reviews() {
         {reviews.map((review) => (
           <SwiperSlide key={review.clientReview} className="text-center py-10">
             <img
-              className="w-10 rounded-full mx-auto"
+              className="w-16 rounded-full mx-auto"
               src={review.userProfile}
               alt=""
             />
