@@ -12,13 +12,6 @@ import "@smastrom/react-rating/style.css";
 const reviews = [
   {
     clientReview:
-      "Great website for buying and selling hardware products. Easy to navigate and find what I need. Will definitely use again!",
-    starRating: 5,
-    userProfile: "https://i.ibb.co/W5Wn9R9/Stephen-King.jpg",
-    userName: "JohnDoe",
-  },
-  {
-    clientReview:
       "Smooth transactions every time. Munshi Wholesale has a wide range of products at competitive prices. Highly recommend.",
     starRating: 4,
     userProfile: "https://i.ibb.co/W5Wn9R9/Stephen-King.jpg",
@@ -26,94 +19,52 @@ const reviews = [
   },
   {
     clientReview:
+      "Great website for buying and selling hardware products. Easy to navigate and find what I need. Will definitely use again!",
+    starRating: 5,
+    userProfile: "https://i.ibb.co/GTDXjSZ/p2.jpg",
+    userName: "JohnDoe",
+  },
+  {
+    clientReview:
       "Excellent customer service and fast shipping. Found exactly what I was looking for. Will be a repeat customer.",
     starRating: 5,
-    userProfile: "https://i.ibb.co/W5Wn9R9/Stephen-King.jpg",
+    userProfile: "https://i.ibb.co/DzWg2g3/p4.jpg",
     userName: "MikeJohnson",
   },
   {
     clientReview:
       "Good selection of hardware items. Prices are reasonable. Website interface could be improved for better user experience.",
     starRating: 3,
-    userProfile: "https://i.ibb.co/W5Wn9R9/Stephen-King.jpg",
+    userProfile: "https://i.ibb.co/CV7W2Hj/p1.jpg",
     userName: "SarahBrown",
   },
   {
     clientReview:
       "Munshi Wholesale offers great deals on bulk purchases. Saved me a lot of money for my business.",
     starRating: 4,
-    userProfile: "https://i.ibb.co/W5Wn9R9/Stephen-King.jpg",
+    userProfile: "https://i.ibb.co/7n1MXk9/p7.jpg",
     userName: "DavidClark",
   },
   {
     clientReview:
       "The website layout is clean and easy to use. However, some product descriptions lack detail. Overall satisfied with my purchase.",
     starRating: 4,
-    userProfile: "https://i.ibb.co/W5Wn9R9/Stephen-King.jpg",
+    userProfile: "https://i.ibb.co/XD5VbFK/p6.jpg",
     userName: "EmilyTaylor",
   },
   {
     clientReview:
       "Had an issue with an order, but customer service was quick to resolve it. Appreciate the prompt response.",
     starRating: 4,
-    userProfile: "https://i.ibb.co/W5Wn9R9/Stephen-King.jpg",
+    userProfile: "https://i.ibb.co/6N976yz/p9.jpg",
     userName: "ChrisWilson",
   },
   {
     clientReview:
       "Munshi Wholesale has become my go-to for hardware needs. Reliable service and quality products.",
     starRating: 5,
-    userProfile: "https://i.ibb.co/W5Wn9R9/Stephen-King.jpg",
+    userProfile: " https://i.ibb.co/pfs4dq2/p8.jpg",
     userName: "JenniferLee",
-  },
-  {
-    clientReview:
-      "Average experience overall. Prices are decent, but shipping took longer than expected.",
-    starRating: 3,
-    userProfile: "https://i.ibb.co/W5Wn9R9/Stephen-King.jpg",
-    userName: "KevinNguyen",
-  },
-  {
-    clientReview:
-      "Impressive selection of hardware items. Prices are competitive. Will recommend to friends.",
-    starRating: 5,
-    userProfile: "https://i.ibb.co/W5Wn9R9/Stephen-King.jpg",
-    userName: "AmandaGarcia",
-  },
-  {
-    clientReview:
-      "User-friendly website. Found what I needed quickly and checkout was smooth. Will shop again.",
-    starRating: 5,
-    userProfile: "https://i.ibb.co/W5Wn9R9/Stephen-King.jpg",
-    userName: "DanielMartinez",
-  },
-  {
-    clientReview:
-      "Decent prices, but could use more variety in product offerings. Overall satisfied with my purchase.",
-    starRating: 3,
-    userProfile: "https://i.ibb.co/W5Wn9R9/Stephen-King.jpg",
-    userName: "MelissaWong",
-  },
-  {
-    clientReview:
-      "Love the convenience of shopping at Munshi Wholesale. Always find what I need at a good price.",
-    starRating: 5,
-    userProfile: "https://i.ibb.co/W5Wn9R9/Stephen-King.jpg",
-    userName: "RyanJohnson",
-  },
-  {
-    clientReview:
-      "Website is easy to use, but could benefit from more filtering options. Products arrived as described.",
-    starRating: 4,
-    userProfile: "https://i.ibb.co/W5Wn9R9/Stephen-King.jpg",
-    userName: "LauraDavis",
-  },
-  {
-    clientReview:
-      "Great experience overall. Will definitely recommend to colleagues. Keep up the good work!",
-    starRating: 5,
-    userProfile: "https://i.ibb.co/W5Wn9R9/Stephen-King.jpg",
-    userName: "MarkThompson",
   },
 ];
 
@@ -130,7 +81,7 @@ export default function Reviews() {
         {reviews.map((review) => (
           <SwiperSlide key={review.clientReview} className="text-center py-10">
             <img
-              className="w-10 rounded-full mx-auto"
+              className="w-10 h-10 rounded-full mx-auto"
               src={review.userProfile}
               alt=""
             />
