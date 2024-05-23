@@ -6,8 +6,8 @@ import LIGHT_LOGO from "../../../assets/light-logo.png";
 export default function Footer() {
   return (
     <>
-      <footer className="font-[sans-serif] bg-black py-12 font-montserrat bg-[url('https://i.ibb.co/1rwqq8k/footerbg.png')]">
-        <div className="grid container mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3  xl:grid-cols-5 gap-6 md:gap-8 lg:gap-12">
+      <footer className="font-[sans-serif] bg-black py-12 px-5 font-montserrat bg-[url('https://i.ibb.co/1rwqq8k/footerbg.png')]">
+        <div className="grid container xl:max-w-[1500px] mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3  xl:grid-cols-5 gap-6 md:gap-8 lg:gap-12">
           <div>
             <div className="">
               <img className="w-44 mb-4 " src={LIGHT_LOGO} alt="" />

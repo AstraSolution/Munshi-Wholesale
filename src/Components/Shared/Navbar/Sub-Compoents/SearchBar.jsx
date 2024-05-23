@@ -40,12 +40,12 @@ const SearchBar = () => {
 
   return (
     <div className="relative">
-      <div className="flex items-center" onClick={toggleDropdown}>
+      <div className="flex items-center justify-center" onClick={toggleDropdown}>
         <input
           type="text"
           name="search"
           placeholder="Search by Product"
-          className="px-4 py-2 md:py-3 rounded-lg w-full border-2 border-yellow-500"
+          className="px-4 py-2 md:py-3 rounded-lg w-full border-2 border-yellow-500 "
           value={searchTerm}
           onChange={(e) => handleInputChange(e.target.value)}
         />
@@ -57,7 +57,7 @@ const SearchBar = () => {
       {/* display search results */}
       {isOpen && (
         <div
-          className="w-full absolute h-[350px] md:h-[400px] overflow-x-auto custom-scrollbar"
+          className="w-full absolute h-[350px] md:h-[400px] mt overflow-x-auto custom-scrollbar"
           ref={dropdownRef}
         >
           {isLoading ? (
