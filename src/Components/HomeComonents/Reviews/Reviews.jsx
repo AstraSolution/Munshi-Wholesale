@@ -97,7 +97,7 @@ export default function Reviews() {
         {reviews.map((review) => (
           <SwiperSlide key={review.clientReview} className="text-center py-10">
             <img
-              className="w-16 h-16 rounded-full mx-auto"
+              className="w-16 h-16 object-cover rounded-full mx-auto"
               src={review.userProfile}
               alt=""
             />

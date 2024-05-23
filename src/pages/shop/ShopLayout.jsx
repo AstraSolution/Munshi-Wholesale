@@ -64,10 +64,10 @@ const ShopLayout = () => {
   };
 
   return (
-    <div>
+    <div className="">
       <SectionBanner title={"Collection"} subTitle={"Shop / Products"} />
 
-      <div className="border-b flex flex-col gap-10 md:gap-0 md:flex-row justify-between items-center px-5 lg:px-10 py-5">
+      <div className="border-b flex flex-col gap-10 md:gap-0 md:flex-row justify-between items-center px-5 lg:px-10 py-5 ">
         <div className="relative max-w-sm">
           <div className="flex items-center">
             <input
@@ -135,7 +135,7 @@ const ShopLayout = () => {
         </div>
       </div>
 
-      <div className="flex px-5 md:px-0 relative mx-auto">
+      <div className="flex px-5 md:px-0 relative mx-auto ">
         {/* Sidebar start */}
         <div
           className={`${

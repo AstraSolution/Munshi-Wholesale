@@ -48,7 +48,7 @@ const Hero = () => {
   };
 
   return (
-    <div className="mt-2 drop-shadow rounded-3xl">
+    <div className="mt-20 md:mt-2 drop-shadow rounded-3xl">
       <Slider {...settings}>
         {HeroData.map((data) => (
           <div key={data?.id}>

@@ -53,7 +53,7 @@ const NavItems = () => {
         <></>
       ) : (
         <li className="flex md:hidden">
-          <Button color="red" className="w-full btn-shape">
+          <Button color="red" className="w-full md:btn-shape">
             <Link color="red" to={"/login"}>
               Login
             </Link>
@@ -84,8 +84,8 @@ const NavItems = () => {
 
   return (
     <nav className="">
-      <div className="bg-yellow-600  -mt-20 md:mt-0">
-        <div className="container mx-auto flex justify-between items-center nav-container">
+      <div className="bg-yellow-600  -mt-[96px] md:mt-0">
+        <div className="container xl:max-w-[1500px] mx-auto flex justify-between items-center nav-container">
           {/* menu for medium and large device  */}
           <div>
             <ul className="hidden md:flex items-center space-x-10">

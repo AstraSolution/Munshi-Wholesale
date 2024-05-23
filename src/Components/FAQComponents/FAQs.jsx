@@ -144,7 +144,7 @@ const FAQs = () => {
                     <div className="mt-8 xl:mt-16 lg:flex lg:-mx-12">
                         <div className="lg:mx-12">
                             <h1 className="text-xl font-semibold text-gray-800">Table of Content</h1>
-                            <div className="mt-4 space-y-4 lg:mt-8 text-base">
+                            <div className="mt-4 space-y-4 lg:mt-8 text-lg">
                                 <a href="#" className={`block text-red-600 hover:underline ${selectedCategory === 'All' ? 'font-semibold' : ''}`} onClick={() => handleCategoryClick('All')}>All</a>
                                 {faqs.map((faq, index) => (
                                     <a key={index} href="#" className={`block text-red-600 hover:underline ${selectedCategory === faq.category ? 'font-semibold' : ''}`} onClick={() => handleCategoryClick(faq.category)}>{faq.category}</a>

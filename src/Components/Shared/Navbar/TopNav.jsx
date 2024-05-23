@@ -15,17 +15,17 @@ export default function TopNav() {
   const cartItems = myCarts?.length;
 
   return (
-    <div className="bg-gray-200">
-      <div className="container mx-auto py-4 flex justify-between items-center flex-wrap">
+    <div className="bg-gray-200 px-5">
+      <div className="container xl:max-w-[1500px] mx-auto py-1 md:py-4 flex justify-between items-center flex-wrap">
         {/* logo  */}
-        <h3 className="order-1">
+        <div className="order-1">
           <Link to={"/"}>
             <img src={LOGO} className="w-32 md:w-24 lg:w-32" alt="" />
           </Link>
-        </h3>
+        </div>
 
         {/* search bar  */}
-        <div className="order-3 md:order-2 md:mt-0 w-[85%] md:w-[55%] lg:w-[50%] mt-4">
+        <div className="order-3 md:order-2 mx-auto ml-5 md:ml-auto md:mt-0 w-[85%] md:w-[55%] lg:w-[50%] py-2 mt-10">
           <SearchBar />
         </div>
 
