@@ -94,8 +94,8 @@ const Profile_Page = () => {
       .then((res) => {
         if (res.status === 200) {
           toast.success(" Profile Update successfully");
-          refetch();
           setIsEditing(false);
+          refetch();
         } else {
           console.error("Update failed: User not found or update unsuccessful");
           toast.error("Update failed. Please try again.");

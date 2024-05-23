@@ -13,7 +13,7 @@ import Services from "../../Components/HomeComonents/Services/Services";
 function Home() {
   return (
     <>
-      <div className="container px-5 md:px-10 mx-auto">
+      <div className="container xl:max-w-[1600px] px-5 md:px-10 mx-auto">
         <Hero />
         <Services />
         <Category />

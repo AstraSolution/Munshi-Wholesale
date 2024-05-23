@@ -1,10 +1,8 @@
-// import Image1 from "../../../assets/category/earphone.png";
-// import Image2 from "../../../assets/category/watch.png";
-// import Image3 from "../../../assets/category/macbook.png";
 
-import Image1 from "../../../assets/hero/yellow-drill-1.png";
-import Image2 from "../../../assets/hero/yellow-drill-1.png";
-import Image3 from "../../../assets/hero/yellow-chainsaw1.png";
+import automotiveTools from "../../../assets/category/automotive-tools.png";
+import handTools from "../../../assets/category/hand-tools.png";
+import gardenTools from "../../../assets/category/garden-tools.png";
+
 
 import Button from "../../Shared/Button/Button";
 import { Link } from "react-router-dom";
@@ -12,7 +10,7 @@ import { Link } from "react-router-dom";
 const Category = () => {
   return (
     <div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {/* 1st col */}
         <div className="py-10 pl-5 bg-gradient-to-br from-black/90 to-black/70 text-white rounded-xl relative h-[320px] flex items-end hover:scale-110 duration-300">
           <div>
@@ -34,7 +32,7 @@ const Category = () => {
               </Link>
             </div>
           </div>
-          <img src={Image1} alt="" className="w-[320px] absolute bottom-0" />
+          <img src={automotiveTools} alt="" className="w-[320px] rounded-br-xl absolute bottom-0 right-0" />
         </div>
         {/* 2nd col */}
         <div className="py-10 pl-5 bg-gradient-to-br from-brandYellow/90 to-brandYellow/90 text-white rounded-xl relative h-[320px] flex items-end hover:scale-110 duration-300">
@@ -43,10 +41,10 @@ const Category = () => {
               <p className="mb-[2px] text-white">Enjoy</p>
               <p className="text-2xl font-semibold mb-[2px]">With</p>
               <p className="text-4xl xl:text-5xl font-bold opacity-40 mb-2">
-                Hand Tools
+                Garden Tools
               </p>
               <Link
-                state={{ value: "Hand Tools", type: "category" }}
+                state={{ value: "Gardening Tools", type: "category" }}
                 to="/shop"
               >
                 <Button
@@ -58,9 +56,9 @@ const Category = () => {
             </div>
           </div>
           <img
-            src={Image2}
+            src={gardenTools}
             alt="Gadget"
-            className="w-[320px] absolute -right-4 lg:top-[40px]"
+            className="w-[320px] absolute rounded-br-xl bottom-0 right-0"
           />
         </div>
         {/* 3rd col */}
@@ -70,10 +68,11 @@ const Category = () => {
               <p className="mb-[2px] text-white">Enjoy</p>
               <p className="text-2xl font-semibold mb-[2px]">With</p>
               <p className="text-4xl xl:text-5xl font-bold opacity-40 mb-2">
-                Gardening Tools
+                Hand Tools
               </p>
               <Link
-                state={{ value: "Gardening Tools", type: "category" }}
+                state={{ value: "Hand Tools", type: "category" }}
+
                 to="/shop"
               >
                 <Button
@@ -85,9 +84,9 @@ const Category = () => {
             </div>
           </div>
           <img
-            src={Image3}
+            src={handTools}
             alt="Laptop"
-            className="w-[320px] absolute top-1/2 -translate-y-1/2 -right-0"
+            className="w-[320px] lg:w-[420px] absolute bottom-2 right-5"
           />
         </div>
       </div>
